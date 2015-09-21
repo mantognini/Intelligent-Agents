@@ -1,0 +1,12 @@
+
+To make the eclipse work I did:
+ - import the existing eclipse project found in lastname directory
+ - remove the TA's repast jar library from the project's properties
+ - downloaded RePast J 3.1 and run ant repast to build it
+ - went to the *workspace* settings, under Java > Build Path > User Libraries
+   + create a new user library, named it repast
+   + added the homebuilt repast.jar file (RepastJ/build/repast.jar) to this new library
+   + and added the whole lot of jar files from RepastJ/build/lib too
+ - then in the *project* settings, I added the repast user library as a dependency
+ - at this point eclipse doesn't complain anymore and the project should run fine
+
