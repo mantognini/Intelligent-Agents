@@ -34,7 +34,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	 */
 	@Override
 	public String[] getInitParam() {
-		String[] initParams = { "GridSize", "GrassGrowthRate" };
+		String[] initParams = { "GridSize", "GrassGrowthRate", "InitialRabbits" };
 		return initParams;
 	}
 
@@ -65,16 +65,24 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		return gridSize;
 	}
 
-	public void setGridSize(int size) {
-		gridSize = size;
+	public void setGridSize(int gridSize) {
+		this.gridSize = gridSize;
 	}
 
 	public int getGrassGrowthRate() {
 		return grassGrowthRate;
 	}
 
-	public void setGrassGrowthRate(int rate) {
-		grassGrowthRate = rate;
+	public void setGrassGrowthRate(int grassGrowthRate) {
+		this.grassGrowthRate = grassGrowthRate;
+	}
+
+	public int getInitialRabbits() {
+		return initialRabbits;
+	}
+
+	public void setInitialRabbits(int initialRabbits) {
+		this.initialRabbits = initialRabbits;
 	}
 
 	private void buildModel() {
@@ -119,8 +127,10 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	// Simulation parameters
 	private int gridSize = DEFAULT_GRID_SIZE;
 	private int grassGrowthRate = DEFAULT_GRASS_GROWTH_RATE;
+	private int initialRabbits = DEFAULT_INIITIAL_RABBITS;
 
 	// Default values for parameters
 	static private final int DEFAULT_GRID_SIZE = 20;
 	static private final int DEFAULT_GRASS_GROWTH_RATE = 1;
+	static private final int DEFAULT_INIITIAL_RABBITS = 1;
 }
