@@ -1,3 +1,4 @@
+import uchicago.src.reflector.RangePropertyDescriptor;
 import uchicago.src.sim.engine.BasicAction;
 import uchicago.src.sim.engine.Schedule;
 import uchicago.src.sim.engine.SimModelImpl;
@@ -22,6 +23,10 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		space = null;
 		surface = null;
 		schedule = null;
+		
+		// register the growth of grass as a slider
+		RangePropertyDescriptor grassSlider = new RangePropertyDescriptor("GrassGrowthRate", 0, 255, 50);
+		descriptors.put("GrassGrowthRate", grassSlider);
 	}
 
 	/**
