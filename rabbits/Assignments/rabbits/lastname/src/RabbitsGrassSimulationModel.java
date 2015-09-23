@@ -23,9 +23,10 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		space = null;
 		surface = null;
 		schedule = null;
-		
+
 		// register the growth of grass as a slider
-		RangePropertyDescriptor grassSlider = new RangePropertyDescriptor("GrassGrowthRate", 0, 255, 50);
+		RangePropertyDescriptor grassSlider = new RangePropertyDescriptor(
+				"GrassGrowthRate", 0, 255, 50);
 		descriptors.put("GrassGrowthRate", grassSlider);
 	}
 
@@ -34,7 +35,8 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	 */
 	@Override
 	public String[] getInitParam() {
-		String[] initParams = { "GridSize", "GrassGrowthRate", "InitialRabbits", "BirthThreshold" };
+		String[] initParams = { "GridSize", "GrassGrowthRate",
+				"InitialRabbits", "BirthThreshold", "MaxEatQuantity" };
 		return initParams;
 	}
 
@@ -47,7 +49,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		buildSchedule();
 		buildDisplay();
 
-		// Open the display window 
+		// Open the display window
 		surface.display();
 	}
 
@@ -93,8 +95,17 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		this.birthThreshold = birthThreshold;
 	}
 
+	public int getMaxEatQuantity() {
+		return maxEatQuantity;
+	}
+
+	public void setMaxEatQuantity(int maxEatQuantity) {
+		this.maxEatQuantity = maxEatQuantity;
+	}
+
 	private void buildModel() {
-		space = new RabbitsGrassSimulationSpace(getGridSize(), getInitialRabbits());
+		space = new RabbitsGrassSimulationSpace(getGridSize(),
+				getInitialRabbits());
 	}
 
 	private void buildSchedule() {
@@ -107,7 +118,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 				space.growGrass(grassGrowthRate);
 			}
 		});
-		
+
 		// Repaint the surface frequently
 		schedule.scheduleActionAtInterval(1, new BasicAction() {
 			@Override
@@ -121,7 +132,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		surface = new DisplaySurface(space.getDimension(), this, "Display");
 		surface.addDisplayable(space.getGrassDisplayable(), "Grass");
 		surface.addDisplayable(space.getRabbitsDisplayable(), "Rabbits");
-		
+
 		registerDisplaySurface("World", surface);
 	}
 
@@ -139,10 +150,12 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	private int grassGrowthRate = DEFAULT_GRASS_GROWTH_RATE;
 	private int initialRabbits = DEFAULT_INIITIAL_RABBITS;
 	private int birthThreshold = DEFAULT_BRITH_THRESHOLD;
+	private int maxEatQuantity = DEFAULT_MAX_EAT_QUANTITY;
 
 	// Default values for parameters
 	static private final int DEFAULT_GRID_SIZE = 20;
 	static private final int DEFAULT_GRASS_GROWTH_RATE = 1;
 	static private final int DEFAULT_INIITIAL_RABBITS = 1;
 	static private final int DEFAULT_BRITH_THRESHOLD = 50;
+	static private final int DEFAULT_MAX_EAT_QUANTITY = 50;
 }

@@ -25,7 +25,7 @@ class RabbitsGrassSimulationSpace {
 				grass.putObjectAt(i, j, new Integer(0));
 			}
 		}
-		
+
 		// Insert at most worldSize x worldSize rabbits on the plane
 		rabbitCount = Math.min(rabbitCount, worldSize * worldSize);
 		while (rabbitCount > 0) {
@@ -60,7 +60,7 @@ class RabbitsGrassSimulationSpace {
 	public Displayable getGrassDisplayable() {
 		return new Value2DDisplay(grass, GREENS);
 	}
-	
+
 	public Displayable getRabbitsDisplayable() {
 		return new Object2DDisplay(rabbits);
 	}
@@ -76,7 +76,7 @@ class RabbitsGrassSimulationSpace {
 	// Grids: representing objects on the discrete space
 	private Object2DGrid grass;
 	private Object2DGrid rabbits;
-	
+
 	static private final int MAX_GRASS = 255; // TODO Do we need that?
 
 	// TODO maybe we'll have to deal with more than "255 grass"...
