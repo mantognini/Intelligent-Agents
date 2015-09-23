@@ -31,7 +31,7 @@ class RabbitsGrassSimulationSpace {
 		while (rabbitCount > 0) {
 			int x = Utils.uniform(0, worldSize - 1);
 			int y = Utils.uniform(0, worldSize - 1);
-			if (isFree(x, y)) {
+			if (isFreeForRabbit(x, y)) {
 				rabbits.putObjectAt(x, y, new RabbitsGrassSimulationAgent(x, y));
 				rabbitCount--;
 			}
@@ -69,7 +69,7 @@ class RabbitsGrassSimulationSpace {
 		return grass.getSize();
 	}
 
-	private boolean isFree(int x, int y) {
+	private boolean isFreeForRabbit(int x, int y) {
 		return rabbits.getObjectAt(x, y) == null;
 	}
 
