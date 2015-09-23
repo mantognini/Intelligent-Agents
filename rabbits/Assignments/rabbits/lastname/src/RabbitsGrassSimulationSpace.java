@@ -3,6 +3,7 @@ import java.awt.Dimension;
 
 import uchicago.src.sim.gui.ColorMap;
 import uchicago.src.sim.gui.Displayable;
+import uchicago.src.sim.gui.Object2DDisplay;
 import uchicago.src.sim.gui.Value2DDisplay;
 import uchicago.src.sim.space.Object2DGrid;
 
@@ -12,15 +13,27 @@ import uchicago.src.sim.space.Object2DGrid;
  * @author
  */
 
-public class RabbitsGrassSimulationSpace {
+class RabbitsGrassSimulationSpace {
 
-	public RabbitsGrassSimulationSpace(int worldSize) {
+	public RabbitsGrassSimulationSpace(int worldSize, int rabbitCount) {
 		grass = new Object2DGrid(worldSize, worldSize);
+		rabbits = new Object2DGrid(worldSize, worldSize);
 
 		// Fill the space with no grass at all initially
 		for (int i = 0; i < worldSize; i++) {
 			for (int j = 0; j < worldSize; j++) {
 				grass.putObjectAt(i, j, new Integer(0));
+			}
+		}
+		
+		// Insert at most worldSize x worldSize rabbits on the plane
+		rabbitCount = Math.min(rabbitCount, worldSize * worldSize);
+		while (rabbitCount > 0) {
+			int x = Utils.uniform(0, worldSize - 1);
+			int y = Utils.uniform(0, worldSize - 1);
+			if (isFree(x, y)) {
+				rabbits.putObjectAt(x, y, new RabbitsGrassSimulationAgent(x, y));
+				rabbitCount--;
 			}
 		}
 
@@ -47,13 +60,23 @@ public class RabbitsGrassSimulationSpace {
 	public Displayable getGrassDisplayable() {
 		return new Value2DDisplay(grass, GREENS);
 	}
+	
+	public Displayable getRabbitsDisplayable() {
+		return new Object2DDisplay(rabbits);
+	}
 
 	public Dimension getDimension() {
 		return grass.getSize();
 	}
 
-	private Object2DGrid grass;
+	private boolean isFree(int x, int y) {
+		return rabbits.getObjectAt(x, y) == null;
+	}
 
+	// Grids: representing objects on the discrete space
+	private Object2DGrid grass;
+	private Object2DGrid rabbits;
+	
 	static private final int MAX_GRASS = 255; // TODO Do we need that?
 
 	// TODO maybe we'll have to deal with more than "255 grass"...
@@ -63,6 +86,6 @@ public class RabbitsGrassSimulationSpace {
 		for (int i = 1; i <= MAX_GRASS; i++) {
 			GREENS.mapColor(i, new Color(0, i, 0));
 		}
-		GREENS.mapColor(0, Color.white); // we don't want 0 to be black
+		GREENS.mapColor(0, Color.WHITE); // we don't want 0 to be black
 	}
 }

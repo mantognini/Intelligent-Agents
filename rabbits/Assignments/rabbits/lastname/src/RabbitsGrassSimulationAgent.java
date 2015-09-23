@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
 
@@ -7,21 +9,30 @@ import uchicago.src.sim.gui.SimGraphics;
  * @author
  */
 
-public class RabbitsGrassSimulationAgent implements Drawable {
+class RabbitsGrassSimulationAgent implements Drawable {
 
-	public void draw(SimGraphics arg0) {
-		// TODO Auto-generated method stub
-
+	public RabbitsGrassSimulationAgent(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
+	@Override
+	public void draw(SimGraphics graphics) {
+		// Let's draw our beautiful rabbit here...
+		graphics.drawFastRoundRect(Color.GRAY);
+	}
+
+	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return x;
 	}
 
+	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
+	
+	private int x;
+	private int y;
 
 }

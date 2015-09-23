@@ -94,7 +94,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	}
 
 	private void buildModel() {
-		space = new RabbitsGrassSimulationSpace(getGridSize());
+		space = new RabbitsGrassSimulationSpace(getGridSize(), getInitialRabbits());
 	}
 
 	private void buildSchedule() {
@@ -120,7 +120,9 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	private void buildDisplay() {
 		surface = new DisplaySurface(space.getDimension(), this, "Display");
 		surface.addDisplayable(space.getGrassDisplayable(), "Grass");
-		registerDisplaySurface("Grass", surface);
+		surface.addDisplayable(space.getRabbitsDisplayable(), "Rabbits");
+		
+		registerDisplaySurface("World", surface);
 	}
 
 	// Our even scheduler
