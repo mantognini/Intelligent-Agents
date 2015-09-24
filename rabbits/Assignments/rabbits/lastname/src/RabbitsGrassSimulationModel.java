@@ -28,10 +28,9 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		schedule = null;
 		rabbits = null;
 
-		// register the growth of grass as a slider
-		RangePropertyDescriptor grassSlider = new RangePropertyDescriptor(
-				"GrassGrowthRate", 0, 255, 50);
-		descriptors.put("GrassGrowthRate", grassSlider);
+		// register sliders
+		for (String parameter : PARAMETERS)
+			registerSlider(parameter);
 	}
 
 	/**
@@ -39,10 +38,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	 */
 	@Override
 	public String[] getInitParam() {
-		String[] initParams = { "GridSize", "GrassGrowthRate",
-				"InitialRabbits", "BirthThreshold", "MaxEatQuantity",
-				"InitialAgentEnergy", "MoveEnergyCost", "InitialAmountOfGrass" };
-		return initParams;
+		return PARAMETERS;
 	}
 
 	/**
@@ -192,6 +188,12 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		}
 	}
 
+	private void registerSlider(String parameter) {
+		RangePropertyDescriptor slider = new RangePropertyDescriptor(parameter,
+				0, 500, 100);
+		descriptors.put(parameter, slider);
+	}
+
 	// Our even scheduler
 	private Schedule schedule;
 
@@ -223,4 +225,9 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	static private final int DEFAULT_INITIAL_ARGENT_ENERGY = 30;
 	static private final int DEFAULT_MOVE_ENERGY_CAST = 1;
 	static private final int DEFAULT_INITIAL_AMOUNT_OF_GRASS = 200;
+
+	static private final String[] PARAMETERS = new String[] { "GridSize",
+			"GrassGrowthRate", "InitialRabbits", "BirthThreshold",
+			"MaxEatQuantity", "InitialAgentEnergy", "MoveEnergyCost",
+			"InitialAmountOfGrass" };
 }
