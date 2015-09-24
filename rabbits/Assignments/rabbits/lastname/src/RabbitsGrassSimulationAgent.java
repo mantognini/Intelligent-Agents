@@ -107,7 +107,7 @@ class RabbitsGrassSimulationAgent implements Drawable {
 
 	private RabbitsGrassSimulationAgent reproduce(int birthThreshold,
 			int initialAmountOfEnergy) {
-		if (energy < birthThreshold)
+		if (energy < birthThreshold || initialAmountOfEnergy >= energy)
 			return null;
 
 		// Find a room for newborn
