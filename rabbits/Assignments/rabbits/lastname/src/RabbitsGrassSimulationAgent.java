@@ -23,13 +23,11 @@ class RabbitsGrassSimulationAgent implements Drawable {
 	}
 
 	/**
-	 * Returns true if the agent is still alive
-	 * 
-	 * @param initialAmountOfEnergy
-	 * @param birthThreshold
+	 * Returns an offspring if the agent reproduces with itself
 	 */
 	public RabbitsGrassSimulationAgent step(int maxEatQuantity,
-			int moveEnergyCost, int initialAmountOfEnergy, int birthThreshold) {
+			int moveEnergyCost, int initialAmountOfEnergy, int birthThreshold,
+			int energyConsumptionRate) {
 		// Try to move to an adjacent cell only if it's free
 		switch (Utils.uniform(0, 3)) {
 		case 0: // North
@@ -51,6 +49,9 @@ class RabbitsGrassSimulationAgent implements Drawable {
 
 		// Try to eat
 		eat(maxEatQuantity);
+
+		// Default energy consumption
+		energy -= energyConsumptionRate;
 
 		// If possible, "reproduce"
 		RabbitsGrassSimulationAgent offspring = reproduce(birthThreshold,

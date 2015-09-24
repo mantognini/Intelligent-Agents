@@ -128,6 +128,14 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		this.initialAmountOfGrass = initialAmountOfGrass;
 	}
 
+	public int getEnergyConsumptionRate() {
+		return energyConsumptionRate;
+	}
+
+	public void setEnergyConsumptionRate(int energyConsumptionRate) {
+		this.energyConsumptionRate = energyConsumptionRate;
+	}
+
 	private void buildModel() {
 		int size = getGridSize();
 
@@ -184,7 +192,8 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 
 			RabbitsGrassSimulationAgent offspring = agent.step(
 					getMaxEatQuantity(), getMoveEnergyCost(),
-					getInitialAgentEnergy(), getBirthThreshold());
+					getInitialAgentEnergy(), getBirthThreshold(),
+					getEnergyConsumptionRate());
 
 			if (offspring != null) {
 				offsprings.add(offspring);
@@ -203,7 +212,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 
 	private void registerSlider(String parameter) {
 		RangePropertyDescriptor slider = new RangePropertyDescriptor(parameter,
-				0, 500, 100);
+				0, 1000, 200);
 		descriptors.put(parameter, slider);
 	}
 
@@ -228,6 +237,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	private int initialAgentEnergy = DEFAULT_INITIAL_ARGENT_ENERGY;
 	private int moveEnergyCost = DEFAULT_MOVE_ENERGY_CAST;
 	private int initialAmountOfGrass = DEFAULT_INITIAL_AMOUNT_OF_GRASS;
+	private int energyConsumptionRate = DEFAULT_ENERGY_CONSUMPTION_RATE;
 
 	// Default values for parameters
 	static private final int DEFAULT_GRID_SIZE = 20;
@@ -238,9 +248,10 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	static private final int DEFAULT_INITIAL_ARGENT_ENERGY = 30;
 	static private final int DEFAULT_MOVE_ENERGY_CAST = 1;
 	static private final int DEFAULT_INITIAL_AMOUNT_OF_GRASS = 200;
+	static private final int DEFAULT_ENERGY_CONSUMPTION_RATE = 1;
 
 	static private final String[] PARAMETERS = new String[] { "GridSize",
 			"GrassGrowthRate", "InitialRabbits", "BirthThreshold",
 			"MaxEatQuantity", "InitialAgentEnergy", "MoveEnergyCost",
-			"InitialAmountOfGrass" };
+			"InitialAmountOfGrass", "EnergyConsumptionRate" };
 }
