@@ -93,14 +93,13 @@ class RabbitsGrassSimulationSpace {
 	private Discrete2DSpace rabbits;
 	private int size; // of the world
 
-	static private final int MAX_GRASS = 255; // TODO Do we need that?
+	static private final int MAX_GRASS = 500;
 
-	// TODO maybe we'll have to deal with more than "255 grass"...
-	// Map integer in [0, 255] to a specific green
+	// Map integer in [0, MAX_GRASS] to a specific green
 	static private final ColorMap GREENS = new ColorMap();
 	static {
 		for (int i = 0; i <= MAX_GRASS; i++) {
-			GREENS.mapColor(i, new Color(0, i, 0));
+			GREENS.mapColor(i, new Color(0, Math.min(255, i * 5), 0));
 		}
 	}
 }
