@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import uchicago.src.reflector.RangePropertyDescriptor;
 import uchicago.src.sim.engine.BasicAction;
 import uchicago.src.sim.engine.Schedule;
@@ -13,7 +17,6 @@ import uchicago.src.sim.gui.DisplaySurface;
  */
 
 public class RabbitsGrassSimulationModel extends SimModelImpl {
-
 	/**
 	 * Prepares the model for a new run
 	 */
@@ -23,6 +26,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		space = null;
 		surface = null;
 		schedule = null;
+		rabbits = null;
 
 		// register the growth of grass as a slider
 		RangePropertyDescriptor grassSlider = new RangePropertyDescriptor(
@@ -36,7 +40,8 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	@Override
 	public String[] getInitParam() {
 		String[] initParams = { "GridSize", "GrassGrowthRate",
-				"InitialRabbits", "BirthThreshold", "MaxEatQuantity" };
+				"InitialRabbits", "BirthThreshold", "MaxEatQuantity",
+				"InitialAgentEnergy", "MoveEnergyCost" };
 		return initParams;
 	}
 
@@ -103,25 +108,52 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		this.maxEatQuantity = maxEatQuantity;
 	}
 
+	public int getInitialAgentEnergy() {
+		return initialAgentEnergy;
+	}
+
+	public void setInitialAgentEnergy(int initialAgentEnergy) {
+		this.initialAgentEnergy = initialAgentEnergy;
+	}
+
+	public int getMoveEnergyCost() {
+		return moveEnergyCost;
+	}
+
+	public void setMoveEnergyCost(int moveEnergyCost) {
+		this.moveEnergyCost = moveEnergyCost;
+	}
+
 	private void buildModel() {
-		space = new RabbitsGrassSimulationSpace(getGridSize(),
-				getInitialRabbits());
+		int size = getGridSize();
+
+		space = new RabbitsGrassSimulationSpace(size);
+		rabbits = new ArrayList<RabbitsGrassSimulationAgent>();
+
+		// Insert at most size x size rabbits on the plane
+		int rabbitCount = getInitialRabbits();
+		rabbitCount = Math.min(rabbitCount, size * size);
+		while (rabbitCount > 0) {
+			int x = Utils.uniform(0, size - 1);
+			int y = Utils.uniform(0, size - 1);
+			if (space.isFreeForRabbit(x, y)) {
+				RabbitsGrassSimulationAgent agent = new RabbitsGrassSimulationAgent(
+						x, y, getInitialAgentEnergy(), space);
+				rabbits.add(agent);
+				rabbitCount--;
+			}
+		}
 	}
 
 	private void buildSchedule() {
 		schedule = new Schedule();
 
-		// Perform every action
+		// Perform all actions in one event at every clock tick
 		schedule.scheduleActionAtInterval(1, new BasicAction() {
 			@Override
 			public void execute() {
-				// Grow the grass at every clock tick
 				space.growGrass(grassGrowthRate);
-
-				// Move rabbits around and let them eat
-				// space.updateRabbits();
-
-				// Repaint the surface frequently
+				updateRabits();
 				surface.updateDisplay();
 			}
 		});
@@ -135,6 +167,22 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		registerDisplaySurface("World", surface);
 	}
 
+	private void updateRabits() {
+		// Shuffle the rabbits for better simulation
+		Collections.shuffle(rabbits);
+
+		// Update agents and remove the dead ones
+		for (int i = 0; i < rabbits.size();) {
+			boolean alive = rabbits.get(i).step(getMaxEatQuantity(),
+					getMoveEnergyCost());
+			if (alive) {
+				i++;
+			} else {
+				rabbits.remove(i);
+			}
+		}
+	}
+
 	// Our even scheduler
 	private Schedule schedule;
 
@@ -144,17 +192,24 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	// 2D surface for rendering
 	private DisplaySurface surface;
 
+	// Our collection of agents
+	private List<RabbitsGrassSimulationAgent> rabbits;
+
 	// Simulation parameters
 	private int gridSize = DEFAULT_GRID_SIZE;
 	private int grassGrowthRate = DEFAULT_GRASS_GROWTH_RATE;
 	private int initialRabbits = DEFAULT_INIITIAL_RABBITS;
 	private int birthThreshold = DEFAULT_BRITH_THRESHOLD;
 	private int maxEatQuantity = DEFAULT_MAX_EAT_QUANTITY;
+	private int initialAgentEnergy = DEFAULT_INITIAL_ARGENT_ENERGY;
+	private int moveEnergyCost = DEFAULT_MOVE_ENERGY_CAST;
 
 	// Default values for parameters
 	static private final int DEFAULT_GRID_SIZE = 20;
-	static private final int DEFAULT_GRASS_GROWTH_RATE = 1;
-	static private final int DEFAULT_INIITIAL_RABBITS = 1;
+	static private final int DEFAULT_GRASS_GROWTH_RATE = 50;
+	static private final int DEFAULT_INIITIAL_RABBITS = 5;
 	static private final int DEFAULT_BRITH_THRESHOLD = 50;
-	static private final int DEFAULT_MAX_EAT_QUANTITY = 50;
+	static private final int DEFAULT_MAX_EAT_QUANTITY = 5;
+	static private final int DEFAULT_INITIAL_ARGENT_ENERGY = 30;
+	static private final int DEFAULT_MOVE_ENERGY_CAST = 5;
 }
