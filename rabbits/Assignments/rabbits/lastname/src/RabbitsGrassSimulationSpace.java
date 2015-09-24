@@ -93,6 +93,9 @@ class RabbitsGrassSimulationSpace {
 	private Discrete2DSpace rabbits;
 	private int size; // of the world
 
+	// We have to set a maximum amount of grass per cell so that we can use
+	// ColorMap to display it (because ColorMap doesn't have a default color we
+	// have to define a finite input domain).
 	static private final int MAX_GRASS = 500;
 
 	// Map integer in [0, MAX_GRASS] to a specific green

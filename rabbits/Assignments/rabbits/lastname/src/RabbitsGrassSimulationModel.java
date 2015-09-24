@@ -241,14 +241,14 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 
 	// Default values for parameters
 	static private final int DEFAULT_GRID_SIZE = 20;
-	static private final int DEFAULT_GRASS_GROWTH_RATE = 50;
+	static private final int DEFAULT_GRASS_GROWTH_RATE = 120;
 	static private final int DEFAULT_INIITIAL_RABBITS = 5;
 	static private final int DEFAULT_BRITH_THRESHOLD = 190;
-	static private final int DEFAULT_MAX_EAT_QUANTITY = 10;
+	static private final int DEFAULT_MAX_EAT_QUANTITY = 50;
 	static private final int DEFAULT_INITIAL_ARGENT_ENERGY = 30;
 	static private final int DEFAULT_MOVE_ENERGY_CAST = 2;
-	static private final int DEFAULT_INITIAL_AMOUNT_OF_GRASS = 200;
-	static private final int DEFAULT_ENERGY_CONSUMPTION_RATE = 1;
+	static private final int DEFAULT_INITIAL_AMOUNT_OF_GRASS = 700;
+	static private final int DEFAULT_ENERGY_CONSUMPTION_RATE = 2;
 
 	static private final String[] PARAMETERS = new String[] { "GridSize",
 			"GrassGrowthRate", "InitialRabbits", "BirthThreshold",
