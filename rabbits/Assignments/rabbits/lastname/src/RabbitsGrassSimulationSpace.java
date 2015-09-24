@@ -16,6 +16,7 @@ import uchicago.src.sim.space.Object2DGrid;
 class RabbitsGrassSimulationSpace {
 
 	public RabbitsGrassSimulationSpace(int worldSize, int rabbitCount) {
+		size = worldSize;
 		grass = new Object2DGrid(worldSize, worldSize);
 		rabbits = new Object2DGrid(worldSize, worldSize);
 
@@ -29,31 +30,29 @@ class RabbitsGrassSimulationSpace {
 		// Insert at most worldSize x worldSize rabbits on the plane
 		rabbitCount = Math.min(rabbitCount, worldSize * worldSize);
 		while (rabbitCount > 0) {
-			int x = Utils.uniform(0, worldSize - 1);
-			int y = Utils.uniform(0, worldSize - 1);
+			int x = Utils.uniform(0, size - 1);
+			int y = Utils.uniform(0, size - 1);
 			if (isFreeForRabbit(x, y)) {
 				rabbits.putObjectAt(x, y, new RabbitsGrassSimulationAgent(x, y));
 				rabbitCount--;
 			}
 		}
-
-		// TODO remove me
-		grass.putObjectAt(0, 0, new Integer(255));
-		grass.putObjectAt(worldSize - 1, 0, new Integer(125));
-		grass.putObjectAt(0, worldSize - 1, new Integer(125));
 	}
 
-	// Increase the grass height everywhere
+	// Increase the grass height in a few places
 	public void growGrass(int amount) {
-		for (int i = 0; i < grass.getSizeX(); i++) {
-			for (int j = 0; j < grass.getSizeY(); j++) {
-				Integer value = (Integer) grass.getObjectAt(i, j);
+		while (amount > 0) {
+			int x = Utils.uniform(0, size - 1);
+			int y = Utils.uniform(0, size - 1);
 
-				// Don't allow more than the maximum:
-				value = Math.min(value + amount, MAX_GRASS);
+			Integer value = (Integer) grass.getObjectAt(x, y);
 
-				grass.putObjectAt(i, j, value);
-			}
+			// Don't allow more than the maximum:
+			value = Math.min(value + amount, MAX_GRASS);
+
+			grass.putObjectAt(x, y, value);
+
+			amount--;
 		}
 	}
 
@@ -76,6 +75,7 @@ class RabbitsGrassSimulationSpace {
 	// Grids: representing objects on the discrete space
 	private Object2DGrid grass;
 	private Object2DGrid rabbits;
+	private int size; // of the world
 
 	static private final int MAX_GRASS = 255; // TODO Do we need that?
 

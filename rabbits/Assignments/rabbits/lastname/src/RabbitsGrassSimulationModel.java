@@ -111,18 +111,17 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	private void buildSchedule() {
 		schedule = new Schedule();
 
-		// Grow the grass at every clock tick
+		// Perform every action
 		schedule.scheduleActionAtInterval(1, new BasicAction() {
 			@Override
 			public void execute() {
+				// Grow the grass at every clock tick
 				space.growGrass(grassGrowthRate);
-			}
-		});
 
-		// Repaint the surface frequently
-		schedule.scheduleActionAtInterval(1, new BasicAction() {
-			@Override
-			public void execute() {
+				// Move rabbits around and let them eat
+				// space.updateRabbits();
+
+				// Repaint the surface frequently
 				surface.updateDisplay();
 			}
 		});
