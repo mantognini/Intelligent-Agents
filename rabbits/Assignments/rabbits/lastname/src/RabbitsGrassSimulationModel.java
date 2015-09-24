@@ -176,16 +176,29 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		// Shuffle the rabbits for better simulation
 		Collections.shuffle(rabbits);
 
+		List<RabbitsGrassSimulationAgent> offsprings = new ArrayList<RabbitsGrassSimulationAgent>();
+
 		// Update agents and remove the dead ones
 		for (int i = 0; i < rabbits.size();) {
-			boolean alive = rabbits.get(i).step(getMaxEatQuantity(),
-					getMoveEnergyCost());
-			if (alive) {
-				i++;
-			} else {
+			RabbitsGrassSimulationAgent agent = rabbits.get(i);
+
+			RabbitsGrassSimulationAgent offspring = agent.step(
+					getMaxEatQuantity(), getMoveEnergyCost(),
+					getInitialAgentEnergy(), getBirthThreshold());
+
+			if (offspring != null) {
+				offsprings.add(offspring);
+			}
+
+			if (agent.isDead()) {
 				rabbits.remove(i); // was removed from the space already
+			} else {
+				i++;
 			}
 		}
+
+		// Integrate new generation of agents into the current population
+		rabbits.addAll(offsprings);
 	}
 
 	private void registerSlider(String parameter) {

@@ -24,8 +24,12 @@ class RabbitsGrassSimulationAgent implements Drawable {
 
 	/**
 	 * Returns true if the agent is still alive
+	 * 
+	 * @param initialAmountOfEnergy
+	 * @param birthThreshold
 	 */
-	public boolean step(int maxEatQuantity, int moveEnergyCost) {
+	public RabbitsGrassSimulationAgent step(int maxEatQuantity,
+			int moveEnergyCost, int initialAmountOfEnergy, int birthThreshold) {
 		// Try to move to an adjacent cell only if it's free
 		switch (Utils.uniform(0, 3)) {
 		case 0: // North
@@ -48,13 +52,20 @@ class RabbitsGrassSimulationAgent implements Drawable {
 		// Try to eat
 		eat(maxEatQuantity);
 
+		// If possible, "reproduce"
+		RabbitsGrassSimulationAgent offspring = reproduce(birthThreshold,
+				initialAmountOfEnergy);
+
 		// Remove from space if dead
-		if (energy <= 0) {
+		if (isDead()) {
 			space.removeRabbit(x, y);
-			return false;
-		} else {
-			return true;
 		}
+
+		return offspring;
+	}
+
+	public boolean isDead() {
+		return energy <= 0;
 	}
 
 	@Override
@@ -91,6 +102,32 @@ class RabbitsGrassSimulationAgent implements Drawable {
 
 	private void eat(int maxEatQuantity) {
 		energy += space.getEnergy(x, y, maxEatQuantity);
+	}
+
+	private RabbitsGrassSimulationAgent reproduce(int birthThreshold,
+			int initialAmountOfEnergy) {
+		if (energy < birthThreshold)
+			return null;
+
+		// Find a room for newborn
+		int freeX = x;
+		int freeY = y;
+		if (space.isFreeForRabbit(x, y - 1)) {
+			freeY = y - 1;
+		} else if (space.isFreeForRabbit(x + 1, y)) {
+			freeX = x + 1;
+		} else if (space.isFreeForRabbit(x, y + 1)) {
+			freeY = y + 1;
+		} else if (space.isFreeForRabbit(x - 1, y)) {
+			freeX = x - 1;
+		} else {
+			return null; // No spot available...
+		}
+
+		// Now we're sure we can reproduce
+		energy -= initialAmountOfEnergy;
+		return new RabbitsGrassSimulationAgent(freeX, freeY,
+				initialAmountOfEnergy, space);
 	}
 
 	private int x;
