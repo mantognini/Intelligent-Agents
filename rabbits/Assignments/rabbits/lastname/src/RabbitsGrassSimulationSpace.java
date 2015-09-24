@@ -79,7 +79,7 @@ class RabbitsGrassSimulationSpace {
 	 */
 	public int getEnergy(int x, int y, int maxEatQuantity) {
 		Integer value = (Integer) grass.getObjectAt(x, y);
-		int taken = Math.max(maxEatQuantity, value);
+		int taken = Math.min(maxEatQuantity, value);
 		value -= taken;
 		grass.putObjectAt(x, y, value);
 		return taken;

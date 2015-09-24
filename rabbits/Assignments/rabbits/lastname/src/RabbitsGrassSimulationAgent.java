@@ -26,7 +26,7 @@ class RabbitsGrassSimulationAgent implements Drawable {
 	 * Returns true if the agent is still alive
 	 */
 	public boolean step(int maxEatQuantity, int moveEnergyCost) {
-		// Try to move to an adjacent cell
+		// Try to move to an adjacent cell only if it's free
 		switch (Utils.uniform(0, 3)) {
 		case 0: // North
 			move(moveEnergyCost, x, y - 1);

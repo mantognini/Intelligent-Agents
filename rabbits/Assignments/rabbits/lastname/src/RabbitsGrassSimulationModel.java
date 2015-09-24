@@ -41,7 +41,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	public String[] getInitParam() {
 		String[] initParams = { "GridSize", "GrassGrowthRate",
 				"InitialRabbits", "BirthThreshold", "MaxEatQuantity",
-				"InitialAgentEnergy", "MoveEnergyCost" };
+				"InitialAgentEnergy", "MoveEnergyCost", "InitialAmountOfGrass" };
 		return initParams;
 	}
 
@@ -124,13 +124,22 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		this.moveEnergyCost = moveEnergyCost;
 	}
 
+	public int getInitialAmountOfGrass() {
+		return initialAmountOfGrass;
+	}
+
+	public void setInitialAmountOfGrass(int initialAmountOfGrass) {
+		this.initialAmountOfGrass = initialAmountOfGrass;
+	}
+
 	private void buildModel() {
 		int size = getGridSize();
 
 		space = new RabbitsGrassSimulationSpace(size);
-		rabbits = new ArrayList<RabbitsGrassSimulationAgent>();
+		space.growGrass(getInitialAmountOfGrass());
 
 		// Insert at most size x size rabbits on the plane
+		rabbits = new ArrayList<RabbitsGrassSimulationAgent>();
 		int rabbitCount = getInitialRabbits();
 		rabbitCount = Math.min(rabbitCount, size * size);
 		while (rabbitCount > 0) {
@@ -178,7 +187,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 			if (alive) {
 				i++;
 			} else {
-				rabbits.remove(i);
+				rabbits.remove(i); // was removed from the space already
 			}
 		}
 	}
@@ -203,13 +212,15 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	private int maxEatQuantity = DEFAULT_MAX_EAT_QUANTITY;
 	private int initialAgentEnergy = DEFAULT_INITIAL_ARGENT_ENERGY;
 	private int moveEnergyCost = DEFAULT_MOVE_ENERGY_CAST;
+	private int initialAmountOfGrass = DEFAULT_INITIAL_AMOUNT_OF_GRASS;
 
 	// Default values for parameters
 	static private final int DEFAULT_GRID_SIZE = 20;
 	static private final int DEFAULT_GRASS_GROWTH_RATE = 50;
 	static private final int DEFAULT_INIITIAL_RABBITS = 5;
 	static private final int DEFAULT_BRITH_THRESHOLD = 50;
-	static private final int DEFAULT_MAX_EAT_QUANTITY = 5;
+	static private final int DEFAULT_MAX_EAT_QUANTITY = 10;
 	static private final int DEFAULT_INITIAL_ARGENT_ENERGY = 30;
-	static private final int DEFAULT_MOVE_ENERGY_CAST = 5;
+	static private final int DEFAULT_MOVE_ENERGY_CAST = 1;
+	static private final int DEFAULT_INITIAL_AMOUNT_OF_GRASS = 200;
 }
