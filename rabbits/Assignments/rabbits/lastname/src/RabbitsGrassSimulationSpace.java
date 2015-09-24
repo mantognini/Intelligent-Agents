@@ -58,19 +58,30 @@ class RabbitsGrassSimulationSpace {
 	}
 
 	boolean isFreeForRabbit(int x, int y) {
+		x = fixTorusCoordinate(x, grass.getSizeX());
+		y = fixTorusCoordinate(y, grass.getSizeY());
+
 		return x >= 0 && y >= 0 && x < rabbits.getSizeX()
 				&& y < rabbits.getSizeY() && rabbits.getObjectAt(x, y) == null;
 	}
 
 	public void putRabbit(int x, int y, RabbitsGrassSimulationAgent rabbit) {
+		x = fixTorusCoordinate(x, grass.getSizeX());
+		y = fixTorusCoordinate(y, grass.getSizeY());
+
 		assert isFreeForRabbit(x, y);
+
 		rabbits.putObjectAt(x, y, rabbit);
 		rabbit.setX(x);
 		rabbit.setY(y);
 	}
 
 	public void removeRabbit(int x, int y) {
+		x = fixTorusCoordinate(x, grass.getSizeX());
+		y = fixTorusCoordinate(y, grass.getSizeY());
+
 		assert !isFreeForRabbit(x, y);
+
 		rabbits.putObjectAt(x, y, null);
 	}
 
@@ -78,11 +89,25 @@ class RabbitsGrassSimulationSpace {
 	 * Allow rabbits to eat grass
 	 */
 	public int getEnergy(int x, int y, int maxEatQuantity) {
+		x = fixTorusCoordinate(x, grass.getSizeX());
+		y = fixTorusCoordinate(y, grass.getSizeY());
+
 		Integer value = (Integer) grass.getObjectAt(x, y);
 		int taken = Math.min(maxEatQuantity, value);
 		value -= taken;
 		grass.putObjectAt(x, y, value);
+
 		return taken;
+	}
+
+	private int fixTorusCoordinate(int i, int size) {
+		while (i < 0)
+			i += size;
+
+		while (i >= size)
+			i -= size;
+
+		return i;
 	}
 
 	// Grids: representing objects on the discrete space
