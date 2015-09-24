@@ -5,7 +5,8 @@ import uchicago.src.sim.gui.ColorMap;
 import uchicago.src.sim.gui.Displayable;
 import uchicago.src.sim.gui.Object2DDisplay;
 import uchicago.src.sim.gui.Value2DDisplay;
-import uchicago.src.sim.space.Object2DGrid;
+import uchicago.src.sim.space.Discrete2DSpace;
+import uchicago.src.sim.space.Object2DTorus;
 
 /**
  * Class that implements the simulation space of the rabbits grass simulation.
@@ -17,8 +18,8 @@ class RabbitsGrassSimulationSpace {
 
 	public RabbitsGrassSimulationSpace(int worldSize) {
 		size = worldSize;
-		grass = new Object2DGrid(worldSize, worldSize);
-		rabbits = new Object2DGrid(worldSize, worldSize);
+		grass = new Object2DTorus(worldSize, worldSize);
+		rabbits = new Object2DTorus(worldSize, worldSize);
 
 		// Fill the space with no grass at all initially
 		for (int i = 0; i < worldSize; i++) {
@@ -58,17 +59,10 @@ class RabbitsGrassSimulationSpace {
 	}
 
 	boolean isFreeForRabbit(int x, int y) {
-		x = fixTorusCoordinate(x, grass.getSizeX());
-		y = fixTorusCoordinate(y, grass.getSizeY());
-
-		return x >= 0 && y >= 0 && x < rabbits.getSizeX()
-				&& y < rabbits.getSizeY() && rabbits.getObjectAt(x, y) == null;
+		return rabbits.getObjectAt(x, y) == null;
 	}
 
 	public void putRabbit(int x, int y, RabbitsGrassSimulationAgent rabbit) {
-		x = fixTorusCoordinate(x, grass.getSizeX());
-		y = fixTorusCoordinate(y, grass.getSizeY());
-
 		assert isFreeForRabbit(x, y);
 
 		rabbits.putObjectAt(x, y, rabbit);
@@ -77,9 +71,6 @@ class RabbitsGrassSimulationSpace {
 	}
 
 	public void removeRabbit(int x, int y) {
-		x = fixTorusCoordinate(x, grass.getSizeX());
-		y = fixTorusCoordinate(y, grass.getSizeY());
-
 		assert !isFreeForRabbit(x, y);
 
 		rabbits.putObjectAt(x, y, null);
@@ -89,9 +80,6 @@ class RabbitsGrassSimulationSpace {
 	 * Allow rabbits to eat grass
 	 */
 	public int getEnergy(int x, int y, int maxEatQuantity) {
-		x = fixTorusCoordinate(x, grass.getSizeX());
-		y = fixTorusCoordinate(y, grass.getSizeY());
-
 		Integer value = (Integer) grass.getObjectAt(x, y);
 		int taken = Math.min(maxEatQuantity, value);
 		value -= taken;
@@ -100,19 +88,9 @@ class RabbitsGrassSimulationSpace {
 		return taken;
 	}
 
-	private int fixTorusCoordinate(int i, int size) {
-		while (i < 0)
-			i += size;
-
-		while (i >= size)
-			i -= size;
-
-		return i;
-	}
-
 	// Grids: representing objects on the discrete space
-	private Object2DGrid grass;
-	private Object2DGrid rabbits;
+	private Discrete2DSpace grass;
+	private Discrete2DSpace rabbits;
 	private int size; // of the world
 
 	static private final int MAX_GRASS = 255; // TODO Do we need that?
