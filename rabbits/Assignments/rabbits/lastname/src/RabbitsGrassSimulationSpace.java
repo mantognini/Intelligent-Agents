@@ -58,7 +58,17 @@ class RabbitsGrassSimulationSpace {
 		return grass.getSize();
 	}
 
-	boolean isFreeForRabbit(int x, int y) {
+	public int getGrassPopulation() {
+		int grassPop = 0;
+		for (int x = 0; x < grass.getSizeX(); x++) {
+			for (int y = 0; y < grass.getSizeY(); y++) {
+				grassPop += (Integer) grass.getObjectAt(x, y);
+			}
+		}
+		return grassPop;
+	}
+
+	public boolean isFreeForRabbit(int x, int y) {
 		return rabbits.getObjectAt(x, y) == null;
 	}
 

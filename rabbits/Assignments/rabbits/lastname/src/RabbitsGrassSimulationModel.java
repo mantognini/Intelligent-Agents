@@ -3,6 +3,8 @@ import java.util.Collections;
 import java.util.List;
 
 import uchicago.src.reflector.RangePropertyDescriptor;
+import uchicago.src.sim.analysis.OpenSequenceGraph;
+import uchicago.src.sim.analysis.Sequence;
 import uchicago.src.sim.engine.BasicAction;
 import uchicago.src.sim.engine.Schedule;
 import uchicago.src.sim.engine.SimModelImpl;
@@ -156,6 +158,8 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 				rabbitCount--;
 			}
 		}
+		createChart("Populations Evolution");
+
 	}
 
 	private void buildSchedule() {
@@ -168,6 +172,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 				space.growGrass(grassGrowthRate);
 				updateRabits();
 				surface.updateDisplay();
+				popGraph.step();
 			}
 		});
 	}
@@ -178,6 +183,7 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		surface.addDisplayable(space.getRabbitsDisplayable(), "Rabbits");
 
 		registerDisplaySurface("World", surface);
+		popGraph.display();
 	}
 
 	private void updateRabits() {
@@ -216,6 +222,30 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		descriptors.put(parameter, slider);
 	}
 
+	private void createChart(String graphName) {
+		popGraph = new OpenSequenceGraph(graphName, this);
+		popGraph.setXRange(0, 200);
+		popGraph.setYRange(0, 5);
+		popGraph.setAxisTitles("time", "log Num. of population");
+
+		// Y axis is Log scale due to the difference between Grass and rabbits
+		popGraph.addSequence("Num. Rabbits", new Sequence() {
+
+			@Override
+			public double getSValue() {
+				return Math.log10((double) rabbits.size());
+			}
+		});
+		popGraph.addSequence("Num. Grass", new Sequence() {
+
+			@Override
+			public double getSValue() {
+				return Math.log10((double) space.getGrassPopulation());
+			}
+		});
+
+	}
+
 	// Our even scheduler
 	private Schedule schedule;
 
@@ -227,6 +257,9 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 
 	// Our collection of agents
 	private List<RabbitsGrassSimulationAgent> rabbits;
+
+	// Population chart
+	private OpenSequenceGraph popGraph;
 
 	// Simulation parameters
 	private int gridSize = DEFAULT_GRID_SIZE;
