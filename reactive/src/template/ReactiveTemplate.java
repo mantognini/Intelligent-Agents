@@ -2,12 +2,12 @@ package template;
 
 import java.util.Random;
 
-import logist.simulation.Vehicle;
 import logist.agent.Agent;
 import logist.behavior.ReactiveBehavior;
 import logist.plan.Action;
 import logist.plan.Action.Move;
 import logist.plan.Action.Pickup;
+import logist.simulation.Vehicle;
 import logist.task.Task;
 import logist.task.TaskDistribution;
 import logist.topology.Topology;
@@ -21,10 +21,10 @@ public class ReactiveTemplate implements ReactiveBehavior {
 	@Override
 	public void setup(Topology topology, TaskDistribution td, Agent agent) {
 
+		// TODO is this the gamma factor???
 		// Reads the discount factor from the agents.xml file.
 		// If the property is not present it defaults to 0.95
-		Double discount = agent.readProperty("discount-factor", Double.class,
-				0.95);
+		Double discount = agent.readProperty("discount-factor", Double.class, 0.95);
 
 		this.random = new Random();
 		this.pPickup = discount;
@@ -40,6 +40,7 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		} else {
 			action = new Pickup(availableTask);
 		}
+
 		return action;
 	}
 }
