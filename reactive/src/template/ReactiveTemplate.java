@@ -1,5 +1,6 @@
 package template;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import logist.agent.Agent;
@@ -17,61 +18,40 @@ public class ReactiveTemplate implements ReactiveBehavior {
 
 	private Random random;
 	private double pPickup;
+	private HashMap<State, Double> values = new HashMap<State, Double>();
 
 	@Override
 	public void setup(Topology topology, TaskDistribution td, Agent agent) {
 
-		// TODO is this the gamma factor???
 		// Reads the discount factor from the agents.xml file.
 		// If the property is not present it defaults to 0.95
-		Double discount = agent.readProperty("discount-factor", Double.class, 0.95);
+		Double discount = agent.readProperty("discount-factor", Double.class,
+				0.95);
 
 		this.random = new Random();
 		this.pPickup = discount;
 
-		// Number of cities & moves:
-		Integer N = topology.size();
-		// Number of task's state: N+1 (when task == N it means no task is available)
+		Vehicle vehicle = agent.vehicles().get(0);
 
-		// Potential V for each state s = (city, task)
-		Double potential[][] = new Double[N][N + 1];
+		// TODO : Handle the case where there isn't any taks
+		// TODO : Handle the fact that an agent can't mover further thant its
+		// neighbors
+		// TODO : Handle the storage of Q/ maxQ and Values
+		for (City city : topology) {
+			for (City task : topology) {
+				State state = new State(city, task);
+				// TODO : Define Q
+				for (City move : topology) {
+					double q = reward(city, task, move, vehicle, td);
 
-		Boolean progress = true;
-		do {
-			// Progress is made if `potential` is updated
-			progress = false;
-
-			// For all states (city x task)
-			for (Integer city = 0; city < N; ++city) {
-				for (Integer task = 0; task <= N; ++task) {
-					Double bestQForAction = -1.0;
-
-					// For all actions (move): compute best Q
-					for (Integer move = 0; move < N; ++move) {
-						Double q = reward(city, task, move);
-
-						// for all s'∈ S: γ * T(s,a,s') * V(s')
-						Integer cityP = move; // only one possibility for the next state's city
-						for (Integer taskP = 0; taskP <= N; ++taskP) {
-							q += gamma * probabilityTransition(city, task, move, cityP, taskP)
-									* potential[cityP][taskP];
+					for (City cityP : topology) {
+						for (City taskP : topology) {
+							q += futureValue(city, task, cityP, taskP, td);
 						}
-
-						// NOTE: probabilityTransition will probably depends only on the last two parameters
-
-						bestQForAction = Math.max(bestQForAction, q);
-					}
-
-					// Update potential
-					if (potential[city][task] != bestQForAction) {
-						progress = true;
-						potential[city][task] = bestQForAction;
 					}
 				}
 			}
-		} while (progress);
-
-		// TODO same `potential` as a field or something
+		}
 	}
 
 	@Override
@@ -84,7 +64,29 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		} else {
 			action = new Pickup(availableTask);
 		}
-
 		return action;
+	}
+
+	private double reward(City city, City task, City move, Vehicle vehicle,
+			TaskDistribution td) {
+		if (city.id == task.id || city.id == move.id) {
+			return 0.0;
+		} else if (task.id != move.id) {
+			return city.distanceTo(move) * vehicle.costPerKm();
+		} else {
+			return td.reward(city, task) - city.distanceTo(task)
+					* vehicle.costPerKm();
+		}
+
+	}
+
+	private double futureValue(City currentC, City currentT, City futureC,
+			City futureT, TaskDistribution td) {
+		if ((currentC.id == futureC.id) || (currentT.id == currentC.id)
+				|| (currentT.id == futureT.id)) {
+			return 0.0;
+		} else {
+			return td.probability(futureC, futureT);
+		}
 	}
 }
