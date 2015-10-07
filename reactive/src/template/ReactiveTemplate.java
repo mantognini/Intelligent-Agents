@@ -33,25 +33,34 @@ public class ReactiveTemplate implements ReactiveBehavior {
 
 		Vehicle vehicle = agent.vehicles().get(0);
 
-		// TODO : Handle the case where there isn't any taks
+		// TODO : Handle the case where there isn't any task
 		// TODO : Handle the fact that an agent can't mover further thant its
 		// neighbors
-		// TODO : Handle the storage of Q/ maxQ and Values
-		for (City city : topology) {
-			for (City task : topology) {
-				State state = new State(city, task);
-				// TODO : Define Q
-				for (City move : topology) {
-					double q = reward(city, task, move, vehicle, td);
-
-					for (City cityP : topology) {
-						for (City taskP : topology) {
-							q += futureValue(city, task, cityP, taskP, td);
+		boolean improvement = false;
+		do {
+			improvement = false;
+			for (City city : topology) {
+				for (City task : topology) {
+					State state = new State(city, task);
+					// TODO : Define Q
+					double bestQ = 0.0;
+					for (City move : topology) {
+						double q = reward(city, task, move, vehicle, td);
+	
+						for (City cityP : topology) {
+							for (City taskP : topology) {
+								q += futureValue(city, task, cityP, taskP, td);
+							}
 						}
+						bestQ = Math.max(q, bestQ);
+					}
+					if(values.get(state) < bestQ) {
+						values.put(state, bestQ);
+						improvement = true;
 					}
 				}
 			}
-		}
+		}while(improvement)
 	}
 
 	@Override
