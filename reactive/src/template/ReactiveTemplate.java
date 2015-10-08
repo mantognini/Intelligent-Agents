@@ -1,13 +1,12 @@
 package template;
 
 import java.util.HashMap;
-import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 
 import logist.agent.Agent;
 import logist.behavior.ReactiveBehavior;
 import logist.plan.Action;
-import logist.plan.Action.Move;
-import logist.plan.Action.Pickup;
 import logist.simulation.Vehicle;
 import logist.task.Task;
 import logist.task.TaskDistribution;
@@ -16,86 +15,119 @@ import logist.topology.Topology.City;
 
 public class ReactiveTemplate implements ReactiveBehavior {
 
-	private Random random;
-	private double pPickup;
-	private HashMap<State, Double> values = new HashMap<State, Double>();
+	private HashMap<State, Double> potentials = new HashMap<State, Double>();
 
 	@Override
 	public void setup(Topology topology, TaskDistribution td, Agent agent) {
 
-		// Reads the discount factor from the agents.xml file.
+		// Reads the gamma factor from the agents.xml file.
 		// If the property is not present it defaults to 0.95
-		Double discount = agent.readProperty("discount-factor", Double.class,
-				0.95);
-
-		this.random = new Random();
-		this.pPickup = discount;
+		Double gamma = agent.readProperty("gamma", Double.class, 0.95);
 
 		Vehicle vehicle = agent.vehicles().get(0);
 
+		final int N = topology.size();
+
 		// TODO : Handle the case where there isn't any task
-		// TODO : Handle the fact that an agent can't mover further thant its
-		// neighbors
 		boolean improvement = false;
 		do {
 			improvement = false;
+			Double sumOfDiffs = 0.0;
+			// System.out.println("------------------------------------");
+
+			// For all states
 			for (City city : topology) {
-				for (City task : topology) {
+				for (int task = 0; task <= N; ++task) {
+
+					// Skip invalid state
+					if (task == city.id)
+						continue;
+
 					State state = new State(city, task);
-					// TODO : Define Q
+
 					double bestQ = 0.0;
-					for (City move : topology) {
-						double q = reward(city, task, move, vehicle, td);
-	
-						for (City cityP : topology) {
-							for (City taskP : topology) {
-								q += futureValue(city, task, cityP, taskP, td);
-							}
+
+					// From the current city we can go to any neighbors or, if any, the destination of the task
+					// Using set to avoid duplicates with task destination
+					Set<City> dests = new HashSet<Topology.City>();
+					dests.addAll(state.city.neighbors());
+					if (task < N) {
+						dests.add(topology.cities().get(task));
+					}
+
+					// For all actions
+					for (City action : dests) {
+						double q = reward(state, action, vehicle, td, topology);
+
+						// For all state' (prime)
+						City cityP = action;
+						for (int taskP = 0; taskP <= N; ++taskP) {
+							State stateP = new State(cityP, taskP);
+
+							q += gamma * transitionProbability(state, action, stateP, td, topology)
+									* potentials.getOrDefault(stateP, 0.0);
 						}
+
 						bestQ = Math.max(q, bestQ);
 					}
-					if(values.get(state) < bestQ) {
-						values.put(state, bestQ);
+
+					// Update potential if change
+					Double currentPotential = potentials.getOrDefault(state, 0.0);
+					// System.out.println("current: " + currentPotential + "; bestQ: " + bestQ);
+					sumOfDiffs += Math.abs(currentPotential - bestQ);
+					if (!currentPotential.equals(bestQ)) {
+						potentials.put(state, bestQ);
 						improvement = true;
 					}
 				}
 			}
-		}while(improvement)
+
+			System.out.println("Sum of diffs: " + sumOfDiffs);
+
+		} while (improvement);
+	}
+
+	private double transitionProbability(State state, City action, State stateP, TaskDistribution td, Topology topology) {
+		final int N = topology.size();
+
+		if (state.city.id == action.id || state.city.id == state.task || state.city.id == stateP.city.id
+				|| stateP.city.id != action.id) {
+			return 0.0;
+		} else if (stateP.task < N) {
+			return td.probability(stateP.city, getCity(stateP.task, topology));
+		} else {
+			// stateP.task >= N ---> π[1 - p(stateP.city, dest)]
+			double p = 1.0;
+			for (City dest : topology) {
+				p *= 1.0 - td.probability(stateP.city, dest);
+			}
+			return p;
+		}
+	}
+
+	private City getCity(int task, Topology topology) {
+		assert task < topology.size();
+		return topology.cities().get(task);
+	}
+
+	private double reward(State state, City action, Vehicle vehicle, TaskDistribution td, Topology topology) {
+		final int N = topology.size();
+
+		double win = 0;
+
+		// If we have a task with us, we can get some candy!
+		if (state.task < N && action.id == state.task) {
+			win = td.reward(state.city, action);
+		}
+
+		double lost = state.city.distanceTo(action) * vehicle.costPerKm();
+
+		return win - lost;
 	}
 
 	@Override
 	public Action act(Vehicle vehicle, Task availableTask) {
-		Action action;
-
-		if (availableTask == null || random.nextDouble() > pPickup) {
-			City currentCity = vehicle.getCurrentCity();
-			action = new Move(currentCity.randomNeighbor(random));
-		} else {
-			action = new Pickup(availableTask);
-		}
-		return action;
+		return null;
 	}
 
-	private double reward(City city, City task, City move, Vehicle vehicle,
-			TaskDistribution td) {
-		if (city.id == task.id || city.id == move.id) {
-			return 0.0;
-		} else if (task.id != move.id) {
-			return city.distanceTo(move) * vehicle.costPerKm();
-		} else {
-			return td.reward(city, task) - city.distanceTo(task)
-					* vehicle.costPerKm();
-		}
-
-	}
-
-	private double futureValue(City currentC, City currentT, City futureC,
-			City futureT, TaskDistribution td) {
-		if ((currentC.id == futureC.id) || (currentT.id == currentC.id)
-				|| (currentT.id == futureT.id)) {
-			return 0.0;
-		} else {
-			return td.probability(futureC, futureT);
-		}
-	}
 }
