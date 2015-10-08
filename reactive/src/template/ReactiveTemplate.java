@@ -31,6 +31,7 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		// TODO : Handle the case where there isn't any task
 		boolean improvement = false;
 		do {
+
 			improvement = false;
 			Double sumOfDiffs = 0.0;
 			// System.out.println("------------------------------------");
@@ -51,8 +52,8 @@ public class ReactiveTemplate implements ReactiveBehavior {
 					// Using set to avoid duplicates with task destination
 					Set<City> dests = new HashSet<Topology.City>();
 					dests.addAll(state.city.neighbors());
-					if (task < N) {
-						dests.add(topology.cities().get(task));
+					if (task < N && !dests.contains(getCity(task, topology))) {
+						dests.add(getCity(task, topology));
 					}
 
 					// For all actions
@@ -96,12 +97,14 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		} else if (stateP.task < N) {
 			return td.probability(stateP.city, getCity(stateP.task, topology));
 		} else {
-			// stateP.task >= N ---> π[1 - p(stateP.city, dest)]
-			double p = 1.0;
-			for (City dest : topology) {
-				p *= 1.0 - td.probability(stateP.city, dest);
-			}
-			return p;
+			// stateP.task >= N ---> p = 1 - sum(p(stateP.city, dest))
+			// double p = 1.0;
+			// for (City dest : topology) {
+			// p -= td.probability(stateP.city, dest);
+			// }
+			// return p;
+			// Equivalent to the operation above
+			return td.probability(stateP.city, null);
 		}
 	}
 
