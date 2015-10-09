@@ -2,6 +2,15 @@ package template;
 
 import logist.topology.Topology.City;
 
+/*
+ * Represents the state of a Reactive Agent.
+ * 
+ * Assuming there are N cities in the topology of the agent's world, a state is represented as follow:
+ * 
+ * - city: the city in which the agent is
+ * - task: if less than N it means that a task for the `task`-th city of the topology is available,
+ *         otherwise it means no task is available in the current `city`.
+ */
 class State {
 
 	public final City city;
@@ -12,7 +21,7 @@ class State {
 		this.task = task;
 	}
 
-	// Eclipse generate this:
+	// Eclipse generate this; no human should read it!
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -22,7 +31,7 @@ class State {
 		return result;
 	}
 
-	// Eclipse generate this:
+	// Eclipse generate this; no human should read it!
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

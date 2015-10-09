@@ -15,8 +15,10 @@ import logist.topology.Topology.City;
 
 public class ReactiveTemplate implements ReactiveBehavior {
 
+	// Potential table; access it through get/setPotential
 	private HashMap<State, Double> potentials = new HashMap<State, Double>();
 
+	// Setup transition table for our Reactive Agent
 	@Override
 	public void setup(Topology topology, TaskDistribution td, Agent agent) {
 
@@ -26,15 +28,12 @@ public class ReactiveTemplate implements ReactiveBehavior {
 
 		Vehicle vehicle = agent.vehicles().get(0);
 
-		final int N = topology.size();
+		final int N = topology.size(); // # of cities
 
-		// TODO : Handle the case where there isn't any task
 		boolean improvement = false;
 		do {
 
 			improvement = false;
-			Double sumOfDiffs = 0.0;
-			// System.out.println("------------------------------------");
 
 			// For all states
 			for (City city : topology) {
@@ -44,50 +43,53 @@ public class ReactiveTemplate implements ReactiveBehavior {
 					if (task == city.id)
 						continue;
 
+					// Current state
 					State state = new State(city, task);
 
 					double bestQ = 0.0;
 
 					// From the current city we can go to any neighbors or, if any, the destination of the task
-					// Using set to avoid duplicates with task destination
+					// Using `Set` to avoid duplicates with task destination
 					Set<City> dests = new HashSet<Topology.City>();
 					dests.addAll(state.city.neighbors());
-					if (task < N && !dests.contains(getCity(task, topology))) {
+					if (task < N) {
 						dests.add(getCity(task, topology));
 					}
 
-					// For all actions
+					// Compute potential for all actions (that is, for all legal moves), and keep only the best
 					for (City action : dests) {
 						double q = reward(state, action, vehicle, td, topology);
 
-						// For all state' (prime)
+						// For all possible next state' (prime)
 						City cityP = action;
 						for (int taskP = 0; taskP <= N; ++taskP) {
 							State stateP = new State(cityP, taskP);
 
 							q += gamma * transitionProbability(state, action, stateP, td, topology)
-									* potentials.getOrDefault(stateP, 0.0);
+									* getPotential(stateP);
 						}
 
 						bestQ = Math.max(q, bestQ);
 					}
 
 					// Update potential if change
-					Double currentPotential = potentials.getOrDefault(state, 0.0);
-					// System.out.println("current: " + currentPotential + "; bestQ: " + bestQ);
-					sumOfDiffs += Math.abs(currentPotential - bestQ);
+					Double currentPotential = getPotential(state);
 					if (!currentPotential.equals(bestQ)) {
-						potentials.put(state, bestQ);
+						setPotential(state, bestQ);
 						improvement = true;
 					}
 				}
 			}
 
-			System.out.println("Sum of diffs: " + sumOfDiffs);
-
 		} while (improvement);
 	}
 
+	@Override
+	public Action act(Vehicle vehicle, Task availableTask) {
+		return null;
+	}
+
+	// Compute the probability to be in `stateP` after taking `action` from `state`
 	private double transitionProbability(State state, City action, State stateP, TaskDistribution td, Topology topology) {
 		final int N = topology.size();
 
@@ -97,22 +99,20 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		} else if (stateP.task < N) {
 			return td.probability(stateP.city, getCity(stateP.task, topology));
 		} else {
-			// stateP.task >= N ---> p = 1 - sum(p(stateP.city, dest))
-			// double p = 1.0;
-			// for (City dest : topology) {
-			// p -= td.probability(stateP.city, dest);
-			// }
-			// return p;
-			// Equivalent to the operation above
+			// stateP.task >= N implies there's no task available in the city
+			// So we have p = 1 - sum(p(stateP.city, dest))
+			// Which is nicely handled by `TaskDistribution.probability`.
 			return td.probability(stateP.city, null);
 		}
 	}
 
+	// Get the city corresponding to the destination of the given task
 	private City getCity(int task, Topology topology) {
 		assert task < topology.size();
 		return topology.cities().get(task);
 	}
 
+	// Compute reward for the given state-action pair
 	private double reward(State state, City action, Vehicle vehicle, TaskDistribution td, Topology topology) {
 		final int N = topology.size();
 
@@ -128,9 +128,13 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		return win - lost;
 	}
 
-	@Override
-	public Action act(Vehicle vehicle, Task availableTask) {
-		return null;
+	private Double getPotential(State state) {
+		// By default the table is empty but by default we assume a value of 0.0
+		return potentials.getOrDefault(state, 0.0);
+	}
+
+	private Double setPotential(State state, double potential) {
+		return potentials.put(state, potential);
 	}
 
 }
