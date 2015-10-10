@@ -4,10 +4,35 @@
 	<!-- A list of agents and their behavior classes -->
 	
 	<!-- #### REACTIVE AGENTS ### -->
-	<agent name="reactive-random">
+	<agent name="reactive0.2">
 		<set class-path="bin/"/>
 		<set class-name="template.ReactiveTemplate"/>
-		<set gamma="0.85"/>
+		<set gamma="0.2"/>
+	</agent>
+	<agent name="reactive0.4">
+		<set class-path="bin/"/>
+		<set class-name="template.ReactiveTemplate"/>
+		<set gamma="0.4"/>
+	</agent>
+	<agent name="reactive0.6">
+		<set class-path="bin/"/>
+		<set class-name="template.ReactiveTemplate"/>
+		<set gamma="0.6"/>
+	</agent>
+	<agent name="reactive0.8">
+		<set class-path="bin/"/>
+		<set class-name="template.ReactiveTemplate"/>
+		<set gamma="0.8"/>
+	</agent>
+	<agent name="reactive0.9">
+		<set class-path="bin/"/>
+		<set class-name="template.ReactiveTemplate"/>
+		<set gamma="0.9"/>
+	</agent>
+	<agent name="reactive0.95">
+		<set class-path="bin/"/>
+		<set class-name="template.ReactiveTemplate"/>
+		<set gamma="0.95"/>
 	</agent>
 	
 </agents>
