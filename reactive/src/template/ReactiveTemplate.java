@@ -27,6 +27,9 @@ public class ReactiveTemplate implements ReactiveBehavior {
 	private Topology topology;
 	private int N; // # of cities
 
+	private Agent agent;
+	private int counterSteps = 0;
+
 	// Setup transition table for our Reactive Agent
 	@Override
 	public void setup(Topology topology, TaskDistribution td, Agent agent) {
@@ -88,10 +91,20 @@ public class ReactiveTemplate implements ReactiveBehavior {
 			}
 
 		} while (improvement);
+
+		this.agent = agent;
 	}
 
 	@Override
 	public Action act(Vehicle vehicle, Task availableTask) {
+		// ADDED CODE - this output gives information about the "goodness" of your agent (higher values are preferred)
+		if ((counterSteps > 0) && (counterSteps % 100 == 0)) {
+			System.out.println("The total profit after " + counterSteps + " steps is " + agent.getTotalProfit() + ".");
+			System.out.println("The profit per action after " + counterSteps + " steps is "
+					+ ((double) agent.getTotalProfit() / counterSteps) + ".");
+		}
+		counterSteps++;
+		// END OF ADDED CODE
 		State state = new State(vehicle.getCurrentCity(), availableTask == null ? N : availableTask.deliveryCity.id);
 
 		// Choose best action
