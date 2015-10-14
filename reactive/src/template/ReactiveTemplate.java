@@ -1,7 +1,9 @@
 package template;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import logist.agent.Agent;
@@ -23,22 +25,19 @@ public class ReactiveTemplate implements ReactiveBehavior {
 	// Action table; best move for state/potential; use getPreferableAction
 	private HashMap<State, City> actions = new HashMap<State, City>();
 
-	// Keep track of the topology for runtime decision
-	private Topology topology;
-	private int N; // # of cities
-
+	// For reward per action ration computation
 	private Agent agent;
 	private int counterSteps = 0;
 
 	// Setup transition table for our Reactive Agent
 	@Override
 	public void setup(Topology topology, TaskDistribution td, Agent agent) {
-		this.topology = topology;
-		this.N = topology.size();
-
 		// Reads the gamma factor from the agents.xml file.
 		// If the property is not present it defaults to 0.95
 		Double gamma = agent.readProperty("gamma", Double.class, 0.95);
+
+		List<City> tasks = new ArrayList<Topology.City>(topology.cities());
+		tasks.add(null); // The "no task" state
 
 		Vehicle vehicle = agent.vehicles().get(0);
 
@@ -49,10 +48,10 @@ public class ReactiveTemplate implements ReactiveBehavior {
 
 			// For all states
 			for (City city : topology) {
-				for (int task = 0; task <= N; ++task) {
+				for (City task : tasks) {
 
 					// Skip invalid state
-					if (task == city.id)
+					if (city.equals(task))
 						continue;
 
 					// Current state
@@ -69,7 +68,7 @@ public class ReactiveTemplate implements ReactiveBehavior {
 
 						// For all possible next state' (prime)
 						City cityP = action;
-						for (int taskP = 0; taskP <= N; ++taskP) {
+						for (City taskP : tasks) {
 							State stateP = new State(cityP, taskP);
 
 							q += gamma * transitionProbability(state, action, stateP, td) * getPotential(stateP);
@@ -97,21 +96,20 @@ public class ReactiveTemplate implements ReactiveBehavior {
 
 	@Override
 	public Action act(Vehicle vehicle, Task availableTask) {
-		// ADDED CODE - this output gives information about the "goodness" of your agent (higher values are preferred)
 		if ((counterSteps > 0) && (counterSteps % 100 == 0)) {
 			System.out.println("The total profit after " + counterSteps + " steps is " + agent.getTotalProfit() + ".");
 			System.out.println("The profit per action after " + counterSteps + " steps is "
 					+ ((double) agent.getTotalProfit() / counterSteps) + ".");
 		}
 		counterSteps++;
-		// END OF ADDED CODE
-		State state = new State(vehicle.getCurrentCity(), availableTask == null ? N : availableTask.deliveryCity.id);
+
+		State state = new State(vehicle.getCurrentCity(), availableTask == null ? null : availableTask.deliveryCity);
 
 		// Choose best action
 		City destination = getPreferableAction(state);
 
 		// If the destination and the task's destination match, take the task
-		if (destination.id == state.task) {
+		if (destination.equals(state.task)) {
 			return new Pickup(availableTask);
 		} else {
 			return new Move(destination);
@@ -120,23 +118,12 @@ public class ReactiveTemplate implements ReactiveBehavior {
 
 	// Compute the probability to be in `stateP` after taking `action` from `state`
 	private double transitionProbability(State state, City action, State stateP, TaskDistribution td) {
-		if (state.city.id == action.id || state.city.id == state.task || state.city.id == stateP.city.id
-				|| stateP.city.id != action.id) {
+		if (state.city.equals(action) || state.city.equals(state.task) || state.city.equals(stateP.city)
+				|| !stateP.city.equals(action)) {
 			return 0.0;
-		} else if (stateP.task < N) {
-			return td.probability(stateP.city, getCity(stateP.task));
 		} else {
-			// stateP.task >= N implies there's no task available in the city
-			// So we have p = 1 - sum(p(stateP.city, dest))
-			// Which is nicely handled by `TaskDistribution.probability`.
-			return td.probability(stateP.city, null);
+			return td.probability(stateP.city, stateP.task);
 		}
-	}
-
-	// Get the city corresponding to the destination of the given task
-	private City getCity(int task) {
-		assert task < topology.size();
-		return topology.cities().get(task);
 	}
 
 	// From the current city we can go to any neighbors or, if any, the destination of the task
@@ -145,8 +132,8 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		Set<City> dests = new HashSet<Topology.City>();
 
 		dests.addAll(state.city.neighbors());
-		if (state.task < N) {
-			dests.add(getCity(state.task));
+		if (state.task != null) {
+			dests.add(state.task);
 		}
 
 		return dests;
@@ -157,7 +144,7 @@ public class ReactiveTemplate implements ReactiveBehavior {
 		double win = 0;
 
 		// If we have a task with us, we can get some candy!
-		if (state.task < N && action.id == state.task) {
+		if (action.equals(state.task)) {
 			win = td.reward(state.city, action);
 		}
 

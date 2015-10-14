@@ -14,9 +14,9 @@ import logist.topology.Topology.City;
 class State {
 
 	public final City city;
-	public final int task;
+	public final City task;
 
-	public State(City city, int task) {
+	public State(City city, City task) {
 		this.city = city;
 		this.task = task;
 	}
@@ -27,7 +27,7 @@ class State {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + task;
+		result = prime * result + ((task == null) ? 0 : task.hashCode());
 		return result;
 	}
 
@@ -46,7 +46,10 @@ class State {
 				return false;
 		} else if (!city.equals(other.city))
 			return false;
-		if (task != other.task)
+		if (task == null) {
+			if (other.task != null)
+				return false;
+		} else if (!task.equals(other.task))
 			return false;
 		return true;
 	}
