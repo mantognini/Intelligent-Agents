@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import logist.task.Task;
+import logist.task.TaskSet;
 import logist.topology.Topology.City;
 
 public class State {
@@ -17,28 +18,28 @@ public class State {
 	/**
 	 * Tasks on board
 	 */
-	public final List<Task> deliveries;
+	public final TaskSet deliveries;
 	/**
 	 * Task available on the topology
 	 */
-	public final List<Task> availableTasks;
+	public final TaskSet availableTasks;
 	/**
 	 * Remaining available capacity on the vehicle
 	 */
 	public final int remainingCapacity;
 
-	public State(City currentCity, List<Task> deliveries, List<Task> available, int remainCapacity) {
+	public State(City currentCity, TaskSet deliveries, TaskSet available, int remainingCapacity) {
 		this.currentCity = currentCity;
 		this.deliveries = deliveries;
 		this.availableTasks = available;
-		this.remainingCapacity = remainCapacity;
+		this.remainingCapacity = remainingCapacity;
 	}
 
 	public boolean isFinal() {
 		return deliveries.isEmpty() && availableTasks.isEmpty();
 	}
 
-	public List<Action> possibleActions() {
+	public List<Action> getLegalActions() {
 
 		List<Action> actions = new ArrayList<Action>(); // The set of legal actions
 		Set<City> destinations = new HashSet<City>(); // The set of interesting destination (pickup + delivery)
@@ -86,31 +87,20 @@ public class State {
 	}
 
 	public State nextState(Action a) {
-		if (a instanceof Delivery) {
-			// TODO assert action is valid
-			Delivery action = (Delivery) a;
-			List<Task> remainingDeliveries = new ArrayList<Task>(deliveries);
-			remainingDeliveries.remove(action.task);
-			int newRemainingCapacity = remainingCapacity + action.task.weight;
-			return new State(currentCity, remainingDeliveries, availableTasks, newRemainingCapacity);
-		} else if (a instanceof Pickup) {
-			Pickup action = (Pickup) a;
-			return null; // TODO
-		} else if (a instanceof Move) {
-			Move action = (Move) a;
-			return null; // TODO
-		} else {
-			assert false; // This should not happen!
-			return null;
-		}
+		return a.apply(); // See note about `Action` class.
 	}
 
 	/**
 	 * We need access to logist.plan.Action's private member for the `nextState` method... So we apply a Facade pattern.
-	 * Quite verbose in Java but here we go!
+	 * And in order to avoid using instanceof in `nextState`, we use dynamic dispatch with `apply` on the action itself.
+	 * 
+	 * Note that those actions are bounded to the State object that created them so we have access to the state's
+	 * internal fields.
 	 */
-	private abstract class Action {
+	protected abstract class Action {
 		public abstract logist.plan.Action getLogistAction();
+
+		public abstract State apply(); // transform the current state
 	}
 
 	private final class Move extends Action {
@@ -123,6 +113,12 @@ public class State {
 		@Override
 		public logist.plan.Action getLogistAction() {
 			return new logist.plan.Action.Move(destination);
+		}
+
+		@Override
+		public State apply() {
+			// Simply move to the destination
+			return new State(destination, deliveries, availableTasks, remainingCapacity);
 		}
 	}
 
@@ -137,6 +133,20 @@ public class State {
 		public logist.plan.Action getLogistAction() {
 			return new logist.plan.Action.Pickup(task);
 		}
+
+		@Override
+		public State apply() {
+			// Transfer the task from one set to the other
+			TaskSet newAvailableTasks = availableTasks.clone();
+			newAvailableTasks.remove(task);
+
+			TaskSet newDeliveries = deliveries.clone();
+			newDeliveries.add(task);
+
+			int newRemainingCapacity = remainingCapacity - task.weight;
+
+			return new State(currentCity, newDeliveries, newAvailableTasks, newRemainingCapacity);
+		}
 	}
 
 	private final class Delivery extends Action {
@@ -149,6 +159,17 @@ public class State {
 		@Override
 		public logist.plan.Action getLogistAction() {
 			return new logist.plan.Action.Delivery(task);
+		}
+
+		@Override
+		public State apply() {
+			// Drop the task and free the truck
+			TaskSet newDeliveries = deliveries.clone();
+			newDeliveries.remove(task);
+
+			int newRemainingCapacity = remainingCapacity + task.weight;
+
+			return new State(currentCity, newDeliveries, availableTasks, newRemainingCapacity);
 		}
 	}
 
