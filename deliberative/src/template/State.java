@@ -1,0 +1,197 @@
+package template;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import logist.task.Task;
+import logist.topology.Topology.City;
+
+public class State {
+
+	/**
+	 * City currently in
+	 */
+	public final City currentCity;
+	/**
+	 * Tasks on board
+	 */
+	public final List<Task> deliveries;
+	/**
+	 * Task available on the topology
+	 */
+	public final List<Task> availableTasks;
+	/**
+	 * Remaining available capacity on the vehicle
+	 */
+	public final int remainingCapacity;
+
+	public State(City currentCity, List<Task> deliveries, List<Task> available, int remainCapacity) {
+		this.currentCity = currentCity;
+		this.deliveries = deliveries;
+		this.availableTasks = available;
+		this.remainingCapacity = remainCapacity;
+	}
+
+	public boolean isFinal() {
+		return deliveries.isEmpty() && availableTasks.isEmpty();
+	}
+
+	public List<Action> possibleActions() {
+
+		List<Action> actions = new ArrayList<Action>(); // The set of legal actions
+		Set<City> destinations = new HashSet<City>(); // The set of interesting destination (pickup + delivery)
+
+		// Drop case
+		for (Task t : deliveries) {
+			if (t.deliveryCity.equals(currentCity)) {
+				// We are in the same city so we can deliver it now.
+				actions.add(new Delivery(t));
+			} else {
+				// We need to go to the task's delivery site, hence we compute the path to this city and
+				// add the next city on this path to our set of interesting destinations.
+				List<City> path = currentCity.pathTo(t.deliveryCity);
+				City nextStep = path.get(0);
+				destinations.add(nextStep);
+			}
+		}
+
+		// Pickup case
+		for (Task t : availableTasks) {
+			// We don't go to pickup location of task, nor pickup, that don't fit in our vehicle.
+			if (t.weight > remainingCapacity)
+				continue;
+
+			if (t.pickupCity.equals(currentCity)) {
+				// We are in the same city so we can pick it up now.
+				actions.add(new Pickup(t));
+			} else {
+				// We need to go to this task's pickup site and similarly to the drop case
+				// we add the next city toward it.
+				List<City> path = currentCity.pathTo(t.pickupCity);
+				City nextStep = path.get(0);
+				destinations.add(nextStep);
+			}
+
+		}
+
+		// Move actions
+		for (City c : destinations) {
+			assert currentCity.neighbors().contains(c); // just in case...
+			actions.add(new Move(c));
+		}
+
+		return actions;
+	}
+
+	public State nextState(Action a) {
+		if (a instanceof Delivery) {
+			// TODO assert action is valid
+			Delivery action = (Delivery) a;
+			List<Task> remainingDeliveries = new ArrayList<Task>(deliveries);
+			remainingDeliveries.remove(action.task);
+			int newRemainingCapacity = remainingCapacity + action.task.weight;
+			return new State(currentCity, remainingDeliveries, availableTasks, newRemainingCapacity);
+		} else if (a instanceof Pickup) {
+			Pickup action = (Pickup) a;
+			return null; // TODO
+		} else if (a instanceof Move) {
+			Move action = (Move) a;
+			return null; // TODO
+		} else {
+			assert false; // This should not happen!
+			return null;
+		}
+	}
+
+	/**
+	 * We need access to logist.plan.Action's private member for the `nextState` method... So we apply a Facade pattern.
+	 * Quite verbose in Java but here we go!
+	 */
+	private abstract class Action {
+		public abstract logist.plan.Action getLogistAction();
+	}
+
+	private final class Move extends Action {
+		public final City destination;
+
+		public Move(City destination) {
+			this.destination = destination;
+		}
+
+		@Override
+		public logist.plan.Action getLogistAction() {
+			return new logist.plan.Action.Move(destination);
+		}
+	}
+
+	private final class Pickup extends Action {
+		public final Task task;
+
+		public Pickup(Task task) {
+			this.task = task;
+		}
+
+		@Override
+		public logist.plan.Action getLogistAction() {
+			return new logist.plan.Action.Pickup(task);
+		}
+	}
+
+	private final class Delivery extends Action {
+		public final Task task;
+
+		public Delivery(Task task) {
+			this.task = task;
+		}
+
+		@Override
+		public logist.plan.Action getLogistAction() {
+			return new logist.plan.Action.Delivery(task);
+		}
+	}
+
+	// * ECLIPSE GENERATE THIS: *//
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((availableTasks == null) ? 0 : availableTasks.hashCode());
+		result = prime * result + ((currentCity == null) ? 0 : currentCity.hashCode());
+		result = prime * result + ((deliveries == null) ? 0 : deliveries.hashCode());
+		result = prime * result + remainingCapacity;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		State other = (State) obj;
+		if (availableTasks == null) {
+			if (other.availableTasks != null)
+				return false;
+		} else if (!availableTasks.equals(other.availableTasks))
+			return false;
+		if (currentCity == null) {
+			if (other.currentCity != null)
+				return false;
+		} else if (!currentCity.equals(other.currentCity))
+			return false;
+		if (deliveries == null) {
+			if (other.deliveries != null)
+				return false;
+		} else if (!deliveries.equals(other.deliveries))
+			return false;
+		if (remainingCapacity != other.remainingCapacity)
+			return false;
+		return true;
+	}
+
+}
