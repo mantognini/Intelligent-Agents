@@ -18,7 +18,7 @@ import logist.topology.Topology.City;
 public class DeliberativeTemplate implements DeliberativeBehavior {
 
 	enum Algorithm {
-		BFS, ASTAR
+		BFS, ASTAR, NAIVE
 	}
 
 	/* Environment */
@@ -27,7 +27,6 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 
 	/* the properties of the agent */
 	Agent agent;
-	int capacity;
 
 	/* the planning class */
 	Algorithm algorithm;
@@ -39,7 +38,6 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 		this.agent = agent;
 
 		// initialize the planner
-		capacity = agent.vehicles().get(0).capacity();
 		String algorithmName = agent.readProperty("algorithm", String.class, "ASTAR");
 
 		// Throws IllegalArgumentException if algorithm is unknown
@@ -50,22 +48,21 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 
 	@Override
 	public Plan plan(Vehicle vehicle, TaskSet tasks) {
-		Plan plan;
-
 		// Compute the plan with the selected algorithm.
 		switch (algorithm) {
 		case ASTAR:
-			// ...
-			plan = naivePlan(vehicle, tasks);
-			break;
+			return aStarPlan(vehicle, tasks);
+
 		case BFS:
-			// ...
-			plan = naivePlan(vehicle, tasks);
-			break;
+			// TODO BFS
+			return naivePlan(vehicle, tasks);
+
+		case NAIVE:
+			return naivePlan(vehicle, tasks);
+
 		default:
 			throw new AssertionError("Should not happen.");
 		}
-		return plan;
 	}
 
 	private Plan naivePlan(Vehicle vehicle, TaskSet tasks) {
@@ -89,6 +86,11 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 			current = task.deliveryCity;
 		}
 		return plan;
+	}
+
+	private Plan aStarPlan(Vehicle vehicle, TaskSet tasks) {
+		State initialState = State.createInitialState(vehicle, tasks);
+		return null;
 	}
 
 	@Override

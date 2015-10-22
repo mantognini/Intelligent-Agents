@@ -5,11 +5,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import logist.simulation.Vehicle;
 import logist.task.Task;
 import logist.task.TaskSet;
 import logist.topology.Topology.City;
 
 public class State {
+
+	/**
+	 * Create the initial state for the given vehicle and the task list
+	 */
+	public static State createInitialState(Vehicle vehicle, TaskSet tasks) {
+		// Couldn't find a cleaner way of creating an empty taskset...
+		TaskSet empty = tasks.clone();
+		empty.clear();
+
+		return new State(vehicle.getCurrentCity(), empty, tasks, vehicle.capacity());
+	}
 
 	/**
 	 * City currently in
@@ -214,5 +226,4 @@ public class State {
 			return false;
 		return true;
 	}
-
 }
