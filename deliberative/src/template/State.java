@@ -20,7 +20,7 @@ public class State {
 		TaskSet empty = tasks.clone();
 		empty.clear();
 
-		return new State(vehicle.getCurrentCity(), empty, tasks, vehicle.capacity());
+		return new State(vehicle.getCurrentCity(), empty, tasks, vehicle.capacity(), vehicle.costPerKm());
 	}
 
 	/**
@@ -40,11 +40,15 @@ public class State {
 	 */
 	public final int remainingCapacity;
 
-	public State(City currentCity, TaskSet deliveries, TaskSet available, int remainingCapacity) {
+	// We need to keep track of that in order to compute the cost of an action.
+	private final int costPerKm;
+
+	public State(City currentCity, TaskSet deliveries, TaskSet available, int remainingCapacity, int costPerKm) {
 		this.currentCity = currentCity;
 		this.deliveries = deliveries;
 		this.availableTasks = available;
 		this.remainingCapacity = remainingCapacity;
+		this.costPerKm = costPerKm;
 	}
 
 	public boolean isFinal() {
@@ -113,6 +117,13 @@ public class State {
 		public abstract logist.plan.Action getLogistAction();
 
 		public abstract State apply(); // transform the current state
+
+		public abstract double cost(); // cost (or reward) of applying the action
+
+		// Get the state back from the action
+		public final State getState() {
+			return State.this;
+		}
 	}
 
 	private final class Move extends Action {
@@ -130,7 +141,14 @@ public class State {
 		@Override
 		public State apply() {
 			// Simply move to the destination
-			return new State(destination, deliveries, availableTasks, remainingCapacity);
+			return new State(destination, deliveries, availableTasks, remainingCapacity, costPerKm);
+		}
+
+		@Override
+		public double cost() {
+			// Consume energy...
+			double distance = currentCity.distanceTo(destination);
+			return distance * costPerKm;
 		}
 	}
 
@@ -157,7 +175,13 @@ public class State {
 
 			int newRemainingCapacity = remainingCapacity - task.weight;
 
-			return new State(currentCity, newDeliveries, newAvailableTasks, newRemainingCapacity);
+			return new State(currentCity, newDeliveries, newAvailableTasks, newRemainingCapacity, costPerKm);
+		}
+
+		@Override
+		public double cost() {
+			// No reward yet
+			return 0;
 		}
 	}
 
@@ -181,7 +205,13 @@ public class State {
 
 			int newRemainingCapacity = remainingCapacity + task.weight;
 
-			return new State(currentCity, newDeliveries, availableTasks, newRemainingCapacity);
+			return new State(currentCity, newDeliveries, availableTasks, newRemainingCapacity, costPerKm);
+		}
+
+		@Override
+		public double cost() {
+			// Reward are a good things!
+			return -task.reward;
 		}
 	}
 

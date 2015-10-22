@@ -14,7 +14,6 @@ import logist.topology.Topology.City;
 /**
  * An optimal planner for one vehicle.
  */
-@SuppressWarnings("unused")
 public class DeliberativeTemplate implements DeliberativeBehavior {
 
 	enum Algorithm {
@@ -89,12 +88,13 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 	}
 
 	private Plan aStarPlan(Vehicle vehicle, TaskSet tasks) {
-		State initialState = State.createInitialState(vehicle, tasks);
-		return null;
+		return new AStarPlanner(vehicle, tasks).build();
 	}
 
 	@Override
 	public void planCancelled(TaskSet carriedTasks) {
+
+		// TODO implement me
 
 		if (!carriedTasks.isEmpty()) {
 			// This cannot happen for this simple agent, but typically
