@@ -17,6 +17,7 @@ public class BFS {
 	private City initialCity;
 	private TaskSet tasks;
 	private HashMap<Plan, Double> plans = new HashMap<Plan, Double>();
+	private HashMap<Plan, List<State.Action>> plansActions = new HashMap<Plan, List<State.Action>>();
 
 	public BFS(Vehicle vehicle, TaskSet tasks) {
 		super();
@@ -34,14 +35,14 @@ public class BFS {
 	 */
 
 	public Plan build() {
-		State initial = new State(initialCity, null, tasks, vehicle.capacity(), vehicle.costPerKm());
-		perform(initial, new ArrayList<State.Action>());
+		State initial = State.createInitialState(vehicle, tasks);
+		performQueue(initial);
 		return computeBestPlan();
 	}
 
 	/**
 	 * Performing BFS by recursion, according to all possible legal actions that an agent can perform in a current
-	 * state.
+	 * state. WARNING : Throw StackOverflow error on normal simulation condition.
 	 * 
 	 * @param current
 	 *            : Current state the algorithm is
@@ -62,6 +63,44 @@ public class BFS {
 			plans.put(plan, computeCost(actions));
 		}
 
+	}
+
+	// TODO : Verify code corectness
+	/**
+	 * Perform the BFS, same as before, but with a queue instead of a recursion, since stack for java recursion is
+	 * limited.
+	 * 
+	 * @param initial
+	 *            : Initial State
+	 */
+	private void performQueue(State initial) {
+
+		ArrayList<State> queue = new ArrayList<State>();
+		queue.add(initial);
+		Plan initialPlan = new Plan(initialCity);
+		initial.setPlan(initialPlan);
+		plansActions.put(initialPlan, new ArrayList<State.Action>());
+
+		for (int i = 0; i < queue.size(); i++) {
+			State currentState = queue.remove(0);
+
+			if (currentState.isFinal()) {
+				plans.put(currentState.getPlan(), computeCost(plansActions.get(currentState.getPlan())));
+				continue;
+			}
+			Plan currentPlan = currentState.getPlan();
+			List<State.Action> currentActions = plansActions.get(currentPlan);
+
+			for (State.Action action : currentActions) {
+				List<State.Action> futureActions = new ArrayList<State.Action>(currentActions);
+				futureActions.add(action);
+				Plan futurePlan = new Plan(initialCity, convertToAction(futureActions));
+				plansActions.put(futurePlan, futureActions);
+				queue.add(currentState.nextState(action));
+			}
+
+			plansActions.remove(currentPlan);
+		}
 	}
 
 	// TODO : Verify cost is well computed

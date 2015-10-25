@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import logist.plan.Plan;
 import logist.simulation.Vehicle;
 import logist.task.Task;
 import logist.task.TaskSet;
@@ -43,6 +44,8 @@ public class State {
 	// We need to keep track of that in order to compute the cost of an action.
 	private final int costPerKm;
 
+	private Plan correspondantPlan;
+
 	public State(City currentCity, TaskSet deliveries, TaskSet available, int remainingCapacity, int costPerKm) {
 		this.currentCity = currentCity;
 		this.deliveries = deliveries;
@@ -53,6 +56,14 @@ public class State {
 
 	public boolean isFinal() {
 		return deliveries.isEmpty() && availableTasks.isEmpty();
+	}
+
+	public void setPlan(Plan plan) {
+		this.correspondantPlan = plan;
+	}
+
+	public Plan getPlan() {
+		return this.correspondantPlan;
 	}
 
 	public List<Action> getLegalActions() {
