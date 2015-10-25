@@ -54,7 +54,7 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 
 		case BFS:
 			// TODO BFS
-			return naivePlan(vehicle, tasks);
+			return bfs(vehicle, tasks);
 
 		case NAIVE:
 			return naivePlan(vehicle, tasks);
@@ -85,6 +85,10 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 			current = task.deliveryCity;
 		}
 		return plan;
+	}
+
+	private Plan bfs(Vehicle vehicle, TaskSet tasks) {
+		return new BFS(vehicle, tasks).build();
 	}
 
 	private Plan aStarPlan(Vehicle vehicle, TaskSet tasks) {
