@@ -33,7 +33,7 @@ public class AStarPlanner {
 		List<Action> noAction = new LinkedList<Action>();
 		double knownCost = 0.0;
 		double heuristic = computeHeuristic(start);
-		PartialPlan initialPlan = new PartialPlan(noAction, start, knownCost, heuristic);
+		PartialPlan initialPlan = new PartialPlan(noAction, start, heuristic, knownCost);
 
 		queue.add(initialPlan);
 	}
@@ -69,7 +69,7 @@ public class AStarPlanner {
 		Plan plan = new Plan(start.currentCity, actions);
 
 		// Debug: print the plan
-		System.out.println(plan);
+		// System.out.println("Plan for A*: " + plan);
 
 		return plan;
 	}
