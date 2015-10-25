@@ -20,6 +20,7 @@
 		<set class-path="bin/"/>
 		<set class-name="template.DeliberativeTemplate"/>
 		<set algorithm="ASTAR"/>
+		<set heuristic="DELIVERY" />
 	</agent>
 	
 </agents>
