@@ -27,13 +27,22 @@ public class AStarPlanner {
 	// Initial state.
 	private final State start;
 
-	public AStarPlanner(Vehicle vehicle, TaskSet tasks) {
+	private final Heuristic algorithm;
+
+	/* see computeHeuristic for details */
+	public enum Heuristic {
+		DELIVERY, NAIVE, SIMPLEST
+	};
+
+	public AStarPlanner(Vehicle vehicle, TaskSet tasks, Heuristic algorithm) {
+		this.algorithm = algorithm;
+
 		// Initialize algorithm from the start node
 		start = State.createInitialState(vehicle, tasks);
 		List<Action> noAction = new LinkedList<Action>();
 		double knownCost = 0.0;
 		double heuristic = computeHeuristic(start);
-		PartialPlan initialPlan = new PartialPlan(noAction, start, knownCost, heuristic);
+		PartialPlan initialPlan = new PartialPlan(noAction, start, heuristic, knownCost);
 
 		queue.add(initialPlan);
 	}
@@ -69,15 +78,31 @@ public class AStarPlanner {
 		Plan plan = new Plan(start.currentCity, actions);
 
 		// Debug: print the plan
-		System.out.println(plan);
+		// System.out.println("Plan for A*: " + plan);
 
 		return plan;
 	}
 
 	private double computeHeuristic(State state) {
-		// TODO
-		double h = 0.0;
-		return h;
+		switch (algorithm) {
+		case SIMPLEST:
+			// Simplest heuristic
+			// -> VERY fast, but sub-optimal
+			return 0;
+
+		case NAIVE:
+			// Naive heuristic
+			// -> MUCH slower but much more cost-efficient
+			return -state.availableTasks.rewardSum() - state.deliveries.rewardSum();
+
+		case DELIVERY:
+			// Slightly less naive heuristic: use only what's on the lorry to predict cost
+			// -> RATHER fast, a bit sub-optimal
+			return -state.deliveries.rewardSum();
+
+		default:
+			throw new AssertionError("Should not happen.");
+		}
 	}
 
 	private void enqueue(PartialPlan node, Action action) {

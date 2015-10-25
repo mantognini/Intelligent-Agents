@@ -20,10 +20,6 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 		BFS, ASTAR, NAIVE
 	}
 
-	/* Environment */
-	Topology topology;
-	TaskDistribution td;
-
 	/* the properties of the agent */
 	Agent agent;
 
@@ -32,8 +28,6 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 
 	@Override
 	public void setup(Topology topology, TaskDistribution td, Agent agent) {
-		this.topology = topology;
-		this.td = td;
 		this.agent = agent;
 
 		// initialize the planner
@@ -41,27 +35,39 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 
 		// Throws IllegalArgumentException if algorithm is unknown
 		algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
-
-		// ...
 	}
 
 	@Override
 	public Plan plan(Vehicle vehicle, TaskSet tasks) {
 		// Compute the plan with the selected algorithm.
+		Plan plan = null;
+		long startTime = System.currentTimeMillis();
 		switch (algorithm) {
 		case ASTAR:
-			return aStarPlan(vehicle, tasks);
+			plan = aStarPlan(vehicle, tasks);
+			break;
 
 		case BFS:
-			// TODO BFS
-			return bfs(vehicle, tasks);
+			plan = bfs(vehicle, tasks);
+			break;
 
 		case NAIVE:
-			return naivePlan(vehicle, tasks);
+			plan = naivePlan(vehicle, tasks);
+			break;
 
 		default:
 			throw new AssertionError("Should not happen.");
 		}
+		long endTime = System.currentTimeMillis();
+
+		System.out.println("Algorithm: " + algorithm);
+
+		double distance = vehicle.getDistance() + plan.totalDistance();
+		System.out.println("Distance to be travelled: " + distance);
+
+		System.out.println("Plan computed in " + (endTime - startTime) / 1000.0 + "s");
+
+		return plan;
 	}
 
 	private Plan naivePlan(Vehicle vehicle, TaskSet tasks) {
@@ -92,18 +98,15 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 	}
 
 	private Plan aStarPlan(Vehicle vehicle, TaskSet tasks) {
-		return new AStarPlanner(vehicle, tasks).build();
+		String heuristicName = agent.readProperty("heuristic", String.class, "Delivery");
+
+		// Throws IllegalArgumentException if algorithm is unknown
+		AStarPlanner.Heuristic algorithm = AStarPlanner.Heuristic.valueOf(heuristicName.toUpperCase());
+		return new AStarPlanner(vehicle, tasks, algorithm).build();
 	}
 
 	@Override
 	public void planCancelled(TaskSet carriedTasks) {
-
-		// TODO implement me
-
-		if (!carriedTasks.isEmpty()) {
-			// This cannot happen for this simple agent, but typically
-			// you will need to consider the carriedTasks when the next
-			// plan is computed.
-		}
+		// Intentionally empty
 	}
 }

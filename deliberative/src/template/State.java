@@ -17,11 +17,9 @@ public class State {
 	 * Create the initial state for the given vehicle and the task list
 	 */
 	public static State createInitialState(Vehicle vehicle, TaskSet tasks) {
-		// Couldn't find a cleaner way of creating an empty taskset...
-		TaskSet empty = tasks.clone();
-		empty.clear();
-
-		return new State(vehicle.getCurrentCity(), empty, tasks, vehicle.capacity(), vehicle.costPerKm());
+		TaskSet currentTasks = vehicle.getCurrentTasks();
+		int remainingCapacity = vehicle.capacity() - currentTasks.weightSum();
+		return new State(vehicle.getCurrentCity(), currentTasks, tasks, remainingCapacity, vehicle.costPerKm());
 	}
 
 	/**
@@ -177,6 +175,8 @@ public class State {
 
 		@Override
 		public State apply() {
+			assert remainingCapacity >= task.weight;
+
 			// Transfer the task from one set to the other
 			TaskSet newAvailableTasks = availableTasks.clone();
 			newAvailableTasks.remove(task);
