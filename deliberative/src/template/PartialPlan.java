@@ -45,7 +45,7 @@ class PartialPlan implements Comparable<PartialPlan> {
 			return 0;
 	}
 
-	private double getCost() {
+	public double getCost() {
 		return heuristicCost + knownCost;
 	}
 }
