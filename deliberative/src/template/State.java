@@ -73,7 +73,7 @@ public class State {
 		for (Task t : deliveries) {
 			if (t.deliveryCity.equals(currentCity)) {
 				// We are in the same city so we can deliver it now.
-				actions.add(new Delivery(t));
+				actions.add(new Deliver(t));
 			} else {
 				// We need to go to the task's delivery site, hence we compute the path to this city and
 				// add the next city on this path to our set of interesting destinations.
@@ -196,10 +196,10 @@ public class State {
 		}
 	}
 
-	private final class Delivery extends Action {
+	private final class Deliver extends Action {
 		public final Task task;
 
-		public Delivery(Task task) {
+		public Deliver(Task task) {
 			this.task = task;
 		}
 
