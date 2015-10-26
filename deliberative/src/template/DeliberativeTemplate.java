@@ -99,9 +99,10 @@ public class DeliberativeTemplate implements DeliberativeBehavior {
 
 	private Plan aStarPlan(Vehicle vehicle, TaskSet tasks) {
 		String heuristicName = agent.readProperty("heuristic", String.class, "Delivery");
-
-		// Throws IllegalArgumentException if algorithm is unknown
 		AStarPlanner.Heuristic algorithm = AStarPlanner.Heuristic.valueOf(heuristicName.toUpperCase());
+
+		System.out.println("A* heuristic: " + heuristicName);
+
 		return new AStarPlanner(vehicle, tasks, algorithm).build();
 	}
 
