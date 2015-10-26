@@ -90,7 +90,7 @@ public class AStarPlanner {
 		switch (algorithm) {
 		case CONSTANT:
 			// Simplest heuristic
-			// -> VERY fast, but sub-optimal
+			// -> fast, but sub-optimal for small enough problem. Doesn't converge for higher number of tasks.
 			return 0;
 
 		case OPTIMISTIC:
@@ -100,7 +100,7 @@ public class AStarPlanner {
 
 		case DELIVERY:
 			// Slightly less naive heuristic: use only what's on the lorry to predict cost
-			// -> RATHER fast, a bit sub-optimal
+			// -> Very fast, a bit sub-optimal
 			return -state.deliveries.rewardSum();
 
 		default:

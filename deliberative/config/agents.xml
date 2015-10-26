@@ -16,13 +16,25 @@
 		<set algorithm="BFS"/>
 	</agent>
 	
-	<agent name="deliberative-astar">
+	<agent name="deliberative-astar-optimistic">
 		<set class-path="bin/"/>
 		<set class-name="template.DeliberativeTemplate"/>
 		<set algorithm="ASTAR"/>
-<!-- 		<set heuristic="CONSTANT" /> -->
-<!-- 		<set heuristic="OPTIMISTIC" /> -->
-		<set heuristic="DELIVERY" />
+		<set heuristic="OPTIMISTIC" />
+	</agent>
+	
+<agent name="deliberative-astar-constant">
+		<set class-path="bin/"/>
+		<set class-name="template.DeliberativeTemplate"/>
+		<set algorithm="ASTAR"/>
+  		<set heuristic="CONSTANT" />   
+	</agent>
+	
+	<agent name="deliberative-astar-delivery">
+		<set class-path="bin/"/>
+		<set class-name="template.DeliberativeTemplate"/>
+		<set algorithm="ASTAR"/>
+		<set heuristic="DELIVERY" /> 
 	</agent>
 	
 </agents>
