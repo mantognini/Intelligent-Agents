@@ -31,7 +31,7 @@ public class AStarPlanner {
 
 	/* see computeHeuristic for details */
 	public enum Heuristic {
-		DELIVERY, NAIVE, CONSTANT
+		DELIVERY, OPTIMISTIC, CONSTANT
 	};
 
 	public AStarPlanner(Vehicle vehicle, TaskSet tasks, Heuristic algorithm) {
@@ -90,7 +90,7 @@ public class AStarPlanner {
 			// -> VERY fast, but sub-optimal
 			return 0;
 
-		case NAIVE:
+		case OPTIMISTIC:
 			// Naive heuristic
 			// -> MUCH slower but much more cost-efficient
 			return -state.availableTasks.rewardSum() - state.deliveries.rewardSum();

@@ -21,7 +21,7 @@
 		<set class-name="template.DeliberativeTemplate"/>
 		<set algorithm="ASTAR"/>
 		<set heuristic="CONSTANT" />
-<!-- 		<set heuristic="NAIVE" /> -->
+<!-- 		<set heuristic="OPTIMISTIC" /> -->
 <!-- 		<set heuristic="DELIVERY" /> -->
 	</agent>
 	
