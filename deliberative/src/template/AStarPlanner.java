@@ -1,10 +1,10 @@
 package template;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 import logist.plan.Plan;
 import logist.simulation.Vehicle;
@@ -18,8 +18,8 @@ import template.State.Action;
  */
 public class AStarPlanner {
 
-	// Set of nodes already evaluated.
-	private final Set<State> closedSet = new HashSet<State>();
+	// Set of nodes already evaluated (with their estimated cost)
+	private final Map<State, Double> closedSet = new HashMap<State, Double>();
 
 	// Set of nodes to be visited, with their estimated cost, sorted by priority (cost).
 	private final PriorityQueue<PartialPlan> queue = new PriorityQueue<PartialPlan>();
@@ -56,8 +56,11 @@ public class AStarPlanner {
 				return buildPlan(node);
 
 			// TODO do we need to check if a higher cost was previously found for this state???
-			if (!closedSet.contains(node.lastState)) {
-				closedSet.add(node.lastState);
+			// if (!closedSet.contains(node.lastState)) {
+			Double previousCost = closedSet.getOrDefault(node.lastState, Double.POSITIVE_INFINITY);
+			Double currentCost = node.getCost();
+			if (currentCost < previousCost) {
+				closedSet.put(node.lastState, currentCost);
 
 				// Augment the queue of partial plans of interest
 				for (Action action : node.lastState.getLegalActions()) {
@@ -137,6 +140,10 @@ public class AStarPlanner {
 			this.knownCost = knownCost;
 		}
 
+		public double getCost() {
+			return heuristicCost + knownCost;
+		}
+
 		/**
 		 * Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater
 		 * than the specified object.
@@ -149,10 +156,6 @@ public class AStarPlanner {
 				return 1;
 			else
 				return 0;
-		}
-
-		private double getCost() {
-			return heuristicCost + knownCost;
 		}
 	}
 
