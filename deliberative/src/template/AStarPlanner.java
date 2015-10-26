@@ -31,7 +31,7 @@ public class AStarPlanner {
 
 	/* see computeHeuristic for details */
 	public enum Heuristic {
-		DELIVERY, NAIVE, SIMPLEST
+		DELIVERY, NAIVE, CONSTANT
 	};
 
 	public AStarPlanner(Vehicle vehicle, TaskSet tasks, Heuristic algorithm) {
@@ -85,7 +85,7 @@ public class AStarPlanner {
 
 	private double computeHeuristic(State state) {
 		switch (algorithm) {
-		case SIMPLEST:
+		case CONSTANT:
 			// Simplest heuristic
 			// -> VERY fast, but sub-optimal
 			return 0;
