@@ -52,11 +52,11 @@ public class AStarPlanner {
 		do {
 			PartialPlan node = dequeue();
 
-			if (node.lastState.isFinal())
+			if (node.lastState.isFinal()) {
+				System.out.println("# of node visited: " + closedSet.size());
 				return buildPlan(node);
+			}
 
-			// TODO do we need to check if a higher cost was previously found for this state???
-			// if (!closedSet.contains(node.lastState)) {
 			Double previousCost = closedSet.getOrDefault(node.lastState, Double.POSITIVE_INFINITY);
 			Double currentCost = node.getCost();
 			if (currentCost < previousCost) {

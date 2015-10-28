@@ -36,6 +36,7 @@ public class BFS {
 			PartialPlan node = queue.poll();
 			State state = node.lastState;
 			if (state.isFinal()) {
+				System.out.println("# of node visited: " + alreadyVisitedStates.size());
 				return new Plan(initialCity, convertToAction(node.actions));
 			}
 			if (!alreadyVisitedStates.contains(state)) {
