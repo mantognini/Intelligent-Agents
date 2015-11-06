@@ -1,5 +1,7 @@
 package template;
 
+import logist.task.Task;
+
 public class VehiculeAction {
 
 	public enum Action {
@@ -7,12 +9,11 @@ public class VehiculeAction {
 	};
 
 	public final Action action;
-	public final int taksID;
+	public final Task task;
 
-	public VehiculeAction(Action action, int taksID) {
-		super();
+	public VehiculeAction(Action action, Task task) {
 		this.action = action;
-		this.taksID = taksID;
+		this.task = task;
 	}
 
 }
