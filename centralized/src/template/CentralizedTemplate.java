@@ -22,9 +22,6 @@ import logist.topology.Topology.City;
  */
 public class CentralizedTemplate implements CentralizedBehavior {
 
-	private Topology topology;
-	private TaskDistribution distribution;
-	private Agent agent;
 	private long timeout_setup;
 	private long timeout_plan;
 
@@ -43,24 +40,18 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		timeout_setup = ls.get(LogistSettings.TimeoutKey.SETUP);
 		// the plan method cannot execute more than timeout_plan milliseconds
 		timeout_plan = ls.get(LogistSettings.TimeoutKey.PLAN);
-
-		this.topology = topology;
-		this.distribution = distribution;
-		this.agent = agent;
 	}
 
 	@Override
 	public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
 		long time_start = System.currentTimeMillis();
 
-		// System.out.println("Agent " + agent.id() + " has tasks " + tasks);
-		Plan planVehicle1 = naivePlan(vehicles.get(0), tasks);
+		// TODO define an option in the agent's XML file to use either the baseline method or our algorithm
 
-		List<Plan> plans = new ArrayList<Plan>();
-		plans.add(planVehicle1);
-		while (plans.size() < vehicles.size()) {
-			plans.add(Plan.EMPTY);
-		}
+		// TODO implement our algorithm by visiting "neighbor plans"
+
+		// System.out.println("Agent " + agent.id() + " has tasks " + tasks);
+		List<Plan> plans = naivePlans(vehicles, tasks);
 
 		long time_end = System.currentTimeMillis();
 		long duration = time_end - time_start;
@@ -69,6 +60,19 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		return plans;
 	}
 
+	private List<Plan> naivePlans(List<Vehicle> vehicles, TaskSet tasks) {
+		Plan planVehicle1 = naivePlan(vehicles.get(0), tasks);
+
+		List<Plan> plans = new ArrayList<Plan>();
+		plans.add(planVehicle1);
+		while (plans.size() < vehicles.size()) {
+			plans.add(Plan.EMPTY);
+		}
+
+		return plans;
+	}
+
+	// Baseline: plan for one vehicle only
 	private Plan naivePlan(Vehicle vehicle, TaskSet tasks) {
 		City current = vehicle.getCurrentCity();
 		Plan plan = new Plan(current);
