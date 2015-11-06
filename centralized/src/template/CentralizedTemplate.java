@@ -3,6 +3,7 @@ package template;
 //the list of imports
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import logist.LogistSettings;
 import logist.agent.Agent;
@@ -51,11 +52,30 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		// TODO implement our algorithm by visiting "neighbor plans"
 
 		// System.out.println("Agent " + agent.id() + " has tasks " + tasks);
-		List<Plan> plans = naivePlans(vehicles, tasks);
+		// List<Plan> plans = naivePlans(vehicles, tasks);
+		List<Plan> plans = slsPlans(vehicles, tasks);
 
 		long time_end = System.currentTimeMillis();
 		long duration = time_end - time_start;
 		System.out.println("The plan was generated in " + duration + " milliseconds.");
+
+		return plans;
+	}
+
+	// Build plans using a SLS-based algorithm
+	private List<Plan> slsPlans(List<Vehicle> vehicles, TaskSet tasks) {
+		GeneralPlan generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
+
+		// TODO implement me; don't forget about timeout!
+
+		// Convert solution to logist plans format
+		Map<Vehicle, Plan> logistPlans = generalPlans.convertToLogistPlans();
+
+		// Keep the correct order for plan
+		List<Plan> plans = new ArrayList<Plan>(vehicles.size());
+		for (Vehicle vehicle : vehicles) {
+			plans.add(logistPlans.get(vehicle));
+		}
 
 		return plans;
 	}
