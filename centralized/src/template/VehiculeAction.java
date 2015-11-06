@@ -2,8 +2,8 @@ package template;
 
 public class VehiculeAction {
 
-	enum Action {
-		PICK, DELIVERY
+	public enum Action {
+		PICK, DELIVER
 	};
 
 	public final Action action;
