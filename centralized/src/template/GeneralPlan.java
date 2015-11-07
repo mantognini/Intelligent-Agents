@@ -164,7 +164,43 @@ public class GeneralPlan {
 				"advancePickUp needs an index corresponding to a pick up event");
 
 		List<GeneralPlan> neighbours = new LinkedList<>();
-		// TODO Auto-generated method stub
+
+		if (actionIndex == 0)
+			return neighbours; // no need to do more work: it cannot be advanced
+
+		final List<VehiculeAction> originalPlan = plans.get(vehicle);
+		final Task movedTask = originalPlan.get(actionIndex).task;
+
+		// Compute load at time of pickup
+		int load = 0;
+		for (int i = 0; i < actionIndex; ++i) {
+			VehiculeAction action = originalPlan.get(i);
+			load += action.getDifferentialWeight();
+		}
+
+		// Try to go back in time and advance the pick up action
+
+		/* First attempt: just before original time */
+		int t = actionIndex - 1;
+
+		/* Continue if beginning of time is not in the future and not overloaded */
+		while (t >= 0 && load + movedTask.weight <= vehicle.capacity()) {
+			// The vehicle has enough room at time t so let's pick the task earlier
+			LinkedList<VehiculeAction> newVehiclePlan = getCopyOfVehiclePlan(vehicle);
+			VehiculeAction action = newVehiclePlan.remove(actionIndex);
+			newVehiclePlan.add(t, action);
+
+			// And combine everything together
+			Map<Vehicle, List<VehiculeAction>> newPlans = getCopyOfPlans();
+			newPlans.put(vehicle, newVehiclePlan);
+			GeneralPlan newGeneralPlan = new GeneralPlan(newPlans, vehicles, tasks);
+			neighbours.add(newGeneralPlan);
+
+			/* Go one step back in time and update weight */
+			load -= originalPlan.get(t).getDifferentialWeight();
+			--t;
+		}
+
 		return neighbours;
 	}
 
@@ -286,6 +322,7 @@ public class GeneralPlan {
 		final String rule3 = "All tasks should be delivered exactly once, and therefore by one vehicle";
 		final String rule4 = "All tasks should be delivered by the same vehicle that picked it up";
 		final String rule5 = "All tasks should be delivered after being picked up";
+		final String rule6 = "No vehicle should be overloaded";
 
 		// Ensure the first rule holds
 		for (Vehicle vehicle : vehicles) {
@@ -308,6 +345,9 @@ public class GeneralPlan {
 		// Iterate on all plans to build up knowledge
 		for (Vehicle vehicle : vehicles) {
 			List<VehiculeAction> actions = plans.get(vehicle);
+
+			// TODO check that rule6 holds here
+
 			for (int t = 0; t < actions.size(); ++t) {
 				VehiculeAction action = actions.get(t);
 

@@ -16,4 +16,11 @@ public class VehiculeAction {
 		this.task = task;
 	}
 
+	public int getDifferentialWeight() {
+		if (event == Event.PICK)
+			return +task.weight;
+		else
+			return -task.weight;
+	}
+
 }
