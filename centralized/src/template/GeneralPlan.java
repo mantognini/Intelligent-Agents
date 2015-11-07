@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import logist.plan.Plan;
@@ -132,11 +131,13 @@ public class GeneralPlan {
 		return cost;
 	}
 
-	public Map<Vehicle, Plan> convertToLogistPlans() {
-		Map<Vehicle, Plan> logistPlans = new HashMap<Vehicle, Plan>(plans.size());
-
-		for (Entry<Vehicle, List<VehiculeAction>> p : plans.entrySet()) {
-			logistPlans.put(p.getKey(), convertToLogistPlan(p.getKey(), p.getValue()));
+	public List<Plan> convertToLogistPlans() {
+		// Keep the correct order for plan
+		List<Plan> logistPlans = new ArrayList<Plan>(vehicles.size());
+		for (Vehicle vehicle : vehicles) {
+			List<VehiculeAction> plan = plans.get(vehicle);
+			Plan logistPlan = convertToLogistPlan(vehicle, plan);
+			logistPlans.add(logistPlan);
 		}
 
 		return logistPlans;

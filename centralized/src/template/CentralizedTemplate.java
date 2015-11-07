@@ -3,7 +3,6 @@ package template;
 //the list of imports
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import logist.LogistSettings;
 import logist.agent.Agent;
@@ -94,15 +93,9 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		// TODO add max number of iterations?
 
 		// Convert solution to logist plans format
-		Map<Vehicle, Plan> logistPlans = generalPlans.convertToLogistPlans();
+		List<Plan> logistPlans = generalPlans.convertToLogistPlans();
 
-		// Keep the correct order for plan
-		List<Plan> plans = new ArrayList<Plan>(vehicles.size());
-		for (Vehicle vehicle : vehicles) {
-			plans.add(logistPlans.get(vehicle));
-		}
-
-		return plans;
+		return logistPlans;
 	}
 
 	private boolean hasPlanTimedOut(long startTime) {
