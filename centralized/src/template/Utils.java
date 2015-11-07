@@ -31,4 +31,13 @@ public final class Utils {
 		}
 		return biggest;
 	}
+
+	/**
+	 * Find and return (one of) the best given plans
+	 */
+	public static GeneralPlan selectBest(List<GeneralPlan> plans) {
+		// TODO Implement select best
+		assert plans.size() > 0;
+		return plans.get(0);
+	}
 }

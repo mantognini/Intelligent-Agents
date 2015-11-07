@@ -18,16 +18,22 @@ import template.VehiculeAction.Action;
 
 public class GeneralPlan {
 
-	public final Map<Vehicle, List<VehiculeAction>> plans; // One plan per vehicle
+	private final Map<Vehicle, List<VehiculeAction>> plans; // One plan per vehicle
 
-	private Random randomGenerator = new Random();
+	// Keep track of those for validation purposes
+	private final List<Vehicle> vehicles;
+	private final TaskSet tasks;
+
+	private final Random randomGenerator = new Random();
 
 	/**
 	 * Private constructor; use generateInitial static factory to build the first plan, then use generateNeighbors to
 	 * navigate onto the plan space.
 	 */
-	private GeneralPlan(Map<Vehicle, List<VehiculeAction>> plans) {
+	private GeneralPlan(Map<Vehicle, List<VehiculeAction>> plans, List<Vehicle> vehicles, TaskSet tasks) {
 		this.plans = plans;
+		this.vehicles = vehicles;
+		this.tasks = tasks;
 
 		validateOrDie();
 	}
@@ -62,23 +68,23 @@ public class GeneralPlan {
 				plans.put(v, new LinkedList<VehiculeAction>());
 		}
 
-		return new GeneralPlan(plans);
+		return new GeneralPlan(plans, vehicles, tasks);
 	}
 
-	public List<GeneralPlan> generateNeighbors(List<Vehicle> vehicles) {
+	public List<GeneralPlan> generateNeighbors() {
 		List<GeneralPlan> neighbours = new ArrayList<GeneralPlan>();
 		Vehicle modelVehicule;
-		// Randomly choose a vehicles that have at least on task
+		// Randomly choose a vehicle that has at least one task
 		do {
 			int index = randomGenerator.nextInt(vehicles.size());
 			modelVehicule = vehicles.get(index);
 		} while (plans.get(modelVehicule).size() == 0);
 
-		// Distribute the same task to the other vehicule for each new plan
+		// Distribute the same task to the other vehicle for each new plan
 		List<VehiculeAction> newTaskList = new LinkedList<VehiculeAction>(plans.get(modelVehicule));
 		VehiculeAction distributedAction = newTaskList.remove(0);
 
-		// TODO : Verify that the added plan doesn't violate the contraints
+		// TODO : Verify that the added plan doesn't violate the constraints
 		for (Vehicle vehicle : vehicles) {
 			Map<Vehicle, List<VehiculeAction>> newPlan = new HashMap<Vehicle, List<VehiculeAction>>(plans);
 			if (!vehicle.equals(modelVehicule)) {
@@ -87,7 +93,7 @@ public class GeneralPlan {
 				newPlan.put(vehicle, updated);
 				newPlan.put(modelVehicule, newTaskList);
 				// TODO : Convert to LogistPlan
-				neighbours.add(new GeneralPlan(newPlan));
+				neighbours.add(new GeneralPlan(newPlan, vehicles, tasks));
 			}
 		}
 
@@ -102,7 +108,7 @@ public class GeneralPlan {
 					Collections.swap(newTaskList, i, j);
 					// TODO Check if doesn't violate constraints
 					newPlan.put(modelVehicule, newActions);
-					neighbours.add(new GeneralPlan(newPlan));
+					neighbours.add(new GeneralPlan(newPlan, vehicles, tasks));
 				}
 			}
 		}
@@ -150,7 +156,7 @@ public class GeneralPlan {
 	 * Make sure no constraints are violated
 	 */
 	private void validateOrDie() {
-		// TODO
+		// TODO implement validation for plans
 	}
 
 }

@@ -23,8 +23,7 @@ import logist.topology.Topology.City;
  */
 public class CentralizedTemplate implements CentralizedBehavior {
 
-	private long timeout_setup;
-	private long timeout_plan;
+	private long timeoutPlan;
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
@@ -37,36 +36,62 @@ public class CentralizedTemplate implements CentralizedBehavior {
 			throw new RuntimeException("There was a problem loading the configuration file.", e);
 		}
 
-		// the setup method cannot last more than timeout_setup milliseconds
-		timeout_setup = ls.get(LogistSettings.TimeoutKey.SETUP);
-		// the plan method cannot execute more than timeout_plan milliseconds
-		timeout_plan = ls.get(LogistSettings.TimeoutKey.PLAN);
+		// The setup method cannot last more than timeout_setup milliseconds
+		// timeout_setup = ls.get(LogistSettings.TimeoutKey.SETUP);
+		// Note: we're not using it
+
+		// The plan method cannot execute more than timeout_plan milliseconds
+		timeoutPlan = ls.get(LogistSettings.TimeoutKey.PLAN);
 	}
 
 	@Override
 	public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
-		long time_start = System.currentTimeMillis();
+		long startTime = System.currentTimeMillis();
 
 		// TODO define an option in the agent's XML file to use either the baseline method or our algorithm
 
-		// TODO implement our algorithm by visiting "neighbor plans"
-
 		// System.out.println("Agent " + agent.id() + " has tasks " + tasks);
 		// List<Plan> plans = naivePlans(vehicles, tasks);
-		List<Plan> plans = slsPlans(vehicles, tasks);
+		List<Plan> plans = slsPlans(startTime, vehicles, tasks);
 
-		long time_end = System.currentTimeMillis();
-		long duration = time_end - time_start;
+		long endTime = System.currentTimeMillis();
+		long duration = endTime - startTime;
 		System.out.println("The plan was generated in " + duration + " milliseconds.");
 
 		return plans;
 	}
 
 	// Build plans using a SLS-based algorithm
-	private List<Plan> slsPlans(List<Vehicle> vehicles, TaskSet tasks) {
+	private List<Plan> slsPlans(long startTime, List<Vehicle> vehicles, TaskSet tasks) {
+		/*
+		 * Ideas for improvement:
+		 * 
+		 * - keep a "bestPlanSoFar" variable
+		 * 
+		 * - start with X random plan (not simply generateInitial plan!) and at each iteration choose to update one of
+		 * them randomly
+		 */
+
+		// TODO define p as a simulation parameter in the XML file
+		double p = 0.1;
+
+		// A ← SelectInitialSolution(X, D, C, f)
 		GeneralPlan generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
 
-		// TODO implement me; don't forget about timeout!
+		do {
+			// Aold ← A
+			// no need for that
+
+			// N ← ChooseNeighbours(Aold, X, D, C, f)
+			List<GeneralPlan> neighbours = generalPlans.generateNeighbors();
+
+			// A ← LocalChoice(N,f)
+			GeneralPlan bestNeighbour = Utils.selectBest(neighbours);
+			if (Math.random() > p) {
+				generalPlans = bestNeighbour;
+			}
+		} while (!hasPlanTimedOut(startTime));
+		// TODO add max number of iterations?
 
 		// Convert solution to logist plans format
 		Map<Vehicle, Plan> logistPlans = generalPlans.convertToLogistPlans();
@@ -78,6 +103,11 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		}
 
 		return plans;
+	}
+
+	private boolean hasPlanTimedOut(long startTime) {
+		long currentTime = System.currentTimeMillis();
+		return currentTime - startTime > timeoutPlan;
 	}
 
 	private List<Plan> naivePlans(List<Vehicle> vehicles, TaskSet tasks) {
