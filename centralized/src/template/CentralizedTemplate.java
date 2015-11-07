@@ -111,7 +111,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 	private List<Plan> naivePlans(List<Vehicle> vehicles, TaskSet tasks) {
 		Plan planVehicle1 = naivePlan(vehicles.get(0), tasks);
 
-		List<Plan> plans = new ArrayList<Plan>();
+		List<Plan> plans = new ArrayList<>();
 		plans.add(planVehicle1);
 		while (plans.size() < vehicles.size()) {
 			plans.add(Plan.EMPTY);

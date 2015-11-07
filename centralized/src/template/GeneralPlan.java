@@ -1,7 +1,6 @@
 package template;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class GeneralPlan {
 		if (biggest.capacity() < heaviest)
 			throw new RuntimeException("Impossible to plan: vehicles are not big enough");
 
-		List<VehiculeAction> planForBiggest = new LinkedList<VehiculeAction>();
+		List<VehiculeAction> planForBiggest = new LinkedList<>();
 
 		for (Task task : tasks) {
 			// move & pickup
@@ -61,21 +60,21 @@ public class GeneralPlan {
 		}
 
 		// Build vehicles' actions lists
-		Map<Vehicle, List<VehiculeAction>> plans = new HashMap<Vehicle, List<VehiculeAction>>(vehicles.size());
+		Map<Vehicle, List<VehiculeAction>> plans = new HashMap<>(vehicles.size());
 		for (Vehicle v : vehicles) {
 			if (v.equals(biggest))
 				plans.put(v, planForBiggest);
 			else
-				plans.put(v, new LinkedList<VehiculeAction>());
+				plans.put(v, new LinkedList<>());
 		}
 
 		return new GeneralPlan(plans, vehicles, tasks);
 	}
 
 	/**
-	 * Neighbor plans are computed using five rules:
+	 * Neighbor plans are computed using five strategies:
 	 * 
-	 * - the first task of a vehicle is transfered to another vehicle;
+	 * - the first task of a vehicle is transfered to another vehicle as long as this other vehicle has enough capacity;
 	 * 
 	 * - the pick time for a given task can be advanced as long as, at no point in time, the vehicle is overloaded;
 	 * 
@@ -91,47 +90,80 @@ public class GeneralPlan {
 	 * sets.
 	 */
 	public List<GeneralPlan> generateNeighbors() {
-		List<GeneralPlan> neighbours = new ArrayList<GeneralPlan>();
+
+		List<GeneralPlan> neighbours = new LinkedList<>();
+
+		// Apply first strategy
+		Vehicle modelVehicle = selectRandomVehicle();
+		neighbours.addAll(swapFirstTask(modelVehicle));
+
+
+		return neighbours;
+	}
+
+	private List<GeneralPlan> swapFirstTask(Vehicle sourceVehicle) {
+		Utils.ensure(plans.get(sourceVehicle).size() > 0, "swapFirstTask need a vehicle with at least one task");
+
+		List<GeneralPlan> neighbours = new LinkedList<>();
+
+		// Transfer the first task from the source vehicle to the other vehicles
+		List<VehiculeAction> newSourcePlan = getCopyOfVehiclePlan(sourceVehicle);
+		Task transferedTask = newSourcePlan.get(0).task;
+
+		// Remove pickup & deliver actions from the model vehicle
+		newSourcePlan.remove(0);
+		for (int i = 0; i < newSourcePlan.size(); ++i) {
+			if (newSourcePlan.get(i).task.equals(transferedTask)) {
+				newSourcePlan.remove(i);
+				break;
+			}
+		}
+
+		// Attempt to transfer the task to other vehicles
+		for (Vehicle destinationVehicle : vehicles) {
+			// Skip the source vehicle
+			if (destinationVehicle.equals(sourceVehicle))
+				continue;
+
+			// Skip small vehicle
+			if (destinationVehicle.capacity() < transferedTask.weight)
+				continue;
+
+			// Build new plan for destination vehicle
+			LinkedList<VehiculeAction> newDestinationPlan = getCopyOfVehiclePlan(destinationVehicle);
+			newDestinationPlan.addFirst(new VehiculeAction(Event.DELIVER, transferedTask));
+			newDestinationPlan.addFirst(new VehiculeAction(Event.PICK, transferedTask));
+
+			// And combine everything together
+			Map<Vehicle, List<VehiculeAction>> newPlans = getCopyOfPlans();
+			newPlans.put(sourceVehicle, newSourcePlan);
+			newPlans.put(destinationVehicle, newDestinationPlan);
+			GeneralPlan newGeneralPlan = new GeneralPlan(newPlans, vehicles, tasks);
+			neighbours.add(newGeneralPlan);
+		}
+
+		return neighbours;
+	}
+
+	private LinkedList<VehiculeAction> getCopyOfVehiclePlan(Vehicle vehicle) {
+		return new LinkedList<>(plans.get(vehicle));
+	}
+
+	private Map<Vehicle, List<VehiculeAction>> getCopyOfPlans() {
+		return new HashMap<>(plans);
+	}
+
+	/**
+	 * The returned vehicle has at least one task on its agenda
+	 */
+	private Vehicle selectRandomVehicle() {
 		Vehicle modelVehicule;
-		// Randomly choose a vehicle that has at least one task
 		do {
 			int index = randomGenerator.nextInt(vehicles.size());
 			modelVehicule = vehicles.get(index);
 		} while (plans.get(modelVehicule).size() == 0);
 
-		// Distribute the same task to the other vehicle for each new plan
-		List<VehiculeAction> newTaskList = new LinkedList<VehiculeAction>(plans.get(modelVehicule));
-		VehiculeAction distributedAction = newTaskList.remove(0);
-
-		// TODO : Verify that the added plan doesn't violate the constraints
-		for (Vehicle vehicle : vehicles) {
-			Map<Vehicle, List<VehiculeAction>> newPlan = new HashMap<Vehicle, List<VehiculeAction>>(plans);
-			if (!vehicle.equals(modelVehicule)) {
-				List<VehiculeAction> updated = newPlan.get(vehicle);
-				updated.add(0, distributedAction);
-				newPlan.put(vehicle, updated);
-				newPlan.put(modelVehicule, newTaskList);
-				// TODO : Convert to LogistPlan
-				neighbours.add(new GeneralPlan(newPlan, vehicles, tasks));
-			}
-		}
-
-		List<VehiculeAction> originalActions = plans.get(modelVehicule);
-		Map<Vehicle, List<VehiculeAction>> newPlan = new HashMap<Vehicle, List<VehiculeAction>>(plans);
-
-		if (originalActions.size() > 1) {
-
-			for (int i = 0; i < originalActions.size(); i++) {
-				for (int j = i + 1; j < originalActions.size(); j++) {
-					List<VehiculeAction> newActions = new LinkedList<VehiculeAction>(originalActions);
-					Collections.swap(newTaskList, i, j);
-					// TODO Check if doesn't violate constraints
-					newPlan.put(modelVehicule, newActions);
-					neighbours.add(new GeneralPlan(newPlan, vehicles, tasks));
-				}
-			}
-		}
-		return neighbours;
+		return modelVehicule;
 	}
 
 	public double computeOverallCost() {
@@ -151,7 +183,7 @@ public class GeneralPlan {
 
 	public List<Plan> convertToLogistPlans() {
 		// Keep the correct order for plan
-		List<Plan> logistPlans = new ArrayList<Plan>(vehicles.size());
+		List<Plan> logistPlans = new ArrayList<>(vehicles.size());
 		for (Vehicle vehicle : vehicles) {
 			List<VehiculeAction> plan = plans.get(vehicle);
 			Plan logistPlan = convertToLogistPlan(vehicle, plan);
@@ -206,14 +238,14 @@ public class GeneralPlan {
 
 		// Build up knowledge about our plans:
 		// -> how many vehicles pick up/deliver a task
-		Map<Task, Integer> pickupCount = new HashMap<Task, Integer>(tasks.size());
-		Map<Task, Integer> deliveryCount = new HashMap<Task, Integer>(tasks.size());
+		Map<Task, Integer> pickupCount = new HashMap<>(tasks.size());
+		Map<Task, Integer> deliveryCount = new HashMap<>(tasks.size());
 		// -> who pick up/deliver a task
-		Map<Task, Vehicle> pickupVehicle = new HashMap<Task, Vehicle>(tasks.size());
-		Map<Task, Vehicle> deliveryVehicle = new HashMap<Task, Vehicle>(tasks.size());
+		Map<Task, Vehicle> pickupVehicle = new HashMap<>(tasks.size());
+		Map<Task, Vehicle> deliveryVehicle = new HashMap<>(tasks.size());
 		// -> and when a task was picked up/delivered
-		Map<Task, Integer> pickupVehicleTime = new HashMap<Task, Integer>(tasks.size());
-		Map<Task, Integer> deliveryVehicleTime = new HashMap<Task, Integer>(tasks.size());
+		Map<Task, Integer> pickupVehicleTime = new HashMap<>(tasks.size());
+		Map<Task, Integer> deliveryVehicleTime = new HashMap<>(tasks.size());
 		// Those last two variables keep track of relative time for the pickup/delivery vehicle;
 		// i.e. the index of the corresponding action
 
