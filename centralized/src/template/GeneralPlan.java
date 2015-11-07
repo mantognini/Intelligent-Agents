@@ -384,4 +384,16 @@ public class GeneralPlan {
 			Utils.ensure(pickupVehicleTime.get(task) < deliveryVehicleTime.get(task), rule5);
 		}
 	}
+
+	@Override
+	public String toString() {
+		String rep = "";
+
+		for (Vehicle vehicle : vehicles) {
+			rep += "Plan for vehicle n° " + vehicle.id() + ": " + plans.get(vehicle) + "\n";
+		}
+
+		return rep;
+	}
+
 }
