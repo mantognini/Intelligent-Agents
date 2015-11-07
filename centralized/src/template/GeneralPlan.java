@@ -72,6 +72,24 @@ public class GeneralPlan {
 		return new GeneralPlan(plans, vehicles, tasks);
 	}
 
+	/**
+	 * Neighbor plans are computed using five rules:
+	 * 
+	 * - the first task of a vehicle is transfered to another vehicle;
+	 * 
+	 * - the pick time for a given task can be advanced as long as, at no point in time, the vehicle is overloaded;
+	 * 
+	 * - the pick time for a given task can be postponed as long as the delivery time is still after the pick up time;
+	 * 
+	 * - the delivery time for a given task can be advanced as long as the delivery time is still after the pick up
+	 * time;
+	 * 
+	 * - the delivery time for a given task can be postponed as long as, at no point in time, the vehicle is overloaded.
+	 * 
+	 * Note that this method doesn't build the full set of neighbors as it would get too big. Instead the neighbor plans
+	 * are stochastically selected. This means that running this methods twice might result in two different solution
+	 * sets.
+	 */
 	public List<GeneralPlan> generateNeighbors() {
 		List<GeneralPlan> neighbours = new ArrayList<GeneralPlan>();
 		Vehicle modelVehicule;
