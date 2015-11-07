@@ -2,7 +2,7 @@ package template;
 
 import logist.task.Task;
 
-public class VehiculeAction {
+public class VehicleAction {
 
 	public enum Event {
 		PICK, DELIVER
@@ -11,7 +11,7 @@ public class VehiculeAction {
 	public final Event event;
 	public final Task task;
 
-	public VehiculeAction(Event event, Task task) {
+	public VehicleAction(Event event, Task task) {
 		this.event = event;
 		this.task = task;
 	}
@@ -21,6 +21,11 @@ public class VehiculeAction {
 			return +task.weight;
 		else
 			return -task.weight;
+	}
+
+	@Override
+	public String toString() {
+		return event + " task n° " + task.id + " (" + task.weight + ")";
 	}
 
 }

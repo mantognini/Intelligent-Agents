@@ -12,11 +12,11 @@ import logist.simulation.Vehicle;
 import logist.task.Task;
 import logist.task.TaskSet;
 import logist.topology.Topology.City;
-import template.VehiculeAction.Event;
+import template.VehicleAction.Event;
 
 public class GeneralPlan {
 
-	private final Map<Vehicle, List<VehiculeAction>> plans; // One plan per vehicle
+	private final Map<Vehicle, List<VehicleAction>> plans; // One plan per vehicle
 
 	// Keep track of those for validation purposes
 	private final List<Vehicle> vehicles;
@@ -28,7 +28,7 @@ public class GeneralPlan {
 	 * Private constructor; use generateInitial static factory to build the first plan, then use generateNeighbors to
 	 * navigate onto the plan space.
 	 */
-	private GeneralPlan(Map<Vehicle, List<VehiculeAction>> plans, List<Vehicle> vehicles, TaskSet tasks) {
+	private GeneralPlan(Map<Vehicle, List<VehicleAction>> plans, List<Vehicle> vehicles, TaskSet tasks) {
 		this.plans = plans;
 		this.vehicles = vehicles;
 		this.tasks = tasks;
@@ -49,18 +49,18 @@ public class GeneralPlan {
 		if (biggest.capacity() < heaviest)
 			throw new RuntimeException("Impossible to plan: vehicles are not big enough");
 
-		List<VehiculeAction> planForBiggest = new LinkedList<>();
+		List<VehicleAction> planForBiggest = new LinkedList<>();
 
 		for (Task task : tasks) {
 			// move & pickup
-			planForBiggest.add(new VehiculeAction(Event.PICK, task));
+			planForBiggest.add(new VehicleAction(Event.PICK, task));
 
 			// move & deliver
-			planForBiggest.add(new VehiculeAction(Event.DELIVER, task));
+			planForBiggest.add(new VehicleAction(Event.DELIVER, task));
 		}
 
 		// Build vehicles' actions lists
-		Map<Vehicle, List<VehiculeAction>> plans = new HashMap<>(vehicles.size());
+		Map<Vehicle, List<VehicleAction>> plans = new HashMap<>(vehicles.size());
 		for (Vehicle v : vehicles) {
 			if (v.equals(biggest))
 				plans.put(v, planForBiggest);
@@ -98,9 +98,9 @@ public class GeneralPlan {
 
 		neighbours.addAll(swapFirstTask(modelVehicle));
 
-		List<VehiculeAction> modelPlan = plans.get(modelVehicle);
+		List<VehicleAction> modelPlan = plans.get(modelVehicle);
 		for (int i = 0; i < modelPlan.size(); ++i) {
-			VehiculeAction action = modelPlan.get(i);
+			VehicleAction action = modelPlan.get(i);
 			if (action.event == Event.PICK) {
 				neighbours.addAll(advancePickUp(modelVehicle, i));
 				neighbours.addAll(postponePickUp(modelVehicle, i));
@@ -119,7 +119,7 @@ public class GeneralPlan {
 		List<GeneralPlan> neighbours = new LinkedList<>();
 
 		// Transfer the first task from the source vehicle to the other vehicles
-		List<VehiculeAction> newSourcePlan = getCopyOfVehiclePlan(sourceVehicle);
+		List<VehicleAction> newSourcePlan = getCopyOfVehiclePlan(sourceVehicle);
 		Task transferedTask = newSourcePlan.get(0).task;
 
 		// Remove pickup & deliver actions from the model vehicle
@@ -142,12 +142,12 @@ public class GeneralPlan {
 				continue;
 
 			// Build new plan for destination vehicle
-			LinkedList<VehiculeAction> newDestinationPlan = getCopyOfVehiclePlan(destinationVehicle);
-			newDestinationPlan.addFirst(new VehiculeAction(Event.DELIVER, transferedTask));
-			newDestinationPlan.addFirst(new VehiculeAction(Event.PICK, transferedTask));
+			LinkedList<VehicleAction> newDestinationPlan = getCopyOfVehiclePlan(destinationVehicle);
+			newDestinationPlan.addFirst(new VehicleAction(Event.DELIVER, transferedTask));
+			newDestinationPlan.addFirst(new VehicleAction(Event.PICK, transferedTask));
 
 			// And combine everything together
-			Map<Vehicle, List<VehiculeAction>> newPlans = getCopyOfPlans();
+			Map<Vehicle, List<VehicleAction>> newPlans = getCopyOfPlans();
 			newPlans.put(sourceVehicle, newSourcePlan);
 			newPlans.put(destinationVehicle, newDestinationPlan);
 			GeneralPlan newGeneralPlan = new GeneralPlan(newPlans, vehicles, tasks);
@@ -168,13 +168,13 @@ public class GeneralPlan {
 		if (actionIndex == 0)
 			return neighbours; // no need to do more work: it cannot be advanced
 
-		final List<VehiculeAction> originalPlan = plans.get(vehicle);
+		final List<VehicleAction> originalPlan = plans.get(vehicle);
 		final Task movedTask = originalPlan.get(actionIndex).task;
 
 		// Compute load at time of pickup
 		int load = 0;
 		for (int i = 0; i < actionIndex; ++i) {
-			VehiculeAction action = originalPlan.get(i);
+			VehicleAction action = originalPlan.get(i);
 			load += action.getDifferentialWeight();
 		}
 
@@ -186,12 +186,12 @@ public class GeneralPlan {
 		/* Continue if beginning of time is not in the future and not overloaded */
 		while (t >= 0 && load + movedTask.weight <= vehicle.capacity()) {
 			// The vehicle has enough room at time t so let's pick the task earlier
-			LinkedList<VehiculeAction> newVehiclePlan = getCopyOfVehiclePlan(vehicle);
-			VehiculeAction action = newVehiclePlan.remove(actionIndex);
+			LinkedList<VehicleAction> newVehiclePlan = getCopyOfVehiclePlan(vehicle);
+			VehicleAction action = newVehiclePlan.remove(actionIndex);
 			newVehiclePlan.add(t, action);
 
 			// And combine everything together
-			Map<Vehicle, List<VehiculeAction>> newPlans = getCopyOfPlans();
+			Map<Vehicle, List<VehicleAction>> newPlans = getCopyOfPlans();
 			newPlans.put(vehicle, newVehiclePlan);
 			GeneralPlan newGeneralPlan = new GeneralPlan(newPlans, vehicles, tasks);
 			neighbours.add(newGeneralPlan);
@@ -237,11 +237,11 @@ public class GeneralPlan {
 		return neighbours;
 	}
 
-	private LinkedList<VehiculeAction> getCopyOfVehiclePlan(Vehicle vehicle) {
+	private LinkedList<VehicleAction> getCopyOfVehiclePlan(Vehicle vehicle) {
 		return new LinkedList<>(plans.get(vehicle));
 	}
 
-	private Map<Vehicle, List<VehiculeAction>> getCopyOfPlans() {
+	private Map<Vehicle, List<VehicleAction>> getCopyOfPlans() {
 		return new HashMap<>(plans);
 	}
 
@@ -265,7 +265,7 @@ public class GeneralPlan {
 
 		double cost = 0;
 		for (Vehicle vehicle : vehicles) {
-			List<VehiculeAction> plan = plans.get(vehicle);
+			List<VehicleAction> plan = plans.get(vehicle);
 			Plan logistPlan = convertToLogistPlan(vehicle, plan);
 			cost += logistPlan.totalDistance() * vehicle.costPerKm();
 		}
@@ -277,7 +277,7 @@ public class GeneralPlan {
 		// Keep the correct order for plan
 		List<Plan> logistPlans = new ArrayList<>(vehicles.size());
 		for (Vehicle vehicle : vehicles) {
-			List<VehiculeAction> plan = plans.get(vehicle);
+			List<VehicleAction> plan = plans.get(vehicle);
 			Plan logistPlan = convertToLogistPlan(vehicle, plan);
 			logistPlans.add(logistPlan);
 		}
@@ -285,11 +285,11 @@ public class GeneralPlan {
 		return logistPlans;
 	}
 
-	private Plan convertToLogistPlan(Vehicle vehicle, List<VehiculeAction> actions) {
+	private Plan convertToLogistPlan(Vehicle vehicle, List<VehicleAction> actions) {
 		City currentCity = vehicle.getCurrentCity();
 		Plan logistPlan = new Plan(currentCity);
 
-		for (VehiculeAction action : actions) {
+		for (VehicleAction action : actions) {
 			if (action.event == Event.PICK) {
 				// move to pickup location & pick it up
 				for (City city : currentCity.pathTo(action.task.pickupCity)) {
@@ -344,12 +344,12 @@ public class GeneralPlan {
 
 		// Iterate on all plans to build up knowledge
 		for (Vehicle vehicle : vehicles) {
-			List<VehiculeAction> actions = plans.get(vehicle);
+			List<VehicleAction> actions = plans.get(vehicle);
 
 			// TODO check that rule6 holds here
 
 			for (int t = 0; t < actions.size(); ++t) {
-				VehiculeAction action = actions.get(t);
+				VehicleAction action = actions.get(t);
 
 				if (action.event == Event.PICK) {
 					int newCount = pickupCount.getOrDefault(action.task, 0) + 1;
