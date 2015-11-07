@@ -210,7 +210,27 @@ public class GeneralPlan {
 				"advanceDelivery needs an index corresponding to a pick up event");
 
 		List<GeneralPlan> neighbours = new LinkedList<>();
-		// TODO Auto-generated method stub
+
+		if (actionIndex == 0)
+			return neighbours; // no need to do more work: it cannot be advanced
+
+		/* Try to go back in time and advance the delivery action */
+
+		final List<VehicleAction> originalPlan = plans.get(vehicle);
+		final Task movedTask = originalPlan.get(actionIndex).task;
+
+		// First attempt: just before original time
+		int t = actionIndex - 1;
+
+		// Continue if beginning of time is not in the future and pick up action is still in the past
+		while (t >= 0 && !originalPlan.get(t).task.equals(movedTask)) {
+			GeneralPlan newGeneralPlan = createGeneralPlanByMovingAction(vehicle, actionIndex, t);
+			neighbours.add(newGeneralPlan);
+
+			// Go one step back in time
+			--t;
+		}
+
 		return neighbours;
 	}
 
