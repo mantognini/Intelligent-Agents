@@ -35,6 +35,8 @@ public class GeneralPlan {
 		this.vehicles = vehicles;
 		this.tasks = tasks;
 
+		// TODO This should be probably be disabled after we are sure everything is working well in order to ensure
+		// decent performance.
 		validateOrDie();
 	}
 
@@ -156,7 +158,74 @@ public class GeneralPlan {
 	 * Make sure no constraints are violated
 	 */
 	private void validateOrDie() {
-		// TODO implement validation for plans
+		// The set of rules that should hold:
+		final String rule1 = "All vehicles should have a (maybe empty) plan";
+		final String rule2 = "All tasks should be picked up by exactly once, and therefore by one vehicle";
+		final String rule3 = "All tasks should be delivered exactly once, and therefore by one vehicle";
+		final String rule4 = "All tasks should be delivered by the same vehicle that picked it up";
+		final String rule5 = "All tasks should be delivered after being picked up";
+
+		// Ensure the first rule holds
+		for (Vehicle vehicle : vehicles) {
+			ensure(plans.get(vehicle) != null, rule1);
+		}
+
+		// Build up knowledge about our plans:
+		// -> how many vehicles pick up/deliver a task
+		Map<Task, Integer> pickupCount = new HashMap<Task, Integer>(tasks.size());
+		Map<Task, Integer> deliveryCount = new HashMap<Task, Integer>(tasks.size());
+		// -> who pick up/deliver a task
+		Map<Task, Vehicle> pickupVehicle = new HashMap<Task, Vehicle>(tasks.size());
+		Map<Task, Vehicle> deliveryVehicle = new HashMap<Task, Vehicle>(tasks.size());
+		// -> and when a task was picked up/delivered
+		Map<Task, Integer> pickupVehicleTime = new HashMap<Task, Integer>(tasks.size());
+		Map<Task, Integer> deliveryVehicleTime = new HashMap<Task, Integer>(tasks.size());
+		// Those last two variables keep track of relative time for the pickup/delivery vehicle;
+		// i.e. the index of the corresponding action
+
+		// Iterate on all plans to build up knowledge
+		for (Vehicle vehicle : vehicles) {
+			List<VehiculeAction> actions = plans.get(vehicle);
+			for (int t = 0; t < actions.size(); ++t) {
+				VehiculeAction action = actions.get(t);
+
+				if (action.event == Event.PICK) {
+					int newCount = pickupCount.getOrDefault(action.task, 0) + 1;
+					pickupCount.put(action.task, newCount);
+
+					pickupVehicle.put(action.task, vehicle);
+
+					pickupVehicleTime.put(action.task, t);
+				} else {
+					int newCount = deliveryCount.getOrDefault(action.task, 0) + 1;
+					deliveryCount.put(action.task, newCount);
+
+					deliveryVehicle.put(action.task, vehicle);
+
+					deliveryVehicleTime.put(action.task, t);
+				}
+			}
+		}
+
+		// Ensure rule 2 to 5 hold
+		for (Task task : tasks) {
+			ensure(pickupCount.getOrDefault(task, 0) == 1, rule2);
+			ensure(pickupVehicle.get(task) != null, rule2);
+			ensure(pickupVehicleTime.get(task) != null, rule2);
+
+			ensure(deliveryCount.getOrDefault(task, 0) == 1, rule3);
+			ensure(deliveryVehicle.get(task) != null, rule3);
+			ensure(deliveryVehicleTime.get(task) != null, rule3);
+
+			ensure(pickupVehicle.get(task).equals(deliveryVehicle.get(task)), rule4);
+
+			ensure(pickupVehicleTime.get(task) < deliveryVehicleTime.get(task), rule5);
+		}
 	}
 
+	private void ensure(boolean b, String rule) {
+		if (!b) {
+			throw new RuntimeException("rule <" + rule + "> was violated");
+		}
+	}
 }
