@@ -199,7 +199,30 @@ public class GeneralPlan {
 				"postponePickUp needs an index corresponding to a pick up event");
 
 		List<GeneralPlan> neighbours = new LinkedList<>();
-		// TODO Auto-generated method stub
+
+		final List<VehicleAction> originalPlan = plans.get(vehicle);
+		final Task movedTask = originalPlan.get(actionIndex).task;
+
+		if (actionIndex + 1 == originalPlan.size())
+			return neighbours; // no need to do more work: it cannot be postponed
+
+		/* Try to go forward in time and postpone the pick up action */
+
+		/* the pick time for a given task can be postponed as long as the delivery time is still after the pick up time; */
+
+		// First attempt: just after original time
+		int t = actionIndex + 1;
+
+		// Continue if end of time is not in the past and delivery action is still in the future
+		while (t < originalPlan.size() && !originalPlan.get(t).task.equals(movedTask)) {
+			// The vehicle has enough room at time t so let's deliver the task later
+			GeneralPlan newGeneralPlan = createGeneralPlanByMovingAction(vehicle, actionIndex, t);
+			neighbours.add(newGeneralPlan);
+
+			// Go one step further in time
+			++t;
+		}
+
 		return neighbours;
 	}
 
