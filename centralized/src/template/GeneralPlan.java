@@ -14,7 +14,7 @@ import logist.simulation.Vehicle;
 import logist.task.Task;
 import logist.task.TaskSet;
 import logist.topology.Topology.City;
-import template.VehiculeAction.Action;
+import template.VehiculeAction.Event;
 
 public class GeneralPlan {
 
@@ -53,10 +53,10 @@ public class GeneralPlan {
 
 		for (Task task : tasks) {
 			// move & pickup
-			planForBiggest.add(new VehiculeAction(Action.PICK, task));
+			planForBiggest.add(new VehiculeAction(Event.PICK, task));
 
 			// move & deliver
-			planForBiggest.add(new VehiculeAction(Action.DELIVER, task));
+			planForBiggest.add(new VehiculeAction(Event.DELIVER, task));
 		}
 
 		// Build vehicles' actions lists
@@ -130,7 +130,7 @@ public class GeneralPlan {
 		Plan logistPlan = new Plan(currentCity);
 
 		for (VehiculeAction action : actions) {
-			if (action.action == Action.PICK) {
+			if (action.event == Event.PICK) {
 				// move to pickup location & pick it up
 				for (City city : currentCity.pathTo(action.task.pickupCity)) {
 					logistPlan.appendMove(city);

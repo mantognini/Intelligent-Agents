@@ -4,15 +4,15 @@ import logist.task.Task;
 
 public class VehiculeAction {
 
-	public enum Action {
+	public enum Event {
 		PICK, DELIVER
 	};
 
-	public final Action action;
+	public final Event event;
 	public final Task task;
 
-	public VehiculeAction(Action action, Task task) {
-		this.action = action;
+	public VehiculeAction(Event event, Task task) {
+		this.event = event;
 		this.task = task;
 	}
 
