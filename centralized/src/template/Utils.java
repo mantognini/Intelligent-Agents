@@ -36,8 +36,24 @@ public final class Utils {
 	 * Find and return (one of) the best given plans
 	 */
 	public static GeneralPlan selectBest(List<GeneralPlan> plans) {
-		// TODO Implement select best
-		assert plans.size() > 0;
-		return plans.get(0);
+		ensure(plans.size() > 0, "selectBest needs at least one plan");
+
+		GeneralPlan bestPlan = plans.get(0);
+		double bestCost = bestPlan.computeOverallCost();
+		for (GeneralPlan plan : plans) {
+			double cost = plan.computeOverallCost();
+			if (cost < bestCost) {
+				bestPlan = plan;
+				bestCost = cost;
+			}
+		}
+
+		return bestPlan;
+	}
+
+	static void ensure(boolean b, String rule) {
+		if (!b) {
+			throw new RuntimeException("rule <" + rule + "> was violated");
+		}
 	}
 }

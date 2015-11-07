@@ -117,6 +117,21 @@ public class GeneralPlan {
 		return neighbours;
 	}
 
+	public double computeOverallCost() {
+		// Converting to logist plan format will probably significantly slow down things.
+		// Instead we could compute the cost ourselves.
+		// TODO determine if computeOverallCost is a bottleneck and if so optimize it.
+
+		double cost = 0;
+		for (Vehicle vehicle : vehicles) {
+			List<VehiculeAction> plan = plans.get(vehicle);
+			Plan logistPlan = convertToLogistPlan(vehicle, plan);
+			cost += logistPlan.totalDistance() * vehicle.costPerKm();
+		}
+
+		return cost;
+	}
+
 	public Map<Vehicle, Plan> convertToLogistPlans() {
 		Map<Vehicle, Plan> logistPlans = new HashMap<Vehicle, Plan>(plans.size());
 
@@ -167,7 +182,7 @@ public class GeneralPlan {
 
 		// Ensure the first rule holds
 		for (Vehicle vehicle : vehicles) {
-			ensure(plans.get(vehicle) != null, rule1);
+			Utils.ensure(plans.get(vehicle) != null, rule1);
 		}
 
 		// Build up knowledge about our plans:
@@ -209,23 +224,17 @@ public class GeneralPlan {
 
 		// Ensure rule 2 to 5 hold
 		for (Task task : tasks) {
-			ensure(pickupCount.getOrDefault(task, 0) == 1, rule2);
-			ensure(pickupVehicle.get(task) != null, rule2);
-			ensure(pickupVehicleTime.get(task) != null, rule2);
+			Utils.ensure(pickupCount.getOrDefault(task, 0) == 1, rule2);
+			Utils.ensure(pickupVehicle.get(task) != null, rule2);
+			Utils.ensure(pickupVehicleTime.get(task) != null, rule2);
 
-			ensure(deliveryCount.getOrDefault(task, 0) == 1, rule3);
-			ensure(deliveryVehicle.get(task) != null, rule3);
-			ensure(deliveryVehicleTime.get(task) != null, rule3);
+			Utils.ensure(deliveryCount.getOrDefault(task, 0) == 1, rule3);
+			Utils.ensure(deliveryVehicle.get(task) != null, rule3);
+			Utils.ensure(deliveryVehicleTime.get(task) != null, rule3);
 
-			ensure(pickupVehicle.get(task).equals(deliveryVehicle.get(task)), rule4);
+			Utils.ensure(pickupVehicle.get(task).equals(deliveryVehicle.get(task)), rule4);
 
-			ensure(pickupVehicleTime.get(task) < deliveryVehicleTime.get(task), rule5);
-		}
-	}
-
-	private void ensure(boolean b, String rule) {
-		if (!b) {
-			throw new RuntimeException("rule <" + rule + "> was violated");
+			Utils.ensure(pickupVehicleTime.get(task) < deliveryVehicleTime.get(task), rule5);
 		}
 	}
 }
