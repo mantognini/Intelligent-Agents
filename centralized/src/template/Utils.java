@@ -1,12 +1,15 @@
 package template;
 
 import java.util.List;
+import java.util.Random;
 
 import logist.simulation.Vehicle;
 import logist.task.Task;
 import logist.task.TaskSet;
 
 public final class Utils {
+
+	public final static Random random = new Random();
 
 	/**
 	 * Find the heaviest task
@@ -32,17 +35,24 @@ public final class Utils {
 		return biggest;
 	}
 
+	public static <E> E getRandomElement(List<E> list) {
+		ensure(list.size() > 0, "selectRandom needs at least one plan");
+
+		int index = random.nextInt(list.size());
+		return list.get(index);
+	}
+
 	/**
 	 * Find and return (one of) the best given plans
 	 */
-	public static GeneralPlan selectBest(List<GeneralPlan> plans) {
+	public static GeneralPlan selectBest(GeneralPlan currentBest, List<GeneralPlan> plans) {
 		ensure(plans.size() > 0, "selectBest needs at least one plan");
 
-		GeneralPlan bestPlan = plans.get(0);
+		GeneralPlan bestPlan = currentBest != null ? currentBest : plans.get(0);
 		double bestCost = bestPlan.computeOverallCost();
 		for (GeneralPlan plan : plans) {
 			double cost = plan.computeOverallCost();
-			if (cost < bestCost) {
+			if (cost <= bestCost) {
 				bestPlan = plan;
 				bestCost = cost;
 			}

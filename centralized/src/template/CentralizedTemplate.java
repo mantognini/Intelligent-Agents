@@ -72,24 +72,34 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		 */
 
 		// TODO define p as a simulation parameter in the XML file
-		double p = 0.1;
+		double p = 0.7;
 
 		// A ← SelectInitialSolution(X, D, C, f)
+		// TODO Is it normal that generateInitial produce solutions with only one active vehicle?
 		GeneralPlan generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
+		// While this works "better"
+		// GeneralPlan generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
+		// TODO we need a better metric to judge how the company is doing maybe?
 
+		int i = 0;
 		do {
+			++i;
 			// Aold ← A
 			// no need for that
 
 			// N ← ChooseNeighbours(Aold, X, D, C, f)
-			List<GeneralPlan> neighbours = generalPlans.generateNeighbors();
+			List<GeneralPlan> neighbors = generalPlans.generateNeighbors();
 
 			// A ← LocalChoice(N,f)
-			GeneralPlan bestNeighbour = Utils.selectBest(neighbours);
+			// GeneralPlan bestNeighbour = Utils.selectBest(null, neighbors);
 			if (Math.random() > p) {
-				generalPlans = bestNeighbour;
+				generalPlans = Utils.selectBest(generalPlans, neighbors);
+			} else {
+				generalPlans = Utils.getRandomElement(neighbors);
 			}
-		} while (!hasPlanTimedOut(startTime));
+
+			System.out.println("New general plans #" + i + ":\n" + generalPlans);
+		} while (i < 100 && !hasPlanTimedOut(startTime));
 		// TODO add max number of iterations?
 
 		// Convert solution to logist plans format

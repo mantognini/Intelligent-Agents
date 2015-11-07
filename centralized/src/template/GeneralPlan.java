@@ -71,6 +71,37 @@ public class GeneralPlan {
 		return new GeneralPlan(plans, vehicles, tasks);
 	}
 
+	public static GeneralPlan generateRandomInitial(List<Vehicle> vehicles, TaskSet tasks) {
+		assert vehicles.size() > 0;
+		Vehicle biggest = Utils.getBiggestVehicle(vehicles);
+		int heaviest = Utils.getHeaviestWeight(tasks);
+
+		if (biggest.capacity() < heaviest)
+			throw new RuntimeException("Impossible to plan: vehicles are not big enough");
+
+		// Build vehicles' actions lists
+		Map<Vehicle, List<VehicleAction>> plans = new HashMap<>(vehicles.size());
+		for (Vehicle v : vehicles) {
+			plans.put(v, new LinkedList<>());
+		}
+
+		// Affect each task to a random vehicle
+		for (Task task : tasks) {
+			Vehicle vehicle;
+			do {
+				vehicle = Utils.getRandomElement(vehicles);
+			} while (vehicle.capacity() < task.weight);
+
+			// move & pickup
+			plans.get(vehicle).add(new VehicleAction(Event.PICK, task));
+
+			// move & deliver
+			plans.get(vehicle).add(new VehicleAction(Event.DELIVER, task));
+		}
+
+		return new GeneralPlan(plans, vehicles, tasks);
+	}
+
 	/**
 	 * Neighbor plans are computed using five strategies:
 	 * 
