@@ -122,7 +122,7 @@ public class GeneralPlan {
 		List<VehicleAction> newSourcePlan = getCopyOfVehiclePlan(sourceVehicle);
 		Task transferedTask = newSourcePlan.get(0).task;
 
-		// Remove pickup & deliver actions from the model vehicle
+		// Remove pickup & deliver actions from the source vehicle
 		newSourcePlan.remove(0);
 		for (int i = 0; i < newSourcePlan.size(); ++i) {
 			if (newSourcePlan.get(i).task.equals(transferedTask)) {
@@ -171,32 +171,20 @@ public class GeneralPlan {
 		final List<VehicleAction> originalPlan = plans.get(vehicle);
 		final Task movedTask = originalPlan.get(actionIndex).task;
 
-		// Compute load at time of pickup
-		int load = 0;
-		for (int i = 0; i < actionIndex; ++i) {
-			VehicleAction action = originalPlan.get(i);
-			load += action.getDifferentialWeight();
-		}
+		// Compute load right before pickup
+		int load = computeLoadAtTime(actionIndex - 1, originalPlan);
 
-		// Try to go back in time and advance the pick up action
+		/* Try to go back in time and advance the pick up action */
 
-		/* First attempt: just before original time */
+		// First attempt: just before original time
 		int t = actionIndex - 1;
 
-		/* Continue if beginning of time is not in the future and not overloaded */
+		// Continue if beginning of time is not in the future and not overloaded
 		while (t >= 0 && load + movedTask.weight <= vehicle.capacity()) {
-			// The vehicle has enough room at time t so let's pick the task earlier
-			LinkedList<VehicleAction> newVehiclePlan = getCopyOfVehiclePlan(vehicle);
-			VehicleAction action = newVehiclePlan.remove(actionIndex);
-			newVehiclePlan.add(t, action);
-
-			// And combine everything together
-			Map<Vehicle, List<VehicleAction>> newPlans = getCopyOfPlans();
-			newPlans.put(vehicle, newVehiclePlan);
-			GeneralPlan newGeneralPlan = new GeneralPlan(newPlans, vehicles, tasks);
+			GeneralPlan newGeneralPlan = createGeneralPlanByMovingAction(vehicle, actionIndex, t);
 			neighbours.add(newGeneralPlan);
 
-			/* Go one step back in time and update weight */
+			// Go one step back in time and update weight
 			load -= originalPlan.get(t).getDifferentialWeight();
 			--t;
 		}
@@ -233,8 +221,59 @@ public class GeneralPlan {
 				"postponeDelivery needs an index corresponding to a pick up event");
 
 		List<GeneralPlan> neighbours = new LinkedList<>();
-		// TODO Auto-generated method stub
+
+		final List<VehicleAction> originalPlan = plans.get(vehicle);
+
+		if (actionIndex + 1 == originalPlan.size())
+			return neighbours; // no need to do more work: it cannot be postponed
+
+		// Compute load right before delivery
+		int load = computeLoadAtTime(actionIndex - 1, originalPlan);
+
+		/* Try to go forward in time and postpone the delivery action */
+
+		// First attempt: just after original time
+		int t = actionIndex + 1;
+
+		// Continue if end of time is not in the past and not overloaded
+		while (t < originalPlan.size() && load + originalPlan.get(t).getDifferentialWeight() <= vehicle.capacity()) {
+			// The vehicle has enough room at time t so let's deliver the task later
+			GeneralPlan newGeneralPlan = createGeneralPlanByMovingAction(vehicle, actionIndex, t);
+			neighbours.add(newGeneralPlan);
+
+			// Go one step further in time and update weight
+			load += originalPlan.get(t).getDifferentialWeight();
+			++t;
+		}
+
 		return neighbours;
+	}
+
+	/**
+	 * Move the action at index `sourceIndex` of the given `vehicle` to index `destinationIndex` correctly
+	 */
+	private GeneralPlan createGeneralPlanByMovingAction(Vehicle vehicle, int sourceIndex, int destinationIndex) {
+		Map<Vehicle, List<VehicleAction>> newPlans = getCopyOfPlans();
+
+		// Move the given action carefully: make sure destination index is not invalidated
+		List<VehicleAction> newVehiclePlan = newPlans.get(vehicle);
+		VehicleAction action = newVehiclePlan.remove(sourceIndex);
+		if (sourceIndex >= destinationIndex)
+			newVehiclePlan.add(destinationIndex, action);
+		else
+			newVehiclePlan.add(destinationIndex - 1, action);
+
+		GeneralPlan newGeneralPlan = new GeneralPlan(newPlans, vehicles, tasks);
+		return newGeneralPlan;
+	}
+
+	private int computeLoadAtTime(int timeIndex, List<VehicleAction> plan) {
+		int load = 0;
+		for (int i = 0; i <= timeIndex; ++i) {
+			VehicleAction action = plan.get(i);
+			load += action.getDifferentialWeight();
+		}
+		return load;
 	}
 
 	private LinkedList<VehicleAction> getCopyOfVehiclePlan(Vehicle vehicle) {
@@ -242,7 +281,13 @@ public class GeneralPlan {
 	}
 
 	private Map<Vehicle, List<VehicleAction>> getCopyOfPlans() {
-		return new HashMap<>(plans);
+		// NOTE: using new HashMap<>(plans) won't work as value are mutable lists.
+
+		Map<Vehicle, List<VehicleAction>> copy = new HashMap<>(vehicles.size());
+		for (Vehicle vehicle : vehicles) {
+			copy.put(vehicle, getCopyOfVehiclePlan(vehicle));
+		}
+		return copy;
 	}
 
 	/**
