@@ -93,16 +93,28 @@ public class GeneralPlan {
 
 		List<GeneralPlan> neighbours = new LinkedList<>();
 
-		// Apply first strategy
+		// Apply strategies for a randomly selected, non-empty vehicle
 		Vehicle modelVehicle = selectRandomVehicle();
+
 		neighbours.addAll(swapFirstTask(modelVehicle));
 
+		List<VehiculeAction> modelPlan = plans.get(modelVehicle);
+		for (int i = 0; i < modelPlan.size(); ++i) {
+			VehiculeAction action = modelPlan.get(i);
+			if (action.event == Event.PICK) {
+				neighbours.addAll(advancePickUp(modelVehicle, i));
+				neighbours.addAll(postponePickUp(modelVehicle, i));
+			} else {
+				neighbours.addAll(advanceDelivery(modelVehicle, i));
+				neighbours.addAll(postponeDelivery(modelVehicle, i));
+			}
+		}
 
 		return neighbours;
 	}
 
 	private List<GeneralPlan> swapFirstTask(Vehicle sourceVehicle) {
-		Utils.ensure(plans.get(sourceVehicle).size() > 0, "swapFirstTask need a vehicle with at least one task");
+		Utils.ensure(plans.get(sourceVehicle).size() > 0, "swapFirstTask needs a vehicle with at least one task");
 
 		List<GeneralPlan> neighbours = new LinkedList<>();
 
@@ -142,6 +154,50 @@ public class GeneralPlan {
 			neighbours.add(newGeneralPlan);
 		}
 
+		return neighbours;
+	}
+
+	private List<GeneralPlan> advancePickUp(Vehicle vehicle, int actionIndex) {
+		Utils.ensure(plans.get(vehicle).size() > actionIndex, "advancePickUp needs a vehicle with at least "
+				+ actionIndex + " events");
+		Utils.ensure(plans.get(vehicle).get(actionIndex).event == Event.PICK,
+				"advancePickUp needs an index corresponding to a pick up event");
+
+		List<GeneralPlan> neighbours = new LinkedList<>();
+		// TODO Auto-generated method stub
+		return neighbours;
+	}
+
+	private List<GeneralPlan> postponePickUp(Vehicle vehicle, int actionIndex) {
+		Utils.ensure(plans.get(vehicle).size() > actionIndex, "postponePickUp needs a vehicle with at least "
+				+ actionIndex + " events");
+		Utils.ensure(plans.get(vehicle).get(actionIndex).event == Event.PICK,
+				"postponePickUp needs an index corresponding to a pick up event");
+
+		List<GeneralPlan> neighbours = new LinkedList<>();
+		// TODO Auto-generated method stub
+		return neighbours;
+	}
+
+	private List<GeneralPlan> advanceDelivery(Vehicle vehicle, int actionIndex) {
+		Utils.ensure(plans.get(vehicle).size() > actionIndex, "advanceDelivery needs a vehicle with at least "
+				+ actionIndex + " events");
+		Utils.ensure(plans.get(vehicle).get(actionIndex).event == Event.DELIVER,
+				"advanceDelivery needs an index corresponding to a pick up event");
+
+		List<GeneralPlan> neighbours = new LinkedList<>();
+		// TODO Auto-generated method stub
+		return neighbours;
+	}
+
+	private List<GeneralPlan> postponeDelivery(Vehicle vehicle, int actionIndex) {
+		Utils.ensure(plans.get(vehicle).size() > actionIndex, "postponeDelivery needs a vehicle with at least "
+				+ actionIndex + " events");
+		Utils.ensure(plans.get(vehicle).get(actionIndex).event == Event.DELIVER,
+				"postponeDelivery needs an index corresponding to a pick up event");
+
+		List<GeneralPlan> neighbours = new LinkedList<>();
+		// TODO Auto-generated method stub
 		return neighbours;
 	}
 
