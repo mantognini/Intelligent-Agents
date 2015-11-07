@@ -1,10 +1,13 @@
 package template;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import logist.plan.Plan;
 import logist.simulation.Vehicle;
@@ -16,6 +19,8 @@ import template.VehiculeAction.Action;
 public class GeneralPlan {
 
 	public final Map<Vehicle, List<VehiculeAction>> plans; // One plan per vehicle
+
+	private Random randomGenerator = new Random();
 
 	/**
 	 * Private constructor; use generateInitial static factory to build the first plan, then use generateNeighbors to
@@ -60,9 +65,48 @@ public class GeneralPlan {
 		return new GeneralPlan(plans);
 	}
 
-	public List<GeneralPlan> generateNeighbors() {
-		// TODO Generate neighbors for a current plan
-		return null;
+	public List<GeneralPlan> generateNeighbors(List<Vehicle> vehicles) {
+		List<GeneralPlan> neighbours = new ArrayList<GeneralPlan>();
+		Vehicle modelVehicule;
+		// Randomly choose a vehicles that have at least on task
+		do {
+			int index = randomGenerator.nextInt(vehicles.size());
+			modelVehicule = vehicles.get(index);
+		} while (plans.get(modelVehicule).size() == 0);
+
+		// Distribute the same task to the other vehicule for each new plan
+		List<VehiculeAction> newTaskList = new LinkedList<VehiculeAction>(plans.get(modelVehicule));
+		VehiculeAction distributedAction = newTaskList.remove(0);
+
+		// TODO : Verify that the added plan doesn't violate the contraints
+		for (Vehicle vehicle : vehicles) {
+			Map<Vehicle, List<VehiculeAction>> newPlan = new HashMap<Vehicle, List<VehiculeAction>>(plans);
+			if (!vehicle.equals(modelVehicule)) {
+				List<VehiculeAction> updated = newPlan.get(vehicle);
+				updated.add(0, distributedAction);
+				newPlan.put(vehicle, updated);
+				newPlan.put(modelVehicule, newTaskList);
+				// TODO : Convert to LogistPlan
+				neighbours.add(new GeneralPlan(newPlan));
+			}
+		}
+
+		List<VehiculeAction> originalActions = plans.get(modelVehicule);
+		Map<Vehicle, List<VehiculeAction>> newPlan = new HashMap<Vehicle, List<VehiculeAction>>(plans);
+
+		if (originalActions.size() > 1) {
+
+			for (int i = 0; i < originalActions.size(); i++) {
+				for (int j = i + 1; j < originalActions.size(); j++) {
+					List<VehiculeAction> newActions = new LinkedList<VehiculeAction>(originalActions);
+					Collections.swap(newTaskList, i, j);
+					// TODO Check if doesn't violate constraints
+					newPlan.put(modelVehicule, newActions);
+					neighbours.add(new GeneralPlan(newPlan));
+				}
+			}
+		}
+		return neighbours;
 	}
 
 	public Map<Vehicle, Plan> convertToLogistPlans() {
