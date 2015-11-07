@@ -100,7 +100,12 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 	private boolean hasPlanTimedOut(long startTime) {
 		long currentTime = System.currentTimeMillis();
-		return currentTime - startTime > timeoutPlan;
+		long duration = currentTime - startTime;
+
+		// Increase duration by 10% to account for next iteration + plan convertion
+		duration *= 1.1;
+
+		return duration > timeoutPlan;
 	}
 
 	private List<Plan> naivePlans(List<Vehicle> vehicles, TaskSet tasks) {
