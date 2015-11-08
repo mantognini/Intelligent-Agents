@@ -61,6 +61,10 @@ public final class Utils {
 		return bestPlan;
 	}
 
+	public static GeneralPlan selectBest(GeneralPlan a, GeneralPlan b) {
+		return a.computeOverallCost() < b.computeOverallCost() ? a : b;
+	}
+
 	static void ensure(boolean b, String rule) {
 		if (!b) {
 			throw new RuntimeException("rule <" + rule + "> was violated");

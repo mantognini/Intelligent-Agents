@@ -135,6 +135,9 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		// TODO we need a better metric to judge how the company is doing maybe?
 
 		System.out.println("Generate Neighbours");
+
+		GeneralPlan bestSoFar = generalPlans;
+
 		int i = 0;
 		do {
 			++i;
@@ -152,15 +155,20 @@ public class CentralizedTemplate implements CentralizedBehavior {
 				generalPlans = Utils.getRandomElement(neighbors);
 			}
 
+			bestSoFar = Utils.selectBest(generalPlans, bestSoFar);
+
 			// TODO remove the following print when we are done debugging stuff as it slows down things a lot!
-			System.out.println("New general plans #" + i + ":\n" + generalPlans);
+			// System.out.println("New general plans #" + i + ":\n" + generalPlans);
 		} while (i < 10000 && !hasPlanTimedOut(startTime));
 		// TODO define proper upper bound for iterations
 		// Ref/statement: «The search process terminates when a maximum number of iterations is reached. We can set this
 		// number to 10000 iterations or more depends on the solution quality and the problem size.»
 
+		System.out
+				.println("Best so far has cost of " + bestSoFar.computeOverallCost() + " after " + i + " iterations.");
+
 		// Convert solution to logist plans format
-		List<Plan> logistPlans = generalPlans.convertToLogistPlans();
+		List<Plan> logistPlans = bestSoFar.convertToLogistPlans();
 
 		return logistPlans;
 	}
