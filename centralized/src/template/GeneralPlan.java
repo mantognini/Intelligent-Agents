@@ -35,6 +35,8 @@ public class GeneralPlan {
 
 		// TODO This should be probably be disabled after we are sure everything is working well in order to ensure
 		// decent performance.
+		// Chris : I don't think so, since validateOrDie is capital for the fulfillness of the constraints when you
+		// generate a plan.
 		validateOrDie();
 	}
 
