@@ -443,7 +443,7 @@ public class GeneralPlan {
 		final String rule5 = "All tasks should be delivered after being picked up";
 		final String rule6 = "No vehicle should be overloaded";
 
-		// Ensure the first rule holds
+		// Ensure rule 1 holds
 		for (Vehicle vehicle : vehicles) {
 			Utils.ensure(plans.get(vehicle) != null, rule1);
 		}
@@ -465,7 +465,7 @@ public class GeneralPlan {
 		for (Vehicle vehicle : vehicles) {
 			List<VehicleAction> actions = plans.get(vehicle);
 
-			// TODO check that rule6 holds here
+			int nbTaks = 0;
 
 			for (int t = 0; t < actions.size(); ++t) {
 				VehicleAction action = actions.get(t);
@@ -485,7 +485,11 @@ public class GeneralPlan {
 
 					deliveryVehicleTime.put(action.task, t);
 				}
+				nbTaks++;
 			}
+
+			// ensure rule 6
+			Utils.ensure(nbTaks <= vehicle.capacity(), rule6);
 		}
 
 		// Ensure rule 2 to 5 hold
@@ -502,6 +506,7 @@ public class GeneralPlan {
 
 			Utils.ensure(pickupVehicleTime.get(task) < deliveryVehicleTime.get(task), rule5);
 		}
+
 	}
 
 	@Override
