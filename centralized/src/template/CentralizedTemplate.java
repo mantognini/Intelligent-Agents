@@ -58,8 +58,6 @@ public class CentralizedTemplate implements CentralizedBehavior {
 	public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
 		long startTime = System.currentTimeMillis();
 
-		// TODO define an option in the agent's XML file to use either the baseline method or our algorithm
-
 		// System.out.println("Agent " + agent.id() + " has tasks " + tasks);
 		// List<Plan> plans = naivePlans(vehicles, tasks);
 		List<Plan> plans;
@@ -121,8 +119,9 @@ public class CentralizedTemplate implements CentralizedBehavior {
 			}
 
 			System.out.println("New general plans #" + i + ":\n" + generalPlans);
-		} while (i < 100 && !hasPlanTimedOut(startTime));
-		// TODO add max number of iterations?
+		} while (i < 10000 && !hasPlanTimedOut(startTime));
+		// TODO add max number of iterations? Chris : From the guideline of the project, it should be set to 10'000 or
+		// more.
 
 		// Convert solution to logist plans format
 		List<Plan> logistPlans = generalPlans.convertToLogistPlans();
