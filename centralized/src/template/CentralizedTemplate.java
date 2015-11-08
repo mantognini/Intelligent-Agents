@@ -24,6 +24,12 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 	private long timeoutPlan;
 
+	enum Algorithm {
+		NAIVE, SLS
+	}
+
+	Algorithm algorithm;
+
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
 
@@ -41,6 +47,11 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 		// The plan method cannot execute more than timeout_plan milliseconds
 		timeoutPlan = ls.get(LogistSettings.TimeoutKey.PLAN);
+
+		String algorithmName = agent.readProperty("algorithm", String.class, "NAIVE");
+
+		algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
+
 	}
 
 	@Override
@@ -51,10 +62,21 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 		// System.out.println("Agent " + agent.id() + " has tasks " + tasks);
 		// List<Plan> plans = naivePlans(vehicles, tasks);
-		List<Plan> plans = slsPlans(startTime, vehicles, tasks);
+		List<Plan> plans;
+		switch (algorithm) {
+		case NAIVE:
+			plans = naivePlans(vehicles, tasks);
+			break;
+		case SLS:
+			plans = slsPlans(startTime, vehicles, tasks);
+			break;
+		default:
+			throw new AssertionError("Should not happen.");
+		}
 
 		long endTime = System.currentTimeMillis();
 		long duration = endTime - startTime;
+		System.out.println("Algorithm : " + algorithm);
 		System.out.println("The plan was generated in " + duration + " milliseconds.");
 
 		return plans;
