@@ -105,6 +105,14 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		System.out.println("Algorithm : " + algorithm);
 		System.out.println("The plan was generated in " + duration + " milliseconds.");
 
+		int cost = 0;
+		for (int i = 0; i < plans.size(); ++i) {
+			Plan p = plans.get(i);
+			Vehicle v = vehicles.get(i);
+			cost += p.totalDistance() * v.costPerKm();
+		}
+		System.out.println("Overall cost of plans: " + cost);
+
 		return plans;
 	}
 
@@ -120,12 +128,11 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		// A ← SelectInitialSolution(X, D, C, f)
 		// TODO Is it normal that generateInitial produce solutions with only one active vehicle?
 
-		System.out.println("Generate initial plan");
 		GeneralPlan generalPlans;
 		if (randomInitial)
-			generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
-		else
 			generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
+		else
+			generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
 
 		// TODO we need a better metric to judge how the company is doing maybe?
 
@@ -151,16 +158,10 @@ public class CentralizedTemplate implements CentralizedBehavior {
 			}
 
 			bestSoFar = Utils.selectBest(generalPlans, bestSoFar);
-
-			// TODO remove the following print when we are done debugging stuff as it slows down things a lot!
-			// System.out.println("New general plans #" + i + ":\n" + generalPlans);
 		} while (i < 10000 && !hasPlanTimedOut(startTime));
 		// TODO define proper upper bound for iterations
 		// Ref/statement: «The search process terminates when a maximum number of iterations is reached. We can set this
 		// number to 10000 iterations or more depends on the solution quality and the problem size.»
-
-		System.out
-				.println("Best so far has cost of " + bestSoFar.computeOverallCost() + " after " + i + " iterations.");
 
 		// Convert solution to logist plans format
 		List<Plan> logistPlans = bestSoFar.convertToLogistPlans();
@@ -179,12 +180,8 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		GeneralPlan bestSoFar = Utils.selectBest(null, population);
 
 		System.out.println("Population size is " + geneticPopulationSize);
-		System.out.println("Initial best cost is " + bestSoFar.computeOverallCost());
 
-		long i = 0;
 		do {
-			++i;
-
 			// Select a random individual (i.e. a general plan) & mutate it
 			int rank = Utils.uniform(0, geneticPopulationSize - 1);
 			population[rank] = population[rank].mutate();
@@ -192,9 +189,6 @@ public class CentralizedTemplate implements CentralizedBehavior {
 			bestSoFar = Utils.selectBest(bestSoFar, population[rank]);
 
 		} while (!hasPlanTimedOut(startTime));
-
-		System.out
-				.println("Best so far has cost of " + bestSoFar.computeOverallCost() + " after " + i + " iterations.");
 
 		return bestSoFar.convertToLogistPlans();
 	}
