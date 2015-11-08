@@ -12,4 +12,12 @@
 		<set initial="NORMAL"/>
 	</agent>
 	
+	<agent name="centralized-SLSrandom">
+		<set class-path="bin/"/>
+		<set class-name="template.CentralizedTemplate"/>
+		<set algorithm="SLS"/>
+		<set probability="0.7"/>
+		<set initial="RANDOM"/>
+	</agent>
+	
 </agents>
