@@ -98,14 +98,9 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		// TODO Is it normal that generateInitial produce solutions with only one active vehicle?
 		// Chris : No, since it violates the constraints of capacity.
 		System.out.println("Generate initial plan");
-		GeneralPlan generalPlans;
-		try {
-			generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
-		} catch (RuntimeException e) {
-			System.out.println("Biggest vehicle overloaded, random initial choosen");
-			generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
-		}
-		//
+		GeneralPlan generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
+		// While this works "better"
+		// GeneralPlan generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
 		// TODO we need a better metric to judge how the company is doing maybe?
 
 		System.out.println("Generate Neighbours");
