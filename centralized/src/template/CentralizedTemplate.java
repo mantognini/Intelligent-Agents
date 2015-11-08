@@ -24,13 +24,33 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 	private long timeoutPlan;
 
+	/*
+	 * Type of possible algorithm
+	 */
 	enum Algorithm {
 		NAIVE, SLS
 	}
 
-	Algorithm algorithm;
+	/**
+	 * Parameter fot the generateInitial for SLS
+	 *
+	 */
+	enum Initial {
+		NORMAL, RANDOM
+	}
 
+	/**
+	 * Type of choosen algorithm
+	 */
+	Algorithm algorithm;
+	/**
+	 * Probability to take the new plan
+	 */
 	double p;
+	/**
+	 * Kind of initial plan generation
+	 */
+	Initial initial;
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
@@ -52,8 +72,10 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 		String algorithmName = agent.readProperty("algorithm", String.class, "NAIVE");
 		p = agent.readProperty("probability", Double.class, 0.5);
+		String intialName = agent.readProperty("initial", String.class, "NORMAL");
 
 		algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
+		initial = Initial.valueOf(intialName.toUpperCase());
 
 	}
 
@@ -98,9 +120,18 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		// TODO Is it normal that generateInitial produce solutions with only one active vehicle?
 		// Chris : No, since it violates the constraints of capacity.
 		System.out.println("Generate initial plan");
-		GeneralPlan generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
-		// While this works "better"
-		// GeneralPlan generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
+		GeneralPlan generalPlans;
+		switch (initial) {
+		case NORMAL:
+			generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
+			break;
+		case RANDOM:
+			generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
+			break;
+		default:
+			throw new RuntimeException("It should not happed !");
+		}
+
 		// TODO we need a better metric to judge how the company is doing maybe?
 
 		System.out.println("Generate Neighbours");
