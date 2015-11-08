@@ -34,9 +34,7 @@ public class GeneralPlan {
 		this.tasks = tasks;
 
 		// TODO This should be probably be disabled after we are sure everything is working well in order to ensure
-		// decent performance.
-		// Chris : I don't think so, since validateOrDie is capital for the fulfillness of the constraints when you
-		// generate a plan.
+		// decent performance. (Note: validation should only be usefull for debugging.)
 		validateOrDie();
 	}
 

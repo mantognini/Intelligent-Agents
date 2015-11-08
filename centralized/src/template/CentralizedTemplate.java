@@ -118,7 +118,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 		// A ← SelectInitialSolution(X, D, C, f)
 		// TODO Is it normal that generateInitial produce solutions with only one active vehicle?
-		// Chris : No, since it violates the constraints of capacity.
+
 		System.out.println("Generate initial plan");
 		GeneralPlan generalPlans;
 		switch (initial) {
@@ -152,10 +152,12 @@ public class CentralizedTemplate implements CentralizedBehavior {
 				generalPlans = Utils.getRandomElement(neighbors);
 			}
 
+			// TODO remove the following print when we are done debugging stuff as it slows down things a lot!
 			System.out.println("New general plans #" + i + ":\n" + generalPlans);
 		} while (i < 10000 && !hasPlanTimedOut(startTime));
-		// add max number of iterations? Chris : From the guideline of the project, it should be set to 10'000 or
-		// more.
+		// TODO define proper upper bound for iterations
+		// Ref/statement: «The search process terminates when a maximum number of iterations is reached. We can set this
+		// number to 10000 iterations or more depends on the solution quality and the problem size.»
 
 		// Convert solution to logist plans format
 		List<Plan> logistPlans = generalPlans.convertToLogistPlans();
@@ -167,7 +169,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		long currentTime = System.currentTimeMillis();
 		long duration = currentTime - startTime;
 
-		// Increase duration by 10% to account for next iteration + plan convertion
+		// Increase duration by 10% to account for next iteration + plan conversion
 		duration *= 1.1;
 
 		return duration > timeoutPlan;
