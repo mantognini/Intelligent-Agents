@@ -24,6 +24,8 @@ public class GeneralPlan {
 
 	private final Random randomGenerator = new Random();
 
+	private double overallCostCache = -1;
+
 	/**
 	 * Private constructor; use generateInitial static factory to build the first plan, then use generateNeighbors to
 	 * navigate onto the plan space.
@@ -375,15 +377,35 @@ public class GeneralPlan {
 	}
 
 	public double computeOverallCost() {
-		// Converting to logist plan format will probably significantly slow down things.
-		// Instead we could compute the cost ourselves.
-		// TODO determine if computeOverallCost is a bottleneck and if so optimize it.
+		// Return the cost if we already know it, otherwise we compute it
+		if (overallCostCache >= 0)
+			return overallCostCache;
 
-		double cost = 0;
+		overallCostCache = 0;
 		for (Vehicle vehicle : vehicles) {
 			List<VehicleAction> plan = plans.get(vehicle);
-			Plan logistPlan = convertToLogistPlan(vehicle, plan);
-			cost += logistPlan.totalDistance() * vehicle.costPerKm();
+			overallCostCache += computeCost(vehicle, plan);
+		}
+
+		return overallCostCache;
+	}
+
+	private double computeCost(Vehicle vehicle, List<VehicleAction> actions) {
+		double cost = 0;
+		City currentCity = vehicle.getCurrentCity();
+
+		for (VehicleAction action : actions) {
+			City nextCity = null;
+			if (action.event == Event.PICK) {
+				nextCity = action.task.pickupCity;
+			} else {
+				nextCity = action.task.deliveryCity;
+			}
+
+			double distance = currentCity.distanceTo(nextCity);
+			currentCity = nextCity;
+
+			cost += distance * vehicle.costPerKm();
 		}
 
 		return cost;
