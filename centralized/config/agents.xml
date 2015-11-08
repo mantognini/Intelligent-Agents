@@ -4,12 +4,17 @@
 	<!-- A list of agents and their behavior classes -->
 	
 	<!-- #### CENTRALIZED AGENTS ### -->
+	<agent name="centralized-Naive">
+		<set class-path="bin/"/>
+		<set class-name="template.CentralizedTemplate"/>
+		<set algorithm="NAIVE"/>
+	</agent>
+	
 	<agent name="centralized-SLS">
 		<set class-path="bin/"/>
 		<set class-name="template.CentralizedTemplate"/>
 		<set algorithm="SLS"/>
 		<set probability="0.7"/>
-		<set initial="NORMAL"/>
 	</agent>
 	
 	<agent name="centralized-SLSrandom">
