@@ -2,12 +2,10 @@ package template;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import logist.plan.Plan;
 import logist.simulation.Vehicle;
@@ -469,11 +467,11 @@ public class GeneralPlan {
 		for (Vehicle vehicle : vehicles) {
 			List<VehicleAction> actions = plans.get(vehicle);
 
-			Set<Task> taskPerVehicule = new HashSet<>();
+			int load = 0; // keep track of current load for the vehicle
 
 			for (int t = 0; t < actions.size(); ++t) {
 				VehicleAction action = actions.get(t);
-				taskPerVehicule.add(action.task);
+
 				if (action.event == Event.PICK) {
 					int newCount = pickupCount.getOrDefault(action.task, 0) + 1;
 					pickupCount.put(action.task, newCount);
@@ -490,10 +488,9 @@ public class GeneralPlan {
 					deliveryVehicleTime.put(action.task, t);
 				}
 
+				load += action.getDifferentialWeight();
+				Utils.ensure(load <= vehicle.capacity(), rule6);
 			}
-
-			Utils.ensure(taskPerVehicule.size() <= vehicle.capacity(), rule6);
-
 		}
 
 		// Ensure rule 2 to 5 hold
