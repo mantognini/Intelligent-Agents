@@ -30,6 +30,8 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 	Algorithm algorithm;
 
+	double p;
+
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
 
@@ -49,6 +51,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		timeoutPlan = ls.get(LogistSettings.TimeoutKey.PLAN);
 
 		String algorithmName = agent.readProperty("algorithm", String.class, "NAIVE");
+		p = agent.readProperty("probability", Double.class, 0.5);
 
 		algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
 
@@ -91,9 +94,6 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		 * them randomly
 		 */
 
-		// TODO define p as a simulation parameter in the XML file
-		double p = 0.7;
-
 		// A ← SelectInitialSolution(X, D, C, f)
 		// TODO Is it normal that generateInitial produce solutions with only one active vehicle?
 		GeneralPlan generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
@@ -120,7 +120,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 			System.out.println("New general plans #" + i + ":\n" + generalPlans);
 		} while (i < 10000 && !hasPlanTimedOut(startTime));
-		// TODO add max number of iterations? Chris : From the guideline of the project, it should be set to 10'000 or
+		// add max number of iterations? Chris : From the guideline of the project, it should be set to 10'000 or
 		// more.
 
 		// Convert solution to logist plans format
