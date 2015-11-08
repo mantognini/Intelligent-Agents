@@ -11,6 +11,21 @@ public final class Utils {
 
 	public final static Random random = new Random();
 
+	static int uniform(int min, int max) {
+		ensure(min < max, "uniform requires lowerbound smaller than upperbound");
+		ensure(min >= 0, "uniform doesn't work with negative integer"); // it might actually work but we don't care
+
+		int bound = max - min;
+		return random.nextInt(bound) + min;
+	}
+
+	public static <E> E getRandomElement(List<E> list) {
+		ensure(list.size() > 0, "selectRandom needs at least one plan");
+
+		int index = random.nextInt(list.size());
+		return list.get(index);
+	}
+
 	/**
 	 * Find the heaviest task
 	 */
@@ -35,13 +50,6 @@ public final class Utils {
 		return biggest;
 	}
 
-	public static <E> E getRandomElement(List<E> list) {
-		ensure(list.size() > 0, "selectRandom needs at least one plan");
-
-		int index = random.nextInt(list.size());
-		return list.get(index);
-	}
-
 	/**
 	 * Find and return (one of) the best given plans
 	 */
@@ -54,6 +62,23 @@ public final class Utils {
 			double cost = plan.computeOverallCost();
 			if (cost <= bestCost) {
 				bestPlan = plan;
+				bestCost = cost;
+			}
+		}
+
+		return bestPlan;
+	}
+
+	public static GeneralPlan selectBest(GeneralPlan currentBest, GeneralPlan[] plans) {
+		ensure(plans.length > 0, "selectBest needs at least one plan");
+
+		GeneralPlan bestPlan = currentBest != null ? currentBest : plans[0];
+		double bestCost = bestPlan.computeOverallCost();
+
+		for (int i = 0; i < plans.length; i++) {
+			double cost = plans[i].computeOverallCost();
+			if (cost <= bestCost) {
+				bestPlan = plans[i];
 				bestCost = cost;
 			}
 		}

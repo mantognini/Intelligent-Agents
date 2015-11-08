@@ -15,9 +15,15 @@
 	<agent name="centralized-SLSrandom">
 		<set class-path="bin/"/>
 		<set class-name="template.CentralizedTemplate"/>
-		<set algorithm="SLS"/>
+		<set algorithm="SLS_RANDOM_INITIAL"/>
 		<set probability="0.7"/>
-		<set initial="RANDOM"/>
+	</agent>
+	
+	<agent name="centralized-SLSgenetic">
+		<set class-path="bin/"/>
+		<set class-name="template.CentralizedTemplate"/>
+		<set algorithm="SLS_GENETIC"/>
+		<set populationSize="100" />
 	</agent>
 	
 </agents>

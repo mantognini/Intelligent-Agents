@@ -28,29 +28,23 @@ public class CentralizedTemplate implements CentralizedBehavior {
 	 * Type of possible algorithm
 	 */
 	enum Algorithm {
-		NAIVE, SLS
-	}
-
-	/**
-	 * Parameter fot the generateInitial for SLS
-	 *
-	 */
-	enum Initial {
-		NORMAL, RANDOM
+		NAIVE, SLS, SLS_RANDOM_INITIAL, SLS_GENETIC
 	}
 
 	/**
 	 * Type of choosen algorithm
 	 */
 	Algorithm algorithm;
+
 	/**
 	 * Probability to take the new plan
 	 */
 	double p;
+
 	/**
-	 * Kind of initial plan generation
+	 * Population size for SLS-genetic algorithm
 	 */
-	Initial initial;
+	int geneticPopulationSize;
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
@@ -71,12 +65,11 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		timeoutPlan = ls.get(LogistSettings.TimeoutKey.PLAN);
 
 		String algorithmName = agent.readProperty("algorithm", String.class, "NAIVE");
-		p = agent.readProperty("probability", Double.class, 0.5);
-		String intialName = agent.readProperty("initial", String.class, "NORMAL");
-
 		algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
-		initial = Initial.valueOf(intialName.toUpperCase());
 
+		p = agent.readProperty("probability", Double.class, 0.5);
+
+		geneticPopulationSize = agent.readProperty("populationSize", Integer.class, 10);
 	}
 
 	@Override
@@ -90,9 +83,19 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		case NAIVE:
 			plans = naivePlans(vehicles, tasks);
 			break;
+
 		case SLS:
-			plans = slsPlans(startTime, vehicles, tasks);
+			plans = slsPlans(false, startTime, vehicles, tasks);
 			break;
+
+		case SLS_RANDOM_INITIAL:
+			plans = slsPlans(true, startTime, vehicles, tasks);
+			break;
+
+		case SLS_GENETIC:
+			plans = slsGeneticPlans(startTime, vehicles, tasks);
+			break;
+
 		default:
 			throw new AssertionError("Should not happen.");
 		}
@@ -106,11 +109,9 @@ public class CentralizedTemplate implements CentralizedBehavior {
 	}
 
 	// Build plans using a SLS-based algorithm
-	private List<Plan> slsPlans(long startTime, List<Vehicle> vehicles, TaskSet tasks) {
+	private List<Plan> slsPlans(boolean randomInitial, long startTime, List<Vehicle> vehicles, TaskSet tasks) {
 		/*
 		 * Ideas for improvement:
-		 * 
-		 * - keep a "bestPlanSoFar" variable
 		 * 
 		 * - start with X random plan (not simply generateInitial plan!) and at each iteration choose to update one of
 		 * them randomly
@@ -121,16 +122,10 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 		System.out.println("Generate initial plan");
 		GeneralPlan generalPlans;
-		switch (initial) {
-		case NORMAL:
+		if (randomInitial)
 			generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
-			break;
-		case RANDOM:
+		else
 			generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
-			break;
-		default:
-			throw new RuntimeException("It should not happed !");
-		}
 
 		// TODO we need a better metric to judge how the company is doing maybe?
 
@@ -171,6 +166,37 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		List<Plan> logistPlans = bestSoFar.convertToLogistPlans();
 
 		return logistPlans;
+	}
+
+	private List<Plan> slsGeneticPlans(long startTime, List<Vehicle> vehicles, TaskSet tasks) {
+		// Generate an initial random population of general plans
+		GeneralPlan[] population = new GeneralPlan[geneticPopulationSize];
+		for (int i = 0; i < geneticPopulationSize; ++i) {
+			population[i] = GeneralPlan.generateRandomInitial(vehicles, tasks);
+		}
+
+		// Keep track of the best so far
+		GeneralPlan bestSoFar = Utils.selectBest(null, population);
+
+		System.out.println("Population size is " + geneticPopulationSize);
+		System.out.println("Initial best cost is " + bestSoFar.computeOverallCost());
+
+		long i = 0;
+		do {
+			++i;
+
+			// Select a random individual (i.e. a general plan) & mutate it
+			int rank = Utils.uniform(0, geneticPopulationSize - 1);
+			population[rank] = population[rank].mutate();
+
+			bestSoFar = Utils.selectBest(bestSoFar, population[rank]);
+
+		} while (!hasPlanTimedOut(startTime));
+
+		System.out
+				.println("Best so far has cost of " + bestSoFar.computeOverallCost() + " after " + i + " iterations.");
+
+		return bestSoFar.convertToLogistPlans();
 	}
 
 	private boolean hasPlanTimedOut(long startTime) {
