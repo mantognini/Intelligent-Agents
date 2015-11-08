@@ -34,7 +34,7 @@ public class GeneralPlan {
 		this.tasks = tasks;
 
 		// TODO This should be probably be disabled after we are sure everything is working well in order to ensure
-		// decent performance. (Note: validation should only be usefull for debugging.)
+		// decent performance. (Note: validation should only be useful for debugging.)
 		validateOrDie();
 	}
 
@@ -200,10 +200,9 @@ public class GeneralPlan {
 			return neighbours; // no need to do more work: it cannot be advanced
 
 		final List<VehicleAction> originalPlan = plans.get(vehicle);
-		final Task movedTask = originalPlan.get(actionIndex).task;
 
-		// Compute load right before pickup
-		int load = computeLoadAtTime(actionIndex - 1, originalPlan);
+		// Compute load at pickup time
+		int load = computeLoadAtTime(actionIndex, originalPlan);
 
 		/* Try to go back in time and advance the pick up action */
 
@@ -211,7 +210,7 @@ public class GeneralPlan {
 		int t = actionIndex - 1;
 
 		// Continue if beginning of time is not in the future and not overloaded
-		while (t >= 0 && load + movedTask.weight <= vehicle.capacity()) {
+		while (t >= 0 && load - originalPlan.get(t).getDifferentialWeight() <= vehicle.capacity()) {
 			GeneralPlan newGeneralPlan = createGeneralPlanByMovingAction(vehicle, actionIndex, t);
 			neighbours.add(newGeneralPlan);
 
@@ -238,8 +237,6 @@ public class GeneralPlan {
 			return neighbours; // no need to do more work: it cannot be postponed
 
 		/* Try to go forward in time and postpone the pick up action */
-
-		/* the pick time for a given task can be postponed as long as the delivery time is still after the pick up time; */
 
 		// First attempt: just after original time
 		int t = actionIndex + 1;
