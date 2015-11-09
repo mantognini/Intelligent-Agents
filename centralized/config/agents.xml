@@ -16,7 +16,7 @@
 		<set algorithm="SLS"/>
 		<set probability="0.7"/>
 		<set bound="50000"/>
-		<set stsll="5000"/>
+		<set stall="5000"/>
 	</agent>
 	
 	<agent name="centralized-SLSrandom">
@@ -24,15 +24,8 @@
 		<set class-name="template.CentralizedTemplate"/>
 		<set algorithm="SLS_RANDOM_INITIAL"/>
 		<set probability="0.7"/>
-		<set bound="10000"/>
-		<set stoll="100"/>
-	</agent>
-	
-	<agent name="centralized-SLSgenetic">
-		<set class-path="bin/"/>
-		<set class-name="template.CentralizedTemplate"/>
-		<set algorithm="SLS_GENETIC"/>
-		<set populationSize="100" />
+		<set bound="50000"/>
+		<set stall="5000"/>
 	</agent>
 	
 </agents>
