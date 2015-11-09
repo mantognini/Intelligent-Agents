@@ -35,9 +35,8 @@ public class GeneralPlan {
 		this.vehicles = vehicles;
 		this.tasks = tasks;
 
-		// TODO This should be probably be disabled after we are sure everything is working well in order to ensure
-		// decent performance. (Note: validation should only be useful for debugging.)
-		validateOrDie();
+		// If needed, i.e. for debugging, enable this line:
+		// validateOrDie();
 	}
 
 	/**

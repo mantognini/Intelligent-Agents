@@ -15,8 +15,8 @@
 		<set class-name="template.CentralizedTemplate"/>
 		<set algorithm="SLS"/>
 		<set probability="0.7"/>
-		<set bound="10000"/>
-		<set stoll="100"/>
+		<set bound="50000"/>
+		<set stsll="5000"/>
 	</agent>
 	
 	<agent name="centralized-SLSrandom">

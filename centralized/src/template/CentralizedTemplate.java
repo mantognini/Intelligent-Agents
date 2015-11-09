@@ -47,7 +47,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 	int geneticPopulationSize;
 
 	int bound;
-	int stollBound;
+	int stallBound;
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
@@ -70,7 +70,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		String algorithmName = agent.readProperty("algorithm", String.class, "NAIVE");
 		algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
 		bound = agent.readProperty("bound", Integer.class, 10000);
-		stollBound = agent.readProperty("stoll", Integer.class, 100);
+		stallBound = agent.readProperty("stall", Integer.class, 100);
 
 		p = agent.readProperty("probability", Double.class, 0.5);
 
@@ -123,15 +123,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 	// Build plans using a SLS-based algorithm
 	private List<Plan> slsPlans(boolean randomInitial, long startTime, List<Vehicle> vehicles, TaskSet tasks) {
-		/*
-		 * Ideas for improvement:
-		 * 
-		 * - start with X random plan (not simply generateInitial plan!) and at each iteration choose to update one of
-		 * them randomly
-		 */
-
 		// A ← SelectInitialSolution(X, D, C, f)
-		// TODO Is it normal that generateInitial produce solutions with only one active vehicle?
 
 		GeneralPlan generalPlans;
 		if (randomInitial)
@@ -139,15 +131,15 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		else
 			generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
 
-		// TODO we need a better metric to judge how the company is doing maybe?
-
 		System.out.println("Generate Neighbours");
 
 		GeneralPlan bestSoFar = generalPlans;
 
-		int i = 0;
+		int iterationCount = 0;
+		int stallCount = 0;
+
 		do {
-			++i;
+			++iterationCount;
 			// Aold ← A
 			// no need for that
 
@@ -162,11 +154,29 @@ public class CentralizedTemplate implements CentralizedBehavior {
 				generalPlans = Utils.getRandomElement(neighbors);
 			}
 
+			GeneralPlan previousBest = bestSoFar;
 			bestSoFar = Utils.selectBest(generalPlans, bestSoFar);
-		} while (i < bound && !hasPlanTimedOut(startTime));
-		// TODO define proper upper bound for iterations
-		// Ref/statement: «The search process terminates when a maximum number of iterations is reached. We can set this
-		// number to 10000 iterations or more depends on the solution quality and the problem size.»
+
+			// Reset generalPlans is stuck in a local minima
+			if (previousBest == bestSoFar) { // yes, address comparison.
+				++stallCount;
+			} else {
+				stallCount = 0;
+			}
+
+			if (stallCount >= stallBound) {
+				// Reset!
+				if (randomInitial)
+					generalPlans = GeneralPlan.generateRandomInitial(vehicles, tasks);
+				else
+					generalPlans = GeneralPlan.generateInitial(vehicles, tasks);
+
+				stallCount = 0;
+				bestSoFar = Utils.selectBest(generalPlans, bestSoFar);
+
+				System.out.println("plans were reset");
+			}
+		} while (iterationCount < bound && !hasPlanTimedOut(startTime));
 
 		// Convert solution to logist plans format
 		List<Plan> logistPlans = bestSoFar.convertToLogistPlans();
