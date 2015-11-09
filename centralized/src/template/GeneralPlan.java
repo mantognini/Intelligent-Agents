@@ -145,35 +145,6 @@ public class GeneralPlan {
 		return neighbours;
 	}
 
-	/**
-	 * Apply one random kind of mutations (i.e. strategies) and take best of results (including current plans)
-	 */
-	public GeneralPlan mutate() {
-
-		int strategy = Utils.uniform(1, 5);
-
-		List<GeneralPlan> mutationResults = null;
-
-		Vehicle modelVehicle = selectRandomVehicle(); // With at least one task
-
-		if (strategy == 1) {
-			mutationResults = swapFirstTask(modelVehicle);
-		} else if (strategy == 2) {
-			mutationResults = advancePickUp(modelVehicle, selectRandomAction(modelVehicle, Event.PICK));
-		} else if (strategy == 3) {
-			mutationResults = postponePickUp(modelVehicle, selectRandomAction(modelVehicle, Event.PICK));
-		} else if (strategy == 4) {
-			mutationResults = advanceDelivery(modelVehicle, selectRandomAction(modelVehicle, Event.DELIVER));
-		} else if (strategy == 5) {
-			mutationResults = postponeDelivery(modelVehicle, selectRandomAction(modelVehicle, Event.DELIVER));
-		} else {
-			Utils.ensure(false, "This should not happen!");
-		}
-
-		// If we got at least one mutation, we take the best one
-		return mutationResults.isEmpty() ? this : Utils.selectBest(this, mutationResults);
-	}
-
 	private List<GeneralPlan> swapFirstTask(Vehicle sourceVehicle) {
 		Utils.ensure(plans.get(sourceVehicle).size() > 0, "swapFirstTask needs a vehicle with at least one task");
 
@@ -404,31 +375,6 @@ public class GeneralPlan {
 		return modelVehicule;
 	}
 
-	private int selectRandomAction(Vehicle vehicle, Event kind) {
-		// NOTE: here we assume we have at least one action of the given kind!
-		// (In other word, that the given vehicle has at least one task to move.)
-
-		List<VehicleAction> plan = plans.get(vehicle);
-
-		// Select a random event
-		Utils.ensure(plan.size() % 2 == 0, "selectRandomAction assumes there's the same number of action of each kind");
-		int rank = Utils.uniform(0, plan.size() / 2);
-
-		// Find the rank-th event of the given kind
-		int i = 0;
-		for (; i < plan.size() && rank >= 0; ++i) {
-			if (plan.get(i).event == kind) {
-				--rank;
-			}
-		}
-
-		// Off-by-one error fix:
-		--i;
-
-		Utils.ensure(plan.get(i).event == kind, "selectRandomAction should select an action of the given kind");
-		return i;
-	}
-
 	public double computeOverallCost() {
 		// Return the cost if we already know it, otherwise we compute it
 		if (overallCostCache >= 0)
@@ -506,6 +452,7 @@ public class GeneralPlan {
 	/**
 	 * Make sure no constraints are violated
 	 */
+	@SuppressWarnings("unused")
 	private void validateOrDie() {
 		// The set of rules that should hold:
 		final String rule1 = "All vehicles should have a (maybe empty) plan";

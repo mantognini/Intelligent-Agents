@@ -28,7 +28,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 	 * Type of possible algorithm
 	 */
 	enum Algorithm {
-		NAIVE, SLS, SLS_RANDOM_INITIAL, SLS_GENETIC
+		NAIVE, SLS, SLS_RANDOM_INITIAL
 	}
 
 	/**
@@ -95,10 +95,6 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 		case SLS_RANDOM_INITIAL:
 			plans = slsPlans(true, startTime, vehicles, tasks);
-			break;
-
-		case SLS_GENETIC:
-			plans = slsGeneticPlans(startTime, vehicles, tasks);
 			break;
 
 		default:
@@ -182,30 +178,6 @@ public class CentralizedTemplate implements CentralizedBehavior {
 		List<Plan> logistPlans = bestSoFar.convertToLogistPlans();
 
 		return logistPlans;
-	}
-
-	private List<Plan> slsGeneticPlans(long startTime, List<Vehicle> vehicles, TaskSet tasks) {
-		// Generate an initial random population of general plans
-		GeneralPlan[] population = new GeneralPlan[geneticPopulationSize];
-		for (int i = 0; i < geneticPopulationSize; ++i) {
-			population[i] = GeneralPlan.generateRandomInitial(vehicles, tasks);
-		}
-
-		// Keep track of the best so far
-		GeneralPlan bestSoFar = Utils.selectBest(null, population);
-
-		System.out.println("Population size is " + geneticPopulationSize);
-
-		do {
-			// Select a random individual (i.e. a general plan) & mutate it
-			int rank = Utils.uniform(0, geneticPopulationSize - 1);
-			population[rank] = population[rank].mutate();
-
-			bestSoFar = Utils.selectBest(bestSoFar, population[rank]);
-
-		} while (!hasPlanTimedOut(startTime));
-
-		return bestSoFar.convertToLogistPlans();
 	}
 
 	private boolean hasPlanTimedOut(long startTime) {
