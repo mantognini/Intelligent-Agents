@@ -27,8 +27,8 @@ public class GeneralPlan {
 	private double overallCostCache = -1;
 
 	/**
-	 * Private constructor; use generateInitial static factory to build the first plan, then use generateNeighbors to
-	 * navigate onto the plan space.
+	 * Private constructor; use generateInitial of generateRandomInitial static factories to build the first plan, then
+	 * use generateNeighbors to navigate onto the plan space.
 	 */
 	private GeneralPlan(Map<Vehicle, List<VehicleAction>> plans, List<Vehicle> vehicles, TaskSet tasks) {
 		this.plans = plans;
@@ -72,6 +72,9 @@ public class GeneralPlan {
 		return new GeneralPlan(plans, vehicles, tasks);
 	}
 
+	/**
+	 * Randomly assign the task to different vehicles.
+	 */
 	public static GeneralPlan generateRandomInitial(List<Vehicle> vehicles, TaskSet tasks) {
 		assert vehicles.size() > 0;
 		Vehicle biggest = Utils.getBiggestVehicle(vehicles);
@@ -348,12 +351,14 @@ public class GeneralPlan {
 		return load;
 	}
 
+	// Performs deep copy of the `vehicle`'s plan
 	private LinkedList<VehicleAction> getCopyOfVehiclePlan(Vehicle vehicle) {
 		return new LinkedList<>(plans.get(vehicle));
 	}
 
+	// Performs deep copy of all plans
 	private Map<Vehicle, List<VehicleAction>> getCopyOfPlans() {
-		// NOTE: using new HashMap<>(plans) won't work as value are mutable lists.
+		// NOTE: using new HashMap<>(plans) won't work as values are mutable lists.
 
 		Map<Vehicle, List<VehicleAction>> copy = new HashMap<>(vehicles.size());
 		for (Vehicle vehicle : vehicles) {
