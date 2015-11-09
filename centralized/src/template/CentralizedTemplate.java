@@ -46,6 +46,9 @@ public class CentralizedTemplate implements CentralizedBehavior {
 	 */
 	int geneticPopulationSize;
 
+	int bound;
+	int stollBound;
+
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
 
@@ -66,6 +69,8 @@ public class CentralizedTemplate implements CentralizedBehavior {
 
 		String algorithmName = agent.readProperty("algorithm", String.class, "NAIVE");
 		algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
+		bound = agent.readProperty("bound", Integer.class, 10000);
+		stollBound = agent.readProperty("stoll", Integer.class, 100);
 
 		p = agent.readProperty("probability", Double.class, 0.5);
 
@@ -158,7 +163,7 @@ public class CentralizedTemplate implements CentralizedBehavior {
 			}
 
 			bestSoFar = Utils.selectBest(generalPlans, bestSoFar);
-		} while (i < 10000 && !hasPlanTimedOut(startTime));
+		} while (i < bound && !hasPlanTimedOut(startTime));
 		// TODO define proper upper bound for iterations
 		// Ref/statement: «The search process terminates when a maximum number of iterations is reached. We can set this
 		// number to 10000 iterations or more depends on the solution quality and the problem size.»
