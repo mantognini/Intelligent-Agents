@@ -36,7 +36,7 @@ public class NaiveAgent implements AuctionBehavior {
 
 	@Override
 	public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
-		return naive.generatePlans().convertToLogistPlans();
+		return naive.generatePlans().convertToLogistPlans(tasks);
 	}
 
 }

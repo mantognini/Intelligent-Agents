@@ -6,6 +6,8 @@ import java.util.Map;
 
 import logist.plan.Plan;
 import logist.simulation.Vehicle;
+import logist.task.Task;
+import logist.task.TaskSet;
 import logist.topology.Topology.City;
 import planner.Action.Event;
 
@@ -65,42 +67,55 @@ public class GeneralPlan {
 		return cost;
 	}
 
-	public List<Plan> convertToLogistPlans() {
+	/**
+	 * Logist will prevent us from keeping Task objects around between two rounds... We have to convert "old" instanced
+	 * to new ones using their id.
+	 */
+	public List<Plan> convertToLogistPlans(TaskSet tasksFromLastRound) {
 		if (logistPlansCache != null)
 			return logistPlansCache;
+
+		// The index correspond to the id and the value is the valid task
+		Task[] tasksConverter = new Task[tasksFromLastRound.size()];
+		for (Task t : tasksFromLastRound) {
+			tasksConverter[t.id] = t;
+		}
 
 		// Keep the correct order for plan
 		logistPlansCache = new ArrayList<>(vehicles.size());
 		for (Vehicle vehicle : vehicles) {
 			List<Action> plan = plans.get(vehicle);
-			Plan logistPlan = convertToLogistPlan(vehicle, plan);
+			Plan logistPlan = convertToLogistPlan(vehicle, plan, tasksConverter);
 			logistPlansCache.add(logistPlan);
 		}
 
 		return logistPlansCache;
 	}
 
-	private Plan convertToLogistPlan(Vehicle vehicle, List<Action> actions) {
+	private Plan convertToLogistPlan(Vehicle vehicle, List<Action> actions, Task[] tasksConverter) {
 		City currentCity = vehicle.getCurrentCity();
 		Plan logistPlan = new Plan(currentCity);
 
 		for (Action action : actions) {
+			// Get the corresponding valid task
+			Task currentTask = tasksConverter[action.task.id];
+
 			if (action.event == Event.PICK) {
 				// move to pickup location & pick it up
-				for (City city : currentCity.pathTo(action.task.pickupCity)) {
+				for (City city : currentCity.pathTo(currentTask.pickupCity)) {
 					logistPlan.appendMove(city);
 				}
 
-				logistPlan.appendPickup(action.task);
-				currentCity = action.task.pickupCity;
+				logistPlan.appendPickup(currentTask);
+				currentCity = currentTask.pickupCity;
 			} else {
 				// move to delivery location & deliver
-				for (City city : currentCity.pathTo(action.task.deliveryCity)) {
+				for (City city : currentCity.pathTo(currentTask.deliveryCity)) {
 					logistPlan.appendMove(city);
 				}
 
-				logistPlan.appendDelivery(action.task);
-				currentCity = action.task.deliveryCity;
+				logistPlan.appendDelivery(currentTask);
+				currentCity = currentTask.deliveryCity;
 			}
 		}
 
