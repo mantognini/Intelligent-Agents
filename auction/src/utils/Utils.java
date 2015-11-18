@@ -63,6 +63,17 @@ public final class Utils {
 		}
 	}
 
+	public static double averageListLong(List<Long> list) {
+		if (list.size() == 0) {
+			return 0;
+		}
+		double sum = 0.0;
+		for (Long elem : list) {
+			sum += (double) elem;
+		}
+		return toLong(sum / ((double) list.size()));
+	}
+
 	private Utils() {
 		// Disallow instantiation
 	}

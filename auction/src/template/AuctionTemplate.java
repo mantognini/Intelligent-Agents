@@ -14,6 +14,15 @@ import logist.task.TaskDistribution;
 import logist.task.TaskSet;
 import logist.topology.Topology;
 import logist.topology.Topology.City;
+import planner.PlannerTrait;
+import utils.Utils;
+import bidder.BidStrategyTrait;
+import bidder.NoGain;
+import bidder.NoPain;
+import bidder.NoPainAverage;
+import estimator.CostEstimatorTrait;
+import estimator.Gipsy;
+import estimator.NoFuture;
 
 /**
  * A very simple auction agent that assigns all tasks to its first vehicle and handles them sequentially.
@@ -21,12 +30,32 @@ import logist.topology.Topology.City;
 @SuppressWarnings("unused")
 public class AuctionTemplate implements AuctionBehavior {
 
+	enum Bidder {
+		NoGain, NoPain, NoPainAverage
+	}
+
+	enum Estimator {
+		Gipsy, NoFuture
+	}
+
+	enum Planner {
+		General, Naive
+	}
+
 	private Topology topology;
 	private TaskDistribution distribution;
 	private Agent agent;
 	private Random random;
 	private Vehicle vehicle;
 	private City currentCity;
+
+	// Strategies
+	private Bidder bidder;
+	private Estimator estimator;
+	private Planner planner;
+
+	// Temporary ε value
+	private static final double EPSILON = 4;
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
@@ -39,6 +68,10 @@ public class AuctionTemplate implements AuctionBehavior {
 
 		long seed = -9019554669489983951L * currentCity.hashCode() * agent.id();
 		this.random = new Random(seed);
+
+		bidder = Bidder.valueOf(agent.readProperty("bidder", String.class, "NoGain"));
+		estimator = Estimator.valueOf(agent.readProperty("estimator", String.class, "NoFuture"));
+		planner = Planner.valueOf(agent.readProperty("planner", String.class, "Naive"));
 	}
 
 	@Override
@@ -51,17 +84,38 @@ public class AuctionTemplate implements AuctionBehavior {
 	@Override
 	public Long askPrice(Task task) {
 
-		if (vehicle.capacity() < task.weight)
-			return null;
+		BidStrategyTrait bidStrategy;
+		CostEstimatorTrait estimatorStrategy;
+		PlannerTrait plannerStrategy;
 
-		long distanceTask = task.pickupCity.distanceUnitsTo(task.deliveryCity);
-		long distanceSum = distanceTask + currentCity.distanceUnitsTo(task.pickupCity);
-		double marginalCost = Measures.unitsToKM(distanceSum * vehicle.costPerKm());
+		switch (bidder) {
+		case NoGain:
+			bidStrategy = new NoGain();
+			break;
+		case NoPain:
+			bidStrategy = new NoPain(EPSILON);
+			break;
+		case NoPainAverage:
+			bidStrategy = new NoPainAverage();
+			break;
+		default:
+			throw new IllegalArgumentException("Should not happend");
+		}
 
-		double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id);
-		double bid = ratio * marginalCost;
+		switch (estimator) {
+		case Gipsy:
+			estimatorStrategy = new Gipsy();
+			break;
+		case NoFuture:
+			estimatorStrategy = new NoFuture();
+			break;
+		default:
+			break;
+		}
 
-		return (long) Math.round(bid);
+		// TODO : Planner
+		// TODO : Strategy
+		return Utils.toLong(0.0);
 	}
 
 	@Override
@@ -77,6 +131,20 @@ public class AuctionTemplate implements AuctionBehavior {
 			plans.add(Plan.EMPTY);
 
 		return plans;
+	}
+
+	private Long naiveBid(Task task) {
+		if (vehicle.capacity() < task.weight)
+			return null;
+
+		long distanceTask = task.pickupCity.distanceUnitsTo(task.deliveryCity);
+		long distanceSum = distanceTask + currentCity.distanceUnitsTo(task.pickupCity);
+		double marginalCost = Measures.unitsToKM(distanceSum * vehicle.costPerKm());
+
+		double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id);
+		double bid = ratio * marginalCost;
+
+		return (long) Math.round(bid);
 	}
 
 	private Plan naivePlan(Vehicle vehicle, TaskSet tasks) {
