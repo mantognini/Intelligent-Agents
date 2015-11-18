@@ -1,5 +1,6 @@
 package estimator;
 
+import logist.task.Task;
 import planner.PlannerTrait;
 
 /**
@@ -8,8 +9,9 @@ import planner.PlannerTrait;
 public final class NoFuture extends CostEstimatorTrait {
 
 	@Override
-	public double estimateCost(PlannerTrait planner) {
-		return 0; // TODO
+	public double computeMC(PlannerTrait planner, Task task) {
+		PlannerTrait extendPlan = planner.extendPlan(task);
+		return extendPlan.generatePlans().computeCost();
 	}
 
 }

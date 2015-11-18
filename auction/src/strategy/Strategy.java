@@ -1,6 +1,5 @@
 package strategy;
 
-import static utils.Utils.ensure;
 import logist.task.Task;
 import planner.GeneralPlan;
 import planner.PlannerTrait;
@@ -9,9 +8,9 @@ import estimator.CostEstimatorTrait;
 
 public class Strategy {
 	private PlannerTrait planner;
-	private PlannerTrait nextPlanner = null;
 	private final CostEstimatorTrait estimator;
 	private final BidStrategyTrait bidder;
+	private Task currentTask;
 
 	public Strategy(PlannerTrait planner, CostEstimatorTrait estimator, BidStrategyTrait bidder) {
 		this.planner = planner;
@@ -20,24 +19,14 @@ public class Strategy {
 	}
 
 	public Long bid(Task task) {
-		ensure(nextPlanner == null, "validate bid should be called between two bids");
-
-		nextPlanner = planner.extendPlan(task);
-		double currentCost = estimator.estimateCost(planner);
-		double estimatedCost = estimator.estimateCost(nextPlanner);
-		long bid = bidder.bid(planner.tasks.size(), currentCost, estimatedCost);
-
-		return bid;
+		currentTask = task;
+		return bidder.bid(estimator.computeMC(planner, currentTask));
 	}
 
 	public void validateBid(Boolean won) {
-		ensure(nextPlanner != null, "no bid was made");
-
 		if (won) {
-			planner = nextPlanner;
+			planner = planner.extendPlan(currentTask);
 		}
-
-		nextPlanner = null;
 	}
 
 	public GeneralPlan generatePlans() {

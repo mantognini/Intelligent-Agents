@@ -10,5 +10,5 @@ public abstract class BidStrategyTrait {
 	 * 
 	 * NB: the marginal cost is estimatedCost - currentCost.
 	 */
-	public abstract long bid(int nbTasks, double currentCost, double estimatedCost);
+	public abstract long bid(double marginalCost);
 }
