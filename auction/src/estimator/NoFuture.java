@@ -6,7 +6,7 @@ import planner.PlannerTrait;
 /**
  * Simple cost estimator; no lookahead in the future
  */
-public final class NoFuture extends CostEstimatorTrait {
+public class NoFuture extends CostEstimatorTrait {
 
 	@Override
 	public double computeMC(PlannerTrait planner, Task task) {

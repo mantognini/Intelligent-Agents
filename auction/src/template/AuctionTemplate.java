@@ -17,7 +17,6 @@ import bidder.NoGain;
 import bidder.NoPain;
 import bidder.NoPainMovingAverage;
 import estimator.CostEstimatorTrait;
-import estimator.Gipsy;
 import estimator.NoFuture;
 
 /**
@@ -76,9 +75,9 @@ public class AuctionTemplate implements AuctionBehavior {
 		}
 
 		switch (estimator) {
-		case Gipsy:
-			estimatorStrategy = new Gipsy();
-			break;
+		// case Gipsy:
+		// estimatorStrategy = new Gipsy();
+		// break;
 		case NoFuture:
 			estimatorStrategy = new NoFuture();
 			break;
