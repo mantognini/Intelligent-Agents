@@ -15,7 +15,7 @@ import strategy.Strategy;
 import bidder.BidStrategyTrait;
 import bidder.NoGain;
 import bidder.NoPain;
-import bidder.NoPainAverage;
+import bidder.NoPainMovingAverage;
 import estimator.CostEstimatorTrait;
 import estimator.Gipsy;
 import estimator.NoFuture;
@@ -52,6 +52,7 @@ public class AuctionTemplate implements AuctionBehavior {
 
 	// Temporary ε value
 	private static final double EPSILON = 4;
+	private static final double MARGIN_RATIO = 0.5;
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
@@ -68,7 +69,7 @@ public class AuctionTemplate implements AuctionBehavior {
 			bidStrategy = new NoPain(EPSILON);
 			break;
 		case NoPainAverage:
-			bidStrategy = new NoPainAverage();
+			bidStrategy = new NoPainMovingAverage(agent.id(), MARGIN_RATIO);
 			break;
 		default:
 			throw new IllegalArgumentException("Should not happend");

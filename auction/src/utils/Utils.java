@@ -63,15 +63,15 @@ public final class Utils {
 		}
 	}
 
-	public static double averageListLong(List<Long> list) {
+	public static double movingAverage(List<Long> list, int depth) {
 		if (list.size() == 0) {
 			return 0;
 		}
 		double sum = 0.0;
-		for (Long elem : list) {
-			sum += (double) elem;
+		for (int i = list.size() - 1; i > (list.size() - 1 - depth); i--) {
+			sum += (double) list.get(i);
 		}
-		return sum / ((double) list.size());
+		return sum / ((double) depth);
 	}
 
 	private Utils() {
