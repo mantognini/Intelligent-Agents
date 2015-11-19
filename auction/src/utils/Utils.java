@@ -71,7 +71,7 @@ public final class Utils {
 		for (Long elem : list) {
 			sum += (double) elem;
 		}
-		return toLong(sum / ((double) list.size()));
+		return sum / ((double) list.size());
 	}
 
 	private Utils() {

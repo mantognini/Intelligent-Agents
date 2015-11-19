@@ -14,8 +14,8 @@ import logist.task.TaskDistribution;
 import logist.task.TaskSet;
 import logist.topology.Topology;
 import logist.topology.Topology.City;
-import planner.PlannerTrait;
-import utils.Utils;
+import planner.NaivePlanner;
+import strategy.Strategy;
 import bidder.BidStrategyTrait;
 import bidder.NoGain;
 import bidder.NoPain;
@@ -53,6 +53,7 @@ public class AuctionTemplate implements AuctionBehavior {
 	private Bidder bidder;
 	private Estimator estimator;
 	private Planner planner;
+	private Strategy strategy;
 
 	// Temporary ε value
 	private static final double EPSILON = 4;
@@ -71,22 +72,9 @@ public class AuctionTemplate implements AuctionBehavior {
 
 		bidder = Bidder.valueOf(agent.readProperty("bidder", String.class, "NoGain"));
 		estimator = Estimator.valueOf(agent.readProperty("estimator", String.class, "NoFuture"));
-		planner = Planner.valueOf(agent.readProperty("planner", String.class, "Naive"));
-	}
-
-	@Override
-	public void auctionResult(Task previous, int winner, Long[] bids) {
-		if (winner == agent.id()) {
-			currentCity = previous.deliveryCity;
-		}
-	}
-
-	@Override
-	public Long askPrice(Task task) {
 
 		BidStrategyTrait bidStrategy;
 		CostEstimatorTrait estimatorStrategy;
-		PlannerTrait plannerStrategy;
 
 		switch (bidder) {
 		case NoGain:
@@ -110,12 +98,26 @@ public class AuctionTemplate implements AuctionBehavior {
 			estimatorStrategy = new NoFuture();
 			break;
 		default:
-			break;
+			throw new IllegalArgumentException("Should not happend");
 		}
 
-		// TODO : Planner
-		// TODO : Strategy
-		return Utils.toLong(0.0);
+		strategy = new Strategy(new NaivePlanner(agent.vehicles()), estimatorStrategy, bidStrategy);
+
+		System.out.println("Estimator :" + estimator + ", BidStrategy : " + bidder);
+
+	}
+
+	@Override
+	public void auctionResult(Task previous, int winner, Long[] bids) {
+		if (winner == agent.id()) {
+			currentCity = previous.deliveryCity;
+		}
+	}
+
+	@Override
+	public Long askPrice(Task task) {
+
+		return strategy.bid(task);
 	}
 
 	@Override
