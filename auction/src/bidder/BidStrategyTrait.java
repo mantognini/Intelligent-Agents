@@ -1,5 +1,6 @@
 package bidder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public abstract class BidStrategyTrait {
 	public void addBids(Long[] bids) {
 		for (int i = 0; i < bids.length; ++i) {
 			List<Long> currenbids = bidHistory.get(i);
+			if (currenbids == null) {
+				currenbids = new ArrayList<Long>();
+			}
 			currenbids.add(bids[i]);
 			bidHistory.put(i, currenbids);
 		}
