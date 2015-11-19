@@ -68,7 +68,7 @@ public final class Utils {
 			return 0;
 		}
 		double sum = 0.0;
-		for (int i = list.size() - 1; i > (list.size() - 1 - depth); i--) {
+		for (int i = list.size() - 1; i > (list.size() - 1 - Math.min(depth, list.size() - 1)); i--) {
 			sum += (double) list.get(i);
 		}
 		return sum / ((double) depth);
