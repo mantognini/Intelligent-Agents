@@ -14,5 +14,19 @@
 		<set class-name="agents.NaiveAgent"/>
 	</agent>
 	
+	<agent name="auction-nopain-nofuture">
+		<set class-path="bin/"/>
+		<set class-name="template.AuctionTemplate"/>
+		<set bidder="NoPain"/>
+		<set estimator="NoFuture"/>
+	</agent>
+	
+	<agent name="auction-nopainavg-nofuture">
+		<set class-path="bin/"/>
+		<set class-name="template.AuctionTemplate"/>
+		<set bidder="NoPainAverage"/>
+		<set estimator="NoFuture"/>
+	</agent>
+
 	
 </agents>
