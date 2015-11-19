@@ -4,6 +4,7 @@ import static utils.Utils.ensure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -74,6 +75,9 @@ public final class NaivePlanner extends PlannerTrait {
 		if (plans == null)
 			buildPlans();
 
+		Set<Task> extendedTasks = new HashSet<>(tasks);
+		extendedTasks.add(extraTask);
+
 		// We don't rebuild everything from scratch; instead we just extends the current plan
 		ensure(extraTask.weight <= biggestVehicle.capacity(), "biggest vehicle is too small for new task");
 		List<Action> extendedPlanForBiggest = new ArrayList<>(plans.get(biggestVehicle));
@@ -83,7 +87,7 @@ public final class NaivePlanner extends PlannerTrait {
 		HashMap<Vehicle, List<Action>> extendedPlans = new HashMap<>(plans);
 		extendedPlans.put(biggestVehicle, extendedPlanForBiggest);
 
-		return new NaivePlanner(vehicles, tasks, extendedPlans, biggestVehicle);
+		return new NaivePlanner(vehicles, extendedTasks, extendedPlans, biggestVehicle);
 	}
 
 }
