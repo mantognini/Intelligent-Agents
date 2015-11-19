@@ -1,6 +1,7 @@
 package planner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,10 +76,11 @@ public class GeneralPlan {
 		if (logistPlansCache != null)
 			return logistPlansCache;
 
-		// The index correspond to the id and the value is the valid task
-		Task[] tasksConverter = new Task[tasksFromLastRound.size()];
+		// The key correspond to the id and the value is the valid task
+		HashMap<Integer, Task> tasksConverter = new HashMap<>(tasksFromLastRound.size());
 		for (Task t : tasksFromLastRound) {
-			tasksConverter[t.id] = t;
+			System.err.println(t.id);
+			tasksConverter.put(t.id, t);
 		}
 
 		// Keep the correct order for plan
@@ -92,13 +94,13 @@ public class GeneralPlan {
 		return logistPlansCache;
 	}
 
-	private Plan convertToLogistPlan(Vehicle vehicle, List<Action> actions, Task[] tasksConverter) {
+	private Plan convertToLogistPlan(Vehicle vehicle, List<Action> actions, HashMap<Integer, Task> tasksConverter) {
 		City currentCity = vehicle.getCurrentCity();
 		Plan logistPlan = new Plan(currentCity);
 
 		for (Action action : actions) {
 			// Get the corresponding valid task
-			Task currentTask = tasksConverter[action.task.id];
+			Task currentTask = tasksConverter.get(action.task.id);
 
 			if (action.event == Event.PICK) {
 				// move to pickup location & pick it up
