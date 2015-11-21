@@ -123,4 +123,8 @@ public class GeneralPlan {
 
 		return logistPlan;
 	}
+
+	public HashMap<Vehicle, List<Action>> getPlans() {
+		return new HashMap<>(plans);
+	}
 }

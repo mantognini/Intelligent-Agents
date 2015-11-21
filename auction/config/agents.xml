@@ -40,4 +40,12 @@
 		<set class-name="agents.GipsyAgent"/>
 	</agent>
 	
+	<agent name="auction-nopain-nofuture-sls">
+		<set class-path="bin/"/>
+		<set class-name="template.AuctionTemplate"/>
+		<set bidder="NoPain"/>
+		<set estimator="NoFuture"/>
+		<set planner="SLS"/>
+	</agent>
+	
 </agents>

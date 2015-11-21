@@ -6,6 +6,7 @@ import java.util.Set;
 
 import logist.simulation.Vehicle;
 import logist.task.Task;
+import planner.GeneralPlan;
 
 public final class Utils {
 
@@ -72,6 +73,46 @@ public final class Utils {
 			sum += (double) list.get(i);
 		}
 		return sum / ((double) depth);
+	}
+
+	/**
+	 * Find and return (one of) the best given plans
+	 */
+	public static GeneralPlan selectBest(GeneralPlan currentBest, List<GeneralPlan> plans) {
+		ensure(plans.size() > 0, "selectBest needs at least one plan");
+
+		GeneralPlan bestPlan = currentBest != null ? currentBest : plans.get(0);
+		double bestCost = bestPlan.computeCost();
+		for (GeneralPlan plan : plans) {
+			double cost = plan.computeCost();
+			if (cost <= bestCost) {
+				bestPlan = plan;
+				bestCost = cost;
+			}
+		}
+
+		return bestPlan;
+	}
+
+	public static GeneralPlan selectBest(GeneralPlan currentBest, GeneralPlan[] plans) {
+		ensure(plans.length > 0, "selectBest needs at least one plan");
+
+		GeneralPlan bestPlan = currentBest != null ? currentBest : plans[0];
+		double bestCost = bestPlan.computeCost();
+
+		for (int i = 0; i < plans.length; i++) {
+			double cost = plans[i].computeCost();
+			if (cost <= bestCost) {
+				bestPlan = plans[i];
+				bestCost = cost;
+			}
+		}
+
+		return bestPlan;
+	}
+
+	public static GeneralPlan selectBest(GeneralPlan a, GeneralPlan b) {
+		return a.computeCost() < b.computeCost() ? a : b;
 	}
 
 	private Utils() {

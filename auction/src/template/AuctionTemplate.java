@@ -11,6 +11,8 @@ import logist.task.TaskDistribution;
 import logist.task.TaskSet;
 import logist.topology.Topology;
 import planner.NaivePlanner;
+import planner.PlannerTrait;
+import planner.SLSPlanner;
 import strategy.Strategy;
 import bidder.BidStrategyTrait;
 import bidder.NoGain;
@@ -34,7 +36,7 @@ public class AuctionTemplate implements AuctionBehavior {
 	}
 
 	enum Planner {
-		General, Naive
+		Naive, SLS
 	}
 
 	private Agent agent;
@@ -47,6 +49,7 @@ public class AuctionTemplate implements AuctionBehavior {
 	// Strategies
 	private BidStrategyTrait bidStrategy;
 	private CostEstimatorTrait estimatorStrategy;
+	private PlannerTrait plannerStrategy;
 	private Strategy strategy;
 
 	// Temporary ε value
@@ -59,6 +62,7 @@ public class AuctionTemplate implements AuctionBehavior {
 
 		bidder = Bidder.valueOf(agent.readProperty("bidder", String.class, "NoGain"));
 		estimator = Estimator.valueOf(agent.readProperty("estimator", String.class, "NoFuture"));
+		planner = Planner.valueOf(agent.readProperty("planner", String.class, "Naive"));
 
 		switch (bidder) {
 		case NoGain:
@@ -85,7 +89,19 @@ public class AuctionTemplate implements AuctionBehavior {
 			throw new IllegalArgumentException("Should not happend");
 		}
 
-		strategy = new Strategy(new NaivePlanner(agent.vehicles()), estimatorStrategy, bidStrategy);
+		switch (planner) {
+
+		case Naive:
+			plannerStrategy = new NaivePlanner(agent.vehicles());
+			break;
+		case SLS:
+			plannerStrategy = new SLSPlanner(agent.vehicles());
+			break;
+		default:
+			throw new IllegalArgumentException("Should not happend");
+		}
+
+		strategy = new Strategy(plannerStrategy, estimatorStrategy, bidStrategy);
 
 		System.out.println("Estimator :" + estimator + ", BidStrategy : " + bidder);
 
