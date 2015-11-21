@@ -109,7 +109,7 @@ public class AuctionTemplate implements AuctionBehavior {
 
 	@Override
 	public void auctionResult(Task previous, int winner, Long[] bids) {
-		strategy.validateBid(agent.id() == winner);
+		strategy.validateBid(agent.id() == winner, bids);
 		bidStrategy.addBids(bids);
 	}
 

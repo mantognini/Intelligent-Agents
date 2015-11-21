@@ -23,10 +23,12 @@ public class Strategy {
 		return bidder.bid(estimator.computeMC(planner, currentTask));
 	}
 
-	public void validateBid(Boolean won) {
+	public void validateBid(Boolean won, Long[] lastOffers) {
 		if (won) {
 			planner = planner.extendPlan(currentTask);
 		}
+
+		bidder.addBids(lastOffers);
 	}
 
 	public GeneralPlan generatePlans() {

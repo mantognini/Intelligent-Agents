@@ -79,7 +79,6 @@ public class GeneralPlan {
 		// The key correspond to the id and the value is the valid task
 		HashMap<Integer, Task> tasksConverter = new HashMap<>(tasksFromLastRound.size());
 		for (Task t : tasksFromLastRound) {
-			System.err.println(t.id);
 			tasksConverter.put(t.id, t);
 		}
 
