@@ -4,35 +4,10 @@
 	<!-- A list of agents and their behavior classes -->
 	
 	<!-- #### AUCTION AGENTS ### -->
-	<agent name="auction-random">
-		<set class-path="bin/"/>
-		<set class-name="template.AuctionTemplate"/>
-	</agent>
 	
 	<agent name="auction-naive">
 		<set class-path="bin/"/>
 		<set class-name="agents.NaiveAgent"/>
-	</agent>
-	
-	<agent name="auction-nogain-nofuture">
-		<set class-path="bin/"/>
-		<set class-name="template.AuctionTemplate"/>
-		<set bidder="NoGain"/>
-		<set estimator="NoFuture"/>
-	</agent>
-	
-	<agent name="auction-nopain-nofuture">
-		<set class-path="bin/"/>
-		<set class-name="template.AuctionTemplate"/>
-		<set bidder="NoPain"/>
-		<set estimator="NoFuture"/>
-	</agent>
-	
-	<agent name="auction-nopainavg-nofuture">
-		<set class-path="bin/"/>
-		<set class-name="template.AuctionTemplate"/>
-		<set bidder="NoPainAverage"/>
-		<set estimator="NoFuture"/>
 	</agent>
 	
 	<agent name="auction-gipsy">
