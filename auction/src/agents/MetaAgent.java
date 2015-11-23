@@ -35,11 +35,11 @@ public abstract class MetaAgent implements AuctionBehavior {
 	}
 
 	// To be called from the setup method in subclasses
-	protected void init(String name, Agent agent, Strategy strategy) {
+	protected void init(Agent agent, Strategy strategy) {
 		this.agent = agent;
 		this.strategy = strategy;
 
-		System.out.print(name + " agent has vehicles ");
+		System.out.print(strategy.name + " agent has vehicles ");
 		for (Vehicle v : agent.vehicles())
 			System.out.print(v.name() + " ");
 		System.out.println();

@@ -6,13 +6,11 @@ import logist.topology.Topology;
 import strategy.Strategy;
 import strategy.StrategyFactory;
 
-public class GipsyAgent extends MetaAgent {
+public class SimpleAgent extends MetaAgent {
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
-		// TODO find best parameters
-		Strategy gipsy = StrategyFactory.gipsy(agent.vehicles(), 6, 10, distribution);
-		init(agent, gipsy);
+		Strategy simple = StrategyFactory.simple(agent.vehicles());
+		init(agent, simple);
 	}
-
 }
