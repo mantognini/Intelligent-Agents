@@ -13,6 +13,7 @@ public class Strategy {
 	private Task currentTask;
 	private int bidCount = 0;
 	public final String name;
+	private Long totalReward = 0l;
 
 	public Strategy(String name, PlannerTrait planner, CostEstimatorTrait estimator, BidStrategyTrait bidder) {
 		this.name = name;
@@ -32,6 +33,7 @@ public class Strategy {
 	public void validateBid(int winner, int agentID, Long[] lastOffers) {
 		if (winner == agentID) {
 			planner = planner.extendPlan(currentTask);
+			totalReward += lastOffers[winner];
 		}
 
 		bidder.addBids(lastOffers);
@@ -40,6 +42,17 @@ public class Strategy {
 
 	public GeneralPlan generatePlans() {
 		System.out.println("Generating plan for " + name);
-		return planner.generatePlans();
+
+		GeneralPlan plan = planner.generatePlans();
+		double totalCost = plan.computeCost();
+
+		System.out.println(name + " total cost   = " + totalCost);
+		System.out.println(name + " total reward = " + totalReward);
+
+		if (totalCost > totalReward) {
+			System.err.println(name + " LOST MONEY!!!");
+		}
+
+		return plan;
 	}
 }
