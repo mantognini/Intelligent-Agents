@@ -18,7 +18,7 @@ public class SLSPlanner extends PlannerTrait {
 	private Map<Vehicle, List<Action>> plans = null;
 
 	// SLS SETTINGS:
-	private int resetBound = 3;
+	private int resetBound = 5;
 	private int stallBound = 500;
 	private double p = 0.5;
 	private int debugLevel = 0; // the higher the more verbose
@@ -52,6 +52,7 @@ public class SLSPlanner extends PlannerTrait {
 
 		GeneralPlan globalBest = current;
 		GeneralPlan localBest = globalBest;
+		int bestReset = 0;
 
 		int iterationCount = 0;
 		int stallCount = 0;
@@ -98,6 +99,7 @@ public class SLSPlanner extends PlannerTrait {
 					debugPrintln(2, "\t>>> GLOBAL best was improved at reset " + resetCount + "<<<");
 					debugPrintln(2, "\t>>> Previous cost was " + previousGlobalBest.computeCost());
 					debugPrintln(2, "\t>>> New      cost is  " + globalBest.computeCost());
+					bestReset = resetCount;
 				}
 
 				// Reset!
@@ -115,9 +117,10 @@ public class SLSPlanner extends PlannerTrait {
 		} while (resetCount < resetBound /* && !hasPlanTimedOut(startTime) */);
 		// TODO add timeout
 
-		globalBest = Utils.selectBest(globalBest, localBest);
-
-		debugPrintln(1, "Best plan cost is " + globalBest.computeCost());
+		debugPrintln(1, "Best plan cost is " + globalBest.computeCost() + " and was found at reset = " + bestReset);
+		if (bestReset >= resetCount - 1) {
+			debugPrintln(0, "The best plan was found during the last reset iteration!");
+		}
 
 		plans = globalBest.getPlans();
 		plansCache = globalBest;
