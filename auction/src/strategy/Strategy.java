@@ -11,16 +11,22 @@ public class Strategy {
 	private final CostEstimatorTrait estimator;
 	private final BidStrategyTrait bidder;
 	private Task currentTask;
+	private int bidCount = 0;
+	public final String name;
 
-	public Strategy(PlannerTrait planner, CostEstimatorTrait estimator, BidStrategyTrait bidder) {
+	public Strategy(String name, PlannerTrait planner, CostEstimatorTrait estimator, BidStrategyTrait bidder) {
+		this.name = name;
 		this.planner = planner;
 		this.estimator = estimator;
 		this.bidder = bidder;
 	}
 
 	public Long bid(Task task) {
+		++bidCount;
 		currentTask = task;
-		return bidder.bid(estimator.computeMC(planner, currentTask));
+		Long bid = bidder.bid(estimator.computeMC(planner, currentTask));
+		System.out.println(name + " " + bidCount + " " + bid);
+		return bid;
 	}
 
 	public void validateBid(Boolean won, Long[] lastOffers) {
@@ -32,6 +38,7 @@ public class Strategy {
 	}
 
 	public GeneralPlan generatePlans() {
+		System.out.println("Generating plan for " + name);
 		return planner.generatePlans();
 	}
 }
