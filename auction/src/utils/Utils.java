@@ -112,7 +112,7 @@ public final class Utils {
 	}
 
 	public static GeneralPlan selectBest(GeneralPlan a, GeneralPlan b) {
-		return a.computeCost() < b.computeCost() ? a : b;
+		return a.computeCost() <= b.computeCost() ? a : b;
 	}
 
 	private Utils() {

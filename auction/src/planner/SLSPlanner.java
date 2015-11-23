@@ -15,11 +15,12 @@ import utils.Utils;
 
 public class SLSPlanner extends PlannerTrait {
 
+	private GeneralPlan plansCache = null;
 	private Map<Vehicle, List<Action>> plans;
 	private Random randomGenerator = new Random();
 	private boolean randomInitial = false;
-	private int bound = 50000;
-	private int stallBound = 5000;
+	private int resetBound = 10;
+	private int stallBound = 10000;
 	private double p = 0.5;
 
 	public SLSPlanner(List<Vehicle> vehicles) {
@@ -33,10 +34,10 @@ public class SLSPlanner extends PlannerTrait {
 
 	@Override
 	public GeneralPlan generatePlans() {
-		if (plans == null) {
+		if (plansCache == null) {
 			buildPlan(randomInitial);
 		}
-		return new GeneralPlan(plans, vehicles);
+		return plansCache;
 	}
 
 	private void buildPlan(boolean randomInitial) {
@@ -45,14 +46,16 @@ public class SLSPlanner extends PlannerTrait {
 		else
 			generateInitial(vehicles, tasks);
 
-		GeneralPlan generalPlans = new GeneralPlan(plans, vehicles);
+		GeneralPlan current = new GeneralPlan(plans, vehicles);
 
 		System.out.println("Generate Neighbours");
 
-		GeneralPlan bestSoFar = generalPlans;
+		GeneralPlan globalBest = current;
+		GeneralPlan localBest = globalBest;
 
 		int iterationCount = 0;
 		int stallCount = 0;
+		int resetCount = 0;
 
 		do {
 			++iterationCount;
@@ -65,40 +68,58 @@ public class SLSPlanner extends PlannerTrait {
 			// A ← LocalChoice(N,f)
 			// GeneralPlan bestNeighbour = Utils.selectBest(null, neighbors);
 			if (Math.random() > p) {
-				generalPlans = Utils.selectBest(generalPlans, neighbors);
+				current = Utils.selectBest(current, neighbors);
 			} else {
-				generalPlans = Utils.getRandomElement(neighbors);
+				current = Utils.getRandomElement(neighbors);
 			}
 
-			plans = generalPlans.getPlans();
+			plans = current.getPlans();
 
-			GeneralPlan previousBest = bestSoFar;
-			bestSoFar = Utils.selectBest(generalPlans, bestSoFar);
+			GeneralPlan previousLocalBest = localBest;
+			localBest = Utils.selectBest(localBest, current);
 
-			// Reset generalPlans is stuck in a local minima
-			if (previousBest == bestSoFar) { // yes, address comparison.
+			// Reset generalPlans is stuck in a local minimum
+			if (previousLocalBest == localBest) { // yes, address comparison.
 				++stallCount;
 			} else {
 				stallCount = 0;
+				System.out.println("LOCAL best was improved at iteration " + iterationCount);
+				System.out.println("Previous cost was " + previousLocalBest.computeCost());
+				System.out.println("New      cost is  " + localBest.computeCost());
 			}
 
 			if (stallCount >= stallBound) {
+				System.out.println("### plans were RESET at iteration " + iterationCount + "###");
+
+				// Save local best if better than global best
+				GeneralPlan previousGlobalBest = globalBest;
+				globalBest = Utils.selectBest(globalBest, localBest);
+				if (previousGlobalBest != globalBest) {
+					System.out.println("\t>>> GLOBAL best was improved at reset " + resetCount + "<<<");
+					System.out.println("\t>>> Previous cost was " + previousGlobalBest.computeCost());
+					System.out.println("\t>>> New      cost is  " + globalBest.computeCost());
+				}
+
 				// Reset!
 				if (randomInitial)
 					generateRandomInitial(vehicles, tasks);
 				else
 					generateInitial(vehicles, tasks);
 
-				generalPlans = new GeneralPlan(plans, vehicles);
+				current = new GeneralPlan(plans, vehicles);
 				stallCount = 0;
-				bestSoFar = Utils.selectBest(generalPlans, bestSoFar);
-
-				System.out.println("plans were reset");
+				iterationCount = 0;
+				++resetCount;
+				localBest = current;
 			}
 
-		} while (iterationCount < bound /* && !hasPlanTimedOut(startTime) */);
+		} while (resetCount < resetBound /* && !hasPlanTimedOut(startTime) */);
+		// TODO add timeout
 
-		plans = bestSoFar.getPlans();
+		globalBest = Utils.selectBest(globalBest, localBest);
+
+		plans = globalBest.getPlans();
+		plansCache = globalBest;
 	}
 
 	@Override
@@ -111,7 +132,7 @@ public class SLSPlanner extends PlannerTrait {
 	/**
 	 * Generate the first, naive plan: all tasks are assigned to be biggest vehicle in a sequential order.
 	 */
-	public void generateInitial(List<Vehicle> vehicles, Set<Task> tasks) {
+	private void generateInitial(List<Vehicle> vehicles, Set<Task> tasks) {
 		assert vehicles.size() > 0;
 		Vehicle biggest = Utils.getBiggestVehicle(vehicles);
 		int heaviest = Utils.getHeaviestWeight(tasks);
@@ -143,7 +164,7 @@ public class SLSPlanner extends PlannerTrait {
 	/**
 	 * Randomly assign the task to different vehicles.
 	 */
-	public void generateRandomInitial(List<Vehicle> vehicles, Set<Task> tasks) {
+	private void generateRandomInitial(List<Vehicle> vehicles, Set<Task> tasks) {
 		assert vehicles.size() > 0;
 		Vehicle biggest = Utils.getBiggestVehicle(vehicles);
 		int heaviest = Utils.getHeaviestWeight(tasks);
@@ -191,7 +212,7 @@ public class SLSPlanner extends PlannerTrait {
 	 * are stochastically selected. This means that running this methods twice might result in two different solution
 	 * sets.
 	 */
-	public List<GeneralPlan> generateNeighbors() {
+	private List<GeneralPlan> generateNeighbors() {
 
 		List<GeneralPlan> neighbours = new LinkedList<>();
 

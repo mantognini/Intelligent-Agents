@@ -123,7 +123,17 @@ public class GeneralPlan {
 		return logistPlan;
 	}
 
-	public HashMap<Vehicle, List<Action>> getPlans() {
-		return new HashMap<>(plans);
+	public Map<Vehicle, List<Action>> getPlans() {
+		return plans; // No deep copy for efficiency reason. Bad design but get over it :-)
+		// NOTE:
+		// A deep copy of Map<K, List<V>> can be done like this if needed:
+		//
+		// @formatter:off
+		// Map<Vehicle, List<VehicleAction>> copy = new HashMap<>(vehicles.size());
+		// for (Vehicle vehicle : vehicles) {
+		//     copy.put(vehicle, new LinkedList<>(plans.get(vehicle));
+		// }
+		// return copy;
+		// @formatter:on
 	}
 }
