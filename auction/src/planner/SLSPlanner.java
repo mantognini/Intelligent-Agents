@@ -19,11 +19,12 @@ public class SLSPlanner extends PlannerTrait {
 
 	// SLS SETTINGS:
 	private boolean randomInitial = false;
-	private int resetBound = 10;
-	private int stallBound = 10000;
+	private int resetBound = 3;
+	private int stallBound = 500;
 	private double p = 0.5;
-	private int debugLevel = 1; // the higher the more verbose
+	private int debugLevel = 0; // the higher the more verbose
 
+	// TODO add those settings as parameters so that different kind of agent can have different settings
 	// TODO find best parameters
 	// TODO add timeout
 
