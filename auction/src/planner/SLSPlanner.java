@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 import logist.simulation.Vehicle;
@@ -16,12 +15,16 @@ import utils.Utils;
 public class SLSPlanner extends PlannerTrait {
 
 	private GeneralPlan plansCache = null;
-	private Map<Vehicle, List<Action>> plans;
-	private Random randomGenerator = new Random();
+	private Map<Vehicle, List<Action>> plans = null;
+
+	// SLS SETTINGS:
 	private boolean randomInitial = false;
 	private int resetBound = 10;
 	private int stallBound = 10000;
 	private double p = 0.5;
+
+	// TODO find best parameters
+	// TODO add timeout
 
 	public SLSPlanner(List<Vehicle> vehicles) {
 		super(vehicles);
@@ -459,13 +462,13 @@ public class SLSPlanner extends PlannerTrait {
 	 * The returned vehicle has at least one task on its agenda
 	 */
 	private Vehicle selectRandomVehicle() {
-		Vehicle modelVehicule;
-		do {
-			int index = randomGenerator.nextInt(vehicles.size());
-			modelVehicule = vehicles.get(index);
-		} while (plans.get(modelVehicule).size() == 0);
+		Vehicle modelVehicle;
 
-		return modelVehicule;
+		do {
+			modelVehicle = Utils.getRandomElement(vehicles);
+		} while (plans.get(modelVehicle).size() == 0);
+
+		return modelVehicle;
 	}
 
 }
