@@ -36,8 +36,7 @@ public class Strategy {
 			totalReward += lastOffers[winner];
 		}
 
-		bidder.addBids(lastOffers);
-		bidder.addWinner(winner);
+		bidder.addBids(lastOffers, winner);
 	}
 
 	public GeneralPlan generatePlans() {

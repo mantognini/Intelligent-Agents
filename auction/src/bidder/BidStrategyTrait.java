@@ -27,7 +27,7 @@ public abstract class BidStrategyTrait {
 	 */
 	public abstract long bid(double marginalCost);
 
-	public void addBids(Long[] bids) {
+	public void addBids(Long[] bids, int winnerID) {
 		for (int i = 0; i < bids.length; ++i) {
 			List<Long> currenbids = bidHistory.get(i);
 			if (currenbids == null) {
@@ -36,9 +36,7 @@ public abstract class BidStrategyTrait {
 			currenbids.add(bids[i]);
 			bidHistory.put(i, currenbids);
 		}
-	}
 
-	public void addWinner(int winnerID) {
 		winners.add(winnerID);
 	}
 
