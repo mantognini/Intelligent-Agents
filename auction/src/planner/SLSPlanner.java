@@ -29,10 +29,12 @@ public class SLSPlanner extends PlannerTrait {
 
 	public SLSPlanner(List<Vehicle> vehicles) {
 		super(vehicles);
+		generateInitial();
 	}
 
-	public SLSPlanner(List<Vehicle> vehicles, Set<Task> tasks) {
+	public SLSPlanner(List<Vehicle> vehicles, Set<Task> tasks, Map<Vehicle, List<Action>> plans) {
 		super(vehicles, tasks);
+		this.plans = plans; // initial plan
 	}
 
 	@Override
@@ -43,8 +45,20 @@ public class SLSPlanner extends PlannerTrait {
 		return plansCache;
 	}
 
+	@Override
+	public PlannerTrait extendPlan(Task extraTask) {
+		Set<Task> extendedTasks = new HashSet<>(tasks);
+		extendedTasks.add(extraTask);
+
+		Vehicle biggest = Utils.getBiggestVehicle(vehicles);
+		Map<Vehicle, List<Action>> extendedInitialPlans = getCopyOfPlans();
+		extendedInitialPlans.get(biggest).add(new Action(Event.PICK, extraTask));
+		extendedInitialPlans.get(biggest).add(new Action(Event.DELIVER, extraTask));
+
+		return new SLSPlanner(vehicles, extendedTasks, extendedInitialPlans);
+	}
+
 	private void buildPlan() {
-		generateInitial(vehicles, tasks);
 		GeneralPlan current = new GeneralPlan(plans, vehicles);
 
 		if (tasks.size() == 0) {
@@ -112,7 +126,7 @@ public class SLSPlanner extends PlannerTrait {
 				++resetCount;
 
 				if (resetCount < resetBound) {
-					generateInitial(vehicles, tasks);
+					generateInitial();
 					current = new GeneralPlan(plans, vehicles);
 					localBest = current;
 				} // else: no need to do it
@@ -136,17 +150,10 @@ public class SLSPlanner extends PlannerTrait {
 		}
 	}
 
-	@Override
-	public PlannerTrait extendPlan(Task extraTask) {
-		Set<Task> extendedTasks = new HashSet<>(tasks);
-		extendedTasks.add(extraTask);
-		return new SLSPlanner(vehicles, extendedTasks);
-	}
-
 	/**
 	 * Generate the first, naive plan: all tasks are assigned to be biggest vehicle in a sequential order.
 	 */
-	private void generateInitial(List<Vehicle> vehicles, Set<Task> tasks) {
+	private void generateInitial() {
 		assert vehicles.size() > 0;
 		Vehicle biggest = Utils.getBiggestVehicle(vehicles);
 		int heaviest = Utils.getHeaviestWeight(tasks);
