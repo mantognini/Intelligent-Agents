@@ -44,6 +44,11 @@ public final class NaivePlanner extends PlannerTrait {
 		return new GeneralPlan(plans, vehicles);
 	}
 
+	@Override
+	public GeneralPlan generateFinalPlans() {
+		return generatePlans(); // Nothing fancy here
+	}
+
 	private void buildPlans() {
 		biggestVehicle = Utils.getBiggestVehicle(vehicles);
 		int heaviest = Utils.getHeaviestWeight(tasks);

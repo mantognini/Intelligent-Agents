@@ -42,7 +42,7 @@ public class Strategy {
 	public GeneralPlan generatePlans() {
 		System.out.println("Generating plan for " + name);
 
-		GeneralPlan plan = planner.generatePlans();
+		GeneralPlan plan = planner.generateFinalPlans();
 		double totalCost = plan.computeCost();
 
 		System.out.println(name + " total cost   = " + totalCost);

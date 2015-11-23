@@ -14,34 +14,69 @@ import utils.Utils;
 
 public class SLSPlanner extends PlannerTrait {
 
+	// SLS SETTINGS:
+	static class Settings {
+		public final int resetBound;
+		public final int stallBound;
+		public final double p;
+		public final int debugLevel; // the higher the more verbose
+
+		// TODO add timeout
+
+		public Settings(int resetBound, int stallBound, double p, int debugLevel) {
+			this.resetBound = resetBound;
+			this.stallBound = stallBound;
+			this.p = p;
+			this.debugLevel = debugLevel;
+		}
+	}
+
+	public static final Settings FAST_SETTIGNS = new Settings(5, 200, 0.5, 0);
+	public static final Settings NORMAL_SETTIGNS = new Settings(2, 700, 0.5, 0);
+	public static final Settings OPTIMAL_SETTINGS = new Settings(3, 2000, 0.5, 0);
+
 	private GeneralPlan plansCache = null;
 	private Map<Vehicle, List<Action>> plans = null;
+	private final Settings regularMode;
+	private final Settings optimalMode;
 
-	// SLS SETTINGS:
-	private int resetBound = 5;
-	private int stallBound = 500;
-	private double p = 0.5;
-	private int debugLevel = 0; // the higher the more verbose
-
-	// TODO add those settings as parameters so that different kind of agent can have different settings
 	// TODO find best parameters
-	// TODO add timeout
 
-	public SLSPlanner(List<Vehicle> vehicles) {
+	public SLSPlanner(List<Vehicle> vehicles, Settings regularMode, Settings optimalMode) {
 		super(vehicles);
+
+		this.regularMode = regularMode;
+		this.optimalMode = optimalMode;
+
 		generateInitial();
 	}
 
-	private SLSPlanner(List<Vehicle> vehicles, Set<Task> tasks, Map<Vehicle, List<Action>> plans) {
+	private SLSPlanner(List<Vehicle> vehicles, Set<Task> tasks, Map<Vehicle, List<Action>> plans, Settings regularMode,
+			Settings optimalMode) {
 		super(vehicles, tasks);
+
 		this.plans = plans; // initial plan
+		this.regularMode = regularMode;
+		this.optimalMode = optimalMode;
 	}
 
 	@Override
 	public GeneralPlan generatePlans() {
 		if (plansCache == null) {
-			buildPlan();
+			buildPlan(regularMode);
 		}
+		return plansCache;
+	}
+
+	@Override
+	public GeneralPlan generateFinalPlans() {
+		// Reset cache, and use special setting for optimality and rebuild plan
+		plans = null;
+		plansCache = null;
+
+		generateInitial();
+		buildPlan(optimalMode);
+
 		return plansCache;
 	}
 
@@ -55,10 +90,10 @@ public class SLSPlanner extends PlannerTrait {
 		extendedInitialPlans.get(biggest).add(new Action(Event.PICK, extraTask));
 		extendedInitialPlans.get(biggest).add(new Action(Event.DELIVER, extraTask));
 
-		return new SLSPlanner(vehicles, extendedTasks, extendedInitialPlans);
+		return new SLSPlanner(vehicles, extendedTasks, extendedInitialPlans, regularMode, optimalMode);
 	}
 
-	private void buildPlan() {
+	private void buildPlan(Settings settings) {
 		GeneralPlan current = new GeneralPlan(plans, vehicles);
 
 		if (tasks.size() == 0) {
@@ -66,7 +101,7 @@ public class SLSPlanner extends PlannerTrait {
 			return;
 		}
 
-		debugPrintln(1, "Generate Neighbours");
+		debugPrintln(settings, 1, "Generate Neighbours");
 
 		GeneralPlan globalBest = current;
 		GeneralPlan localBest = globalBest;
@@ -86,7 +121,7 @@ public class SLSPlanner extends PlannerTrait {
 
 			// A ← LocalChoice(N,f)
 			// GeneralPlan bestNeighbour = Utils.selectBest(null, neighbors);
-			if (Math.random() > p) {
+			if (Math.random() > settings.p) {
 				current = Utils.selectBest(current, neighbors);
 			} else {
 				current = Utils.getRandomElement(neighbors);
@@ -102,21 +137,21 @@ public class SLSPlanner extends PlannerTrait {
 				++stallCount;
 			} else {
 				stallCount = 0;
-				debugPrintln(3, "LOCAL best was improved at iteration " + iterationCount);
-				debugPrintln(3, "Previous cost was " + previousLocalBest.computeCost());
-				debugPrintln(3, "New      cost is  " + localBest.computeCost());
+				debugPrintln(settings, 3, "LOCAL best was improved at iteration " + iterationCount);
+				debugPrintln(settings, 3, "Previous cost was " + previousLocalBest.computeCost());
+				debugPrintln(settings, 3, "New      cost is  " + localBest.computeCost());
 			}
 
-			if (stallCount >= stallBound) {
-				debugPrintln(2, "### plans were RESET at iteration " + iterationCount + "###");
+			if (stallCount >= settings.stallBound) {
+				debugPrintln(settings, 2, "### plans were RESET at iteration " + iterationCount + "###");
 
 				// Save local best if better than global best
 				GeneralPlan previousGlobalBest = globalBest;
 				globalBest = Utils.selectBest(globalBest, localBest);
 				if (previousGlobalBest != globalBest) {
-					debugPrintln(2, "\t>>> GLOBAL best was improved at reset " + resetCount + "<<<");
-					debugPrintln(2, "\t>>> Previous cost was " + previousGlobalBest.computeCost());
-					debugPrintln(2, "\t>>> New      cost is  " + globalBest.computeCost());
+					debugPrintln(settings, 2, "\t>>> GLOBAL best was improved at reset " + resetCount + "<<<");
+					debugPrintln(settings, 2, "\t>>> Previous cost was " + previousGlobalBest.computeCost());
+					debugPrintln(settings, 2, "\t>>> New      cost is  " + globalBest.computeCost());
 					bestReset = resetCount;
 				}
 
@@ -125,27 +160,28 @@ public class SLSPlanner extends PlannerTrait {
 				iterationCount = 0;
 				++resetCount;
 
-				if (resetCount < resetBound) {
+				if (resetCount < settings.resetBound) {
 					generateInitial();
 					current = new GeneralPlan(plans, vehicles);
 					localBest = current;
 				} // else: no need to do it
 			}
 
-		} while (resetCount < resetBound /* && !hasPlanTimedOut(startTime) */);
+		} while (resetCount < settings.resetBound /* && !hasPlanTimedOut(startTime) */);
 		// TODO add timeout
 
-		debugPrintln(1, "Best plan cost is " + globalBest.computeCost() + " and was found at reset = " + bestReset);
+		debugPrintln(settings, 1, "Best plan cost is " + globalBest.computeCost() + " and was found at reset = "
+				+ bestReset);
 		if (bestReset >= resetCount - 1) {
-			debugPrintln(0, "The best plan was found during the last reset iteration!");
+			debugPrintln(settings, 0, "The best plan was found during the last reset iteration!");
 		}
 
 		plans = globalBest.getPlans();
 		plansCache = globalBest;
 	}
 
-	private void debugPrintln(int level, String msg) {
-		if (level <= debugLevel) {
+	private void debugPrintln(Settings settings, int level, String msg) {
+		if (level <= settings.debugLevel) {
 			System.err.println(msg);
 		}
 	}

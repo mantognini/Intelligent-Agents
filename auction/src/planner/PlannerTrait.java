@@ -36,6 +36,11 @@ public abstract class PlannerTrait {
 	public abstract GeneralPlan generatePlans();
 
 	/**
+	 * Similar to generatePlans but this one need to do its best to find *the* optimal plan
+	 */
+	public abstract GeneralPlan generateFinalPlans();
+
+	/**
 	 * Create a new planner with one more task
 	 */
 	public abstract PlannerTrait extendPlan(Task extraTask);
