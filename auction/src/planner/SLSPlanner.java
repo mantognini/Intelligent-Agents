@@ -45,8 +45,12 @@ public class SLSPlanner extends PlannerTrait {
 
 	private void buildPlan() {
 		generateInitial(vehicles, tasks);
-
 		GeneralPlan current = new GeneralPlan(plans, vehicles);
+
+		if (tasks.size() == 0) {
+			plansCache = current;
+			return;
+		}
 
 		debugPrintln(1, "Generate Neighbours");
 
