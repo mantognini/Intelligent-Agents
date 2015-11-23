@@ -11,7 +11,7 @@ public class GipsyAgent extends MetaAgent {
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
 		// TODO find best parameters
-		Strategy gipsy = StrategyFactory.gipsy(agent.vehicles(), 6, 10, distribution);
+		Strategy gipsy = StrategyFactory.gipsy(agent.vehicles(), distribution);
 		init(agent, gipsy);
 	}
 

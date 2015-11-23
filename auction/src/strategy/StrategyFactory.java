@@ -21,7 +21,9 @@ public class StrategyFactory {
 		return new Strategy("Simple", new SLSPlanner(vehicles), new NoFuture(), new NoGain());
 	}
 
-	public static Strategy gipsy(List<Vehicle> vehicles, int minTasks, int nbPredictions, TaskDistribution distribution) {
+	public static Strategy gipsy(List<Vehicle> vehicles, TaskDistribution distribution) {
+		int minTasks = 6;
+		int nbPredictions = 10;
 		return new Strategy("Gipsy", new SLSPlanner(vehicles), new Gipsy(minTasks, nbPredictions, distribution),
 				new NoPainMinOfBest(0.5, 5));
 	}
