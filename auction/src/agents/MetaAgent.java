@@ -26,7 +26,7 @@ public abstract class MetaAgent implements AuctionBehavior {
 
 	@Override
 	public void auctionResult(Task lastTask, int lastWinner, Long[] lastOffers) {
-		strategy.validateBid(lastWinner == agent.id(), lastOffers);
+		strategy.validateBid(lastWinner, agent.id(), lastOffers);
 	}
 
 	@Override

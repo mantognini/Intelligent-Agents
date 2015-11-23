@@ -15,6 +15,11 @@ public abstract class BidStrategyTrait {
 	public HashMap<Integer, List<Long>> bidHistory = new HashMap<>();
 
 	/**
+	 * Store the number of win
+	 */
+	public List<Integer> winners = new ArrayList<>();
+
+	/**
 	 * Given the number of tasks already owned with the corresponding current cost, and also the estimated cost if we
 	 * win the currently auctioned task, compute the desired bid value.
 	 * 
@@ -31,6 +36,10 @@ public abstract class BidStrategyTrait {
 			currenbids.add(bids[i]);
 			bidHistory.put(i, currenbids);
 		}
+	}
+
+	public void addWinnder(int winnerID) {
+		winners.add(winnerID);
 	}
 
 }

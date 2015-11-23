@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -113,6 +114,42 @@ public final class Utils {
 
 	public static GeneralPlan selectBest(GeneralPlan a, GeneralPlan b) {
 		return a.computeCost() <= b.computeCost() ? a : b;
+	}
+
+	public static Long min(List<Long> longs, int depth) {
+		Long min = Long.MAX_VALUE;
+		for (int i = longs.size() - 1; i < (longs.size() - 1 - depth); i--) {
+			min = Math.min(min, longs.get(i));
+		}
+
+		return min;
+	}
+
+	public static int bestAgent(List<Integer> winners, HashMap<Integer, List<Long>> bids, int depth) {
+		int best = 0;
+		int nbWinsBest = 0;
+
+		for (int id : bids.keySet()) {
+			int nbWins = 0;
+			for (int winner : winners) {
+				if (id == winner) {
+					nbWins++;
+				}
+			}
+
+			if (nbWins > nbWinsBest) {
+				best = id;
+				nbWinsBest = nbWins;
+			} else if (nbWins == nbWinsBest) {
+				Long minBest = min(bids.get(best), depth);
+				Long minCurrent = min(bids.get(id), depth);
+				if (minBest > minCurrent) {
+					best = id;
+				}
+			}
+		}
+
+		return best;
 	}
 
 	private Utils() {
