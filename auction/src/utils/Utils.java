@@ -118,7 +118,7 @@ public final class Utils {
 
 	public static Long min(List<Long> longs, int depth) {
 		Long min = Long.MAX_VALUE;
-		for (int i = longs.size() - 1; i < (longs.size() - 1 - depth); i--) {
+		for (int i = longs.size() - 1; i < (longs.size() - 1 - Math.min(depth, longs.size() - 1)); i--) {
 			min = Math.min(min, longs.get(i));
 		}
 
