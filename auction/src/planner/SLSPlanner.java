@@ -18,7 +18,6 @@ public class SLSPlanner extends PlannerTrait {
 	private Map<Vehicle, List<Action>> plans = null;
 
 	// SLS SETTINGS:
-	private boolean randomInitial = false;
 	private int resetBound = 3;
 	private int stallBound = 500;
 	private double p = 0.5;
@@ -39,16 +38,13 @@ public class SLSPlanner extends PlannerTrait {
 	@Override
 	public GeneralPlan generatePlans() {
 		if (plansCache == null) {
-			buildPlan(randomInitial);
+			buildPlan();
 		}
 		return plansCache;
 	}
 
-	private void buildPlan(boolean randomInitial) {
-		if (randomInitial)
-			generateRandomInitial(vehicles, tasks);
-		else
-			generateInitial(vehicles, tasks);
+	private void buildPlan() {
+		generateInitial(vehicles, tasks);
 
 		GeneralPlan current = new GeneralPlan(plans, vehicles);
 
@@ -105,16 +101,15 @@ public class SLSPlanner extends PlannerTrait {
 				}
 
 				// Reset!
-				if (randomInitial)
-					generateRandomInitial(vehicles, tasks);
-				else
-					generateInitial(vehicles, tasks);
-
-				current = new GeneralPlan(plans, vehicles);
 				stallCount = 0;
 				iterationCount = 0;
 				++resetCount;
-				localBest = current;
+
+				if (resetCount < resetBound) {
+					generateInitial(vehicles, tasks);
+					current = new GeneralPlan(plans, vehicles);
+					localBest = current;
+				} // else: no need to do it
 			}
 
 		} while (resetCount < resetBound /* && !hasPlanTimedOut(startTime) */);
@@ -169,39 +164,6 @@ public class SLSPlanner extends PlannerTrait {
 				plans.put(v, planForBiggest);
 			else
 				plans.put(v, new LinkedList<>());
-		}
-
-	}
-
-	/**
-	 * Randomly assign the task to different vehicles.
-	 */
-	private void generateRandomInitial(List<Vehicle> vehicles, Set<Task> tasks) {
-		assert vehicles.size() > 0;
-		Vehicle biggest = Utils.getBiggestVehicle(vehicles);
-		int heaviest = Utils.getHeaviestWeight(tasks);
-
-		if (biggest.capacity() < heaviest)
-			throw new RuntimeException("Impossible to plan: vehicles are not big enough");
-
-		// Build vehicles' actions lists
-		plans = new HashMap<>(vehicles.size());
-		for (Vehicle v : vehicles) {
-			plans.put(v, new LinkedList<>());
-		}
-
-		// Affect each task to a random vehicle
-		for (Task task : tasks) {
-			Vehicle vehicle;
-			do {
-				vehicle = Utils.getRandomElement(vehicles);
-			} while (vehicle.capacity() < task.weight);
-
-			// move & pickup
-			plans.get(vehicle).add(new Action(Event.PICK, task));
-
-			// move & deliver
-			plans.get(vehicle).add(new Action(Event.DELIVER, task));
 		}
 
 	}
