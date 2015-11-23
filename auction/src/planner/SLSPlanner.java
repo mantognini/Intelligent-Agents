@@ -22,6 +22,7 @@ public class SLSPlanner extends PlannerTrait {
 	private int resetBound = 10;
 	private int stallBound = 10000;
 	private double p = 0.5;
+	private int debugLevel = 1; // the higher the more verbose
 
 	// TODO find best parameters
 	// TODO add timeout
@@ -32,7 +33,6 @@ public class SLSPlanner extends PlannerTrait {
 
 	public SLSPlanner(List<Vehicle> vehicles, Set<Task> tasks) {
 		super(vehicles, tasks);
-
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class SLSPlanner extends PlannerTrait {
 
 		GeneralPlan current = new GeneralPlan(plans, vehicles);
 
-		System.out.println("Generate Neighbours");
+		debugPrintln(1, "Generate Neighbours");
 
 		GeneralPlan globalBest = current;
 		GeneralPlan localBest = globalBest;
@@ -86,21 +86,21 @@ public class SLSPlanner extends PlannerTrait {
 				++stallCount;
 			} else {
 				stallCount = 0;
-				System.out.println("LOCAL best was improved at iteration " + iterationCount);
-				System.out.println("Previous cost was " + previousLocalBest.computeCost());
-				System.out.println("New      cost is  " + localBest.computeCost());
+				debugPrintln(3, "LOCAL best was improved at iteration " + iterationCount);
+				debugPrintln(3, "Previous cost was " + previousLocalBest.computeCost());
+				debugPrintln(3, "New      cost is  " + localBest.computeCost());
 			}
 
 			if (stallCount >= stallBound) {
-				System.out.println("### plans were RESET at iteration " + iterationCount + "###");
+				debugPrintln(2, "### plans were RESET at iteration " + iterationCount + "###");
 
 				// Save local best if better than global best
 				GeneralPlan previousGlobalBest = globalBest;
 				globalBest = Utils.selectBest(globalBest, localBest);
 				if (previousGlobalBest != globalBest) {
-					System.out.println("\t>>> GLOBAL best was improved at reset " + resetCount + "<<<");
-					System.out.println("\t>>> Previous cost was " + previousGlobalBest.computeCost());
-					System.out.println("\t>>> New      cost is  " + globalBest.computeCost());
+					debugPrintln(2, "\t>>> GLOBAL best was improved at reset " + resetCount + "<<<");
+					debugPrintln(2, "\t>>> Previous cost was " + previousGlobalBest.computeCost());
+					debugPrintln(2, "\t>>> New      cost is  " + globalBest.computeCost());
 				}
 
 				// Reset!
@@ -121,8 +121,16 @@ public class SLSPlanner extends PlannerTrait {
 
 		globalBest = Utils.selectBest(globalBest, localBest);
 
+		debugPrintln(1, "Best plan cost is " + globalBest.computeCost());
+
 		plans = globalBest.getPlans();
 		plansCache = globalBest;
+	}
+
+	private void debugPrintln(int level, String msg) {
+		if (level <= debugLevel) {
+			System.err.println(msg);
+		}
 	}
 
 	@Override
