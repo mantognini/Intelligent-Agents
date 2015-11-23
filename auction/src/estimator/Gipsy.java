@@ -19,11 +19,14 @@ public class Gipsy extends NoFuture {
 
 	@Override
 	public double computeMC(PlannerTrait planner, Task task) {
-		if (planner.tasks.size() >= minTasks)
-			return super.computeMC(planner, task); // use NoFuture
+		double normalMC = super.computeMC(planner, task); // use NoFuture
+
+		if (planner.tasks.size() >= minTasks || normalMC == 0)
+			return normalMC;
 
 		// Compute a few estimation
 		double worsePrediction = Double.NEGATIVE_INFINITY;
+		double bestPrediction = Double.POSITIVE_INFINITY;
 		double sum = 0;
 		for (int i = 0; i < nbPredictions; ++i) {
 			PlannerTrait vision = planner;
@@ -35,16 +38,21 @@ public class Gipsy extends NoFuture {
 
 			double prediction = super.computeMC(vision, task);
 			worsePrediction = Math.max(worsePrediction, prediction);
+			bestPrediction = Math.min(bestPrediction, prediction);
 
 			sum += prediction;
 		}
 
 		// TODO remove me after plotting data
 		double avg = sum / nbPredictions;
-		System.out.println("Gipsy " + planner.tasks.size() + " " + minTasks + " " + nbPredictions + " " + avg);
+		System.out.println("Gipsy " + planner.tasks.size() + " " + minTasks + " " + nbPredictions);
+		System.out.println("Gipsy WORSE  " + worsePrediction);
+		System.out.println("Gipsy BEST   " + bestPrediction);
+		System.out.println("Gipsy AVG    " + avg);
+		System.out.println("Gipsy NORMAL " + normalMC);
 		// import output in Excel
 
-		return worsePrediction;
+		return Math.min(worsePrediction, normalMC);
 	}
 
 	/**
