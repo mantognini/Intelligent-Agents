@@ -11,7 +11,7 @@ public class NaiveAgent extends MetaAgent {
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
 		Strategy naive = StrategyFactory.naive(agent.vehicles());
-		init("Naive", agent, naive);
+		init(agent, naive);
 	}
 
 }

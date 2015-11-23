@@ -13,11 +13,16 @@ import estimator.NoFuture;
 public class StrategyFactory {
 
 	public static Strategy naive(List<Vehicle> vehicles) {
-		return new Strategy(new NaivePlanner(vehicles), new NoFuture(), new NoGain());
+		return new Strategy("Naive", new NaivePlanner(vehicles), new NoFuture(), new NoGain());
+	}
+
+	public static Strategy simple(List<Vehicle> vehicles) {
+		return new Strategy("Simple", new SLSPlanner(vehicles), new NoFuture(), new NoGain());
 	}
 
 	public static Strategy gipsy(List<Vehicle> vehicles, int minTasks, int nbPredictions, TaskDistribution distribution) {
-		return new Strategy(new SLSPlanner(vehicles), new Gipsy(minTasks, nbPredictions, distribution), new NoGain());
+		return new Strategy("Gipsy", new SLSPlanner(vehicles), new Gipsy(minTasks, nbPredictions, distribution),
+				new NoGain());
 	}
 
 	private StrategyFactory() {
