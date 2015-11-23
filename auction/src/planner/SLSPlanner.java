@@ -32,7 +32,7 @@ public class SLSPlanner extends PlannerTrait {
 		generateInitial();
 	}
 
-	public SLSPlanner(List<Vehicle> vehicles, Set<Task> tasks, Map<Vehicle, List<Action>> plans) {
+	private SLSPlanner(List<Vehicle> vehicles, Set<Task> tasks, Map<Vehicle, List<Action>> plans) {
 		super(vehicles, tasks);
 		this.plans = plans; // initial plan
 	}
