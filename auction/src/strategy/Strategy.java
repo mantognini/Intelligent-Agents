@@ -37,7 +37,7 @@ public class Strategy {
 		}
 
 		bidder.addBids(lastOffers);
-		bidder.addWinnder(winner);
+		bidder.addWinner(winner);
 	}
 
 	public GeneralPlan generatePlans() {
