@@ -24,6 +24,7 @@ public class NaiveEstimator extends CostEstimatorTrait {
 
 	@Override
 	public double computeMC(PlannerTrait planner, Task task) {
+		// FIXME this doesn't take into account the task in the planner!!
 		Utils.ensure(vehicle.capacity() >= task.weight, "Task too heavy for the current vehicle");
 		long distanceTask = task.pickupCity.distanceUnitsTo(task.deliveryCity);
 		long distanceSum = distanceTask + currentCity.distanceUnitsTo(task.pickupCity);
