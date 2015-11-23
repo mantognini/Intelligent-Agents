@@ -49,7 +49,9 @@ public class Strategy {
 		System.out.println(name + " total reward = " + totalReward);
 
 		if (totalCost > totalReward) {
-			System.err.println(name + " LOST MONEY!!!");
+			System.err.println("\t" + name + " LOST MONEY!!! [" + (totalReward - totalCost) + "]");
+		} else {
+			System.out.println("\t" + name + " PROFIT is " + (totalReward - totalCost));
 		}
 
 		return plan;
