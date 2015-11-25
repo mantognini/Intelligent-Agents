@@ -21,12 +21,13 @@ public class StrategyFactory {
 	}
 
 	public static Strategy gipsy(Agent agent, TaskDistribution distribution) {
-		int minTasks = 10;
+		int minTasks = 4;
 		int nbPredictions = 10;
+		double riskTolerance = 0.8;
 
 		return new Strategy("Gipsy", new SLSPlanner(agent.vehicles(), SLSPlanner.FAST_SETTIGNS,
-				SLSPlanner.OPTIMAL_SETTINGS), new Gipsy(minTasks, nbPredictions, distribution), new NoPain(agent.id(),
-				5));
+				SLSPlanner.OPTIMAL_SETTINGS), new Gipsy(minTasks, nbPredictions, riskTolerance, distribution),
+				new NoPain(agent.id(), 5));
 
 	}
 

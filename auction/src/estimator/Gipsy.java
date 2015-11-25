@@ -1,5 +1,6 @@
 package estimator;
 
+import static utils.Utils.ensure;
 import logist.task.DefaultTaskDistribution;
 import logist.task.Task;
 import logist.task.TaskDistribution;
@@ -9,12 +10,18 @@ public class Gipsy extends NoFuture {
 
 	private final int minTasks;
 	private final int nbPredictions;
+	private final double riskTolerance;
 	private final DefaultTaskDistribution distribution;
 
-	public Gipsy(int minTasks, int nbPredictions, TaskDistribution distribution) {
+	public Gipsy(int minTasks, int nbPredictions, double riskTolerance, TaskDistribution distribution) {
 		this.minTasks = minTasks;
 		this.nbPredictions = nbPredictions;
+		this.riskTolerance = riskTolerance;
 		this.distribution = (DefaultTaskDistribution) distribution;
+
+		ensure(minTasks >= 0, "invalid minimun number of tasks");
+		ensure(nbPredictions >= 1, "invalid number of predications");
+		ensure(riskTolerance >= 0 && riskTolerance <= 1, "invalid risk tolerance");
 	}
 
 	@Override
@@ -43,16 +50,19 @@ public class Gipsy extends NoFuture {
 			sum += prediction;
 		}
 
-		// TODO remove me after plotting data
+		double prediction = Math.min(worsePrediction, normalMC);
+		prediction = normalMC - (normalMC - prediction) * riskTolerance;
+
+		// TODO remove me one day
 		double avg = sum / nbPredictions;
 		System.out.println("Gipsy " + planner.tasks.size() + " " + minTasks + " " + nbPredictions);
 		System.out.println("Gipsy WORSE  " + worsePrediction);
 		System.out.println("Gipsy BEST   " + bestPrediction);
 		System.out.println("Gipsy AVG    " + avg);
 		System.out.println("Gipsy NORMAL " + normalMC);
-		// import output in Excel
+		System.out.println("Gipsy PRED   " + prediction);
 
-		return Math.min(worsePrediction, normalMC);
+		return prediction;
 	}
 
 	/**
