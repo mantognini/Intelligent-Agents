@@ -14,6 +14,7 @@ public class Strategy {
 	private Task currentTask;
 	private int bidCount = 0;
 	private Long totalReward = 0l;
+	private int winCount = 0;
 
 	public final String name;
 
@@ -25,20 +26,24 @@ public class Strategy {
 	}
 
 	public Long bid(Task task) {
-		++bidCount;
 		currentTask = task;
 		Long bid = bidder.bid(estimator.computeMC(planner, currentTask));
-		System.out.println(name + " " + bidCount + " " + bid);
 		return bid;
 	}
 
 	public void validateBid(int winner, Long[] lastOffers) {
-		if (winner == bidder.agentID) {
+		final boolean won = winner == bidder.agentID;
+		if (won) {
 			planner = planner.extendPlan(currentTask);
 			totalReward += lastOffers[winner];
+			++winCount;
 		}
+		++bidCount;
 
 		bidder.addBids(lastOffers, winner);
+
+		System.out.print(name + " bid " + lastOffers[bidder.agentID] + " for n° " + bidCount + " and ");
+		System.out.println((won ? "won" : "lost") + " [total = " + winCount + "]");
 	}
 
 	public GeneralPlan generatePlans() {

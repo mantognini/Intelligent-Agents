@@ -30,6 +30,7 @@ public abstract class MetaAgent implements AuctionBehavior {
 
 	@Override
 	public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
+		System.out.println(strategy.name + " got " + tasks.size() + " tasks");
 		return strategy.generatePlans().convertToLogistPlans(tasks);
 	}
 
