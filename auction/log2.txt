@@ -1,0 +1,2391 @@
+08:02:40.405 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Gipsy-Naive.xml -a tournament/test/agents.xml config/auction2.xml Gipsy Naive
+08:02:40.613 CONFIG | Reading config/auction2.xml
+08:02:40.676 CONFIG | Reading config/settings_auction.xml
+08:02:41.033 CONFIG | Reading config/topology/the_netherlands.xml
+08:02:41.058 CONFIG | Reading tournament/test/agents.xml
+08:02:41.099 CONFIG | Gipsy agent has vehicles Vehicle 1 Vehicle 2 
+08:02:41.104 CONFIG | Naive agent has vehicles Vehicle 3 Vehicle 4 
+08:02:41.141 CONFIG | Gipsy is bidding...
+08:02:43.997 WARNING | The best plan was found during the last reset iteration!
+08:02:44.176 WARNING | The best plan was found during the last reset iteration!
+08:02:44.598 CONFIG | Gipsy 0 10 10
+08:02:44.598 CONFIG | Gipsy WORSE  1084.5
+08:02:44.598 CONFIG | Gipsy BEST   0.0
+08:02:44.598 CONFIG | Gipsy AVG    425.2
+08:02:44.598 CONFIG | Gipsy NORMAL 895.0
+08:02:44.598 CONFIG | Gipsy PRED   895.0
+08:02:44.598 CONFIG | Gipsy has bid 895
+08:02:44.598 CONFIG | Naive is bidding...
+08:02:44.600 CONFIG | Naive has bid 954
+08:02:44.601 CONFIG | Gipsy bid 895 for n° 1 and won [total = 1]
+08:02:44.601 CONFIG | Gipsy is bidding...
+08:02:45.745 WARNING | The best plan was found during the last reset iteration!
+08:02:48.105 CONFIG | Gipsy 1 10 10
+08:02:48.106 CONFIG | Gipsy WORSE  712.5
+08:02:48.106 CONFIG | Gipsy BEST   0.0
+08:02:48.106 CONFIG | Gipsy AVG    277.05
+08:02:48.106 CONFIG | Gipsy NORMAL 1041.5
+08:02:48.106 CONFIG | Gipsy PRED   811.2
+08:02:48.106 CONFIG | 	Marginal Cost : 811.2
+08:02:48.106 CONFIG | 	minBid : 954
+08:02:48.106 CONFIG | 	final bid : 882.6
+08:02:48.106 CONFIG | Gipsy has bid 883
+08:02:48.106 CONFIG | Naive bid 954 for n° 1 and lost [total = 0]
+08:02:48.106 CONFIG | Naive is bidding...
+08:02:48.106 CONFIG | Naive has bid 1286
+08:02:48.107 CONFIG | Gipsy bid 883 for n° 2 and won [total = 2]
+08:02:48.107 CONFIG | Gipsy is bidding...
+08:02:48.845 WARNING | The best plan was found during the last reset iteration!
+08:02:49.022 WARNING | The best plan was found during the last reset iteration!
+08:02:49.529 WARNING | The best plan was found during the last reset iteration!
+08:02:49.905 WARNING | The best plan was found during the last reset iteration!
+08:02:51.515 WARNING | The best plan was found during the last reset iteration!
+08:02:51.770 CONFIG | Gipsy 2 10 10
+08:02:51.770 CONFIG | Gipsy WORSE  889.5
+08:02:51.770 CONFIG | Gipsy BEST   0.0
+08:02:51.770 CONFIG | Gipsy AVG    371.25
+08:02:51.770 CONFIG | Gipsy NORMAL 842.5
+08:02:51.770 CONFIG | Gipsy PRED   842.5
+08:02:51.770 CONFIG | 	Marginal Cost : 842.5
+08:02:51.770 CONFIG | 	minBid : 954
+08:02:51.771 CONFIG | 	final bid : 898.25
+08:02:51.771 CONFIG | Gipsy has bid 899
+08:02:51.771 CONFIG | Naive bid 1286 for n° 2 and lost [total = 0]
+08:02:51.771 CONFIG | Naive is bidding...
+08:02:51.771 CONFIG | Naive has bid 1570
+08:02:51.771 CONFIG | Gipsy bid 899 for n° 3 and won [total = 3]
+08:02:51.771 CONFIG | Gipsy is bidding...
+08:02:51.799 CONFIG | 	Marginal Cost : 0.0
+08:02:51.799 CONFIG | 	minBid : 954
+08:02:51.799 CONFIG | 	final bid : 477.0
+08:02:51.799 CONFIG | Gipsy has bid 477
+08:02:51.799 CONFIG | Naive bid 1570 for n° 3 and lost [total = 0]
+08:02:51.799 CONFIG | Naive is bidding...
+08:02:51.799 CONFIG | Naive has bid 1548
+08:02:51.800 CONFIG | Gipsy bid 477 for n° 4 and won [total = 4]
+08:02:51.800 CONFIG | Gipsy is bidding...
+08:02:54.740 WARNING | The best plan was found during the last reset iteration!
+08:02:55.214 CONFIG | Gipsy 4 10 10
+08:02:55.215 CONFIG | Gipsy WORSE  435.5
+08:02:55.215 CONFIG | Gipsy BEST   5.0
+08:02:55.215 CONFIG | Gipsy AVG    239.55
+08:02:55.215 CONFIG | Gipsy NORMAL 285.0
+08:02:55.215 CONFIG | Gipsy PRED   285.0
+08:02:55.215 CONFIG | 	Marginal Cost : 285.0
+08:02:55.215 CONFIG | 	minBid : 954
+08:02:55.215 CONFIG | 	final bid : 619.5
+08:02:55.215 CONFIG | Gipsy has bid 620
+08:02:55.215 CONFIG | Naive bid 1548 for n° 4 and lost [total = 0]
+08:02:55.215 CONFIG | Naive is bidding...
+08:02:55.215 CONFIG | Naive has bid 753
+08:02:55.215 CONFIG | Gipsy bid 620 for n° 5 and won [total = 5]
+08:02:55.215 CONFIG | Gipsy is bidding...
+08:02:55.722 WARNING | The best plan was found during the last reset iteration!
+08:02:57.953 WARNING | The best plan was found during the last reset iteration!
+08:02:58.486 CONFIG | Gipsy 5 10 10
+08:02:58.486 WARNING | The best plan was found during the last reset iteration!
+08:02:58.487 CONFIG | Gipsy WORSE  1484.0
+08:02:58.487 CONFIG | Gipsy BEST   24.5
+08:02:58.487 CONFIG | Gipsy AVG    782.75
+08:02:58.487 CONFIG | Gipsy NORMAL 584.0
+08:02:58.487 CONFIG | Gipsy PRED   584.0
+08:02:58.487 CONFIG | 	Marginal Cost : 584.0
+08:02:58.487 CONFIG | 	minBid : 753
+08:02:58.488 CONFIG | 	final bid : 668.5
+08:02:58.488 CONFIG | Gipsy has bid 669
+08:02:58.488 CONFIG | Naive bid 753 for n° 5 and lost [total = 0]
+08:02:58.488 CONFIG | Naive is bidding...
+08:02:58.488 CONFIG | Naive has bid 1785
+08:02:58.488 CONFIG | Gipsy bid 669 for n° 6 and won [total = 6]
+08:02:58.488 CONFIG | Gipsy is bidding...
+08:02:58.582 CONFIG | 	Marginal Cost : 0.0
+08:02:58.582 CONFIG | 	minBid : 753
+08:02:58.582 CONFIG | 	final bid : 376.5
+08:02:58.582 CONFIG | Gipsy has bid 377
+08:02:58.582 CONFIG | Naive bid 1785 for n° 6 and lost [total = 0]
+08:02:58.582 CONFIG | Naive is bidding...
+08:02:58.582 CONFIG | Naive has bid 800
+08:02:58.583 CONFIG | Gipsy bid 377 for n° 7 and won [total = 7]
+08:02:58.583 CONFIG | Gipsy is bidding...
+08:02:59.385 WARNING | The best plan was found during the last reset iteration!
+08:03:00.764 WARNING | The best plan was found during the last reset iteration!
+08:03:01.957 CONFIG | Gipsy 7 10 10
+08:03:01.957 CONFIG | Gipsy WORSE  1200.5
+08:03:01.957 CONFIG | Gipsy BEST   120.5
+08:03:01.957 CONFIG | Gipsy AVG    534.65
+08:03:01.957 CONFIG | Gipsy NORMAL 373.5
+08:03:01.957 CONFIG | Gipsy PRED   373.5
+08:03:01.957 CONFIG | 	Marginal Cost : 373.5
+08:03:01.957 CONFIG | 	minBid : 753
+08:03:01.957 CONFIG | 	final bid : 563.25
+08:03:01.957 CONFIG | Gipsy has bid 564
+08:03:01.957 CONFIG | Naive bid 800 for n° 7 and lost [total = 0]
+08:03:01.957 CONFIG | Naive is bidding...
+08:03:01.957 CONFIG | Naive has bid 885
+08:03:01.958 CONFIG | Gipsy bid 564 for n° 8 and won [total = 8]
+08:03:01.958 CONFIG | Gipsy is bidding...
+08:03:02.027 WARNING | The best plan was found during the last reset iteration!
+08:03:02.232 WARNING | The best plan was found during the last reset iteration!
+08:03:03.342 WARNING | The best plan was found during the last reset iteration!
+08:03:05.017 CONFIG | Gipsy 8 10 10
+08:03:05.017 CONFIG | Gipsy WORSE  465.5
+08:03:05.017 CONFIG | Gipsy BEST   0.0
+08:03:05.017 CONFIG | Gipsy AVG    255.45
+08:03:05.017 CONFIG | Gipsy NORMAL 396.0
+08:03:05.017 CONFIG | Gipsy PRED   396.0
+08:03:05.017 CONFIG | 	Marginal Cost : 396.0
+08:03:05.018 CONFIG | 	minBid : 753
+08:03:05.018 CONFIG | 	final bid : 574.5
+08:03:05.018 CONFIG | Gipsy has bid 575
+08:03:05.018 CONFIG | Naive bid 885 for n° 8 and lost [total = 0]
+08:03:05.018 CONFIG | Naive is bidding...
+08:03:05.018 CONFIG | Naive has bid 1266
+08:03:05.018 CONFIG | Gipsy bid 575 for n° 9 and won [total = 9]
+08:03:05.018 CONFIG | Gipsy is bidding...
+08:03:05.562 WARNING | The best plan was found during the last reset iteration!
+08:03:07.073 WARNING | The best plan was found during the last reset iteration!
+08:03:07.202 WARNING | The best plan was found during the last reset iteration!
+08:03:07.965 CONFIG | Gipsy 9 10 10
+08:03:07.965 WARNING | The best plan was found during the last reset iteration!
+08:03:07.966 CONFIG | Gipsy WORSE  1404.0
+08:03:07.968 CONFIG | Gipsy BEST   109.0
+08:03:07.969 CONFIG | Gipsy AVG    464.6
+08:03:07.969 CONFIG | Gipsy NORMAL 673.5
+08:03:07.969 CONFIG | Gipsy PRED   673.5
+08:03:07.969 CONFIG | 	Marginal Cost : 673.5
+08:03:07.969 CONFIG | 	minBid : 753
+08:03:07.969 CONFIG | 	final bid : 713.25
+08:03:07.969 CONFIG | Gipsy has bid 714
+08:03:07.969 CONFIG | Naive bid 1266 for n° 9 and lost [total = 0]
+08:03:07.969 CONFIG | Naive is bidding...
+08:03:07.969 CONFIG | Naive has bid 1707
+08:03:07.969 CONFIG | Gipsy bid 714 for n° 10 and won [total = 10]
+08:03:07.969 CONFIG | Gipsy is bidding...
+08:03:08.278 WARNING | The best plan was found during the last reset iteration!
+08:03:08.278 CONFIG | 	Marginal Cost : 581.5
+08:03:08.279 CONFIG | 	minBid : 753
+08:03:08.279 CONFIG | 	final bid : 667.25
+08:03:08.279 CONFIG | Gipsy has bid 668
+08:03:08.279 CONFIG | Naive bid 1707 for n° 10 and lost [total = 0]
+08:03:08.279 CONFIG | Naive is bidding...
+08:03:08.279 CONFIG | Naive has bid 1484
+08:03:08.279 CONFIG | Gipsy bid 668 for n° 11 and won [total = 11]
+08:03:08.279 CONFIG | Gipsy is bidding...
+08:03:08.626 CONFIG | 	Marginal Cost : 304.0
+08:03:08.626 CONFIG | 	minBid : 800
+08:03:08.626 CONFIG | 	final bid : 552.0
+08:03:08.626 CONFIG | Gipsy has bid 552
+08:03:08.627 CONFIG | Naive bid 1484 for n° 11 and lost [total = 0]
+08:03:08.627 CONFIG | Naive is bidding...
+08:03:08.627 CONFIG | Naive has bid 1027
+08:03:08.627 CONFIG | Gipsy bid 552 for n° 12 and won [total = 12]
+08:03:08.627 CONFIG | Gipsy is bidding...
+08:03:08.831 WARNING | The best plan was found during the last reset iteration!
+08:03:09.078 CONFIG | 	Marginal Cost : 104.5
+08:03:09.078 CONFIG | 	minBid : 800
+08:03:09.078 CONFIG | 	final bid : 452.25
+08:03:09.078 CONFIG | Gipsy has bid 453
+08:03:09.078 CONFIG | Naive bid 1027 for n° 12 and lost [total = 0]
+08:03:09.078 CONFIG | Naive is bidding...
+08:03:09.078 CONFIG | Naive has bid 736
+08:03:09.078 CONFIG | Gipsy bid 453 for n° 13 and won [total = 13]
+08:03:09.078 CONFIG | Gipsy is bidding...
+08:03:09.469 CONFIG | 	Marginal Cost : 484.5
+08:03:09.470 CONFIG | 	minBid : 736
+08:03:09.470 CONFIG | 	final bid : 610.25
+08:03:09.470 CONFIG | Gipsy has bid 611
+08:03:09.470 CONFIG | Naive bid 736 for n° 13 and lost [total = 0]
+08:03:09.470 CONFIG | Naive is bidding...
+08:03:09.470 CONFIG | Naive has bid 803
+08:03:09.470 CONFIG | Gipsy bid 611 for n° 14 and won [total = 14]
+08:03:09.470 CONFIG | Gipsy is bidding...
+08:03:10.097 CONFIG | 	Marginal Cost : 398.5
+08:03:10.097 CONFIG | 	minBid : 736
+08:03:10.097 CONFIG | 	final bid : 567.25
+08:03:10.097 CONFIG | Gipsy has bid 568
+08:03:10.097 CONFIG | Naive bid 803 for n° 14 and lost [total = 0]
+08:03:10.097 CONFIG | Naive is bidding...
+08:03:10.097 CONFIG | Naive has bid 1324
+08:03:18.351 CONFIG | Gipsy bid 568 for n° 15 and won [total = 15]
+08:03:18.351 CONFIG | Gipsy got 15 tasks
+08:03:18.351 CONFIG | Generating plan for Gipsy
+08:03:21.373 CONFIG | Gipsy total cost   = 5612.0
+08:03:21.373 CONFIG | Gipsy total reward = 9525
+08:03:21.373 CONFIG | 	Gipsy PROFIT is 3913.0
+08:03:21.378 CONFIG | Naive bid 1324 for n° 15 and lost [total = 0]
+08:03:21.378 CONFIG | Naive got 0 tasks
+08:03:21.378 CONFIG | Generating plan for Naive
+08:03:21.378 CONFIG | Naive total cost   = 0.0
+08:03:21.378 CONFIG | Naive total reward = 0
+08:03:21.378 CONFIG | 	Naive PROFIT is 0.0
+08:03:34.611 CONFIG | Wrote tournament/test/auction2-Gipsy-Naive.xml
+08:03:34.903 INFO | LogistPlatform finished successfully!
+08:03:34.904 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Gipsy-SafeGambler.xml -a tournament/test/agents.xml config/auction2.xml Gipsy SafeGambler
+08:03:35.041 CONFIG | Reading config/auction2.xml
+08:03:35.114 CONFIG | Reading config/settings_auction.xml
+08:03:35.421 CONFIG | Reading config/topology/the_netherlands.xml
+08:03:35.438 CONFIG | Reading tournament/test/agents.xml
+08:03:35.468 CONFIG | Gipsy agent has vehicles Vehicle 1 Vehicle 2 
+08:03:35.475 CONFIG | Safe Gambler agent has vehicles Vehicle 3 Vehicle 4 
+08:03:35.490 CONFIG | Gipsy is bidding...
+08:03:39.263 WARNING | The best plan was found during the last reset iteration!
+08:03:39.438 WARNING | The best plan was found during the last reset iteration!
+08:03:39.883 CONFIG | Gipsy 0 10 10
+08:03:39.883 CONFIG | Gipsy WORSE  868.5
+08:03:39.884 CONFIG | Gipsy BEST   80.0
+08:03:39.884 CONFIG | Gipsy AVG    374.3
+08:03:39.884 CONFIG | Gipsy NORMAL 895.0
+08:03:39.884 CONFIG | Gipsy PRED   876.45
+08:03:39.884 CONFIG | Gipsy has bid 877
+08:03:39.884 CONFIG | Safe Gambler is bidding...
+08:03:39.900 CONFIG | Safe Gambler has bid 954
+08:03:39.900 CONFIG | Gipsy bid 877 for n° 1 and won [total = 1]
+08:03:39.900 CONFIG | Gipsy is bidding...
+08:03:40.140 WARNING | The best plan was found during the last reset iteration!
+08:03:41.840 WARNING | The best plan was found during the last reset iteration!
+08:03:42.488 WARNING | The best plan was found during the last reset iteration!
+08:03:42.639 WARNING | The best plan was found during the last reset iteration!
+08:03:44.006 CONFIG | Gipsy 1 10 10
+08:03:44.006 CONFIG | Gipsy WORSE  856.5
+08:03:44.006 CONFIG | Gipsy BEST   0.0
+08:03:44.006 CONFIG | Gipsy AVG    368.2
+08:03:44.006 CONFIG | Gipsy NORMAL 1041.5
+08:03:44.006 CONFIG | Gipsy PRED   912.0
+08:03:44.006 CONFIG | 	Marginal Cost : 912.0
+08:03:44.006 CONFIG | 	minBid : 954
+08:03:44.006 CONFIG | 	final bid : 933.0
+08:03:44.006 CONFIG | Gipsy has bid 933
+08:03:44.007 CONFIG | Safe Gambler bid 954 for n° 1 and lost [total = 0]
+08:03:44.007 CONFIG | Safe Gambler is bidding...
+08:03:44.014 CONFIG | 	Marginal Cost : 1255.5
+08:03:44.014 CONFIG | 	minBid : 877
+08:03:44.014 CONFIG | 	final bid : 1255.5
+08:03:44.014 CONFIG | Safe Gambler has bid 1256
+08:03:44.014 CONFIG | Gipsy bid 933 for n° 2 and won [total = 2]
+08:03:44.014 CONFIG | Gipsy is bidding...
+08:03:46.335 WARNING | The best plan was found during the last reset iteration!
+08:03:47.215 WARNING | The best plan was found during the last reset iteration!
+08:03:47.840 CONFIG | Gipsy 2 10 10
+08:03:47.841 CONFIG | Gipsy WORSE  766.0
+08:03:47.841 CONFIG | Gipsy BEST   21.0
+08:03:47.841 CONFIG | Gipsy AVG    346.65
+08:03:47.841 CONFIG | Gipsy NORMAL 842.5
+08:03:47.841 CONFIG | Gipsy PRED   788.95
+08:03:47.841 CONFIG | 	Marginal Cost : 788.95
+08:03:47.841 CONFIG | 	minBid : 954
+08:03:47.841 CONFIG | 	final bid : 871.475
+08:03:47.841 CONFIG | Gipsy has bid 872
+08:03:47.841 CONFIG | Safe Gambler bid 1256 for n° 2 and lost [total = 0]
+08:03:47.841 CONFIG | Safe Gambler is bidding...
+08:03:47.848 CONFIG | 	Marginal Cost : 773.5
+08:03:47.848 CONFIG | 	minBid : 877
+08:03:47.848 CONFIG | 	final bid : 825.25
+08:03:47.848 CONFIG | Safe Gambler has bid 826
+08:03:47.848 CONFIG | Gipsy bid 872 for n° 3 and lost [total = 2]
+08:03:47.848 CONFIG | Gipsy is bidding...
+08:03:49.845 WARNING | The best plan was found during the last reset iteration!
+08:03:50.835 WARNING | The best plan was found during the last reset iteration!
+08:03:51.780 CONFIG | Gipsy 2 10 10
+08:03:51.780 CONFIG | Gipsy WORSE  601.5
+08:03:51.780 CONFIG | Gipsy BEST   0.0
+08:03:51.780 CONFIG | Gipsy AVG    228.4
+08:03:51.780 CONFIG | Gipsy NORMAL 113.5
+08:03:51.780 CONFIG | Gipsy PRED   113.5
+08:03:51.780 CONFIG | 	Marginal Cost : 113.5
+08:03:51.780 CONFIG | 	minBid : 826
+08:03:51.780 CONFIG | 	final bid : 469.75
+08:03:51.780 CONFIG | Gipsy has bid 470
+08:03:51.780 CONFIG | Safe Gambler bid 826 for n° 3 and won [total = 1]
+08:03:51.780 CONFIG | Safe Gambler is bidding...
+08:03:51.798 CONFIG | 	Marginal Cost : 1255.5
+08:03:51.798 CONFIG | 	minBid : 872
+08:03:51.798 CONFIG | 	final bid : 1255.5
+08:03:51.798 CONFIG | Safe Gambler has bid 1256
+08:03:51.799 CONFIG | Gipsy bid 470 for n° 4 and won [total = 3]
+08:03:51.799 CONFIG | Gipsy is bidding...
+08:03:52.799 WARNING | The best plan was found during the last reset iteration!
+08:03:53.540 WARNING | The best plan was found during the last reset iteration!
+08:03:54.452 WARNING | The best plan was found during the last reset iteration!
+08:03:55.425 WARNING | The best plan was found during the last reset iteration!
+08:03:55.764 WARNING | The best plan was found during the last reset iteration!
+08:03:55.987 CONFIG | Gipsy 3 10 10
+08:03:55.988 CONFIG | Gipsy WORSE  838.0
+08:03:55.988 CONFIG | Gipsy BEST   75.0
+08:03:55.988 CONFIG | Gipsy AVG    360.45
+08:03:55.988 CONFIG | Gipsy NORMAL 438.0
+08:03:55.988 CONFIG | Gipsy PRED   438.0
+08:03:55.988 CONFIG | 	Marginal Cost : 438.0
+08:03:55.988 CONFIG | 	minBid : 826
+08:03:55.988 CONFIG | 	final bid : 632.0
+08:03:55.988 CONFIG | Gipsy has bid 632
+08:03:55.988 CONFIG | Safe Gambler bid 1256 for n° 4 and lost [total = 1]
+08:03:55.988 CONFIG | Safe Gambler is bidding...
+08:03:56.002 CONFIG | 	Marginal Cost : 115.5
+08:03:56.002 CONFIG | 	minBid : 470
+08:03:56.002 CONFIG | 	final bid : 292.75
+08:03:56.002 CONFIG | Safe Gambler has bid 293
+08:03:56.002 CONFIG | Gipsy bid 632 for n° 5 and lost [total = 3]
+08:03:56.003 CONFIG | Gipsy is bidding...
+08:04:00.075 WARNING | The best plan was found during the last reset iteration!
+08:04:00.323 CONFIG | Gipsy 3 10 10
+08:04:00.323 CONFIG | Gipsy WORSE  1639.0
+08:04:00.323 CONFIG | Gipsy BEST   243.0
+08:04:00.323 CONFIG | Gipsy AVG    926.45
+08:04:00.323 CONFIG | Gipsy NORMAL 755.5
+08:04:00.323 CONFIG | Gipsy PRED   755.5
+08:04:00.323 CONFIG | 	Marginal Cost : 755.5
+08:04:00.323 CONFIG | 	minBid : 293
+08:04:00.323 CONFIG | 	final bid : 755.5
+08:04:00.323 CONFIG | Gipsy has bid 756
+08:04:00.323 CONFIG | Safe Gambler bid 293 for n° 5 and won [total = 2]
+08:04:00.323 CONFIG | Safe Gambler is bidding...
+08:04:00.344 CONFIG | 	Marginal Cost : 1522.5
+08:04:00.344 CONFIG | 	minBid : 470
+08:04:00.344 CONFIG | 	final bid : 1522.5
+08:04:00.344 CONFIG | Safe Gambler has bid 1523
+08:04:00.344 CONFIG | Gipsy bid 756 for n° 6 and won [total = 4]
+08:04:00.344 CONFIG | Gipsy is bidding...
+08:04:00.400 CONFIG | 	Marginal Cost : 0.0
+08:04:00.401 CONFIG | 	minBid : 293
+08:04:00.401 CONFIG | 	final bid : 146.5
+08:04:00.401 CONFIG | Gipsy has bid 147
+08:04:00.401 CONFIG | Safe Gambler bid 1523 for n° 6 and lost [total = 2]
+08:04:00.401 CONFIG | Safe Gambler is bidding...
+08:04:00.418 CONFIG | 	Marginal Cost : 282.0
+08:04:00.418 CONFIG | 	minBid : 470
+08:04:00.418 CONFIG | 	final bid : 376.0
+08:04:00.418 CONFIG | Safe Gambler has bid 376
+08:04:00.419 CONFIG | Gipsy bid 147 for n° 7 and won [total = 5]
+08:04:00.419 CONFIG | Gipsy is bidding...
+08:04:00.495 CONFIG | 	Marginal Cost : 0.0
+08:04:00.496 CONFIG | 	minBid : 293
+08:04:00.496 CONFIG | 	final bid : 146.5
+08:04:00.496 CONFIG | Gipsy has bid 147
+08:04:00.496 CONFIG | Safe Gambler bid 376 for n° 7 and lost [total = 2]
+08:04:00.496 CONFIG | Safe Gambler is bidding...
+08:04:00.511 CONFIG | 	Marginal Cost : 687.0
+08:04:00.511 CONFIG | 	minBid : 147
+08:04:00.511 CONFIG | 	final bid : 687.0
+08:04:00.511 CONFIG | Safe Gambler has bid 687
+08:04:00.511 CONFIG | Gipsy bid 147 for n° 8 and won [total = 6]
+08:04:00.511 CONFIG | Gipsy is bidding...
+08:04:00.628 WARNING | The best plan was found during the last reset iteration!
+08:04:00.900 WARNING | The best plan was found during the last reset iteration!
+08:04:02.218 WARNING | The best plan was found during the last reset iteration!
+08:04:02.551 WARNING | The best plan was found during the last reset iteration!
+08:04:03.856 CONFIG | Gipsy 6 10 10
+08:04:03.856 CONFIG | Gipsy WORSE  887.0
+08:04:03.856 CONFIG | Gipsy BEST   53.5
+08:04:03.856 CONFIG | Gipsy AVG    338.9
+08:04:03.856 CONFIG | Gipsy NORMAL 730.0
+08:04:03.856 CONFIG | Gipsy PRED   730.0
+08:04:03.856 CONFIG | 	Marginal Cost : 730.0
+08:04:03.857 CONFIG | 	minBid : 293
+08:04:03.857 CONFIG | 	final bid : 730.0
+08:04:03.857 CONFIG | Gipsy has bid 730
+08:04:03.857 CONFIG | Safe Gambler bid 687 for n° 8 and lost [total = 2]
+08:04:03.857 CONFIG | Safe Gambler is bidding...
+08:04:03.875 CONFIG | 	Marginal Cost : 148.0
+08:04:03.875 CONFIG | 	minBid : 147
+08:04:03.875 CONFIG | 	final bid : 148.0
+08:04:03.875 CONFIG | Safe Gambler has bid 148
+08:04:03.875 CONFIG | Gipsy bid 730 for n° 9 and lost [total = 6]
+08:04:03.875 CONFIG | Gipsy is bidding...
+08:04:05.479 WARNING | The best plan was found during the last reset iteration!
+08:04:05.809 WARNING | The best plan was found during the last reset iteration!
+08:04:06.177 WARNING | The best plan was found during the last reset iteration!
+08:04:07.188 WARNING | The best plan was found during the last reset iteration!
+08:04:07.353 CONFIG | Gipsy 6 10 10
+08:04:07.353 CONFIG | Gipsy WORSE  1252.5
+08:04:07.353 CONFIG | Gipsy BEST   0.0
+08:04:07.353 CONFIG | Gipsy AVG    377.65
+08:04:07.353 CONFIG | Gipsy NORMAL 968.0
+08:04:07.353 CONFIG | Gipsy PRED   968.0
+08:04:07.353 CONFIG | 	Marginal Cost : 968.0
+08:04:07.353 CONFIG | 	minBid : 148
+08:04:07.353 CONFIG | 	final bid : 968.0
+08:04:07.353 CONFIG | Gipsy has bid 968
+08:04:07.353 CONFIG | Safe Gambler bid 148 for n° 9 and won [total = 3]
+08:04:07.353 CONFIG | Safe Gambler is bidding...
+08:04:07.409 CONFIG | 	Marginal Cost : 134.0
+08:04:07.409 CONFIG | 	minBid : 147
+08:04:07.409 CONFIG | 	final bid : 140.5
+08:04:07.409 CONFIG | Safe Gambler has bid 141
+08:04:07.410 CONFIG | Gipsy bid 968 for n° 10 and lost [total = 6]
+08:04:07.410 CONFIG | Gipsy is bidding...
+08:04:08.629 WARNING | The best plan was found during the last reset iteration!
+08:04:09.626 WARNING | The best plan was found during the last reset iteration!
+08:04:10.766 WARNING | The best plan was found during the last reset iteration!
+08:04:11.125 WARNING | The best plan was found during the last reset iteration!
+08:04:11.125 CONFIG | Gipsy 6 10 10
+08:04:11.126 CONFIG | Gipsy WORSE  1446.0
+08:04:11.126 CONFIG | Gipsy BEST   67.0
+08:04:11.126 CONFIG | Gipsy AVG    472.35
+08:04:11.126 CONFIG | Gipsy NORMAL 767.0
+08:04:11.126 CONFIG | Gipsy PRED   767.0
+08:04:11.126 CONFIG | 	Marginal Cost : 767.0
+08:04:11.126 CONFIG | 	minBid : 141
+08:04:11.126 CONFIG | 	final bid : 767.0
+08:04:11.126 CONFIG | Gipsy has bid 767
+08:04:11.126 CONFIG | Safe Gambler bid 141 for n° 10 and won [total = 4]
+08:04:11.126 CONFIG | Safe Gambler is bidding...
+08:04:11.220 CONFIG | 	Marginal Cost : 919.0
+08:04:11.220 CONFIG | 	minBid : 147
+08:04:11.220 CONFIG | 	final bid : 919.0
+08:04:11.220 CONFIG | Safe Gambler has bid 919
+08:04:11.220 CONFIG | Gipsy bid 767 for n° 11 and won [total = 7]
+08:04:11.220 CONFIG | Gipsy is bidding...
+08:04:13.745 WARNING | The best plan was found during the last reset iteration!
+08:04:13.979 WARNING | The best plan was found during the last reset iteration!
+08:04:14.532 WARNING | The best plan was found during the last reset iteration!
+08:04:14.757 WARNING | The best plan was found during the last reset iteration!
+08:04:15.166 CONFIG | Gipsy 7 10 10
+08:04:15.166 CONFIG | Gipsy WORSE  596.5
+08:04:15.166 CONFIG | Gipsy BEST   0.0
+08:04:15.166 CONFIG | Gipsy AVG    255.65
+08:04:15.166 CONFIG | Gipsy NORMAL 333.5
+08:04:15.166 CONFIG | Gipsy PRED   333.5
+08:04:15.166 CONFIG | 	Marginal Cost : 333.5
+08:04:15.166 CONFIG | 	minBid : 141
+08:04:15.166 CONFIG | 	final bid : 333.5
+08:04:15.166 CONFIG | Gipsy has bid 334
+08:04:15.166 CONFIG | Safe Gambler bid 919 for n° 11 and lost [total = 4]
+08:04:15.166 CONFIG | Safe Gambler is bidding...
+08:04:15.221 CONFIG | 	Marginal Cost : 851.0
+08:04:15.221 CONFIG | 	minBid : 147
+08:04:15.221 CONFIG | 	final bid : 851.0
+08:04:15.221 CONFIG | Safe Gambler has bid 851
+08:04:15.221 CONFIG | Gipsy bid 334 for n° 12 and won [total = 8]
+08:04:15.221 CONFIG | Gipsy is bidding...
+08:04:16.023 WARNING | The best plan was found during the last reset iteration!
+08:04:17.797 WARNING | The best plan was found during the last reset iteration!
+08:04:18.572 WARNING | The best plan was found during the last reset iteration!
+08:04:19.565 CONFIG | Gipsy 8 10 10
+08:04:19.565 CONFIG | Gipsy WORSE  603.5
+08:04:19.565 CONFIG | Gipsy BEST   0.0
+08:04:19.565 CONFIG | Gipsy AVG    296.45
+08:04:19.565 CONFIG | Gipsy NORMAL 187.0
+08:04:19.565 CONFIG | Gipsy PRED   187.0
+08:04:19.565 CONFIG | 	Marginal Cost : 187.0
+08:04:19.565 CONFIG | 	minBid : 141
+08:04:19.565 CONFIG | 	final bid : 187.0
+08:04:19.565 CONFIG | Gipsy has bid 187
+08:04:19.565 CONFIG | Safe Gambler bid 851 for n° 12 and lost [total = 4]
+08:04:19.565 CONFIG | Safe Gambler is bidding...
+08:04:19.600 CONFIG | 	Marginal Cost : 417.0
+08:04:19.600 CONFIG | 	minBid : 147
+08:04:19.600 CONFIG | 	final bid : 417.0
+08:04:19.600 CONFIG | Safe Gambler has bid 417
+08:04:19.600 CONFIG | Gipsy bid 187 for n° 13 and won [total = 9]
+08:04:19.600 CONFIG | Gipsy is bidding...
+08:04:20.170 WARNING | The best plan was found during the last reset iteration!
+08:04:21.394 WARNING | The best plan was found during the last reset iteration!
+08:04:23.391 WARNING | The best plan was found during the last reset iteration!
+08:04:24.035 CONFIG | Gipsy 9 10 10
+08:04:24.036 CONFIG | Gipsy WORSE  1086.0
+08:04:24.036 CONFIG | Gipsy BEST   59.5
+08:04:24.036 CONFIG | Gipsy AVG    555.65
+08:04:24.036 CONFIG | Gipsy NORMAL 481.5
+08:04:24.036 CONFIG | Gipsy PRED   481.5
+08:04:24.036 CONFIG | 	Marginal Cost : 481.5
+08:04:24.036 CONFIG | 	minBid : 141
+08:04:24.036 CONFIG | 	final bid : 481.5
+08:04:24.036 CONFIG | Gipsy has bid 482
+08:04:24.036 CONFIG | Safe Gambler bid 417 for n° 13 and lost [total = 4]
+08:04:24.036 CONFIG | Safe Gambler is bidding...
+08:04:24.084 CONFIG | 	Marginal Cost : 661.5
+08:04:24.084 CONFIG | 	minBid : 147
+08:04:24.084 CONFIG | 	final bid : 661.5
+08:04:24.084 CONFIG | Safe Gambler has bid 662
+08:04:24.084 CONFIG | Gipsy bid 482 for n° 14 and won [total = 10]
+08:04:24.084 CONFIG | Gipsy is bidding...
+08:04:24.417 WARNING | The best plan was found during the last reset iteration!
+08:04:24.417 CONFIG | 	Marginal Cost : 1318.5
+08:04:24.417 CONFIG | 	minBid : 141
+08:04:24.417 CONFIG | 	final bid : 1318.5
+08:04:24.417 CONFIG | Gipsy has bid 1319
+08:04:24.417 CONFIG | Safe Gambler bid 662 for n° 14 and lost [total = 4]
+08:04:24.417 CONFIG | Safe Gambler is bidding...
+08:04:24.449 CONFIG | 	Marginal Cost : 1032.0
+08:04:24.450 CONFIG | 	minBid : 187
+08:04:24.450 CONFIG | 	final bid : 1032.0
+08:04:24.450 CONFIG | Safe Gambler has bid 1032
+08:04:30.143 CONFIG | Gipsy bid 1319 for n° 15 and lost [total = 10]
+08:04:30.143 CONFIG | Gipsy got 10 tasks
+08:04:30.143 CONFIG | Generating plan for Gipsy
+08:04:31.755 CONFIG | Gipsy total cost   = 4503.0
+08:04:31.755 CONFIG | Gipsy total reward = 5100
+08:04:31.755 CONFIG | 	Gipsy PROFIT is 597.0
+08:04:31.760 CONFIG | Safe Gambler bid 1032 for n° 15 and won [total = 5]
+08:04:31.760 CONFIG | Safe Gambler got 5 tasks
+08:04:31.760 CONFIG | Generating plan for Safe Gambler
+08:04:32.012 WARNING | The best plan was found during the last reset iteration!
+08:04:32.012 CONFIG | Safe Gambler total cost   = 2203.0
+08:04:32.013 CONFIG | Safe Gambler total reward = 2440
+08:04:32.013 CONFIG | 	Safe Gambler PROFIT is 237.0
+08:04:57.315 CONFIG | Wrote tournament/test/auction2-Gipsy-SafeGambler.xml
+08:04:57.760 INFO | LogistPlatform finished successfully!
+08:04:57.761 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Gipsy-Simple.xml -a tournament/test/agents.xml config/auction2.xml Gipsy Simple
+08:04:57.897 CONFIG | Reading config/auction2.xml
+08:04:57.971 CONFIG | Reading config/settings_auction.xml
+08:04:58.317 CONFIG | Reading config/topology/the_netherlands.xml
+08:04:58.335 CONFIG | Reading tournament/test/agents.xml
+08:04:58.360 CONFIG | Gipsy agent has vehicles Vehicle 1 Vehicle 2 
+08:04:58.366 CONFIG | Simple agent has vehicles Vehicle 3 Vehicle 4 
+08:04:58.383 CONFIG | Gipsy is bidding...
+08:04:59.755 WARNING | The best plan was found during the last reset iteration!
+08:05:00.864 WARNING | The best plan was found during the last reset iteration!
+08:05:02.545 CONFIG | Gipsy 0 10 10
+08:05:02.545 CONFIG | Gipsy WORSE  618.0
+08:05:02.545 CONFIG | Gipsy BEST   0.0
+08:05:02.545 CONFIG | Gipsy AVG    240.95
+08:05:02.545 CONFIG | Gipsy NORMAL 895.0
+08:05:02.545 CONFIG | Gipsy PRED   701.1
+08:05:02.545 CONFIG | Gipsy has bid 702
+08:05:02.545 CONFIG | Simple is bidding...
+08:05:02.561 CONFIG | Simple has bid 954
+08:05:02.562 CONFIG | Gipsy bid 702 for n° 1 and won [total = 1]
+08:05:02.562 CONFIG | Gipsy is bidding...
+08:05:04.178 WARNING | The best plan was found during the last reset iteration!
+08:05:06.489 CONFIG | Gipsy 1 10 10
+08:05:06.489 CONFIG | Gipsy WORSE  652.0
+08:05:06.489 CONFIG | Gipsy BEST   0.0
+08:05:06.490 CONFIG | Gipsy AVG    227.05
+08:05:06.490 CONFIG | Gipsy NORMAL 1041.5
+08:05:06.490 CONFIG | Gipsy PRED   768.85
+08:05:06.490 CONFIG | 	Marginal Cost : 768.85
+08:05:06.490 CONFIG | 	minBid : 954
+08:05:06.490 CONFIG | 	final bid : 861.425
+08:05:06.490 CONFIG | Gipsy has bid 862
+08:05:06.490 CONFIG | Simple bid 954 for n° 1 and lost [total = 0]
+08:05:06.490 CONFIG | Simple is bidding...
+08:05:06.500 CONFIG | Simple has bid 1256
+08:05:06.500 CONFIG | Gipsy bid 862 for n° 2 and won [total = 2]
+08:05:06.500 CONFIG | Gipsy is bidding...
+08:05:07.090 WARNING | The best plan was found during the last reset iteration!
+08:05:09.235 WARNING | The best plan was found during the last reset iteration!
+08:05:10.254 CONFIG | Gipsy 2 10 10
+08:05:10.254 CONFIG | Gipsy WORSE  580.5
+08:05:10.254 CONFIG | Gipsy BEST   50.5
+08:05:10.254 CONFIG | Gipsy AVG    384.1
+08:05:10.254 CONFIG | Gipsy NORMAL 842.5
+08:05:10.254 CONFIG | Gipsy PRED   659.1
+08:05:10.254 CONFIG | 	Marginal Cost : 659.1
+08:05:10.254 CONFIG | 	minBid : 954
+08:05:10.254 CONFIG | 	final bid : 806.55
+08:05:10.254 CONFIG | Gipsy has bid 807
+08:05:10.254 CONFIG | Simple bid 1256 for n° 2 and lost [total = 0]
+08:05:10.254 CONFIG | Simple is bidding...
+08:05:10.261 CONFIG | Simple has bid 774
+08:05:10.262 CONFIG | Gipsy bid 807 for n° 3 and lost [total = 2]
+08:05:10.262 CONFIG | Gipsy is bidding...
+08:05:11.647 WARNING | The best plan was found during the last reset iteration!
+08:05:14.116 CONFIG | Gipsy 2 10 10
+08:05:14.116 CONFIG | Gipsy WORSE  816.5
+08:05:14.116 CONFIG | Gipsy BEST   0.0
+08:05:14.116 CONFIG | Gipsy AVG    236.05
+08:05:14.116 CONFIG | Gipsy NORMAL 113.5
+08:05:14.116 CONFIG | Gipsy PRED   113.5
+08:05:14.116 CONFIG | 	Marginal Cost : 113.5
+08:05:14.116 CONFIG | 	minBid : 774
+08:05:14.116 CONFIG | 	final bid : 443.75
+08:05:14.116 CONFIG | Gipsy has bid 444
+08:05:14.116 CONFIG | Simple bid 774 for n° 3 and won [total = 1]
+08:05:14.116 CONFIG | Simple is bidding...
+08:05:14.136 CONFIG | Simple has bid 1256
+08:05:14.136 CONFIG | Gipsy bid 444 for n° 4 and won [total = 3]
+08:05:14.136 CONFIG | Gipsy is bidding...
+08:05:14.306 WARNING | The best plan was found during the last reset iteration!
+08:05:17.264 WARNING | The best plan was found during the last reset iteration!
+08:05:17.803 WARNING | The best plan was found during the last reset iteration!
+08:05:17.980 CONFIG | Gipsy 3 10 10
+08:05:17.980 CONFIG | Gipsy WORSE  1214.5
+08:05:17.980 CONFIG | Gipsy BEST   0.0
+08:05:17.980 CONFIG | Gipsy AVG    291.4
+08:05:17.980 CONFIG | Gipsy NORMAL 438.0
+08:05:17.980 CONFIG | Gipsy PRED   438.0
+08:05:17.980 CONFIG | 	Marginal Cost : 438.0
+08:05:17.980 CONFIG | 	minBid : 774
+08:05:17.980 CONFIG | 	final bid : 606.0
+08:05:17.980 CONFIG | Gipsy has bid 606
+08:05:17.980 CONFIG | Simple bid 1256 for n° 4 and lost [total = 1]
+08:05:17.980 CONFIG | Simple is bidding...
+08:05:17.994 CONFIG | Simple has bid 116
+08:05:17.994 CONFIG | Gipsy bid 606 for n° 5 and lost [total = 3]
+08:05:17.995 CONFIG | Gipsy is bidding...
+08:05:21.211 WARNING | The best plan was found during the last reset iteration!
+08:05:21.812 CONFIG | Gipsy 3 10 10
+08:05:21.812 CONFIG | Gipsy WORSE  1440.0
+08:05:21.812 CONFIG | Gipsy BEST   234.5
+08:05:21.812 CONFIG | Gipsy AVG    636.65
+08:05:21.812 CONFIG | Gipsy NORMAL 755.5
+08:05:21.812 CONFIG | Gipsy PRED   755.5
+08:05:21.812 CONFIG | 	Marginal Cost : 755.5
+08:05:21.812 CONFIG | 	minBid : 116
+08:05:21.813 CONFIG | 	final bid : 755.5
+08:05:21.813 CONFIG | Gipsy has bid 756
+08:05:21.813 CONFIG | Simple bid 116 for n° 5 and won [total = 2]
+08:05:21.813 CONFIG | Simple is bidding...
+08:05:21.836 CONFIG | Simple has bid 1523
+08:05:21.836 CONFIG | Gipsy bid 756 for n° 6 and won [total = 4]
+08:05:21.836 CONFIG | Gipsy is bidding...
+08:05:21.884 CONFIG | 	Marginal Cost : 0.0
+08:05:21.884 CONFIG | 	minBid : 116
+08:05:21.884 CONFIG | 	final bid : 58.0
+08:05:21.884 CONFIG | Gipsy has bid 58
+08:05:21.884 CONFIG | Simple bid 1523 for n° 6 and lost [total = 2]
+08:05:21.884 CONFIG | Simple is bidding...
+08:05:21.898 CONFIG | Simple has bid 282
+08:05:21.899 CONFIG | Gipsy bid 58 for n° 7 and won [total = 5]
+08:05:21.899 CONFIG | Gipsy is bidding...
+08:05:21.986 CONFIG | 	Marginal Cost : 0.0
+08:05:21.987 CONFIG | 	minBid : 116
+08:05:21.987 CONFIG | 	final bid : 58.0
+08:05:21.987 CONFIG | Gipsy has bid 58
+08:05:21.987 CONFIG | Simple bid 282 for n° 7 and lost [total = 2]
+08:05:21.987 CONFIG | Simple is bidding...
+08:05:22.000 CONFIG | Simple has bid 687
+08:05:22.001 CONFIG | Gipsy bid 58 for n° 8 and won [total = 6]
+08:05:22.001 CONFIG | Gipsy is bidding...
+08:05:22.917 WARNING | The best plan was found during the last reset iteration!
+08:05:23.917 WARNING | The best plan was found during the last reset iteration!
+08:05:25.386 CONFIG | Gipsy 6 10 10
+08:05:25.386 CONFIG | Gipsy WORSE  1015.5
+08:05:25.386 CONFIG | Gipsy BEST   70.0
+08:05:25.386 CONFIG | Gipsy AVG    471.85
+08:05:25.386 CONFIG | Gipsy NORMAL 465.5
+08:05:25.386 CONFIG | Gipsy PRED   465.5
+08:05:25.386 CONFIG | 	Marginal Cost : 465.5
+08:05:25.386 CONFIG | 	minBid : 116
+08:05:25.386 CONFIG | 	final bid : 465.5
+08:05:25.386 CONFIG | Gipsy has bid 466
+08:05:25.386 CONFIG | Simple bid 687 for n° 8 and lost [total = 2]
+08:05:25.386 CONFIG | Simple is bidding...
+08:05:25.410 CONFIG | Simple has bid 148
+08:05:25.410 CONFIG | Gipsy bid 466 for n° 9 and lost [total = 6]
+08:05:25.410 CONFIG | Gipsy is bidding...
+08:05:25.464 WARNING | The best plan was found during the last reset iteration!
+08:05:25.955 WARNING | The best plan was found during the last reset iteration!
+08:05:26.543 WARNING | The best plan was found during the last reset iteration!
+08:05:29.016 CONFIG | Gipsy 6 10 10
+08:05:29.016 CONFIG | Gipsy WORSE  780.5
+08:05:29.016 CONFIG | Gipsy BEST   0.0
+08:05:29.016 CONFIG | Gipsy AVG    243.6
+08:05:29.016 CONFIG | Gipsy NORMAL 842.5
+08:05:29.016 CONFIG | Gipsy PRED   799.1
+08:05:29.016 CONFIG | 	Marginal Cost : 799.1
+08:05:29.016 CONFIG | 	minBid : 116
+08:05:29.016 CONFIG | 	final bid : 799.1
+08:05:29.016 CONFIG | Gipsy has bid 800
+08:05:29.017 CONFIG | Simple bid 148 for n° 9 and won [total = 3]
+08:05:29.017 CONFIG | Simple is bidding...
+08:05:29.068 CONFIG | Simple has bid 134
+08:05:29.069 CONFIG | Gipsy bid 800 for n° 10 and lost [total = 6]
+08:05:29.069 CONFIG | Gipsy is bidding...
+08:05:29.385 WARNING | The best plan was found during the last reset iteration!
+08:05:32.321 WARNING | The best plan was found during the last reset iteration!
+08:05:32.321 CONFIG | Gipsy 6 10 10
+08:05:32.322 CONFIG | Gipsy WORSE  835.5
+08:05:32.322 CONFIG | Gipsy BEST   7.0
+08:05:32.322 CONFIG | Gipsy AVG    476.15
+08:05:32.322 CONFIG | Gipsy NORMAL 767.0
+08:05:32.322 CONFIG | Gipsy PRED   767.0
+08:05:32.322 CONFIG | 	Marginal Cost : 767.0
+08:05:32.322 CONFIG | 	minBid : 116
+08:05:32.322 CONFIG | 	final bid : 767.0
+08:05:32.322 CONFIG | Gipsy has bid 767
+08:05:32.322 CONFIG | Simple bid 134 for n° 10 and won [total = 4]
+08:05:32.322 CONFIG | Simple is bidding...
+08:05:32.384 CONFIG | Simple has bid 919
+08:05:32.384 CONFIG | Gipsy bid 767 for n° 11 and won [total = 7]
+08:05:32.384 CONFIG | Gipsy is bidding...
+08:05:33.601 WARNING | The best plan was found during the last reset iteration!
+08:05:35.211 WARNING | The best plan was found during the last reset iteration!
+08:05:35.450 WARNING | The best plan was found during the last reset iteration!
+08:05:35.904 WARNING | The best plan was found during the last reset iteration!
+08:05:36.238 CONFIG | Gipsy 7 10 10
+08:05:36.238 CONFIG | Gipsy WORSE  428.0
+08:05:36.238 CONFIG | Gipsy BEST   0.0
+08:05:36.238 CONFIG | Gipsy AVG    235.6
+08:05:36.238 CONFIG | Gipsy NORMAL 288.5
+08:05:36.238 CONFIG | Gipsy PRED   288.5
+08:05:36.238 CONFIG | 	Marginal Cost : 288.5
+08:05:36.238 CONFIG | 	minBid : 134
+08:05:36.238 CONFIG | 	final bid : 288.5
+08:05:36.238 CONFIG | Gipsy has bid 289
+08:05:36.239 CONFIG | Simple bid 919 for n° 11 and lost [total = 4]
+08:05:36.239 CONFIG | Simple is bidding...
+08:05:36.272 CONFIG | Simple has bid 851
+08:05:36.272 CONFIG | Gipsy bid 289 for n° 12 and won [total = 8]
+08:05:36.273 CONFIG | Gipsy is bidding...
+08:05:36.362 WARNING | The best plan was found during the last reset iteration!
+08:05:37.536 WARNING | The best plan was found during the last reset iteration!
+08:05:40.467 WARNING | The best plan was found during the last reset iteration!
+08:05:40.468 CONFIG | Gipsy 8 10 10
+08:05:40.468 CONFIG | Gipsy WORSE  867.0
+08:05:40.468 CONFIG | Gipsy BEST   43.0
+08:05:40.468 CONFIG | Gipsy AVG    262.6
+08:05:40.468 CONFIG | Gipsy NORMAL 135.5
+08:05:40.468 CONFIG | Gipsy PRED   135.5
+08:05:40.468 CONFIG | 	Marginal Cost : 135.5
+08:05:40.468 CONFIG | 	minBid : 134
+08:05:40.468 CONFIG | 	final bid : 135.5
+08:05:40.468 CONFIG | Gipsy has bid 136
+08:05:40.468 CONFIG | Simple bid 851 for n° 12 and lost [total = 4]
+08:05:40.468 CONFIG | Simple is bidding...
+08:05:40.504 CONFIG | Simple has bid 417
+08:05:40.504 CONFIG | Gipsy bid 136 for n° 13 and won [total = 9]
+08:05:40.504 CONFIG | Gipsy is bidding...
+08:05:41.660 WARNING | The best plan was found during the last reset iteration!
+08:05:43.134 WARNING | The best plan was found during the last reset iteration!
+08:05:44.726 WARNING | The best plan was found during the last reset iteration!
+08:05:44.726 CONFIG | Gipsy 9 10 10
+08:05:44.726 CONFIG | Gipsy WORSE  503.0
+08:05:44.726 CONFIG | Gipsy BEST   0.0
+08:05:44.726 CONFIG | Gipsy AVG    280.55
+08:05:44.727 CONFIG | Gipsy NORMAL 481.5
+08:05:44.727 CONFIG | Gipsy PRED   481.5
+08:05:44.727 CONFIG | 	Marginal Cost : 481.5
+08:05:44.727 CONFIG | 	minBid : 134
+08:05:44.727 CONFIG | 	final bid : 481.5
+08:05:44.727 CONFIG | Gipsy has bid 482
+08:05:44.727 CONFIG | Simple bid 417 for n° 13 and lost [total = 4]
+08:05:44.727 CONFIG | Simple is bidding...
+08:05:44.778 CONFIG | Simple has bid 662
+08:05:44.778 CONFIG | Gipsy bid 482 for n° 14 and won [total = 10]
+08:05:44.778 CONFIG | Gipsy is bidding...
+08:05:45.147 CONFIG | 	Marginal Cost : 94.5
+08:05:45.147 CONFIG | 	minBid : 134
+08:05:45.147 CONFIG | 	final bid : 114.25
+08:05:45.148 CONFIG | Gipsy has bid 115
+08:05:45.148 CONFIG | Simple bid 662 for n° 14 and lost [total = 4]
+08:05:45.148 CONFIG | Simple is bidding...
+08:05:45.184 CONFIG | Simple has bid 1032
+08:05:51.431 CONFIG | Gipsy bid 115 for n° 15 and won [total = 11]
+08:05:51.431 CONFIG | Gipsy got 11 tasks
+08:05:51.431 CONFIG | Generating plan for Gipsy
+08:05:53.107 CONFIG | Gipsy total cost   = 4654.5
+08:05:53.107 CONFIG | Gipsy total reward = 4669
+08:05:53.107 CONFIG | 	Gipsy PROFIT is 14.5
+08:05:53.112 CONFIG | Simple bid 1032 for n° 15 and lost [total = 4]
+08:05:53.112 CONFIG | Simple got 4 tasks
+08:05:53.112 CONFIG | Generating plan for Simple
+08:05:53.269 CONFIG | Simple total cost   = 1171.0
+08:05:53.269 CONFIG | Simple total reward = 1172
+08:05:53.269 CONFIG | 	Simple PROFIT is 1.0
+08:06:17.914 CONFIG | Wrote tournament/test/auction2-Gipsy-Simple.xml
+08:06:18.258 INFO | LogistPlatform finished successfully!
+08:06:18.259 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Naive-Gipsy.xml -a tournament/test/agents.xml config/auction2.xml Naive Gipsy
+08:06:18.391 CONFIG | Reading config/auction2.xml
+08:06:18.466 CONFIG | Reading config/settings_auction.xml
+08:06:18.785 CONFIG | Reading config/topology/the_netherlands.xml
+08:06:18.805 CONFIG | Reading tournament/test/agents.xml
+08:06:18.830 CONFIG | Naive agent has vehicles Vehicle 1 Vehicle 2 
+08:06:18.836 CONFIG | Gipsy agent has vehicles Vehicle 3 Vehicle 4 
+08:06:18.857 CONFIG | Naive is bidding...
+08:06:18.858 CONFIG | Naive has bid 1180
+08:06:18.858 CONFIG | Gipsy is bidding...
+08:06:19.995 WARNING | The best plan was found during the last reset iteration!
+08:06:21.514 WARNING | The best plan was found during the last reset iteration!
+08:06:21.891 WARNING | The best plan was found during the last reset iteration!
+08:06:22.282 WARNING | The best plan was found during the last reset iteration!
+08:06:22.468 WARNING | The best plan was found during the last reset iteration!
+08:06:22.908 WARNING | The best plan was found during the last reset iteration!
+08:06:22.908 CONFIG | Gipsy 0 10 10
+08:06:22.908 CONFIG | Gipsy WORSE  845.5
+08:06:22.908 CONFIG | Gipsy BEST   79.5
+08:06:22.908 CONFIG | Gipsy AVG    428.5
+08:06:22.908 CONFIG | Gipsy NORMAL 954.0
+08:06:22.909 CONFIG | Gipsy PRED   878.05
+08:06:22.909 CONFIG | Gipsy has bid 879
+08:06:22.909 CONFIG | Naive bid 1180 for n° 1 and lost [total = 0]
+08:06:22.909 CONFIG | Naive is bidding...
+08:06:22.909 CONFIG | Naive has bid 1619
+08:06:22.910 CONFIG | Gipsy bid 879 for n° 1 and won [total = 1]
+08:06:22.910 CONFIG | Gipsy is bidding...
+08:06:26.254 WARNING | The best plan was found during the last reset iteration!
+08:06:26.405 WARNING | The best plan was found during the last reset iteration!
+08:06:26.809 CONFIG | Gipsy 1 10 10
+08:06:26.809 CONFIG | Gipsy WORSE  424.0
+08:06:26.809 CONFIG | Gipsy BEST   0.0
+08:06:26.809 CONFIG | Gipsy AVG    112.25
+08:06:26.809 CONFIG | Gipsy NORMAL 770.0
+08:06:26.809 CONFIG | Gipsy PRED   527.8
+08:06:26.809 CONFIG | 	Marginal Cost : 527.8
+08:06:26.809 CONFIG | 	minBid : 1180
+08:06:26.809 CONFIG | 	final bid : 853.9
+08:06:26.809 CONFIG | Gipsy has bid 854
+08:06:26.810 CONFIG | Naive bid 1619 for n° 2 and lost [total = 0]
+08:06:26.810 CONFIG | Naive is bidding...
+08:06:26.810 CONFIG | Naive has bid 1242
+08:06:26.810 CONFIG | Gipsy bid 854 for n° 2 and won [total = 2]
+08:06:26.810 CONFIG | Gipsy is bidding...
+08:06:30.389 WARNING | The best plan was found during the last reset iteration!
+08:06:30.389 CONFIG | Gipsy 2 10 10
+08:06:30.389 CONFIG | Gipsy WORSE  984.5
+08:06:30.390 CONFIG | Gipsy BEST   41.5
+08:06:30.390 CONFIG | Gipsy AVG    501.95
+08:06:30.390 CONFIG | Gipsy NORMAL 604.0
+08:06:30.390 CONFIG | Gipsy PRED   604.0
+08:06:30.390 CONFIG | 	Marginal Cost : 604.0
+08:06:30.390 CONFIG | 	minBid : 1180
+08:06:30.390 CONFIG | 	final bid : 892.0
+08:06:30.390 CONFIG | Gipsy has bid 892
+08:06:30.390 CONFIG | Naive bid 1242 for n° 3 and lost [total = 0]
+08:06:30.390 CONFIG | Naive is bidding...
+08:06:30.390 CONFIG | Naive has bid 1320
+08:06:30.390 CONFIG | Gipsy bid 892 for n° 3 and won [total = 3]
+08:06:30.390 CONFIG | Gipsy is bidding...
+08:06:30.427 CONFIG | 	Marginal Cost : 0.0
+08:06:30.428 CONFIG | 	minBid : 1180
+08:06:30.428 CONFIG | 	final bid : 590.0
+08:06:30.428 CONFIG | Gipsy has bid 590
+08:06:30.428 CONFIG | Naive bid 1320 for n° 4 and lost [total = 0]
+08:06:30.428 CONFIG | Naive is bidding...
+08:06:30.428 CONFIG | Naive has bid 515
+08:06:30.428 CONFIG | Gipsy bid 590 for n° 4 and won [total = 4]
+08:06:30.428 CONFIG | Gipsy is bidding...
+08:06:32.015 WARNING | The best plan was found during the last reset iteration!
+08:06:33.048 WARNING | The best plan was found during the last reset iteration!
+08:06:34.329 CONFIG | Gipsy 4 10 10
+08:06:34.329 CONFIG | Gipsy WORSE  660.0
+08:06:34.329 CONFIG | Gipsy BEST   14.5
+08:06:34.329 CONFIG | Gipsy AVG    314.7
+08:06:34.329 CONFIG | Gipsy NORMAL 285.0
+08:06:34.329 CONFIG | Gipsy PRED   285.0
+08:06:34.329 CONFIG | 	Marginal Cost : 285.0
+08:06:34.329 CONFIG | 	minBid : 1180
+08:06:34.329 CONFIG | 	final bid : 732.5
+08:06:34.329 CONFIG | Gipsy has bid 733
+08:06:34.329 CONFIG | Naive bid 515 for n° 5 and won [total = 1]
+08:06:34.330 CONFIG | Naive is bidding...
+08:06:34.330 CONFIG | Naive has bid 1756
+08:06:34.330 CONFIG | Gipsy bid 733 for n° 5 and lost [total = 4]
+08:06:34.330 CONFIG | Gipsy is bidding...
+08:06:35.179 WARNING | The best plan was found during the last reset iteration!
+08:06:35.808 WARNING | The best plan was found during the last reset iteration!
+08:06:35.997 WARNING | The best plan was found during the last reset iteration!
+08:06:36.551 WARNING | The best plan was found during the last reset iteration!
+08:06:36.683 WARNING | The best plan was found during the last reset iteration!
+08:06:36.869 WARNING | The best plan was found during the last reset iteration!
+08:06:37.157 WARNING | The best plan was found during the last reset iteration!
+08:06:37.880 WARNING | The best plan was found during the last reset iteration!
+08:06:37.880 CONFIG | Gipsy 4 10 10
+08:06:37.880 CONFIG | Gipsy WORSE  1489.0
+08:06:37.880 CONFIG | Gipsy BEST   39.5
+08:06:37.880 CONFIG | Gipsy AVG    523.05
+08:06:37.880 CONFIG | Gipsy NORMAL 497.0
+08:06:37.880 CONFIG | Gipsy PRED   497.0
+08:06:37.880 CONFIG | 	Marginal Cost : 497.0
+08:06:37.880 CONFIG | 	minBid : 515
+08:06:37.880 CONFIG | 	final bid : 506.0
+08:06:37.880 CONFIG | Gipsy has bid 506
+08:06:37.880 CONFIG | Naive bid 1756 for n° 6 and lost [total = 1]
+08:06:37.880 CONFIG | Naive is bidding...
+08:06:37.880 CONFIG | Naive has bid 429
+08:06:37.881 CONFIG | Gipsy bid 506 for n° 6 and won [total = 5]
+08:06:37.881 CONFIG | Gipsy is bidding...
+08:06:37.952 CONFIG | 	Marginal Cost : 0.0
+08:06:37.952 CONFIG | 	minBid : 515
+08:06:37.952 CONFIG | 	final bid : 257.5
+08:06:37.952 CONFIG | Gipsy has bid 258
+08:06:37.953 CONFIG | Naive bid 429 for n° 7 and lost [total = 1]
+08:06:37.953 CONFIG | Naive is bidding...
+08:06:37.953 CONFIG | Naive has bid 1305
+08:06:37.953 CONFIG | Gipsy bid 258 for n° 7 and won [total = 6]
+08:06:37.953 CONFIG | Gipsy is bidding...
+08:06:38.248 WARNING | The best plan was found during the last reset iteration!
+08:06:38.493 WARNING | The best plan was found during the last reset iteration!
+08:06:40.335 WARNING | The best plan was found during the last reset iteration!
+08:06:41.546 CONFIG | Gipsy 6 10 10
+08:06:41.546 CONFIG | Gipsy WORSE  1013.0
+08:06:41.546 CONFIG | Gipsy BEST   55.5
+08:06:41.546 CONFIG | Gipsy AVG    432.5
+08:06:41.546 CONFIG | Gipsy NORMAL 372.0
+08:06:41.546 CONFIG | Gipsy PRED   372.0
+08:06:41.546 CONFIG | 	Marginal Cost : 372.0
+08:06:41.546 CONFIG | 	minBid : 429
+08:06:41.546 CONFIG | 	final bid : 400.5
+08:06:41.546 CONFIG | Gipsy has bid 401
+08:06:41.547 CONFIG | Naive bid 1305 for n° 8 and lost [total = 1]
+08:06:41.547 CONFIG | Naive is bidding...
+08:06:41.547 CONFIG | Naive has bid 918
+08:06:41.547 CONFIG | Gipsy bid 401 for n° 8 and won [total = 7]
+08:06:41.547 CONFIG | Gipsy is bidding...
+08:06:44.318 WARNING | The best plan was found during the last reset iteration!
+08:06:44.631 WARNING | The best plan was found during the last reset iteration!
+08:06:45.201 CONFIG | Gipsy 7 10 10
+08:06:45.201 CONFIG | Gipsy WORSE  843.5
+08:06:45.201 CONFIG | Gipsy BEST   0.0
+08:06:45.201 CONFIG | Gipsy AVG    356.35
+08:06:45.201 CONFIG | Gipsy NORMAL 282.0
+08:06:45.201 CONFIG | Gipsy PRED   282.0
+08:06:45.201 CONFIG | 	Marginal Cost : 282.0
+08:06:45.201 CONFIG | 	minBid : 429
+08:06:45.201 CONFIG | 	final bid : 355.5
+08:06:45.201 CONFIG | Gipsy has bid 356
+08:06:45.201 CONFIG | Naive bid 918 for n° 9 and lost [total = 1]
+08:06:45.201 CONFIG | Naive is bidding...
+08:06:45.201 CONFIG | Naive has bid 1351
+08:06:45.202 CONFIG | Gipsy bid 356 for n° 9 and won [total = 8]
+08:06:45.202 CONFIG | Gipsy is bidding...
+08:06:45.421 CONFIG | 	Marginal Cost : 0.0
+08:06:45.422 CONFIG | 	minBid : 429
+08:06:45.422 CONFIG | 	final bid : 214.5
+08:06:45.422 CONFIG | Gipsy has bid 215
+08:06:45.422 CONFIG | Naive bid 1351 for n° 10 and lost [total = 1]
+08:06:45.422 CONFIG | Naive is bidding...
+08:06:45.422 CONFIG | Naive has bid 1068
+08:06:45.422 CONFIG | Gipsy bid 215 for n° 10 and won [total = 9]
+08:06:45.423 CONFIG | Gipsy is bidding...
+08:06:45.990 WARNING | The best plan was found during the last reset iteration!
+08:06:46.834 WARNING | The best plan was found during the last reset iteration!
+08:06:47.487 WARNING | The best plan was found during the last reset iteration!
+08:06:47.760 WARNING | The best plan was found during the last reset iteration!
+08:06:48.831 WARNING | The best plan was found during the last reset iteration!
+08:06:49.017 CONFIG | Gipsy 9 10 10
+08:06:49.017 CONFIG | Gipsy WORSE  997.5
+08:06:49.017 CONFIG | Gipsy BEST   66.5
+08:06:49.017 CONFIG | Gipsy AVG    472.25
+08:06:49.017 CONFIG | Gipsy NORMAL 768.0
+08:06:49.017 CONFIG | Gipsy PRED   768.0
+08:06:49.017 CONFIG | 	Marginal Cost : 768.0
+08:06:49.017 CONFIG | 	minBid : 429
+08:06:49.017 CONFIG | 	final bid : 768.0
+08:06:49.017 CONFIG | Gipsy has bid 768
+08:06:49.017 CONFIG | Naive bid 1068 for n° 11 and lost [total = 1]
+08:06:49.017 CONFIG | Naive is bidding...
+08:06:49.017 CONFIG | Naive has bid 1298
+08:06:49.017 CONFIG | Gipsy bid 768 for n° 11 and won [total = 10]
+08:06:49.017 CONFIG | Gipsy is bidding...
+08:06:49.298 CONFIG | 	Marginal Cost : 851.0
+08:06:49.298 CONFIG | 	minBid : 429
+08:06:49.298 CONFIG | 	final bid : 851.0
+08:06:49.298 CONFIG | Gipsy has bid 851
+08:06:49.298 CONFIG | Naive bid 1298 for n° 12 and lost [total = 1]
+08:06:49.298 CONFIG | Naive is bidding...
+08:06:49.298 CONFIG | Naive has bid 1101
+08:06:49.298 CONFIG | Gipsy bid 851 for n° 12 and won [total = 11]
+08:06:49.298 CONFIG | Gipsy is bidding...
+08:06:49.846 CONFIG | 	Marginal Cost : 296.0
+08:06:49.847 CONFIG | 	minBid : 429
+08:06:49.847 CONFIG | 	final bid : 362.5
+08:06:49.847 CONFIG | Gipsy has bid 363
+08:06:49.847 CONFIG | Naive bid 1101 for n° 13 and lost [total = 1]
+08:06:49.847 CONFIG | Naive is bidding...
+08:06:49.847 CONFIG | Naive has bid 1142
+08:06:49.847 CONFIG | Gipsy bid 363 for n° 13 and won [total = 12]
+08:06:49.847 CONFIG | Gipsy is bidding...
+08:06:50.303 CONFIG | 	Marginal Cost : 400.5
+08:06:50.303 CONFIG | 	minBid : 918
+08:06:50.303 CONFIG | 	final bid : 659.25
+08:06:50.303 CONFIG | Gipsy has bid 660
+08:06:50.303 CONFIG | Naive bid 1142 for n° 14 and lost [total = 1]
+08:06:50.304 CONFIG | Naive is bidding...
+08:06:50.304 CONFIG | Naive has bid 1332
+08:06:50.304 CONFIG | Gipsy bid 660 for n° 14 and won [total = 13]
+08:06:50.304 CONFIG | Gipsy is bidding...
+08:06:50.891 CONFIG | 	Marginal Cost : 975.5
+08:06:50.891 CONFIG | 	minBid : 918
+08:06:50.891 CONFIG | 	final bid : 975.5
+08:06:50.891 CONFIG | Gipsy has bid 976
+08:06:55.841 CONFIG | Naive bid 1332 for n° 15 and lost [total = 1]
+08:06:55.841 CONFIG | Naive got 1 tasks
+08:06:55.841 CONFIG | Generating plan for Naive
+08:06:55.841 CONFIG | Naive total cost   = 456.0
+08:06:55.841 CONFIG | Naive total reward = 515
+08:06:55.841 CONFIG | 	Naive PROFIT is 59.0
+08:06:55.845 CONFIG | Gipsy bid 976 for n° 15 and won [total = 14]
+08:06:55.845 CONFIG | Gipsy got 14 tasks
+08:06:55.845 CONFIG | Generating plan for Gipsy
+08:06:58.662 WARNING | The best plan was found during the last reset iteration!
+08:06:58.662 CONFIG | Gipsy total cost   = 4999.5
+08:06:58.662 CONFIG | Gipsy total reward = 8569
+08:06:58.662 CONFIG | 	Gipsy PROFIT is 3569.5
+08:07:22.421 CONFIG | Wrote tournament/test/auction2-Naive-Gipsy.xml
+08:07:22.700 INFO | LogistPlatform finished successfully!
+08:07:22.701 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Naive-SafeGambler.xml -a tournament/test/agents.xml config/auction2.xml Naive SafeGambler
+08:07:22.834 CONFIG | Reading config/auction2.xml
+08:07:22.913 CONFIG | Reading config/settings_auction.xml
+08:07:23.286 CONFIG | Reading config/topology/the_netherlands.xml
+08:07:23.302 CONFIG | Reading tournament/test/agents.xml
+08:07:23.330 CONFIG | Naive agent has vehicles Vehicle 1 Vehicle 2 
+08:07:23.337 CONFIG | Safe Gambler agent has vehicles Vehicle 3 Vehicle 4 
+08:07:23.352 CONFIG | Naive is bidding...
+08:07:23.353 CONFIG | Naive has bid 1180
+08:07:23.353 CONFIG | Safe Gambler is bidding...
+08:07:23.392 CONFIG | Safe Gambler has bid 954
+08:07:23.393 CONFIG | Naive bid 1180 for n° 1 and lost [total = 0]
+08:07:23.393 CONFIG | Naive is bidding...
+08:07:23.393 CONFIG | Naive has bid 1619
+08:07:23.394 CONFIG | Safe Gambler bid 954 for n° 1 and won [total = 1]
+08:07:23.394 CONFIG | Safe Gambler is bidding...
+08:07:23.437 CONFIG | 	Marginal Cost : 770.0
+08:07:23.437 CONFIG | 	minBid : 1180
+08:07:23.437 CONFIG | 	final bid : 975.0
+08:07:23.437 CONFIG | Safe Gambler has bid 975
+08:07:23.437 CONFIG | Naive bid 1619 for n° 2 and lost [total = 0]
+08:07:23.437 CONFIG | Naive is bidding...
+08:07:23.437 CONFIG | Naive has bid 1242
+08:07:23.438 CONFIG | Safe Gambler bid 975 for n° 2 and won [total = 2]
+08:07:23.438 CONFIG | Safe Gambler is bidding...
+08:07:23.499 CONFIG | 	Marginal Cost : 604.0
+08:07:23.499 CONFIG | 	minBid : 1180
+08:07:23.499 CONFIG | 	final bid : 892.0
+08:07:23.499 CONFIG | Safe Gambler has bid 892
+08:07:23.499 CONFIG | Naive bid 1242 for n° 3 and lost [total = 0]
+08:07:23.499 CONFIG | Naive is bidding...
+08:07:23.499 CONFIG | Naive has bid 1320
+08:07:23.500 CONFIG | Safe Gambler bid 892 for n° 3 and won [total = 3]
+08:07:23.500 CONFIG | Safe Gambler is bidding...
+08:07:23.561 CONFIG | 	Marginal Cost : 0.0
+08:07:23.562 CONFIG | 	minBid : 1180
+08:07:23.562 CONFIG | 	final bid : 590.0
+08:07:23.562 CONFIG | Safe Gambler has bid 590
+08:07:23.562 CONFIG | Naive bid 1320 for n° 4 and lost [total = 0]
+08:07:23.562 CONFIG | Naive is bidding...
+08:07:23.562 CONFIG | Naive has bid 515
+08:07:23.563 CONFIG | Safe Gambler bid 590 for n° 4 and won [total = 4]
+08:07:23.563 CONFIG | Safe Gambler is bidding...
+08:07:23.649 CONFIG | 	Marginal Cost : 285.0
+08:07:23.649 CONFIG | 	minBid : 1180
+08:07:23.649 CONFIG | 	final bid : 732.5
+08:07:23.649 CONFIG | Safe Gambler has bid 733
+08:07:23.649 CONFIG | Naive bid 515 for n° 5 and won [total = 1]
+08:07:23.649 CONFIG | Naive is bidding...
+08:07:23.650 CONFIG | Naive has bid 1756
+08:07:23.650 CONFIG | Safe Gambler bid 733 for n° 5 and lost [total = 4]
+08:07:23.650 CONFIG | Safe Gambler is bidding...
+08:07:23.706 CONFIG | 	Marginal Cost : 497.0
+08:07:23.706 CONFIG | 	minBid : 515
+08:07:23.706 CONFIG | 	final bid : 506.0
+08:07:23.706 CONFIG | Safe Gambler has bid 506
+08:07:23.706 CONFIG | Naive bid 1756 for n° 6 and lost [total = 1]
+08:07:23.706 CONFIG | Naive is bidding...
+08:07:23.706 CONFIG | Naive has bid 429
+08:07:23.707 CONFIG | Safe Gambler bid 506 for n° 6 and won [total = 5]
+08:07:23.707 CONFIG | Safe Gambler is bidding...
+08:07:23.814 CONFIG | 	Marginal Cost : 0.0
+08:07:23.814 CONFIG | 	minBid : 515
+08:07:23.814 CONFIG | 	final bid : 257.5
+08:07:23.814 CONFIG | Safe Gambler has bid 258
+08:07:23.815 CONFIG | Naive bid 429 for n° 7 and lost [total = 1]
+08:07:23.815 CONFIG | Naive is bidding...
+08:07:23.815 CONFIG | Naive has bid 1305
+08:07:23.815 CONFIG | Safe Gambler bid 258 for n° 7 and won [total = 6]
+08:07:23.815 CONFIG | Safe Gambler is bidding...
+08:07:24.016 WARNING | The best plan was found during the last reset iteration!
+08:07:24.016 CONFIG | 	Marginal Cost : 622.5
+08:07:24.016 CONFIG | 	minBid : 429
+08:07:24.016 CONFIG | 	final bid : 622.5
+08:07:24.016 CONFIG | Safe Gambler has bid 623
+08:07:24.016 CONFIG | Naive bid 1305 for n° 8 and lost [total = 1]
+08:07:24.016 CONFIG | Naive is bidding...
+08:07:24.016 CONFIG | Naive has bid 918
+08:07:24.017 CONFIG | Safe Gambler bid 623 for n° 8 and won [total = 7]
+08:07:24.017 CONFIG | Safe Gambler is bidding...
+08:07:24.185 CONFIG | 	Marginal Cost : 358.0
+08:07:24.185 CONFIG | 	minBid : 429
+08:07:24.185 CONFIG | 	final bid : 393.5
+08:07:24.185 CONFIG | Safe Gambler has bid 394
+08:07:24.186 CONFIG | Naive bid 918 for n° 9 and lost [total = 1]
+08:07:24.186 CONFIG | Naive is bidding...
+08:07:24.186 CONFIG | Naive has bid 1351
+08:07:24.186 CONFIG | Safe Gambler bid 394 for n° 9 and won [total = 8]
+08:07:24.186 CONFIG | Safe Gambler is bidding...
+08:07:24.366 WARNING | The best plan was found during the last reset iteration!
+08:07:24.479 CONFIG | 	Marginal Cost : 481.5
+08:07:24.480 CONFIG | 	minBid : 429
+08:07:24.480 CONFIG | 	final bid : 481.5
+08:07:24.480 CONFIG | Safe Gambler has bid 482
+08:07:24.480 CONFIG | Naive bid 1351 for n° 10 and lost [total = 1]
+08:07:24.480 CONFIG | Naive is bidding...
+08:07:24.480 CONFIG | Naive has bid 1068
+08:07:24.480 CONFIG | Safe Gambler bid 482 for n° 10 and won [total = 9]
+08:07:24.480 CONFIG | Safe Gambler is bidding...
+08:07:24.810 CONFIG | 	Marginal Cost : 472.0
+08:07:24.810 CONFIG | 	minBid : 429
+08:07:24.810 CONFIG | 	final bid : 472.0
+08:07:24.810 CONFIG | Safe Gambler has bid 472
+08:07:24.811 CONFIG | Naive bid 1068 for n° 11 and lost [total = 1]
+08:07:24.811 CONFIG | Naive is bidding...
+08:07:24.811 CONFIG | Naive has bid 1298
+08:07:24.811 CONFIG | Safe Gambler bid 472 for n° 11 and won [total = 10]
+08:07:24.811 CONFIG | Safe Gambler is bidding...
+08:07:25.266 CONFIG | 	Marginal Cost : 411.5
+08:07:25.266 CONFIG | 	minBid : 429
+08:07:25.266 CONFIG | 	final bid : 420.25
+08:07:25.266 CONFIG | Safe Gambler has bid 421
+08:07:25.267 CONFIG | Naive bid 1298 for n° 12 and lost [total = 1]
+08:07:25.267 CONFIG | Naive is bidding...
+08:07:25.267 CONFIG | Naive has bid 1101
+08:07:25.267 CONFIG | Safe Gambler bid 421 for n° 12 and won [total = 11]
+08:07:25.267 CONFIG | Safe Gambler is bidding...
+08:07:25.677 WARNING | The best plan was found during the last reset iteration!
+08:07:25.677 CONFIG | 	Marginal Cost : 124.0
+08:07:25.678 CONFIG | 	minBid : 429
+08:07:25.678 CONFIG | 	final bid : 276.5
+08:07:25.678 CONFIG | Safe Gambler has bid 277
+08:07:25.678 CONFIG | Naive bid 1101 for n° 13 and lost [total = 1]
+08:07:25.678 CONFIG | Naive is bidding...
+08:07:25.678 CONFIG | Naive has bid 1142
+08:07:25.678 CONFIG | Safe Gambler bid 277 for n° 13 and won [total = 12]
+08:07:25.678 CONFIG | Safe Gambler is bidding...
+08:07:26.283 WARNING | The best plan was found during the last reset iteration!
+08:07:26.283 CONFIG | 	Marginal Cost : 83.5
+08:07:26.284 CONFIG | 	minBid : 918
+08:07:26.284 CONFIG | 	final bid : 500.75
+08:07:26.284 CONFIG | Safe Gambler has bid 501
+08:07:26.284 CONFIG | Naive bid 1142 for n° 14 and lost [total = 1]
+08:07:26.284 CONFIG | Naive is bidding...
+08:07:26.284 CONFIG | Naive has bid 1332
+08:07:26.284 CONFIG | Safe Gambler bid 501 for n° 14 and won [total = 13]
+08:07:26.284 CONFIG | Safe Gambler is bidding...
+08:07:26.514 WARNING | The best plan was found during the last reset iteration!
+08:07:26.891 CONFIG | 	Marginal Cost : 73.0
+08:07:26.891 CONFIG | 	minBid : 918
+08:07:26.891 CONFIG | 	final bid : 495.5
+08:07:26.891 CONFIG | Safe Gambler has bid 496
+08:07:31.644 CONFIG | Naive bid 1332 for n° 15 and lost [total = 1]
+08:07:31.644 CONFIG | Naive got 1 tasks
+08:07:31.644 CONFIG | Generating plan for Naive
+08:07:31.644 CONFIG | Naive total cost   = 456.0
+08:07:31.644 CONFIG | Naive total reward = 515
+08:07:31.644 CONFIG | 	Naive PROFIT is 59.0
+08:07:31.648 CONFIG | Safe Gambler bid 496 for n° 15 and won [total = 14]
+08:07:31.648 CONFIG | Safe Gambler got 14 tasks
+08:07:31.648 CONFIG | Generating plan for Safe Gambler
+08:07:34.656 CONFIG | Safe Gambler total cost   = 4999.5
+08:07:34.656 CONFIG | Safe Gambler total reward = 7841
+08:07:34.656 CONFIG | 	Safe Gambler PROFIT is 2841.5
+08:07:55.590 CONFIG | Wrote tournament/test/auction2-Naive-SafeGambler.xml
+08:07:55.954 INFO | LogistPlatform finished successfully!
+08:07:55.955 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Naive-Simple.xml -a tournament/test/agents.xml config/auction2.xml Naive Simple
+08:07:56.087 CONFIG | Reading config/auction2.xml
+08:07:56.162 CONFIG | Reading config/settings_auction.xml
+08:07:56.551 CONFIG | Reading config/topology/the_netherlands.xml
+08:07:56.575 CONFIG | Reading tournament/test/agents.xml
+08:07:56.599 CONFIG | Naive agent has vehicles Vehicle 1 Vehicle 2 
+08:07:56.605 CONFIG | Simple agent has vehicles Vehicle 3 Vehicle 4 
+08:07:56.619 CONFIG | Naive is bidding...
+08:07:56.620 CONFIG | Naive has bid 1180
+08:07:56.621 CONFIG | Simple is bidding...
+08:07:56.655 CONFIG | Simple has bid 954
+08:07:56.656 CONFIG | Naive bid 1180 for n° 1 and lost [total = 0]
+08:07:56.656 CONFIG | Naive is bidding...
+08:07:56.656 CONFIG | Naive has bid 1619
+08:07:56.656 CONFIG | Simple bid 954 for n° 1 and won [total = 1]
+08:07:56.656 CONFIG | Simple is bidding...
+08:07:56.701 CONFIG | Simple has bid 770
+08:07:56.701 CONFIG | Naive bid 1619 for n° 2 and lost [total = 0]
+08:07:56.702 CONFIG | Naive is bidding...
+08:07:56.702 CONFIG | Naive has bid 1242
+08:07:56.702 CONFIG | Simple bid 770 for n° 2 and won [total = 2]
+08:07:56.702 CONFIG | Simple is bidding...
+08:07:56.764 CONFIG | Simple has bid 604
+08:07:56.765 CONFIG | Naive bid 1242 for n° 3 and lost [total = 0]
+08:07:56.765 CONFIG | Naive is bidding...
+08:07:56.765 CONFIG | Naive has bid 1320
+08:07:56.765 CONFIG | Simple bid 604 for n° 3 and won [total = 3]
+08:07:56.765 CONFIG | Simple is bidding...
+08:07:56.837 CONFIG | Simple has bid 0
+08:07:56.838 CONFIG | Naive bid 1320 for n° 4 and lost [total = 0]
+08:07:56.838 CONFIG | Naive is bidding...
+08:07:56.838 CONFIG | Naive has bid 515
+08:07:56.838 CONFIG | Simple bid 0 for n° 4 and won [total = 4]
+08:07:56.838 CONFIG | Simple is bidding...
+08:07:56.915 CONFIG | Simple has bid 285
+08:07:56.915 CONFIG | Naive bid 515 for n° 5 and lost [total = 0]
+08:07:56.915 CONFIG | Naive is bidding...
+08:07:56.915 CONFIG | Naive has bid 1756
+08:07:56.916 CONFIG | Simple bid 285 for n° 5 and won [total = 5]
+08:07:56.916 CONFIG | Simple is bidding...
+08:07:57.057 CONFIG | Simple has bid 668
+08:07:57.057 CONFIG | Naive bid 1756 for n° 6 and lost [total = 0]
+08:07:57.057 CONFIG | Naive is bidding...
+08:07:57.057 CONFIG | Naive has bid 429
+08:07:57.057 CONFIG | Simple bid 668 for n° 6 and won [total = 6]
+08:07:57.057 CONFIG | Simple is bidding...
+08:07:57.306 CONFIG | Simple has bid 0
+08:07:57.307 CONFIG | Naive bid 429 for n° 7 and lost [total = 0]
+08:07:57.307 CONFIG | Naive is bidding...
+08:07:57.307 CONFIG | Naive has bid 1305
+08:07:57.308 CONFIG | Simple bid 0 for n° 7 and won [total = 7]
+08:07:57.308 CONFIG | Simple is bidding...
+08:07:57.519 CONFIG | Simple has bid 285
+08:07:57.519 CONFIG | Naive bid 1305 for n° 8 and lost [total = 0]
+08:07:57.519 CONFIG | Naive is bidding...
+08:07:57.520 CONFIG | Naive has bid 918
+08:07:57.520 CONFIG | Simple bid 285 for n° 8 and won [total = 8]
+08:07:57.520 CONFIG | Simple is bidding...
+08:07:57.755 WARNING | The best plan was found during the last reset iteration!
+08:07:57.755 CONFIG | Simple has bid 189
+08:07:57.756 CONFIG | Naive bid 918 for n° 9 and lost [total = 0]
+08:07:57.756 CONFIG | Naive is bidding...
+08:07:57.756 CONFIG | Naive has bid 1351
+08:07:57.756 CONFIG | Simple bid 189 for n° 9 and won [total = 9]
+08:07:57.756 CONFIG | Simple is bidding...
+08:07:58.112 CONFIG | Simple has bid 557
+08:07:58.112 CONFIG | Naive bid 1351 for n° 10 and lost [total = 0]
+08:07:58.112 CONFIG | Naive is bidding...
+08:07:58.112 CONFIG | Naive has bid 1068
+08:07:58.113 CONFIG | Simple bid 557 for n° 10 and won [total = 10]
+08:07:58.113 CONFIG | Simple is bidding...
+08:07:58.511 CONFIG | Simple has bid 391
+08:07:58.512 CONFIG | Naive bid 1068 for n° 11 and lost [total = 0]
+08:07:58.512 CONFIG | Naive is bidding...
+08:07:58.512 CONFIG | Naive has bid 1298
+08:07:58.512 CONFIG | Simple bid 391 for n° 11 and won [total = 11]
+08:07:58.512 CONFIG | Simple is bidding...
+08:07:58.988 CONFIG | Simple has bid 219
+08:07:58.989 CONFIG | Naive bid 1298 for n° 12 and lost [total = 0]
+08:07:58.989 CONFIG | Naive is bidding...
+08:07:58.989 CONFIG | Naive has bid 1101
+08:07:58.989 CONFIG | Simple bid 219 for n° 12 and won [total = 12]
+08:07:58.989 CONFIG | Simple is bidding...
+08:07:59.648 CONFIG | Simple has bid 66
+08:07:59.648 CONFIG | Naive bid 1101 for n° 13 and lost [total = 0]
+08:07:59.649 CONFIG | Naive is bidding...
+08:07:59.649 CONFIG | Naive has bid 1142
+08:07:59.649 CONFIG | Simple bid 66 for n° 13 and won [total = 13]
+08:07:59.649 CONFIG | Simple is bidding...
+08:08:00.170 CONFIG | Simple has bid 52
+08:08:00.170 CONFIG | Naive bid 1142 for n° 14 and lost [total = 0]
+08:08:00.170 CONFIG | Naive is bidding...
+08:08:00.170 CONFIG | Naive has bid 1332
+08:08:00.170 CONFIG | Simple bid 52 for n° 14 and won [total = 14]
+08:08:00.170 CONFIG | Simple is bidding...
+08:08:01.080 WARNING | The best plan was found during the last reset iteration!
+08:08:01.080 CONFIG | Simple has bid 3
+08:08:06.377 CONFIG | Naive bid 1332 for n° 15 and lost [total = 0]
+08:08:06.377 CONFIG | Naive got 0 tasks
+08:08:06.377 CONFIG | Generating plan for Naive
+08:08:06.377 CONFIG | Naive total cost   = 0.0
+08:08:06.377 CONFIG | Naive total reward = 0
+08:08:06.377 CONFIG | 	Naive PROFIT is 0.0
+08:08:06.379 CONFIG | Simple bid 3 for n° 15 and won [total = 15]
+08:08:06.379 CONFIG | Simple got 15 tasks
+08:08:06.379 CONFIG | Generating plan for Simple
+08:08:08.692 WARNING | The best plan was found during the last reset iteration!
+08:08:08.692 CONFIG | Simple total cost   = 5631.0
+08:08:08.693 WARNING | 	Simple LOST MONEY!!! [-588.0]
+08:08:08.693 CONFIG | Simple total reward = 5043
+08:08:30.928 CONFIG | Wrote tournament/test/auction2-Naive-Simple.xml
+08:08:31.357 INFO | LogistPlatform finished successfully!
+08:08:31.358 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-SafeGambler-Gipsy.xml -a tournament/test/agents.xml config/auction2.xml SafeGambler Gipsy
+08:08:31.497 CONFIG | Reading config/auction2.xml
+08:08:31.570 CONFIG | Reading config/settings_auction.xml
+08:08:31.873 CONFIG | Reading config/topology/the_netherlands.xml
+08:08:31.892 CONFIG | Reading tournament/test/agents.xml
+08:08:31.914 CONFIG | Safe Gambler agent has vehicles Vehicle 1 Vehicle 2 
+08:08:31.920 CONFIG | Gipsy agent has vehicles Vehicle 3 Vehicle 4 
+08:08:31.936 CONFIG | Safe Gambler is bidding...
+08:08:31.977 CONFIG | Safe Gambler has bid 895
+08:08:31.977 CONFIG | Gipsy is bidding...
+08:08:34.813 WARNING | The best plan was found during the last reset iteration!
+08:08:36.131 CONFIG | Gipsy 0 10 10
+08:08:36.131 CONFIG | Gipsy WORSE  678.0
+08:08:36.131 CONFIG | Gipsy BEST   0.0
+08:08:36.131 CONFIG | Gipsy AVG    356.1
+08:08:36.131 CONFIG | Gipsy NORMAL 954.0
+08:08:36.131 CONFIG | Gipsy PRED   760.8
+08:08:36.131 CONFIG | Gipsy has bid 761
+08:08:36.132 CONFIG | Safe Gambler bid 895 for n° 1 and lost [total = 0]
+08:08:36.132 CONFIG | Safe Gambler is bidding...
+08:08:36.140 CONFIG | 	Marginal Cost : 1581.5
+08:08:36.140 CONFIG | 	minBid : 761
+08:08:36.140 CONFIG | 	final bid : 1581.5
+08:08:36.140 CONFIG | Safe Gambler has bid 1582
+08:08:36.141 CONFIG | Gipsy bid 761 for n° 1 and won [total = 1]
+08:08:36.141 CONFIG | Gipsy is bidding...
+08:08:37.280 WARNING | The best plan was found during the last reset iteration!
+08:08:37.516 WARNING | The best plan was found during the last reset iteration!
+08:08:38.074 WARNING | The best plan was found during the last reset iteration!
+08:08:38.279 WARNING | The best plan was found during the last reset iteration!
+08:08:40.092 CONFIG | Gipsy 1 10 10
+08:08:40.092 WARNING | The best plan was found during the last reset iteration!
+08:08:40.092 CONFIG | Gipsy WORSE  409.5
+08:08:40.092 CONFIG | Gipsy BEST   0.0
+08:08:40.092 CONFIG | Gipsy AVG    151.55
+08:08:40.092 CONFIG | Gipsy NORMAL 770.0
+08:08:40.092 CONFIG | Gipsy PRED   517.65
+08:08:40.092 CONFIG | 	Marginal Cost : 517.65
+08:08:40.092 CONFIG | 	minBid : 895
+08:08:40.092 CONFIG | 	final bid : 706.325
+08:08:40.092 CONFIG | Gipsy has bid 707
+08:08:40.093 CONFIG | Safe Gambler bid 1582 for n° 2 and lost [total = 0]
+08:08:40.093 CONFIG | Safe Gambler is bidding...
+08:08:40.100 CONFIG | 	Marginal Cost : 1224.5
+08:08:40.100 CONFIG | 	minBid : 707
+08:08:40.100 CONFIG | 	final bid : 1224.5
+08:08:40.100 CONFIG | Safe Gambler has bid 1225
+08:08:40.100 CONFIG | Gipsy bid 707 for n° 2 and won [total = 2]
+08:08:40.100 CONFIG | Gipsy is bidding...
+08:08:42.948 WARNING | The best plan was found during the last reset iteration!
+08:08:43.780 CONFIG | Gipsy 2 10 10
+08:08:43.780 WARNING | The best plan was found during the last reset iteration!
+08:08:43.780 CONFIG | Gipsy WORSE  1414.0
+08:08:43.781 CONFIG | Gipsy BEST   0.0
+08:08:43.781 CONFIG | Gipsy AVG    469.1
+08:08:43.781 CONFIG | Gipsy NORMAL 604.0
+08:08:43.781 CONFIG | Gipsy PRED   604.0
+08:08:43.781 CONFIG | 	Marginal Cost : 604.0
+08:08:43.781 CONFIG | 	minBid : 895
+08:08:43.781 CONFIG | 	final bid : 749.5
+08:08:43.781 CONFIG | Gipsy has bid 750
+08:08:43.781 CONFIG | Safe Gambler bid 1225 for n° 3 and lost [total = 0]
+08:08:43.781 CONFIG | Safe Gambler is bidding...
+08:08:43.786 CONFIG | 	Marginal Cost : 1214.5
+08:08:43.786 CONFIG | 	minBid : 707
+08:08:43.786 CONFIG | 	final bid : 1214.5
+08:08:43.786 CONFIG | Safe Gambler has bid 1215
+08:08:43.786 CONFIG | Gipsy bid 750 for n° 3 and won [total = 3]
+08:08:43.786 CONFIG | Gipsy is bidding...
+08:08:43.819 CONFIG | 	Marginal Cost : 0.0
+08:08:43.819 CONFIG | 	minBid : 895
+08:08:43.819 CONFIG | 	final bid : 447.5
+08:08:43.819 CONFIG | Gipsy has bid 448
+08:08:43.820 CONFIG | Safe Gambler bid 1215 for n° 4 and lost [total = 0]
+08:08:43.820 CONFIG | Safe Gambler is bidding...
+08:08:43.822 CONFIG | 	Marginal Cost : 456.0
+08:08:43.822 CONFIG | 	minBid : 448
+08:08:43.822 CONFIG | 	final bid : 456.0
+08:08:43.822 CONFIG | Safe Gambler has bid 456
+08:08:43.823 CONFIG | Gipsy bid 448 for n° 4 and won [total = 4]
+08:08:43.823 CONFIG | Gipsy is bidding...
+08:08:43.999 WARNING | The best plan was found during the last reset iteration!
+08:08:44.838 WARNING | The best plan was found during the last reset iteration!
+08:08:45.029 WARNING | The best plan was found during the last reset iteration!
+08:08:47.641 CONFIG | Gipsy 4 10 10
+08:08:47.641 CONFIG | Gipsy WORSE  956.5
+08:08:47.641 CONFIG | Gipsy BEST   112.0
+08:08:47.641 CONFIG | Gipsy AVG    409.1
+08:08:47.641 CONFIG | Gipsy NORMAL 285.0
+08:08:47.641 CONFIG | Gipsy PRED   285.0
+08:08:47.641 CONFIG | 	Marginal Cost : 285.0
+08:08:47.641 CONFIG | 	minBid : 895
+08:08:47.641 CONFIG | 	final bid : 590.0
+08:08:47.641 CONFIG | Gipsy has bid 590
+08:08:47.642 CONFIG | Safe Gambler bid 456 for n° 5 and won [total = 1]
+08:08:47.642 CONFIG | Safe Gambler is bidding...
+08:08:47.661 CONFIG | 	Marginal Cost : 1341.5
+08:08:47.661 CONFIG | 	minBid : 448
+08:08:47.661 CONFIG | 	final bid : 1341.5
+08:08:47.661 CONFIG | Safe Gambler has bid 1342
+08:08:47.661 CONFIG | Gipsy bid 590 for n° 5 and lost [total = 4]
+08:08:47.661 CONFIG | Gipsy is bidding...
+08:08:47.975 WARNING | The best plan was found during the last reset iteration!
+08:08:48.361 WARNING | The best plan was found during the last reset iteration!
+08:08:48.563 WARNING | The best plan was found during the last reset iteration!
+08:08:48.795 WARNING | The best plan was found during the last reset iteration!
+08:08:49.301 WARNING | The best plan was found during the last reset iteration!
+08:08:51.149 CONFIG | Gipsy 4 10 10
+08:08:51.149 CONFIG | Gipsy WORSE  1533.5
+08:08:51.149 CONFIG | Gipsy BEST   335.5
+08:08:51.149 CONFIG | Gipsy AVG    936.8
+08:08:51.149 CONFIG | Gipsy NORMAL 497.0
+08:08:51.149 CONFIG | Gipsy PRED   497.0
+08:08:51.149 CONFIG | 	Marginal Cost : 497.0
+08:08:51.149 CONFIG | 	minBid : 456
+08:08:51.150 CONFIG | 	final bid : 497.0
+08:08:51.150 CONFIG | Gipsy has bid 497
+08:08:51.150 CONFIG | Safe Gambler bid 1342 for n° 6 and lost [total = 1]
+08:08:51.150 CONFIG | Safe Gambler is bidding...
+08:08:51.164 CONFIG | 	Marginal Cost : 148.0
+08:08:51.164 CONFIG | 	minBid : 448
+08:08:51.165 CONFIG | 	final bid : 298.0
+08:08:51.165 CONFIG | Safe Gambler has bid 298
+08:08:51.165 CONFIG | Gipsy bid 497 for n° 6 and won [total = 5]
+08:08:51.166 CONFIG | Gipsy is bidding...
+08:08:51.244 CONFIG | 	Marginal Cost : 0.0
+08:08:51.244 CONFIG | 	minBid : 456
+08:08:51.244 CONFIG | 	final bid : 228.0
+08:08:51.244 CONFIG | Gipsy has bid 228
+08:08:51.244 CONFIG | Safe Gambler bid 298 for n° 7 and lost [total = 1]
+08:08:51.244 CONFIG | Safe Gambler is bidding...
+08:08:51.251 CONFIG | 	Marginal Cost : 1013.0
+08:08:51.252 CONFIG | 	minBid : 228
+08:08:51.252 CONFIG | 	final bid : 1013.0
+08:08:51.252 CONFIG | Safe Gambler has bid 1013
+08:08:51.252 CONFIG | Gipsy bid 228 for n° 7 and won [total = 6]
+08:08:51.252 CONFIG | Gipsy is bidding...
+08:08:52.237 WARNING | The best plan was found during the last reset iteration!
+08:08:53.124 WARNING | The best plan was found during the last reset iteration!
+08:08:54.821 CONFIG | Gipsy 6 10 10
+08:08:54.821 CONFIG | Gipsy WORSE  687.0
+08:08:54.821 CONFIG | Gipsy BEST   0.0
+08:08:54.821 CONFIG | Gipsy AVG    265.4
+08:08:54.821 CONFIG | Gipsy NORMAL 541.5
+08:08:54.821 CONFIG | Gipsy PRED   541.5
+08:08:54.821 CONFIG | 	Marginal Cost : 541.5
+08:08:54.821 CONFIG | 	minBid : 298
+08:08:54.821 CONFIG | 	final bid : 541.5
+08:08:54.821 CONFIG | Gipsy has bid 542
+08:08:54.822 CONFIG | Safe Gambler bid 1013 for n° 8 and lost [total = 1]
+08:08:54.822 CONFIG | Safe Gambler is bidding...
+08:08:54.828 CONFIG | 	Marginal Cost : 667.0
+08:08:54.828 CONFIG | 	minBid : 228
+08:08:54.828 CONFIG | 	final bid : 667.0
+08:08:54.829 CONFIG | Safe Gambler has bid 667
+08:08:54.829 CONFIG | Gipsy bid 542 for n° 8 and won [total = 7]
+08:08:54.829 CONFIG | Gipsy is bidding...
+08:08:56.313 WARNING | The best plan was found during the last reset iteration!
+08:08:57.584 WARNING | The best plan was found during the last reset iteration!
+08:08:58.903 WARNING | The best plan was found during the last reset iteration!
+08:08:59.187 WARNING | The best plan was found during the last reset iteration!
+08:08:59.187 CONFIG | Gipsy 7 10 10
+08:08:59.187 CONFIG | Gipsy WORSE  615.0
+08:08:59.187 CONFIG | Gipsy BEST   63.0
+08:08:59.187 CONFIG | Gipsy AVG    313.4
+08:08:59.187 CONFIG | Gipsy NORMAL 400.5
+08:08:59.187 CONFIG | Gipsy PRED   400.5
+08:08:59.187 CONFIG | 	Marginal Cost : 400.5
+08:08:59.187 CONFIG | 	minBid : 298
+08:08:59.188 CONFIG | 	final bid : 400.5
+08:08:59.188 CONFIG | Gipsy has bid 401
+08:08:59.188 CONFIG | Safe Gambler bid 667 for n° 9 and lost [total = 1]
+08:08:59.188 CONFIG | Safe Gambler is bidding...
+08:08:59.194 CONFIG | 	Marginal Cost : 884.0
+08:08:59.194 CONFIG | 	minBid : 228
+08:08:59.194 CONFIG | 	final bid : 884.0
+08:08:59.194 CONFIG | Safe Gambler has bid 884
+08:08:59.195 CONFIG | Gipsy bid 401 for n° 9 and won [total = 8]
+08:08:59.195 CONFIG | Gipsy is bidding...
+08:08:59.328 WARNING | The best plan was found during the last reset iteration!
+08:08:59.444 WARNING | The best plan was found during the last reset iteration!
+08:09:00.217 WARNING | The best plan was found during the last reset iteration!
+08:09:01.630 WARNING | The best plan was found during the last reset iteration!
+08:09:02.025 WARNING | The best plan was found during the last reset iteration!
+08:09:02.919 CONFIG | Gipsy 8 10 10
+08:09:02.919 CONFIG | Gipsy WORSE  1064.5
+08:09:02.919 CONFIG | Gipsy BEST   0.0
+08:09:02.919 CONFIG | Gipsy AVG    481.95
+08:09:02.919 CONFIG | Gipsy NORMAL 282.0
+08:09:02.919 CONFIG | Gipsy PRED   282.0
+08:09:02.919 CONFIG | 	Marginal Cost : 282.0
+08:09:02.919 CONFIG | 	minBid : 298
+08:09:02.919 CONFIG | 	final bid : 290.0
+08:09:02.919 CONFIG | Gipsy has bid 290
+08:09:02.920 CONFIG | Safe Gambler bid 884 for n° 10 and lost [total = 1]
+08:09:02.920 CONFIG | Safe Gambler is bidding...
+08:09:02.927 CONFIG | 	Marginal Cost : 835.5
+08:09:02.927 CONFIG | 	minBid : 228
+08:09:02.927 CONFIG | 	final bid : 835.5
+08:09:02.927 CONFIG | Safe Gambler has bid 836
+08:09:02.928 CONFIG | Gipsy bid 290 for n° 10 and won [total = 9]
+08:09:02.928 CONFIG | Gipsy is bidding...
+08:09:03.028 WARNING | The best plan was found during the last reset iteration!
+08:09:03.143 WARNING | The best plan was found during the last reset iteration!
+08:09:03.503 WARNING | The best plan was found during the last reset iteration!
+08:09:06.371 WARNING | The best plan was found during the last reset iteration!
+08:09:06.371 CONFIG | Gipsy 9 10 10
+08:09:06.372 CONFIG | Gipsy WORSE  1325.5
+08:09:06.372 CONFIG | Gipsy BEST   21.5
+08:09:06.372 CONFIG | Gipsy AVG    600.05
+08:09:06.372 CONFIG | Gipsy NORMAL 926.0
+08:09:06.372 CONFIG | Gipsy PRED   926.0
+08:09:06.372 CONFIG | 	Marginal Cost : 926.0
+08:09:06.372 CONFIG | 	minBid : 298
+08:09:06.372 CONFIG | 	final bid : 926.0
+08:09:06.372 CONFIG | Gipsy has bid 926
+08:09:06.372 CONFIG | Safe Gambler bid 836 for n° 11 and won [total = 2]
+08:09:06.372 CONFIG | Safe Gambler is bidding...
+08:09:06.393 CONFIG | 	Marginal Cost : 570.0
+08:09:06.393 CONFIG | 	minBid : 228
+08:09:06.393 CONFIG | 	final bid : 570.0
+08:09:06.393 CONFIG | Safe Gambler has bid 570
+08:09:06.394 CONFIG | Gipsy bid 926 for n° 11 and lost [total = 9]
+08:09:06.394 CONFIG | Gipsy is bidding...
+08:09:06.648 WARNING | The best plan was found during the last reset iteration!
+08:09:07.336 WARNING | The best plan was found during the last reset iteration!
+08:09:08.082 WARNING | The best plan was found during the last reset iteration!
+08:09:09.086 WARNING | The best plan was found during the last reset iteration!
+08:09:09.584 CONFIG | Gipsy 9 10 10
+08:09:09.584 CONFIG | Gipsy WORSE  434.0
+08:09:09.584 CONFIG | Gipsy BEST   0.0
+08:09:09.584 CONFIG | Gipsy AVG    225.1
+08:09:09.584 CONFIG | Gipsy NORMAL 136.0
+08:09:09.584 CONFIG | Gipsy PRED   136.0
+08:09:09.584 CONFIG | 	Marginal Cost : 136.0
+08:09:09.584 CONFIG | 	minBid : 298
+08:09:09.584 CONFIG | 	final bid : 217.0
+08:09:09.584 CONFIG | Gipsy has bid 217
+08:09:09.584 CONFIG | Safe Gambler bid 570 for n° 12 and lost [total = 2]
+08:09:09.584 CONFIG | Safe Gambler is bidding...
+08:09:09.601 CONFIG | 	Marginal Cost : 536.5
+08:09:09.601 CONFIG | 	minBid : 217
+08:09:09.601 CONFIG | 	final bid : 536.5
+08:09:09.601 CONFIG | Safe Gambler has bid 537
+08:09:09.601 CONFIG | Gipsy bid 217 for n° 12 and won [total = 10]
+08:09:09.601 CONFIG | Gipsy is bidding...
+08:09:09.961 CONFIG | 	Marginal Cost : 137.0
+08:09:09.962 CONFIG | 	minBid : 298
+08:09:09.962 CONFIG | 	final bid : 217.5
+08:09:09.962 CONFIG | Gipsy has bid 218
+08:09:09.962 CONFIG | Safe Gambler bid 537 for n° 13 and lost [total = 2]
+08:09:09.962 CONFIG | Safe Gambler is bidding...
+08:09:09.978 CONFIG | 	Marginal Cost : 897.5
+08:09:09.978 CONFIG | 	minBid : 217
+08:09:09.978 CONFIG | 	final bid : 897.5
+08:09:09.978 CONFIG | Safe Gambler has bid 898
+08:09:09.978 CONFIG | Gipsy bid 218 for n° 13 and won [total = 11]
+08:09:09.978 CONFIG | Gipsy is bidding...
+08:09:10.342 CONFIG | 	Marginal Cost : 271.5
+08:09:10.342 CONFIG | 	minBid : 537
+08:09:10.342 CONFIG | 	final bid : 404.25
+08:09:10.342 CONFIG | Gipsy has bid 405
+08:09:10.342 CONFIG | Safe Gambler bid 898 for n° 14 and lost [total = 2]
+08:09:10.342 CONFIG | Safe Gambler is bidding...
+08:09:10.358 CONFIG | 	Marginal Cost : 351.0
+08:09:10.358 CONFIG | 	minBid : 217
+08:09:10.358 CONFIG | 	final bid : 351.0
+08:09:10.358 CONFIG | Safe Gambler has bid 351
+08:09:10.359 CONFIG | Gipsy bid 405 for n° 14 and won [total = 12]
+08:09:10.359 CONFIG | Gipsy is bidding...
+08:09:11.010 CONFIG | 	Marginal Cost : 462.5
+08:09:11.010 CONFIG | 	minBid : 537
+08:09:11.010 CONFIG | 	final bid : 499.75
+08:09:11.010 CONFIG | Gipsy has bid 500
+08:09:16.251 CONFIG | Safe Gambler bid 351 for n° 15 and won [total = 3]
+08:09:16.251 CONFIG | Safe Gambler got 3 tasks
+08:09:16.251 CONFIG | Generating plan for Safe Gambler
+08:09:16.332 CONFIG | Safe Gambler total cost   = 1642.5
+08:09:16.332 CONFIG | Safe Gambler total reward = 1643
+08:09:16.332 CONFIG | 	Safe Gambler PROFIT is 0.5
+08:09:16.335 CONFIG | Gipsy bid 500 for n° 15 and lost [total = 12]
+08:09:16.335 CONFIG | Gipsy got 12 tasks
+08:09:16.335 CONFIG | Generating plan for Gipsy
+08:09:18.747 CONFIG | Gipsy total cost   = 4251.5
+08:09:18.748 CONFIG | Gipsy total reward = 5464
+08:09:18.748 CONFIG | 	Gipsy PROFIT is 1212.5
+08:09:40.433 CONFIG | Wrote tournament/test/auction2-SafeGambler-Gipsy.xml
+08:09:40.866 INFO | LogistPlatform finished successfully!
+08:09:40.867 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-SafeGambler-Naive.xml -a tournament/test/agents.xml config/auction2.xml SafeGambler Naive
+08:09:41.005 CONFIG | Reading config/auction2.xml
+08:09:41.078 CONFIG | Reading config/settings_auction.xml
+08:09:41.471 CONFIG | Reading config/topology/the_netherlands.xml
+08:09:41.494 CONFIG | Reading tournament/test/agents.xml
+08:09:41.520 CONFIG | Safe Gambler agent has vehicles Vehicle 1 Vehicle 2 
+08:09:41.525 CONFIG | Naive agent has vehicles Vehicle 3 Vehicle 4 
+08:09:41.544 CONFIG | Safe Gambler is bidding...
+08:09:41.580 CONFIG | Safe Gambler has bid 895
+08:09:41.580 CONFIG | Naive is bidding...
+08:09:41.583 CONFIG | Naive has bid 954
+08:09:41.584 CONFIG | Safe Gambler bid 895 for n° 1 and won [total = 1]
+08:09:41.584 CONFIG | Safe Gambler is bidding...
+08:09:41.636 CONFIG | 	Marginal Cost : 1041.5
+08:09:41.636 CONFIG | 	minBid : 954
+08:09:41.636 CONFIG | 	final bid : 1041.5
+08:09:41.636 CONFIG | Safe Gambler has bid 1042
+08:09:41.637 CONFIG | Naive bid 954 for n° 1 and lost [total = 0]
+08:09:41.637 CONFIG | Naive is bidding...
+08:09:41.637 CONFIG | Naive has bid 1286
+08:09:41.637 CONFIG | Safe Gambler bid 1042 for n° 2 and won [total = 2]
+08:09:41.637 CONFIG | Safe Gambler is bidding...
+08:09:41.705 CONFIG | 	Marginal Cost : 842.5
+08:09:41.705 CONFIG | 	minBid : 954
+08:09:41.705 CONFIG | 	final bid : 898.25
+08:09:41.705 CONFIG | Safe Gambler has bid 899
+08:09:41.705 CONFIG | Naive bid 1286 for n° 2 and lost [total = 0]
+08:09:41.705 CONFIG | Naive is bidding...
+08:09:41.705 CONFIG | Naive has bid 1570
+08:09:41.706 CONFIG | Safe Gambler bid 899 for n° 3 and won [total = 3]
+08:09:41.706 CONFIG | Safe Gambler is bidding...
+08:09:41.766 CONFIG | 	Marginal Cost : 0.0
+08:09:41.766 CONFIG | 	minBid : 954
+08:09:41.766 CONFIG | 	final bid : 477.0
+08:09:41.766 CONFIG | Safe Gambler has bid 477
+08:09:41.766 CONFIG | Naive bid 1570 for n° 3 and lost [total = 0]
+08:09:41.766 CONFIG | Naive is bidding...
+08:09:41.767 CONFIG | Naive has bid 1548
+08:09:41.767 CONFIG | Safe Gambler bid 477 for n° 4 and won [total = 4]
+08:09:41.767 CONFIG | Safe Gambler is bidding...
+08:09:41.857 CONFIG | 	Marginal Cost : 285.0
+08:09:41.857 CONFIG | 	minBid : 954
+08:09:41.857 CONFIG | 	final bid : 619.5
+08:09:41.857 CONFIG | Safe Gambler has bid 620
+08:09:41.857 CONFIG | Naive bid 1548 for n° 4 and lost [total = 0]
+08:09:41.857 CONFIG | Naive is bidding...
+08:09:41.857 CONFIG | Naive has bid 753
+08:09:41.858 CONFIG | Safe Gambler bid 620 for n° 5 and won [total = 5]
+08:09:41.858 CONFIG | Safe Gambler is bidding...
+08:09:42.013 CONFIG | 	Marginal Cost : 584.0
+08:09:42.013 CONFIG | 	minBid : 753
+08:09:42.013 CONFIG | 	final bid : 668.5
+08:09:42.013 CONFIG | Safe Gambler has bid 669
+08:09:42.014 CONFIG | Naive bid 753 for n° 5 and lost [total = 0]
+08:09:42.014 CONFIG | Naive is bidding...
+08:09:42.014 CONFIG | Naive has bid 1785
+08:09:42.014 CONFIG | Safe Gambler bid 669 for n° 6 and won [total = 6]
+08:09:42.014 CONFIG | Safe Gambler is bidding...
+08:09:42.161 CONFIG | 	Marginal Cost : 231.5
+08:09:42.161 CONFIG | 	minBid : 753
+08:09:42.161 CONFIG | 	final bid : 492.25
+08:09:42.161 CONFIG | Safe Gambler has bid 493
+08:09:42.161 CONFIG | Naive bid 1785 for n° 6 and lost [total = 0]
+08:09:42.161 CONFIG | Naive is bidding...
+08:09:42.162 CONFIG | Naive has bid 800
+08:09:42.162 CONFIG | Safe Gambler bid 493 for n° 7 and won [total = 7]
+08:09:42.162 CONFIG | Safe Gambler is bidding...
+08:09:42.467 CONFIG | 	Marginal Cost : 285.0
+08:09:42.467 CONFIG | 	minBid : 753
+08:09:42.467 CONFIG | 	final bid : 519.0
+08:09:42.467 CONFIG | Safe Gambler has bid 519
+08:09:42.467 CONFIG | Naive bid 800 for n° 7 and lost [total = 0]
+08:09:42.467 CONFIG | Naive is bidding...
+08:09:42.467 CONFIG | Naive has bid 885
+08:09:42.468 CONFIG | Safe Gambler bid 519 for n° 8 and won [total = 8]
+08:09:42.468 CONFIG | Safe Gambler is bidding...
+08:09:42.756 CONFIG | 	Marginal Cost : 104.5
+08:09:42.756 CONFIG | 	minBid : 753
+08:09:42.756 CONFIG | 	final bid : 428.75
+08:09:42.756 CONFIG | Safe Gambler has bid 429
+08:09:42.757 CONFIG | Naive bid 885 for n° 8 and lost [total = 0]
+08:09:42.757 CONFIG | Naive is bidding...
+08:09:42.757 CONFIG | Naive has bid 1266
+08:09:42.757 CONFIG | Safe Gambler bid 429 for n° 9 and won [total = 9]
+08:09:42.757 CONFIG | Safe Gambler is bidding...
+08:09:43.147 CONFIG | 	Marginal Cost : 294.0
+08:09:43.147 CONFIG | 	minBid : 753
+08:09:43.147 CONFIG | 	final bid : 523.5
+08:09:43.147 CONFIG | Safe Gambler has bid 524
+08:09:43.147 CONFIG | Naive bid 1266 for n° 9 and lost [total = 0]
+08:09:43.147 CONFIG | Naive is bidding...
+08:09:43.147 CONFIG | Naive has bid 1707
+08:09:43.148 CONFIG | Safe Gambler bid 524 for n° 10 and won [total = 10]
+08:09:43.148 CONFIG | Safe Gambler is bidding...
+08:09:43.598 CONFIG | 	Marginal Cost : 728.0
+08:09:43.598 CONFIG | 	minBid : 753
+08:09:43.598 CONFIG | 	final bid : 740.5
+08:09:43.598 CONFIG | Safe Gambler has bid 741
+08:09:43.598 CONFIG | Naive bid 1707 for n° 10 and lost [total = 0]
+08:09:43.598 CONFIG | Naive is bidding...
+08:09:43.598 CONFIG | Naive has bid 1484
+08:09:43.599 CONFIG | Safe Gambler bid 741 for n° 11 and won [total = 11]
+08:09:43.599 CONFIG | Safe Gambler is bidding...
+08:09:44.068 CONFIG | 	Marginal Cost : 219.0
+08:09:44.068 CONFIG | 	minBid : 800
+08:09:44.068 CONFIG | 	final bid : 509.5
+08:09:44.068 CONFIG | Safe Gambler has bid 510
+08:09:44.068 CONFIG | Naive bid 1484 for n° 11 and lost [total = 0]
+08:09:44.068 CONFIG | Naive is bidding...
+08:09:44.068 CONFIG | Naive has bid 1027
+08:09:44.068 CONFIG | Safe Gambler bid 510 for n° 12 and won [total = 12]
+08:09:44.068 CONFIG | Safe Gambler is bidding...
+08:09:44.727 CONFIG | 	Marginal Cost : 285.0
+08:09:44.727 CONFIG | 	minBid : 800
+08:09:44.727 CONFIG | 	final bid : 542.5
+08:09:44.727 CONFIG | Safe Gambler has bid 543
+08:09:44.727 CONFIG | Naive bid 1027 for n° 12 and lost [total = 0]
+08:09:44.727 CONFIG | Naive is bidding...
+08:09:44.728 CONFIG | Naive has bid 736
+08:09:44.728 CONFIG | Safe Gambler bid 543 for n° 13 and won [total = 13]
+08:09:44.728 CONFIG | Safe Gambler is bidding...
+08:09:45.113 WARNING | The best plan was found during the last reset iteration!
+08:09:45.400 CONFIG | 	Marginal Cost : 481.5
+08:09:45.400 CONFIG | 	minBid : 736
+08:09:45.400 CONFIG | 	final bid : 608.75
+08:09:45.401 CONFIG | Safe Gambler has bid 609
+08:09:45.401 CONFIG | Naive bid 736 for n° 13 and lost [total = 0]
+08:09:45.401 CONFIG | Naive is bidding...
+08:09:45.401 CONFIG | Naive has bid 803
+08:09:45.401 CONFIG | Safe Gambler bid 609 for n° 14 and won [total = 14]
+08:09:45.401 CONFIG | Safe Gambler is bidding...
+08:09:46.331 CONFIG | 	Marginal Cost : 635.5
+08:09:46.331 CONFIG | 	minBid : 736
+08:09:46.331 CONFIG | 	final bid : 685.75
+08:09:46.331 CONFIG | Safe Gambler has bid 686
+08:09:46.332 CONFIG | Naive bid 803 for n° 14 and lost [total = 0]
+08:09:46.332 CONFIG | Naive is bidding...
+08:09:46.332 CONFIG | Naive has bid 1324
+08:09:52.688 CONFIG | Safe Gambler bid 686 for n° 15 and won [total = 15]
+08:09:52.688 CONFIG | Safe Gambler got 15 tasks
+08:09:52.688 CONFIG | Generating plan for Safe Gambler
+08:09:55.324 CONFIG | Safe Gambler total cost   = 5781.5
+08:09:55.324 CONFIG | Safe Gambler total reward = 9656
+08:09:55.324 CONFIG | 	Safe Gambler PROFIT is 3874.5
+08:09:55.329 CONFIG | Naive bid 1324 for n° 15 and lost [total = 0]
+08:09:55.329 CONFIG | Naive got 0 tasks
+08:09:55.329 CONFIG | Generating plan for Naive
+08:09:55.329 CONFIG | Naive total cost   = 0.0
+08:09:55.330 CONFIG | Naive total reward = 0
+08:09:55.330 CONFIG | 	Naive PROFIT is 0.0
+08:10:25.717 CONFIG | Wrote tournament/test/auction2-SafeGambler-Naive.xml
+08:10:26.142 INFO | LogistPlatform finished successfully!
+08:10:26.143 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-SafeGambler-Simple.xml -a tournament/test/agents.xml config/auction2.xml SafeGambler Simple
+08:10:26.282 CONFIG | Reading config/auction2.xml
+08:10:26.348 CONFIG | Reading config/settings_auction.xml
+08:10:26.870 CONFIG | Reading config/topology/the_netherlands.xml
+08:10:26.891 CONFIG | Reading tournament/test/agents.xml
+08:10:26.915 CONFIG | Safe Gambler agent has vehicles Vehicle 1 Vehicle 2 
+08:10:26.922 CONFIG | Simple agent has vehicles Vehicle 3 Vehicle 4 
+08:10:26.937 CONFIG | Safe Gambler is bidding...
+08:10:26.970 CONFIG | Safe Gambler has bid 895
+08:10:26.971 CONFIG | Simple is bidding...
+08:10:26.992 CONFIG | Simple has bid 954
+08:10:26.992 CONFIG | Safe Gambler bid 895 for n° 1 and won [total = 1]
+08:10:26.993 CONFIG | Safe Gambler is bidding...
+08:10:27.036 CONFIG | 	Marginal Cost : 1041.5
+08:10:27.036 CONFIG | 	minBid : 954
+08:10:27.036 CONFIG | 	final bid : 1041.5
+08:10:27.036 CONFIG | Safe Gambler has bid 1042
+08:10:27.037 CONFIG | Simple bid 954 for n° 1 and lost [total = 0]
+08:10:27.037 CONFIG | Simple is bidding...
+08:10:27.048 CONFIG | Simple has bid 1256
+08:10:27.048 CONFIG | Safe Gambler bid 1042 for n° 2 and won [total = 2]
+08:10:27.049 CONFIG | Safe Gambler is bidding...
+08:10:27.114 CONFIG | 	Marginal Cost : 842.5
+08:10:27.114 CONFIG | 	minBid : 954
+08:10:27.114 CONFIG | 	final bid : 898.25
+08:10:27.114 CONFIG | Safe Gambler has bid 899
+08:10:27.114 CONFIG | Simple bid 1256 for n° 2 and lost [total = 0]
+08:10:27.114 CONFIG | Simple is bidding...
+08:10:27.124 CONFIG | Simple has bid 774
+08:10:27.124 CONFIG | Safe Gambler bid 899 for n° 3 and lost [total = 2]
+08:10:27.124 CONFIG | Safe Gambler is bidding...
+08:10:27.149 CONFIG | 	Marginal Cost : 113.5
+08:10:27.149 CONFIG | 	minBid : 774
+08:10:27.149 CONFIG | 	final bid : 443.75
+08:10:27.149 CONFIG | Safe Gambler has bid 444
+08:10:27.149 CONFIG | Simple bid 774 for n° 3 and won [total = 1]
+08:10:27.149 CONFIG | Simple is bidding...
+08:10:27.172 CONFIG | Simple has bid 1256
+08:10:27.172 CONFIG | Safe Gambler bid 444 for n° 4 and won [total = 3]
+08:10:27.172 CONFIG | Safe Gambler is bidding...
+08:10:27.234 CONFIG | 	Marginal Cost : 438.0
+08:10:27.234 CONFIG | 	minBid : 774
+08:10:27.234 CONFIG | 	final bid : 606.0
+08:10:27.234 CONFIG | Safe Gambler has bid 606
+08:10:27.234 CONFIG | Simple bid 1256 for n° 4 and lost [total = 1]
+08:10:27.234 CONFIG | Simple is bidding...
+08:10:27.248 CONFIG | Simple has bid 116
+08:10:27.249 CONFIG | Safe Gambler bid 606 for n° 5 and lost [total = 3]
+08:10:27.249 CONFIG | Safe Gambler is bidding...
+08:10:27.285 CONFIG | 	Marginal Cost : 755.5
+08:10:27.285 CONFIG | 	minBid : 116
+08:10:27.285 CONFIG | 	final bid : 755.5
+08:10:27.285 CONFIG | Safe Gambler has bid 756
+08:10:27.286 CONFIG | Simple bid 116 for n° 5 and won [total = 2]
+08:10:27.286 CONFIG | Simple is bidding...
+08:10:27.345 CONFIG | Simple has bid 1523
+08:10:27.345 CONFIG | Safe Gambler bid 756 for n° 6 and won [total = 4]
+08:10:27.345 CONFIG | Safe Gambler is bidding...
+08:10:27.431 CONFIG | 	Marginal Cost : 0.0
+08:10:27.431 CONFIG | 	minBid : 116
+08:10:27.431 CONFIG | 	final bid : 58.0
+08:10:27.431 CONFIG | Safe Gambler has bid 58
+08:10:27.431 CONFIG | Simple bid 1523 for n° 6 and lost [total = 2]
+08:10:27.431 CONFIG | Simple is bidding...
+08:10:27.453 CONFIG | Simple has bid 282
+08:10:27.454 CONFIG | Safe Gambler bid 58 for n° 7 and won [total = 5]
+08:10:27.454 CONFIG | Safe Gambler is bidding...
+08:10:27.550 CONFIG | 	Marginal Cost : 0.0
+08:10:27.550 CONFIG | 	minBid : 116
+08:10:27.550 CONFIG | 	final bid : 58.0
+08:10:27.550 CONFIG | Safe Gambler has bid 58
+08:10:27.550 CONFIG | Simple bid 282 for n° 7 and lost [total = 2]
+08:10:27.550 CONFIG | Simple is bidding...
+08:10:27.591 CONFIG | Simple has bid 687
+08:10:27.591 CONFIG | Safe Gambler bid 58 for n° 8 and won [total = 6]
+08:10:27.591 CONFIG | Safe Gambler is bidding...
+08:10:27.755 WARNING | The best plan was found during the last reset iteration!
+08:10:27.755 CONFIG | 	Marginal Cost : 579.0
+08:10:27.756 CONFIG | 	minBid : 116
+08:10:27.756 CONFIG | 	final bid : 579.0
+08:10:27.756 CONFIG | Safe Gambler has bid 579
+08:10:27.756 CONFIG | Simple bid 687 for n° 8 and lost [total = 2]
+08:10:27.756 CONFIG | Simple is bidding...
+08:10:27.772 CONFIG | Simple has bid 148
+08:10:27.773 CONFIG | Safe Gambler bid 579 for n° 9 and lost [total = 6]
+08:10:27.773 CONFIG | Safe Gambler is bidding...
+08:10:27.830 CONFIG | 	Marginal Cost : 941.0
+08:10:27.830 CONFIG | 	minBid : 116
+08:10:27.830 CONFIG | 	final bid : 941.0
+08:10:27.830 CONFIG | Safe Gambler has bid 941
+08:10:27.830 CONFIG | Simple bid 148 for n° 9 and won [total = 3]
+08:10:27.830 CONFIG | Simple is bidding...
+08:10:27.881 CONFIG | Simple has bid 134
+08:10:27.882 CONFIG | Safe Gambler bid 941 for n° 10 and lost [total = 6]
+08:10:27.882 CONFIG | Safe Gambler is bidding...
+08:10:27.977 CONFIG | 	Marginal Cost : 754.5
+08:10:27.977 CONFIG | 	minBid : 116
+08:10:27.977 CONFIG | 	final bid : 754.5
+08:10:27.977 CONFIG | Safe Gambler has bid 755
+08:10:27.977 CONFIG | Simple bid 134 for n° 10 and won [total = 4]
+08:10:27.977 CONFIG | Simple is bidding...
+08:10:28.081 CONFIG | Simple has bid 1000
+08:10:28.082 CONFIG | Safe Gambler bid 755 for n° 11 and won [total = 7]
+08:10:28.082 CONFIG | Safe Gambler is bidding...
+08:10:28.239 CONFIG | 	Marginal Cost : 321.0
+08:10:28.239 CONFIG | 	minBid : 134
+08:10:28.239 CONFIG | 	final bid : 321.0
+08:10:28.239 CONFIG | Safe Gambler has bid 321
+08:10:28.240 CONFIG | Simple bid 1000 for n° 11 and lost [total = 4]
+08:10:28.240 CONFIG | Simple is bidding...
+08:10:28.271 CONFIG | Simple has bid 851
+08:10:28.271 CONFIG | Safe Gambler bid 321 for n° 12 and won [total = 8]
+08:10:28.271 CONFIG | Safe Gambler is bidding...
+08:10:28.498 CONFIG | 	Marginal Cost : 187.0
+08:10:28.498 CONFIG | 	minBid : 134
+08:10:28.498 CONFIG | 	final bid : 187.0
+08:10:28.498 CONFIG | Safe Gambler has bid 187
+08:10:28.499 CONFIG | Simple bid 851 for n° 12 and lost [total = 4]
+08:10:28.499 CONFIG | Simple is bidding...
+08:10:28.552 CONFIG | Simple has bid 417
+08:10:28.553 CONFIG | Safe Gambler bid 187 for n° 13 and won [total = 9]
+08:10:28.553 CONFIG | Safe Gambler is bidding...
+08:10:28.814 CONFIG | 	Marginal Cost : 481.5
+08:10:28.814 CONFIG | 	minBid : 134
+08:10:28.814 CONFIG | 	final bid : 481.5
+08:10:28.814 CONFIG | Safe Gambler has bid 482
+08:10:28.814 CONFIG | Simple bid 417 for n° 13 and lost [total = 4]
+08:10:28.814 CONFIG | Simple is bidding...
+08:10:28.854 CONFIG | Simple has bid 662
+08:10:28.854 CONFIG | Safe Gambler bid 482 for n° 14 and won [total = 10]
+08:10:28.854 CONFIG | Safe Gambler is bidding...
+08:10:29.228 CONFIG | 	Marginal Cost : 606.5
+08:10:29.228 CONFIG | 	minBid : 134
+08:10:29.228 CONFIG | 	final bid : 606.5
+08:10:29.228 CONFIG | Safe Gambler has bid 607
+08:10:29.229 CONFIG | Simple bid 662 for n° 14 and lost [total = 4]
+08:10:29.229 CONFIG | Simple is bidding...
+08:10:29.257 CONFIG | Simple has bid 1032
+08:10:34.223 CONFIG | Safe Gambler bid 607 for n° 15 and won [total = 11]
+08:10:34.223 CONFIG | Safe Gambler got 11 tasks
+08:10:34.223 CONFIG | Generating plan for Safe Gambler
+08:10:35.734 CONFIG | Safe Gambler total cost   = 4654.5
+08:10:35.734 CONFIG | Safe Gambler total reward = 5605
+08:10:35.734 CONFIG | 	Safe Gambler PROFIT is 950.5
+08:10:35.737 CONFIG | Simple bid 1032 for n° 15 and lost [total = 4]
+08:10:35.738 CONFIG | Simple got 4 tasks
+08:10:35.738 CONFIG | Generating plan for Simple
+08:10:35.885 CONFIG | Simple total cost   = 1171.0
+08:10:35.885 CONFIG | Simple total reward = 1172
+08:10:35.885 CONFIG | 	Simple PROFIT is 1.0
+08:10:58.585 CONFIG | Wrote tournament/test/auction2-SafeGambler-Simple.xml
+08:10:58.900 INFO | LogistPlatform finished successfully!
+08:10:58.901 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Simple-Gipsy.xml -a tournament/test/agents.xml config/auction2.xml Simple Gipsy
+08:10:59.032 CONFIG | Reading config/auction2.xml
+08:10:59.115 CONFIG | Reading config/settings_auction.xml
+08:10:59.592 CONFIG | Reading config/topology/the_netherlands.xml
+08:10:59.607 CONFIG | Reading tournament/test/agents.xml
+08:10:59.634 CONFIG | Simple agent has vehicles Vehicle 1 Vehicle 2 
+08:10:59.641 CONFIG | Gipsy agent has vehicles Vehicle 3 Vehicle 4 
+08:10:59.658 CONFIG | Simple is bidding...
+08:10:59.696 CONFIG | Simple has bid 895
+08:10:59.696 CONFIG | Gipsy is bidding...
+08:11:00.153 WARNING | The best plan was found during the last reset iteration!
+08:11:01.210 WARNING | The best plan was found during the last reset iteration!
+08:11:01.856 WARNING | The best plan was found during the last reset iteration!
+08:11:03.481 WARNING | The best plan was found during the last reset iteration!
+08:11:03.989 CONFIG | Gipsy 0 10 10
+08:11:03.989 CONFIG | Gipsy WORSE  543.5
+08:11:03.989 CONFIG | Gipsy BEST   0.0
+08:11:03.989 CONFIG | Gipsy AVG    296.55
+08:11:03.989 CONFIG | Gipsy NORMAL 954.0
+08:11:03.989 CONFIG | Gipsy PRED   666.6500000000001
+08:11:03.989 CONFIG | Gipsy has bid 667
+08:11:03.990 CONFIG | Simple bid 895 for n° 1 and lost [total = 0]
+08:11:03.990 CONFIG | Simple is bidding...
+08:11:03.998 CONFIG | Simple has bid 1582
+08:11:03.999 CONFIG | Gipsy bid 667 for n° 1 and won [total = 1]
+08:11:03.999 CONFIG | Gipsy is bidding...
+08:11:04.250 WARNING | The best plan was found during the last reset iteration!
+08:11:04.606 WARNING | The best plan was found during the last reset iteration!
+08:11:06.171 WARNING | The best plan was found during the last reset iteration!
+08:11:07.324 WARNING | The best plan was found during the last reset iteration!
+08:11:07.890 CONFIG | Gipsy 1 10 10
+08:11:07.890 CONFIG | Gipsy WORSE  985.5
+08:11:07.890 CONFIG | Gipsy BEST   0.0
+08:11:07.890 CONFIG | Gipsy AVG    291.85
+08:11:07.890 CONFIG | Gipsy NORMAL 770.0
+08:11:07.890 CONFIG | Gipsy PRED   770.0
+08:11:07.890 CONFIG | 	Marginal Cost : 770.0
+08:11:07.890 CONFIG | 	minBid : 895
+08:11:07.890 CONFIG | 	final bid : 832.5
+08:11:07.890 CONFIG | Gipsy has bid 833
+08:11:07.891 CONFIG | Simple bid 1582 for n° 2 and lost [total = 0]
+08:11:07.891 CONFIG | Simple is bidding...
+08:11:07.898 CONFIG | Simple has bid 1225
+08:11:07.898 CONFIG | Gipsy bid 833 for n° 2 and won [total = 2]
+08:11:07.898 CONFIG | Gipsy is bidding...
+08:11:09.449 WARNING | The best plan was found during the last reset iteration!
+08:11:10.042 WARNING | The best plan was found during the last reset iteration!
+08:11:11.188 WARNING | The best plan was found during the last reset iteration!
+08:11:11.687 CONFIG | Gipsy 2 10 10
+08:11:11.687 CONFIG | Gipsy WORSE  1278.5
+08:11:11.687 CONFIG | Gipsy BEST   0.0
+08:11:11.687 CONFIG | Gipsy AVG    406.15
+08:11:11.687 CONFIG | Gipsy NORMAL 604.0
+08:11:11.687 CONFIG | Gipsy PRED   604.0
+08:11:11.687 CONFIG | 	Marginal Cost : 604.0
+08:11:11.687 CONFIG | 	minBid : 895
+08:11:11.687 CONFIG | 	final bid : 749.5
+08:11:11.687 CONFIG | Gipsy has bid 750
+08:11:11.688 CONFIG | Simple bid 1225 for n° 3 and lost [total = 0]
+08:11:11.688 CONFIG | Simple is bidding...
+08:11:11.692 CONFIG | Simple has bid 1215
+08:11:11.692 CONFIG | Gipsy bid 750 for n° 3 and won [total = 3]
+08:11:11.692 CONFIG | Gipsy is bidding...
+08:11:11.722 CONFIG | 	Marginal Cost : 0.0
+08:11:11.723 CONFIG | 	minBid : 895
+08:11:11.723 CONFIG | 	final bid : 447.5
+08:11:11.723 CONFIG | Gipsy has bid 448
+08:11:11.723 CONFIG | Simple bid 1215 for n° 4 and lost [total = 0]
+08:11:11.723 CONFIG | Simple is bidding...
+08:11:11.727 CONFIG | Simple has bid 456
+08:11:11.727 CONFIG | Gipsy bid 448 for n° 4 and won [total = 4]
+08:11:11.727 CONFIG | Gipsy is bidding...
+08:11:11.949 WARNING | The best plan was found during the last reset iteration!
+08:11:13.111 WARNING | The best plan was found during the last reset iteration!
+08:11:13.697 WARNING | The best plan was found during the last reset iteration!
+08:11:14.401 WARNING | The best plan was found during the last reset iteration!
+08:11:15.631 CONFIG | Gipsy 4 10 10
+08:11:15.631 CONFIG | Gipsy WORSE  656.5
+08:11:15.631 CONFIG | Gipsy BEST   92.5
+08:11:15.631 CONFIG | Gipsy AVG    328.3
+08:11:15.631 CONFIG | Gipsy NORMAL 285.0
+08:11:15.631 CONFIG | Gipsy PRED   285.0
+08:11:15.631 CONFIG | 	Marginal Cost : 285.0
+08:11:15.631 CONFIG | 	minBid : 895
+08:11:15.631 CONFIG | 	final bid : 590.0
+08:11:15.631 CONFIG | Gipsy has bid 590
+08:11:15.632 CONFIG | Simple bid 456 for n° 5 and won [total = 1]
+08:11:15.632 CONFIG | Simple is bidding...
+08:11:15.648 CONFIG | Simple has bid 1342
+08:11:15.649 CONFIG | Gipsy bid 590 for n° 5 and lost [total = 4]
+08:11:15.649 CONFIG | Gipsy is bidding...
+08:11:16.642 WARNING | The best plan was found during the last reset iteration!
+08:11:17.191 WARNING | The best plan was found during the last reset iteration!
+08:11:17.640 WARNING | The best plan was found during the last reset iteration!
+08:11:17.800 WARNING | The best plan was found during the last reset iteration!
+08:11:17.958 WARNING | The best plan was found during the last reset iteration!
+08:11:18.248 WARNING | The best plan was found during the last reset iteration!
+08:11:19.351 CONFIG | Gipsy 4 10 10
+08:11:19.351 CONFIG | Gipsy WORSE  1677.5
+08:11:19.351 CONFIG | Gipsy BEST   351.0
+08:11:19.351 CONFIG | Gipsy AVG    873.15
+08:11:19.351 CONFIG | Gipsy NORMAL 497.0
+08:11:19.351 CONFIG | Gipsy PRED   497.0
+08:11:19.351 CONFIG | 	Marginal Cost : 497.0
+08:11:19.351 CONFIG | 	minBid : 456
+08:11:19.351 CONFIG | 	final bid : 497.0
+08:11:19.351 CONFIG | Gipsy has bid 497
+08:11:19.352 CONFIG | Simple bid 1342 for n° 6 and lost [total = 1]
+08:11:19.352 CONFIG | Simple is bidding...
+08:11:19.366 CONFIG | Simple has bid 148
+08:11:19.367 CONFIG | Gipsy bid 497 for n° 6 and won [total = 5]
+08:11:19.367 CONFIG | Gipsy is bidding...
+08:11:19.435 CONFIG | 	Marginal Cost : 0.0
+08:11:19.435 CONFIG | 	minBid : 456
+08:11:19.435 CONFIG | 	final bid : 228.0
+08:11:19.435 CONFIG | Gipsy has bid 228
+08:11:19.435 CONFIG | Simple bid 148 for n° 7 and won [total = 2]
+08:11:19.435 CONFIG | Simple is bidding...
+08:11:19.459 CONFIG | Simple has bid 1013
+08:11:19.459 CONFIG | Gipsy bid 228 for n° 7 and lost [total = 5]
+08:11:19.459 CONFIG | Gipsy is bidding...
+08:11:19.959 WARNING | The best plan was found during the last reset iteration!
+08:11:20.094 WARNING | The best plan was found during the last reset iteration!
+08:11:20.821 WARNING | The best plan was found during the last reset iteration!
+08:11:21.623 WARNING | The best plan was found during the last reset iteration!
+08:11:23.045 CONFIG | Gipsy 5 10 10
+08:11:23.045 CONFIG | Gipsy WORSE  479.0
+08:11:23.046 CONFIG | Gipsy BEST   0.0
+08:11:23.046 CONFIG | Gipsy AVG    224.35
+08:11:23.046 CONFIG | Gipsy NORMAL 372.0
+08:11:23.046 CONFIG | Gipsy PRED   372.0
+08:11:23.046 CONFIG | 	Marginal Cost : 372.0
+08:11:23.046 CONFIG | 	minBid : 148
+08:11:23.046 CONFIG | 	final bid : 372.0
+08:11:23.046 CONFIG | Gipsy has bid 372
+08:11:23.046 CONFIG | Simple bid 1013 for n° 8 and lost [total = 2]
+08:11:23.046 CONFIG | Simple is bidding...
+08:11:23.059 CONFIG | Simple has bid 667
+08:11:23.060 CONFIG | Gipsy bid 372 for n° 8 and won [total = 6]
+08:11:23.060 CONFIG | Gipsy is bidding...
+08:11:24.230 WARNING | The best plan was found during the last reset iteration!
+08:11:24.610 WARNING | The best plan was found during the last reset iteration!
+08:11:26.552 WARNING | The best plan was found during the last reset iteration!
+08:11:26.552 CONFIG | Gipsy 6 10 10
+08:11:26.553 CONFIG | Gipsy WORSE  519.0
+08:11:26.553 CONFIG | Gipsy BEST   18.0
+08:11:26.553 CONFIG | Gipsy AVG    243.1
+08:11:26.553 CONFIG | Gipsy NORMAL 282.0
+08:11:26.553 CONFIG | Gipsy PRED   282.0
+08:11:26.553 CONFIG | 	Marginal Cost : 282.0
+08:11:26.553 CONFIG | 	minBid : 148
+08:11:26.553 CONFIG | 	final bid : 282.0
+08:11:26.553 CONFIG | Gipsy has bid 282
+08:11:26.553 CONFIG | Simple bid 667 for n° 9 and lost [total = 2]
+08:11:26.553 CONFIG | Simple is bidding...
+08:11:26.567 CONFIG | Simple has bid 845
+08:11:26.567 CONFIG | Gipsy bid 282 for n° 9 and won [total = 7]
+08:11:26.567 CONFIG | Gipsy is bidding...
+08:11:27.035 WARNING | The best plan was found during the last reset iteration!
+08:11:28.878 WARNING | The best plan was found during the last reset iteration!
+08:11:30.057 CONFIG | Gipsy 7 10 10
+08:11:30.057 CONFIG | Gipsy WORSE  1002.0
+08:11:30.057 CONFIG | Gipsy BEST   0.0
+08:11:30.057 CONFIG | Gipsy AVG    428.3
+08:11:30.057 CONFIG | Gipsy NORMAL 271.5
+08:11:30.057 CONFIG | Gipsy PRED   271.5
+08:11:30.057 CONFIG | 	Marginal Cost : 271.5
+08:11:30.057 CONFIG | 	minBid : 148
+08:11:30.057 CONFIG | 	final bid : 271.5
+08:11:30.057 CONFIG | Gipsy has bid 272
+08:11:30.057 CONFIG | Simple bid 845 for n° 10 and lost [total = 2]
+08:11:30.057 CONFIG | Simple is bidding...
+08:11:30.071 CONFIG | Simple has bid 688
+08:11:30.071 CONFIG | Gipsy bid 272 for n° 10 and won [total = 8]
+08:11:30.071 CONFIG | Gipsy is bidding...
+08:11:30.848 WARNING | The best plan was found during the last reset iteration!
+08:11:31.902 WARNING | The best plan was found during the last reset iteration!
+08:11:33.192 WARNING | The best plan was found during the last reset iteration!
+08:11:33.376 CONFIG | Gipsy 8 10 10
+08:11:33.376 CONFIG | Gipsy WORSE  1161.5
+08:11:33.376 CONFIG | Gipsy BEST   5.5
+08:11:33.376 CONFIG | Gipsy AVG    430.35
+08:11:33.376 CONFIG | Gipsy NORMAL 756.5
+08:11:33.376 CONFIG | Gipsy PRED   756.5
+08:11:33.376 CONFIG | 	Marginal Cost : 756.5
+08:11:33.376 CONFIG | 	minBid : 148
+08:11:33.376 CONFIG | 	final bid : 756.5
+08:11:33.376 CONFIG | Gipsy has bid 757
+08:11:33.377 CONFIG | Simple bid 688 for n° 11 and won [total = 3]
+08:11:33.377 CONFIG | Simple is bidding...
+08:11:33.414 CONFIG | Simple has bid 570
+08:11:33.414 CONFIG | Gipsy bid 757 for n° 11 and lost [total = 8]
+08:11:33.415 CONFIG | Gipsy is bidding...
+08:11:33.827 WARNING | The best plan was found during the last reset iteration!
+08:11:35.550 WARNING | The best plan was found during the last reset iteration!
+08:11:36.650 WARNING | The best plan was found during the last reset iteration!
+08:11:36.849 WARNING | The best plan was found during the last reset iteration!
+08:11:36.849 CONFIG | Gipsy 8 10 10
+08:11:36.850 CONFIG | Gipsy WORSE  521.5
+08:11:36.850 CONFIG | Gipsy BEST   7.5
+08:11:36.850 CONFIG | Gipsy AVG    244.95
+08:11:36.850 CONFIG | Gipsy NORMAL 411.5
+08:11:36.850 CONFIG | Gipsy PRED   411.5
+08:11:36.850 CONFIG | 	Marginal Cost : 411.5
+08:11:36.850 CONFIG | 	minBid : 148
+08:11:36.850 CONFIG | 	final bid : 411.5
+08:11:36.850 CONFIG | Gipsy has bid 412
+08:11:36.850 CONFIG | Simple bid 570 for n° 12 and lost [total = 3]
+08:11:36.850 CONFIG | Simple is bidding...
+08:11:36.892 CONFIG | Simple has bid 537
+08:11:36.892 CONFIG | Gipsy bid 412 for n° 12 and won [total = 9]
+08:11:36.892 CONFIG | Gipsy is bidding...
+08:11:37.135 WARNING | The best plan was found during the last reset iteration!
+08:11:38.414 WARNING | The best plan was found during the last reset iteration!
+08:11:38.529 WARNING | The best plan was found during the last reset iteration!
+08:11:40.147 WARNING | The best plan was found during the last reset iteration!
+08:11:40.320 CONFIG | Gipsy 9 10 10
+08:11:40.320 CONFIG | Gipsy WORSE  655.0
+08:11:40.320 CONFIG | Gipsy BEST   0.0
+08:11:40.320 CONFIG | Gipsy AVG    328.65
+08:11:40.320 CONFIG | Gipsy NORMAL 78.5
+08:11:40.320 CONFIG | Gipsy PRED   78.5
+08:11:40.320 CONFIG | 	Marginal Cost : 78.5
+08:11:40.320 CONFIG | 	minBid : 148
+08:11:40.320 CONFIG | 	final bid : 113.25
+08:11:40.320 CONFIG | Gipsy has bid 114
+08:11:40.321 CONFIG | Simple bid 537 for n° 13 and lost [total = 3]
+08:11:40.321 CONFIG | Simple is bidding...
+08:11:40.352 CONFIG | Simple has bid 937
+08:11:40.353 CONFIG | Gipsy bid 114 for n° 13 and won [total = 10]
+08:11:40.353 CONFIG | Gipsy is bidding...
+08:11:40.745 CONFIG | 	Marginal Cost : 0.0
+08:11:40.745 CONFIG | 	minBid : 537
+08:11:40.745 CONFIG | 	final bid : 268.5
+08:11:40.745 CONFIG | Gipsy has bid 269
+08:11:40.746 CONFIG | Simple bid 937 for n° 14 and lost [total = 3]
+08:11:40.746 CONFIG | Simple is bidding...
+08:11:40.766 CONFIG | Simple has bid 351
+08:11:40.766 CONFIG | Gipsy bid 269 for n° 14 and won [total = 11]
+08:11:40.766 CONFIG | Gipsy is bidding...
+08:11:41.138 CONFIG | 	Marginal Cost : 890.5
+08:11:41.138 CONFIG | 	minBid : 537
+08:11:41.138 CONFIG | 	final bid : 890.5
+08:11:41.138 CONFIG | Gipsy has bid 891
+08:11:47.329 CONFIG | Simple bid 351 for n° 15 and won [total = 4]
+08:11:47.329 CONFIG | Simple got 4 tasks
+08:11:47.329 CONFIG | Generating plan for Simple
+08:11:47.466 CONFIG | Simple total cost   = 1642.5
+08:11:47.466 CONFIG | Simple total reward = 1643
+08:11:47.466 CONFIG | 	Simple PROFIT is 0.5
+08:11:47.471 CONFIG | Gipsy bid 891 for n° 15 and lost [total = 11]
+08:11:47.471 CONFIG | Gipsy got 11 tasks
+08:11:47.471 CONFIG | Generating plan for Gipsy
+08:11:48.706 WARNING | The best plan was found during the last reset iteration!
+08:11:48.706 CONFIG | Gipsy total cost   = 4251.5
+08:11:48.706 CONFIG | Gipsy total reward = 4916
+08:11:48.707 CONFIG | 	Gipsy PROFIT is 664.5
+08:12:05.668 CONFIG | Wrote tournament/test/auction2-Simple-Gipsy.xml
+08:12:06.109 INFO | LogistPlatform finished successfully!
+08:12:06.110 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Simple-Naive.xml -a tournament/test/agents.xml config/auction2.xml Simple Naive
+08:12:06.238 CONFIG | Reading config/auction2.xml
+08:12:06.304 CONFIG | Reading config/settings_auction.xml
+08:12:06.810 CONFIG | Reading config/topology/the_netherlands.xml
+08:12:06.832 CONFIG | Reading tournament/test/agents.xml
+08:12:06.856 CONFIG | Simple agent has vehicles Vehicle 1 Vehicle 2 
+08:12:06.861 CONFIG | Naive agent has vehicles Vehicle 3 Vehicle 4 
+08:12:06.881 CONFIG | Simple is bidding...
+08:12:06.920 CONFIG | Simple has bid 895
+08:12:06.920 CONFIG | Naive is bidding...
+08:12:06.922 CONFIG | Naive has bid 954
+08:12:06.923 CONFIG | Simple bid 895 for n° 1 and won [total = 1]
+08:12:06.923 CONFIG | Simple is bidding...
+08:12:06.972 CONFIG | Simple has bid 1042
+08:12:06.973 CONFIG | Naive bid 954 for n° 1 and lost [total = 0]
+08:12:06.973 CONFIG | Naive is bidding...
+08:12:06.973 CONFIG | Naive has bid 1286
+08:12:06.973 CONFIG | Simple bid 1042 for n° 2 and won [total = 2]
+08:12:06.973 CONFIG | Simple is bidding...
+08:12:07.039 CONFIG | Simple has bid 843
+08:12:07.039 CONFIG | Naive bid 1286 for n° 2 and lost [total = 0]
+08:12:07.039 CONFIG | Naive is bidding...
+08:12:07.040 CONFIG | Naive has bid 1570
+08:12:07.040 CONFIG | Simple bid 843 for n° 3 and won [total = 3]
+08:12:07.040 CONFIG | Simple is bidding...
+08:12:07.099 CONFIG | Simple has bid 0
+08:12:07.099 CONFIG | Naive bid 1570 for n° 3 and lost [total = 0]
+08:12:07.099 CONFIG | Naive is bidding...
+08:12:07.099 CONFIG | Naive has bid 1548
+08:12:07.100 CONFIG | Simple bid 0 for n° 4 and won [total = 4]
+08:12:07.100 CONFIG | Simple is bidding...
+08:12:07.179 CONFIG | Simple has bid 285
+08:12:07.180 CONFIG | Naive bid 1548 for n° 4 and lost [total = 0]
+08:12:07.180 CONFIG | Naive is bidding...
+08:12:07.180 CONFIG | Naive has bid 753
+08:12:07.180 CONFIG | Simple bid 285 for n° 5 and won [total = 5]
+08:12:07.180 CONFIG | Simple is bidding...
+08:12:07.290 CONFIG | Simple has bid 584
+08:12:07.291 CONFIG | Naive bid 753 for n° 5 and lost [total = 0]
+08:12:07.291 CONFIG | Naive is bidding...
+08:12:07.291 CONFIG | Naive has bid 1785
+08:12:07.291 CONFIG | Simple bid 584 for n° 6 and won [total = 6]
+08:12:07.291 CONFIG | Simple is bidding...
+08:12:07.363 WARNING | The best plan was found during the last reset iteration!
+08:12:07.507 CONFIG | Simple has bid 0
+08:12:07.507 CONFIG | Naive bid 1785 for n° 6 and lost [total = 0]
+08:12:07.507 CONFIG | Naive is bidding...
+08:12:07.507 CONFIG | Naive has bid 800
+08:12:07.508 CONFIG | Simple bid 0 for n° 7 and won [total = 7]
+08:12:07.508 CONFIG | Simple is bidding...
+08:12:07.703 CONFIG | Simple has bid 374
+08:12:07.703 CONFIG | Naive bid 800 for n° 7 and lost [total = 0]
+08:12:07.703 CONFIG | Naive is bidding...
+08:12:07.703 CONFIG | Naive has bid 885
+08:12:07.704 CONFIG | Simple bid 374 for n° 8 and won [total = 8]
+08:12:07.704 CONFIG | Simple is bidding...
+08:12:07.799 WARNING | The best plan was found during the last reset iteration!
+08:12:07.972 CONFIG | Simple has bid 125
+08:12:07.973 CONFIG | Naive bid 885 for n° 8 and lost [total = 0]
+08:12:07.973 CONFIG | Naive is bidding...
+08:12:07.973 CONFIG | Naive has bid 1266
+08:12:07.973 CONFIG | Simple bid 125 for n° 9 and won [total = 9]
+08:12:07.973 CONFIG | Simple is bidding...
+08:12:08.297 WARNING | The best plan was found during the last reset iteration!
+08:12:08.297 CONFIG | Simple has bid 338
+08:12:08.297 CONFIG | Naive bid 1266 for n° 9 and lost [total = 0]
+08:12:08.297 CONFIG | Naive is bidding...
+08:12:08.297 CONFIG | Naive has bid 1707
+08:12:08.298 CONFIG | Simple bid 338 for n° 10 and won [total = 10]
+08:12:08.298 CONFIG | Simple is bidding...
+08:12:08.719 CONFIG | Simple has bid 342
+08:12:08.720 CONFIG | Naive bid 1707 for n° 10 and lost [total = 0]
+08:12:08.720 CONFIG | Naive is bidding...
+08:12:08.720 CONFIG | Naive has bid 1484
+08:12:08.720 CONFIG | Simple bid 342 for n° 11 and won [total = 11]
+08:12:08.720 CONFIG | Simple is bidding...
+08:12:09.080 CONFIG | Simple has bid 72
+08:12:09.080 CONFIG | Naive bid 1484 for n° 11 and lost [total = 0]
+08:12:09.080 CONFIG | Naive is bidding...
+08:12:09.080 CONFIG | Naive has bid 1027
+08:12:09.081 CONFIG | Simple bid 72 for n° 12 and won [total = 12]
+08:12:09.081 CONFIG | Simple is bidding...
+08:12:09.568 CONFIG | Simple has bid 427
+08:12:09.568 CONFIG | Naive bid 1027 for n° 12 and lost [total = 0]
+08:12:09.568 CONFIG | Naive is bidding...
+08:12:09.568 CONFIG | Naive has bid 736
+08:12:09.568 CONFIG | Simple bid 427 for n° 13 and won [total = 13]
+08:12:09.568 CONFIG | Simple is bidding...
+08:12:10.126 CONFIG | Simple has bid 482
+08:12:10.126 CONFIG | Naive bid 736 for n° 13 and lost [total = 0]
+08:12:10.126 CONFIG | Naive is bidding...
+08:12:10.126 CONFIG | Naive has bid 803
+08:12:10.126 CONFIG | Simple bid 482 for n° 14 and won [total = 14]
+08:12:10.126 CONFIG | Simple is bidding...
+08:12:10.860 WARNING | The best plan was found during the last reset iteration!
+08:12:10.860 CONFIG | Simple has bid 520
+08:12:10.860 CONFIG | Naive bid 803 for n° 14 and lost [total = 0]
+08:12:10.860 CONFIG | Naive is bidding...
+08:12:10.860 CONFIG | Naive has bid 1324
+08:12:15.611 CONFIG | Simple bid 520 for n° 15 and won [total = 15]
+08:12:15.611 CONFIG | Simple got 15 tasks
+08:12:15.611 CONFIG | Generating plan for Simple
+08:12:17.597 WARNING | The best plan was found during the last reset iteration!
+08:12:17.597 CONFIG | Simple total cost   = 5921.0
+08:12:17.597 CONFIG | Simple total reward = 6329
+08:12:17.597 CONFIG | 	Simple PROFIT is 408.0
+08:12:17.601 CONFIG | Naive bid 1324 for n° 15 and lost [total = 0]
+08:12:17.601 CONFIG | Naive got 0 tasks
+08:12:17.601 CONFIG | Generating plan for Naive
+08:12:17.601 CONFIG | Naive total cost   = 0.0
+08:12:17.601 CONFIG | Naive total reward = 0
+08:12:17.601 CONFIG | 	Naive PROFIT is 0.0
+08:12:23.633 CONFIG | Wrote tournament/test/auction2-Simple-Naive.xml
+08:12:24.076 INFO | LogistPlatform finished successfully!
+08:12:24.077 FINE | Run command: java -Xmx1024m -classpath /Users/m/Prog/Projects/Intelligent-Agents/logist/logist.jar logist.LogistPlatform -o tournament/test/auction2-Simple-SafeGambler.xml -a tournament/test/agents.xml config/auction2.xml Simple SafeGambler
+08:12:24.212 CONFIG | Reading config/auction2.xml
+08:12:24.294 CONFIG | Reading config/settings_auction.xml
+08:12:24.776 CONFIG | Reading config/topology/the_netherlands.xml
+08:12:24.801 CONFIG | Reading tournament/test/agents.xml
+08:12:24.826 CONFIG | Simple agent has vehicles Vehicle 1 Vehicle 2 
+08:12:24.832 CONFIG | Safe Gambler agent has vehicles Vehicle 3 Vehicle 4 
+08:12:24.851 CONFIG | Simple is bidding...
+08:12:24.894 CONFIG | Simple has bid 895
+08:12:24.894 CONFIG | Safe Gambler is bidding...
+08:12:24.916 CONFIG | Safe Gambler has bid 954
+08:12:24.917 CONFIG | Simple bid 895 for n° 1 and won [total = 1]
+08:12:24.917 CONFIG | Simple is bidding...
+08:12:24.961 CONFIG | Simple has bid 1042
+08:12:24.962 CONFIG | Safe Gambler bid 954 for n° 1 and lost [total = 0]
+08:12:24.962 CONFIG | Safe Gambler is bidding...
+08:12:24.973 CONFIG | 	Marginal Cost : 1255.5
+08:12:24.973 CONFIG | 	minBid : 895
+08:12:24.973 CONFIG | 	final bid : 1255.5
+08:12:24.973 CONFIG | Safe Gambler has bid 1256
+08:12:24.974 CONFIG | Simple bid 1042 for n° 2 and won [total = 2]
+08:12:24.974 CONFIG | Simple is bidding...
+08:12:25.034 CONFIG | Simple has bid 843
+08:12:25.034 CONFIG | Safe Gambler bid 1256 for n° 2 and lost [total = 0]
+08:12:25.034 CONFIG | Safe Gambler is bidding...
+08:12:25.041 CONFIG | 	Marginal Cost : 773.5
+08:12:25.041 CONFIG | 	minBid : 895
+08:12:25.041 CONFIG | 	final bid : 834.25
+08:12:25.041 CONFIG | Safe Gambler has bid 835
+08:12:25.042 CONFIG | Simple bid 843 for n° 3 and lost [total = 2]
+08:12:25.042 CONFIG | Simple is bidding...
+08:12:25.066 CONFIG | Simple has bid 114
+08:12:25.066 CONFIG | Safe Gambler bid 835 for n° 3 and won [total = 1]
+08:12:25.066 CONFIG | Safe Gambler is bidding...
+08:12:25.092 CONFIG | 	Marginal Cost : 1255.5
+08:12:25.092 CONFIG | 	minBid : 843
+08:12:25.092 CONFIG | 	final bid : 1255.5
+08:12:25.092 CONFIG | Safe Gambler has bid 1256
+08:12:25.093 CONFIG | Simple bid 114 for n° 4 and won [total = 3]
+08:12:25.093 CONFIG | Simple is bidding...
+08:12:25.156 CONFIG | Simple has bid 438
+08:12:25.157 CONFIG | Safe Gambler bid 1256 for n° 4 and lost [total = 1]
+08:12:25.157 CONFIG | Safe Gambler is bidding...
+08:12:25.170 CONFIG | 	Marginal Cost : 115.5
+08:12:25.170 CONFIG | 	minBid : 114
+08:12:25.170 CONFIG | 	final bid : 115.5
+08:12:25.170 CONFIG | Safe Gambler has bid 116
+08:12:25.170 CONFIG | Simple bid 438 for n° 5 and lost [total = 3]
+08:12:25.170 CONFIG | Simple is bidding...
+08:12:25.210 CONFIG | Simple has bid 756
+08:12:25.210 CONFIG | Safe Gambler bid 116 for n° 5 and won [total = 2]
+08:12:25.210 CONFIG | Safe Gambler is bidding...
+08:12:25.264 CONFIG | 	Marginal Cost : 1522.5
+08:12:25.264 CONFIG | 	minBid : 114
+08:12:25.264 CONFIG | 	final bid : 1522.5
+08:12:25.264 CONFIG | Safe Gambler has bid 1523
+08:12:25.264 CONFIG | Simple bid 756 for n° 6 and won [total = 4]
+08:12:25.265 CONFIG | Simple is bidding...
+08:12:25.400 CONFIG | Simple has bid 0
+08:12:25.400 CONFIG | Safe Gambler bid 1523 for n° 6 and lost [total = 2]
+08:12:25.400 CONFIG | Safe Gambler is bidding...
+08:12:25.420 CONFIG | 	Marginal Cost : 282.0
+08:12:25.420 CONFIG | 	minBid : 114
+08:12:25.420 CONFIG | 	final bid : 282.0
+08:12:25.420 CONFIG | Safe Gambler has bid 282
+08:12:25.420 CONFIG | Simple bid 0 for n° 7 and won [total = 5]
+08:12:25.420 CONFIG | Simple is bidding...
+08:12:25.543 CONFIG | Simple has bid 0
+08:12:25.543 CONFIG | Safe Gambler bid 282 for n° 7 and lost [total = 2]
+08:12:25.543 CONFIG | Safe Gambler is bidding...
+08:12:25.570 CONFIG | 	Marginal Cost : 687.0
+08:12:25.570 CONFIG | 	minBid : 0
+08:12:25.570 CONFIG | 	final bid : 687.0
+08:12:25.570 CONFIG | Safe Gambler has bid 687
+08:12:25.570 CONFIG | Simple bid 0 for n° 8 and won [total = 6]
+08:12:25.570 CONFIG | Simple is bidding...
+08:12:25.752 CONFIG | Simple has bid 466
+08:12:25.752 CONFIG | Safe Gambler bid 687 for n° 8 and lost [total = 2]
+08:12:25.752 CONFIG | Safe Gambler is bidding...
+08:12:25.770 CONFIG | 	Marginal Cost : 148.0
+08:12:25.770 CONFIG | 	minBid : 0
+08:12:25.770 CONFIG | 	final bid : 148.0
+08:12:25.770 CONFIG | Safe Gambler has bid 148
+08:12:25.771 CONFIG | Simple bid 466 for n° 9 and lost [total = 6]
+08:12:25.771 CONFIG | Simple is bidding...
+08:12:25.836 CONFIG | Simple has bid 941
+08:12:25.836 CONFIG | Safe Gambler bid 148 for n° 9 and won [total = 3]
+08:12:25.836 CONFIG | Safe Gambler is bidding...
+08:12:25.885 CONFIG | 	Marginal Cost : 134.0
+08:12:25.885 CONFIG | 	minBid : 0
+08:12:25.885 CONFIG | 	final bid : 134.0
+08:12:25.885 CONFIG | Safe Gambler has bid 134
+08:12:25.885 CONFIG | Simple bid 941 for n° 10 and lost [total = 6]
+08:12:25.885 CONFIG | Simple is bidding...
+08:12:25.986 CONFIG | Simple has bid 767
+08:12:25.986 CONFIG | Safe Gambler bid 134 for n° 10 and won [total = 4]
+08:12:25.986 CONFIG | Safe Gambler is bidding...
+08:12:26.070 CONFIG | 	Marginal Cost : 919.0
+08:12:26.070 CONFIG | 	minBid : 0
+08:12:26.070 CONFIG | 	final bid : 919.0
+08:12:26.070 CONFIG | Safe Gambler has bid 919
+08:12:26.070 CONFIG | Simple bid 767 for n° 11 and won [total = 7]
+08:12:26.070 CONFIG | Simple is bidding...
+08:12:26.290 CONFIG | Simple has bid 321
+08:12:26.290 CONFIG | Safe Gambler bid 919 for n° 11 and lost [total = 4]
+08:12:26.290 CONFIG | Safe Gambler is bidding...
+08:12:26.321 CONFIG | 	Marginal Cost : 851.0
+08:12:26.321 CONFIG | 	minBid : 0
+08:12:26.321 CONFIG | 	final bid : 851.0
+08:12:26.321 CONFIG | Safe Gambler has bid 851
+08:12:26.321 CONFIG | Simple bid 321 for n° 12 and won [total = 8]
+08:12:26.321 CONFIG | Simple is bidding...
+08:12:26.643 CONFIG | Simple has bid 187
+08:12:26.643 CONFIG | Safe Gambler bid 851 for n° 12 and lost [total = 4]
+08:12:26.643 CONFIG | Safe Gambler is bidding...
+08:12:26.686 CONFIG | 	Marginal Cost : 417.0
+08:12:26.686 CONFIG | 	minBid : 0
+08:12:26.686 CONFIG | 	final bid : 417.0
+08:12:26.686 CONFIG | Safe Gambler has bid 417
+08:12:26.686 CONFIG | Simple bid 187 for n° 13 and won [total = 9]
+08:12:26.687 CONFIG | Simple is bidding...
+08:12:27.089 CONFIG | Simple has bid 324
+08:12:27.090 CONFIG | Safe Gambler bid 417 for n° 13 and lost [total = 4]
+08:12:27.090 CONFIG | Safe Gambler is bidding...
+08:12:27.129 CONFIG | 	Marginal Cost : 661.5
+08:12:27.129 CONFIG | 	minBid : 0
+08:12:27.129 CONFIG | 	final bid : 661.5
+08:12:27.129 CONFIG | Safe Gambler has bid 662
+08:12:27.129 CONFIG | Simple bid 324 for n° 14 and won [total = 10]
+08:12:27.129 CONFIG | Simple is bidding...
+08:12:27.558 WARNING | The best plan was found during the last reset iteration!
+08:12:27.558 CONFIG | Simple has bid 599
+08:12:27.558 CONFIG | Safe Gambler bid 662 for n° 14 and lost [total = 4]
+08:12:27.558 CONFIG | Safe Gambler is bidding...
+08:12:27.587 CONFIG | 	Marginal Cost : 1032.0
+08:12:27.587 CONFIG | 	minBid : 187
+08:12:27.587 CONFIG | 	final bid : 1032.0
+08:12:27.587 CONFIG | Safe Gambler has bid 1032
+08:12:32.676 CONFIG | Simple bid 599 for n° 15 and won [total = 11]
+08:12:32.676 CONFIG | Simple got 11 tasks
+08:12:32.676 CONFIG | Generating plan for Simple
+08:12:34.185 CONFIG | Simple total cost   = 4654.5
+08:12:34.185 CONFIG | Simple total reward = 5005
+08:12:34.185 CONFIG | 	Simple PROFIT is 350.5
+08:12:34.189 CONFIG | Safe Gambler bid 1032 for n° 15 and lost [total = 4]
+08:12:34.190 CONFIG | Safe Gambler got 4 tasks
+08:12:34.190 CONFIG | Generating plan for Safe Gambler
+08:12:34.351 CONFIG | Safe Gambler total cost   = 1171.0
+08:12:34.351 CONFIG | Safe Gambler total reward = 1233
+08:12:34.351 CONFIG | 	Safe Gambler PROFIT is 62.0
+08:12:38.147 CONFIG | Wrote tournament/test/auction2-Simple-SafeGambler.xml
+08:12:38.480 INFO | LogistPlatform finished successfully!

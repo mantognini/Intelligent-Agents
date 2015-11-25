@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<agents>
+	<!-- An auto-generated list of agents and their behavior classes -->
+	<!--  - jar directory : bin/ -->
+	<!--  - generated on  : Wed Nov 25 20:15:18 CET 2015 -->
+	<agent name="Gipsy1">
+		<set class-path="bin"/>
+		<set class-name="agents.GipsyAgent"/>
+	</agent>
+	<agent name="Gipsy2">
+		<set class-path="bin"/>
+		<set class-name="agents.GipsyAgent"/>
+	</agent>
+</agents>
