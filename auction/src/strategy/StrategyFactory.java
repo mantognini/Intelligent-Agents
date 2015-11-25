@@ -7,12 +7,13 @@ import planner.SLSPlanner;
 import bidder.NoGain;
 import bidder.NoPainMinOfBest;
 import estimator.Gipsy;
+import estimator.NaiveEstimator;
 import estimator.NoFuture;
 
 public class StrategyFactory {
 
 	public static Strategy naive(Agent agent) {
-		return new Strategy("Naive", new NaivePlanner(agent.vehicles()), new NoFuture(), new NoGain(agent.id()));
+		return new Strategy("Naive", new NaivePlanner(agent.vehicles()), new NaiveEstimator(), new NoGain(agent.id()));
 	}
 
 	public static Strategy simple(Agent agent) {
