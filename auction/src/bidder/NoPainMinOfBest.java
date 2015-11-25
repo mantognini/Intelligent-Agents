@@ -16,11 +16,21 @@ public class NoPainMinOfBest extends BidStrategyTrait {
 	@Override
 	public long bid(double marginalCost) {
 
-		Long minBid = Utils.min(bidHistory.get(Utils.bestAgent(winners, bidHistory, depth)), depth);
-
 		double bid = marginalCost;
-		if (minBid > marginalCost)
-			bid += (marginalCost - minBid) * marginRatio;
+
+		if (winners.size() > 0) {
+			int bestAgentIndex = Utils.bestAgent(winners, bidHistory, depth);
+			Long minBid = Utils.min(bidHistory.get(bestAgentIndex), depth);
+
+			if (minBid > marginalCost) {
+				bid += (minBid - marginalCost) * marginRatio;
+			}
+
+			System.out.println("Gispsy : ");
+			System.out.println("	Marginal Cost : " + marginalCost);
+			System.out.println("	minBid : " + minBid);
+			System.out.println("	final bid : " + bid);
+		}
 
 		return Utils.toLong(bid);
 	}

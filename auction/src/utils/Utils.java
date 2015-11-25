@@ -117,8 +117,9 @@ public final class Utils {
 	}
 
 	public static Long min(List<Long> longs, int depth) {
+		ensure(longs.size() > 0, "Minimum of a empty list souldn't be called");
 		Long min = Long.MAX_VALUE;
-		for (int i = longs.size() - 1; i < (longs.size() - 1 - Math.min(depth, longs.size() - 1)); i--) {
+		for (int i = longs.size() - 1; i >= (longs.size() - 1 - Math.min(depth, longs.size() - 1)); i--) {
 			min = Math.min(min, longs.get(i));
 		}
 
@@ -127,7 +128,7 @@ public final class Utils {
 
 	public static int bestAgent(List<Integer> winners, HashMap<Integer, List<Long>> bids, int depth) {
 		int best = 0;
-		int nbWinsBest = 0;
+		int nbWinsBest = Integer.MIN_VALUE;
 
 		for (int id : bids.keySet()) {
 			int nbWins = 0;
