@@ -5,7 +5,7 @@ import logist.task.TaskDistribution;
 import planner.NaivePlanner;
 import planner.SLSPlanner;
 import bidder.NoGain;
-import bidder.NoPainMinOfBest;
+import bidder.NoPainMovingAverage;
 import estimator.Gipsy;
 import estimator.NoFuture;
 
@@ -25,8 +25,8 @@ public class StrategyFactory {
 		int nbPredictions = 10;
 
 		return new Strategy("Gipsy", new SLSPlanner(agent.vehicles(), SLSPlanner.FAST_SETTIGNS,
-				SLSPlanner.OPTIMAL_SETTINGS), new Gipsy(minTasks, nbPredictions, distribution), new NoPainMinOfBest(
-				agent.id(), 0.5, 5));
+				SLSPlanner.OPTIMAL_SETTINGS), new Gipsy(minTasks, nbPredictions, distribution),
+				new NoPainMovingAverage(agent.id(), 0.5));
 
 	}
 
