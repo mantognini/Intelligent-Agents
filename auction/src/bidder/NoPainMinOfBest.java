@@ -19,7 +19,7 @@ public class NoPainMinOfBest extends BidStrategyTrait {
 		double bid = marginalCost;
 
 		if (winners.size() > 0) {
-			int bestAgentIndex = Utils.bestAgent(winners, bidHistory, depth, agentID); // TODO don't include ourselves
+			int bestAgentIndex = Utils.bestAgent(winners, bidHistory, depth, agentID);
 			Long minBid = Utils.min(bidHistory.get(bestAgentIndex), depth);
 
 			if (minBid > marginalCost) {
