@@ -40,4 +40,8 @@ public abstract class BidStrategyTrait {
 		winners.add(winnerID);
 	}
 
+	public void addWinner(int winner) {
+		winners.add(winner);
+
+	}
 }
