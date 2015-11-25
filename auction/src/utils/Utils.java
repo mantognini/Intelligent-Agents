@@ -126,11 +126,14 @@ public final class Utils {
 		return min;
 	}
 
-	public static int bestAgent(List<Integer> winners, HashMap<Integer, List<Long>> bids, int depth) {
+	public static int bestAgent(List<Integer> winners, HashMap<Integer, List<Long>> bids, int depth, int agentID) {
 		int best = 0;
 		int nbWinsBest = Integer.MIN_VALUE;
 
 		for (int id : bids.keySet()) {
+			if (id == agentID) {
+				continue;
+			}
 			int nbWins = 0;
 			for (int winner : winners) {
 				if (id == winner) {
