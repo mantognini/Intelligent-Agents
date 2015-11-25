@@ -25,7 +25,7 @@ public class StrategyFactory {
 		int nbPredictions = 10;
 		double riskTolerance = 0.7;
 
-		double marginRatio = 0.7;
+		double marginRatio = 0.5;
 		int depth = 5;
 
 		return new Strategy("Gipsy", new SLSPlanner(agent.vehicles(), SLSPlanner.FAST_SETTIGNS,
