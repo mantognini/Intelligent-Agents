@@ -12,7 +12,7 @@
 		<set class-path="bin"/>
 		<set class-name="agents.NaiveAgent"/>
 	</agent>
-	<agent name="Safe Gambler">
+	<agent name="SafeGambler">
 		<set class-path="bin"/>
 		<set class-name="agents.SafeGamblerAgent"/>
 	</agent>
