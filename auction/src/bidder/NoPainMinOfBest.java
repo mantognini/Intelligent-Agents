@@ -7,8 +7,8 @@ public class NoPainMinOfBest extends BidStrategyTrait {
 	private double marginRatio;
 	private int depth;
 
-	public NoPainMinOfBest(double marginRatio, int depth) {
-		super();
+	public NoPainMinOfBest(int agentID, double marginRatio, int depth) {
+		super(agentID);
 		this.marginRatio = marginRatio;
 		this.depth = depth;
 	}
@@ -19,7 +19,7 @@ public class NoPainMinOfBest extends BidStrategyTrait {
 		double bid = marginalCost;
 
 		if (winners.size() > 0) {
-			int bestAgentIndex = Utils.bestAgent(winners, bidHistory, depth);
+			int bestAgentIndex = Utils.bestAgent(winners, bidHistory, depth); // TODO don't include ourselves
 			Long minBid = Utils.min(bidHistory.get(bestAgentIndex), depth);
 
 			if (minBid > marginalCost) {

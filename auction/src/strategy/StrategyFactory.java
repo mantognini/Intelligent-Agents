@@ -1,8 +1,6 @@
 package strategy;
 
-import java.util.List;
-
-import logist.simulation.Vehicle;
+import logist.agent.Agent;
 import logist.task.TaskDistribution;
 import planner.NaivePlanner;
 import planner.SLSPlanner;
@@ -13,21 +11,21 @@ import estimator.NoFuture;
 
 public class StrategyFactory {
 
-	public static Strategy naive(List<Vehicle> vehicles) {
-		return new Strategy("Naive", new NaivePlanner(vehicles), new NoFuture(), new NoGain());
+	public static Strategy naive(Agent agent) {
+		return new Strategy("Naive", new NaivePlanner(agent.vehicles()), new NoFuture(), new NoGain(agent.id()));
 	}
 
-	public static Strategy simple(List<Vehicle> vehicles) {
-		return new Strategy("Simple",
-				new SLSPlanner(vehicles, SLSPlanner.NORMAL_SETTIGNS, SLSPlanner.OPTIMAL_SETTINGS), new NoFuture(),
-				new NoGain());
+	public static Strategy simple(Agent agent) {
+		return new Strategy("Simple", new SLSPlanner(agent.vehicles(), SLSPlanner.NORMAL_SETTIGNS,
+				SLSPlanner.OPTIMAL_SETTINGS), new NoFuture(), new NoGain(agent.id()));
 	}
 
-	public static Strategy gipsy(List<Vehicle> vehicles, TaskDistribution distribution) {
+	public static Strategy gipsy(Agent agent, TaskDistribution distribution) {
 		int minTasks = 10;
 		int nbPredictions = 10;
-		return new Strategy("Gipsy", new SLSPlanner(vehicles, SLSPlanner.FAST_SETTIGNS, SLSPlanner.OPTIMAL_SETTINGS),
-				new Gipsy(minTasks, nbPredictions, distribution), new NoPain(5));
+		return new Strategy("Gipsy", new SLSPlanner(agent.vehicles(), SLSPlanner.FAST_SETTIGNS,
+				SLSPlanner.OPTIMAL_SETTINGS), new Gipsy(minTasks, nbPredictions, distribution), new NoPain(agent.id(),
+				5));
 	}
 
 	private StrategyFactory() {

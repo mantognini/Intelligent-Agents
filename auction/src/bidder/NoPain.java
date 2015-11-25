@@ -6,7 +6,8 @@ public class NoPain extends BidStrategyTrait {
 
 	private double epsilon;
 
-	public NoPain(double epsilon) {
+	public NoPain(int agentID, double epsilon) {
+		super(agentID);
 		this.epsilon = epsilon;
 	}
 

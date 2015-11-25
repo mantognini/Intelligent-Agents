@@ -10,7 +10,7 @@ public class SimpleAgent extends MetaAgent {
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
-		Strategy simple = StrategyFactory.simple(agent.vehicles());
+		Strategy simple = StrategyFactory.simple(agent);
 		init(agent, simple);
 	}
 }

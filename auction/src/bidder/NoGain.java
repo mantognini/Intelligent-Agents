@@ -7,6 +7,10 @@ import utils.Utils;
  */
 public class NoGain extends BidStrategyTrait {
 
+	public NoGain(int agentID) {
+		super(agentID);
+	}
+
 	@Override
 	public long bid(double marginalCost) {
 		return Utils.toLong(marginalCost);

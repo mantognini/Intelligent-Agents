@@ -20,6 +20,15 @@ public abstract class BidStrategyTrait {
 	public List<Integer> winners = new ArrayList<>();
 
 	/**
+	 * ID of the agent for which the bidder should estimate the bid
+	 */
+	public final int agentID;
+
+	public BidStrategyTrait(int agentID) {
+		this.agentID = agentID;
+	}
+
+	/**
 	 * Given the number of tasks already owned with the corresponding current cost, and also the estimated cost if we
 	 * win the currently auctioned task, compute the desired bid value.
 	 * 
