@@ -39,7 +39,6 @@ public class Strategy {
 		}
 
 		bidder.addBids(lastOffers, winner);
-		bidder.addWinner(winner);
 	}
 
 	public GeneralPlan generatePlans() {
