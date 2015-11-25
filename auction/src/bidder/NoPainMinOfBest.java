@@ -26,7 +26,6 @@ public class NoPainMinOfBest extends BidStrategyTrait {
 				bid += (minBid - marginalCost) * marginRatio;
 			}
 
-			System.out.println("Gispsy : ");
 			System.out.println("	Marginal Cost : " + marginalCost);
 			System.out.println("	minBid : " + minBid);
 			System.out.println("	final bid : " + bid);

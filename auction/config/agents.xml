@@ -15,6 +15,11 @@
 		<set class-name="agents.SimpleAgent"/>
 	</agent>
 	
+	<agent name="auction-safe-gambler">
+		<set class-path="bin/"/>
+		<set class-name="agents.SafeGamblerAgent"/>
+	</agent>
+	
 	<agent name="auction-gipsy">
 		<set class-path="bin/"/>
 		<set class-name="agents.GipsyAgent"/>

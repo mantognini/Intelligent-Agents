@@ -27,7 +27,9 @@ public class Strategy {
 
 	public Long bid(Task task) {
 		currentTask = task;
+		System.out.println(name + " is bidding...");
 		Long bid = bidder.bid(estimator.computeMC(planner, currentTask));
+		System.out.println(name + " has bid " + bid);
 		return bid;
 	}
 

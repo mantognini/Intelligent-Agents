@@ -20,6 +20,14 @@ public class StrategyFactory {
 				SLSPlanner.OPTIMAL_SETTINGS), new NoFuture(), new NoGain(agent.id()));
 	}
 
+	public static Strategy safeGambler(Agent agent) {
+		double marginRatio = 0.5;
+		int depth = 5;
+
+		return new Strategy("Safe Gambler", new SLSPlanner(agent.vehicles(), SLSPlanner.NORMAL_SETTIGNS,
+				SLSPlanner.OPTIMAL_SETTINGS), new NoFuture(), new NoPainMinOfBest(agent.id(), marginRatio, depth));
+	}
+
 	public static Strategy gipsy(Agent agent, TaskDistribution distribution) {
 		int minTasks = 10;
 		int nbPredictions = 10;
@@ -32,7 +40,6 @@ public class StrategyFactory {
 
 		SLSPlanner.OPTIMAL_SETTINGS), new Gipsy(minTasks, nbPredictions, riskTolerance, distribution),
 				new NoPainMinOfBest(agent.id(), marginRatio, depth));
-
 	}
 
 	private StrategyFactory() {
