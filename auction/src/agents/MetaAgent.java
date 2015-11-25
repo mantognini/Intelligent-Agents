@@ -16,7 +16,6 @@ import strategy.Strategy;
  */
 public abstract class MetaAgent implements AuctionBehavior {
 
-	private Agent agent = null;
 	private Strategy strategy = null;
 
 	@Override
@@ -26,7 +25,7 @@ public abstract class MetaAgent implements AuctionBehavior {
 
 	@Override
 	public void auctionResult(Task lastTask, int lastWinner, Long[] lastOffers) {
-		strategy.validateBid(lastWinner, agent.id(), lastOffers);
+		strategy.validateBid(lastWinner, lastOffers);
 	}
 
 	@Override
@@ -36,7 +35,6 @@ public abstract class MetaAgent implements AuctionBehavior {
 
 	// To be called from the setup method in subclasses
 	protected void init(Agent agent, Strategy strategy) {
-		this.agent = agent;
 		this.strategy = strategy;
 
 		System.out.print(strategy.name + " agent has vehicles ");

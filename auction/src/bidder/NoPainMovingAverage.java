@@ -11,8 +11,8 @@ public class NoPainMovingAverage extends BidStrategyTrait {
 	private int currentId;
 	private double marginRatio;
 
-	public NoPainMovingAverage(int id, double marginRatio) {
-		super();
+	public NoPainMovingAverage(int agentID, int id, double marginRatio) {
+		super(agentID);
 		this.currentId = id;
 	}
 

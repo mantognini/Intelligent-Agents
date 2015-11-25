@@ -7,13 +7,15 @@ import bidder.BidStrategyTrait;
 import estimator.CostEstimatorTrait;
 
 public class Strategy {
-	private PlannerTrait planner;
 	private final CostEstimatorTrait estimator;
 	private final BidStrategyTrait bidder;
+
+	private PlannerTrait planner;
 	private Task currentTask;
 	private int bidCount = 0;
-	public final String name;
 	private Long totalReward = 0l;
+
+	public final String name;
 
 	public Strategy(String name, PlannerTrait planner, CostEstimatorTrait estimator, BidStrategyTrait bidder) {
 		this.name = name;
@@ -30,8 +32,8 @@ public class Strategy {
 		return bid;
 	}
 
-	public void validateBid(int winner, int agentID, Long[] lastOffers) {
-		if (winner == agentID) {
+	public void validateBid(int winner, Long[] lastOffers) {
+		if (winner == bidder.agentID) {
 			planner = planner.extendPlan(currentTask);
 			totalReward += lastOffers[winner];
 		}
