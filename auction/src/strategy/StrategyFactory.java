@@ -30,7 +30,7 @@ public class StrategyFactory {
 	}
 
 	public static Strategy gipsy(Agent agent, TaskDistribution distribution) {
-		int minTasks = 10;
+		int minTasks = 5;
 		int nbPredictions = 10;
 		double riskTolerance = 0.7;
 

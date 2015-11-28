@@ -32,8 +32,8 @@ public class SLSPlanner extends PlannerTrait {
 	}
 
 	public static final Settings FAST_SETTIGNS = new Settings(5, 300, 0.5, 0);
-	public static final Settings NORMAL_SETTIGNS = new Settings(3, 700, 0.5, 0);
-	public static final Settings OPTIMAL_SETTINGS = new Settings(3, 4000, 0.5, 0);
+	public static final Settings NORMAL_SETTIGNS = new Settings(5, 3000, 0.5, 0);
+	public static final Settings OPTIMAL_SETTINGS = new Settings(7, 4000, 0.5, 0);
 
 	private GeneralPlan plansCache = null;
 	private Map<Vehicle, List<Action>> plans = null;
