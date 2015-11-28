@@ -14,10 +14,11 @@ public class NaiveEstimator extends NoFuture {
 	}
 
 	@Override
-	public double computeMC(PlannerTrait planner, Task task) {
-		double marginalCost = super.computeMC(planner, task);
+	public Result computeMC(PlannerTrait planner, Task task) {
+		Result result = super.computeMC(planner, task);
 		double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id);
+		double mc = ratio * result.mc;
 
-		return ratio * marginalCost;
+		return new Result(mc, result.planner);
 	}
 }

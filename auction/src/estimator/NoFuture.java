@@ -9,13 +9,15 @@ import planner.PlannerTrait;
 public class NoFuture extends CostEstimatorTrait {
 
 	@Override
-	public double computeMC(PlannerTrait planner, Task task) {
+	public Result computeMC(PlannerTrait planner, Task task) {
 		double currentCost = planner.generatePlans().computeCost();
 
 		PlannerTrait extendedPlan = planner.extendPlan(task);
 		double costWithExtraTask = extendedPlan.generatePlans().computeCost();
 
-		return Math.abs(costWithExtraTask - currentCost);
+		double mc = Math.abs(costWithExtraTask - currentCost);
+
+		return new Result(mc, extendedPlan);
 	}
 
 }

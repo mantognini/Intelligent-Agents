@@ -70,6 +70,8 @@ public class SLSPlanner extends PlannerTrait {
 
 	@Override
 	public GeneralPlan generateFinalPlans() {
+		GeneralPlan previous = plansCache; // might be null
+
 		// Reset cache, and use special setting for optimality and rebuild plan
 		plans = null;
 		plansCache = null;
@@ -77,7 +79,7 @@ public class SLSPlanner extends PlannerTrait {
 		generateInitial();
 		buildPlan(optimalMode);
 
-		return plansCache;
+		return previous == null ? plansCache : Utils.selectBest(previous, plansCache);
 	}
 
 	@Override

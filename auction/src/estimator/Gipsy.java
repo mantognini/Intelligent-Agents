@@ -25,11 +25,11 @@ public class Gipsy extends NoFuture {
 	}
 
 	@Override
-	public double computeMC(PlannerTrait planner, Task task) {
-		double normalMC = super.computeMC(planner, task); // use NoFuture
+	public Result computeMC(PlannerTrait planner, Task task) {
+		Result normalResult = super.computeMC(planner, task); // use NoFuture
 
-		if (planner.tasks.size() >= minTasks || normalMC == 0)
-			return normalMC;
+		if (planner.tasks.size() >= minTasks || normalResult.mc == 0)
+			return normalResult;
 
 		// Compute a few estimation
 		double worsePrediction = Double.NEGATIVE_INFINITY;
@@ -43,15 +43,15 @@ public class Gipsy extends NoFuture {
 				vision = vision.extendPlan(createTask());
 			}
 
-			double prediction = super.computeMC(vision, task);
+			double prediction = super.computeMC(vision, task).mc;
 			worsePrediction = Math.max(worsePrediction, prediction);
 			bestPrediction = Math.min(bestPrediction, prediction);
 
 			sum += prediction;
 		}
 
-		double prediction = Math.min(worsePrediction, normalMC);
-		prediction = normalMC - (normalMC - prediction) * riskTolerance;
+		double prediction = Math.min(worsePrediction, normalResult.mc);
+		prediction = normalResult.mc - (normalResult.mc - prediction) * riskTolerance;
 
 		// TODO remove me one day
 		double avg = sum / nbPredictions;
@@ -59,10 +59,10 @@ public class Gipsy extends NoFuture {
 		System.out.println("Gipsy WORSE  " + worsePrediction);
 		System.out.println("Gipsy BEST   " + bestPrediction);
 		System.out.println("Gipsy AVG    " + avg);
-		System.out.println("Gipsy NORMAL " + normalMC);
+		System.out.println("Gipsy NORMAL " + normalResult.mc);
 		System.out.println("Gipsy PRED   " + prediction);
 
-		return prediction;
+		return new Result(prediction, null); // no associated planner
 	}
 
 	/**

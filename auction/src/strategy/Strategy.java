@@ -5,12 +5,14 @@ import planner.GeneralPlan;
 import planner.PlannerTrait;
 import bidder.BidStrategyTrait;
 import estimator.CostEstimatorTrait;
+import estimator.CostEstimatorTrait.Result;
 
 public class Strategy {
 	private final CostEstimatorTrait estimator;
 	private final BidStrategyTrait bidder;
 
 	private PlannerTrait planner;
+	private PlannerTrait nextPlanner = null;
 	private Task currentTask;
 	private int bidCount = 0;
 	private Long totalReward = 0l;
@@ -28,18 +30,29 @@ public class Strategy {
 	public Long bid(Task task) {
 		currentTask = task;
 		System.out.println(name + " is bidding...");
-		Long bid = bidder.bid(estimator.computeMC(planner, currentTask));
+
+		Result result = estimator.computeMC(planner, currentTask);
+		nextPlanner = result.planner;
+		Long bid = bidder.bid(result.mc);
+
 		System.out.println(name + " has bid " + bid);
+		if (result.planner != null) {
+			// everything should be cached so this won't harm performance
+			System.out.println("next planner has cost: " + result.planner.generatePlans().computeCost());
+		}
 		return bid;
 	}
 
 	public void validateBid(int winner, Long[] lastOffers) {
 		final boolean won = winner == bidder.agentID;
 		if (won) {
-			planner = planner.extendPlan(currentTask);
+			planner = nextPlanner != null ? nextPlanner : planner.extendPlan(currentTask);
+			nextPlanner = null;
+
 			totalReward += lastOffers[winner];
 			++winCount;
 		}
+
 		++bidCount;
 
 		bidder.addBids(lastOffers, winner);
