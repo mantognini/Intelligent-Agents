@@ -21,8 +21,6 @@ public class SLSPlanner extends PlannerTrait {
 		public final double p;
 		public final int debugLevel; // the higher the more verbose
 
-		// TODO add timeout
-
 		public Settings(int resetBound, int stallBound, double p, int debugLevel) {
 			this.resetBound = resetBound;
 			this.stallBound = stallBound;
@@ -59,23 +57,25 @@ public class SLSPlanner extends PlannerTrait {
 	}
 
 	@Override
-	public GeneralPlan generatePlans() {
+	public GeneralPlan generatePlans(long timeout) {
 		if (plansCache == null) {
-			buildPlan(regularMode);
+			buildPlan(regularMode, timeout);
 		}
 		return plansCache;
 	}
 
 	@Override
-	public GeneralPlan generateFinalPlans() {
+	public GeneralPlan generateFinalPlans(long timeout) {
 		GeneralPlan previous = plansCache; // might be null
 
 		// Reset cache, and use special setting for optimality and rebuild plan
 		plans = null;
 		plansCache = null;
 
+		long startTime = System.currentTimeMillis();
 		generateInitial();
-		buildPlan(optimalMode);
+		long midTime = System.currentTimeMillis();
+		buildPlan(optimalMode, timeout - (midTime - startTime));
 
 		return previous == null ? plansCache : Utils.selectBest(previous, plansCache);
 	}
@@ -93,7 +93,9 @@ public class SLSPlanner extends PlannerTrait {
 		return new SLSPlanner(vehicles, extendedTasks, extendedInitialPlans, regularMode, optimalMode);
 	}
 
-	private void buildPlan(Settings settings) {
+	private void buildPlan(Settings settings, long timeout) {
+		long startTime = System.currentTimeMillis();
+
 		GeneralPlan current = new GeneralPlan(plans, vehicles);
 
 		if (tasks.size() == 0) {
@@ -110,6 +112,8 @@ public class SLSPlanner extends PlannerTrait {
 		int iterationCount = 0;
 		int stallCount = 0;
 		int resetCount = 0;
+
+		boolean hasntTimeout = true;
 
 		do {
 			++iterationCount;
@@ -167,8 +171,13 @@ public class SLSPlanner extends PlannerTrait {
 				} // else: no need to do it
 			}
 
-		} while (resetCount < settings.resetBound /* && !hasPlanTimedOut(startTime) */);
-		// TODO add timeout
+			hasntTimeout = System.currentTimeMillis() - startTime < timeout;
+		} while (resetCount < settings.resetBound && hasntTimeout);
+
+		globalBest = Utils.selectBest(globalBest, localBest); // in case of timeout
+
+		if (!hasntTimeout)
+			debugPrintln(settings, 0, "timeout");
 
 		debugPrintln(settings, 1, "Best plan cost is " + globalBest.computeCost() + " and was found at reset = "
 				+ bestReset);

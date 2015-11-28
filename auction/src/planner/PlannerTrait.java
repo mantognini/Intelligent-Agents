@@ -33,12 +33,12 @@ public abstract class PlannerTrait {
 	/**
 	 * Build a general plan for the agent's vehicles and set of tasks to deliver
 	 */
-	public abstract GeneralPlan generatePlans();
+	public abstract GeneralPlan generatePlans(long timeout);
 
 	/**
 	 * Similar to generatePlans but this one need to do its best to find *the* optimal plan
 	 */
-	public abstract GeneralPlan generateFinalPlans();
+	public abstract GeneralPlan generateFinalPlans(long timeout);
 
 	/**
 	 * Create a new planner with one more task

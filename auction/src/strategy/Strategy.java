@@ -27,18 +27,18 @@ public class Strategy {
 		this.bidder = bidder;
 	}
 
-	public Long bid(Task task) {
+	public Long bid(Task task, long timeoutBid) {
 		currentTask = task;
 		System.out.println(name + " is bidding...");
 
-		Result result = estimator.computeMC(planner, currentTask);
+		Result result = estimator.computeMC(planner, currentTask, timeoutBid);
 		nextPlanner = result.planner;
 		Long bid = bidder.bid(result.mc);
 
 		System.out.println(name + " has bid " + bid);
 		if (result.planner != null) {
 			// everything should be cached so this won't harm performance
-			System.out.println("next planner has cost: " + result.planner.generatePlans().computeCost());
+			System.out.println("next planner has cost: " + result.planner.generatePlans(100).computeCost());
 		}
 		return bid;
 	}
@@ -61,10 +61,10 @@ public class Strategy {
 		System.out.println((won ? "won" : "lost") + " [total = " + winCount + "]");
 	}
 
-	public GeneralPlan generatePlans() {
+	public GeneralPlan generatePlans(long timeoutPlan) {
 		System.out.println("Generating plan for " + name);
 
-		GeneralPlan plan = planner.generateFinalPlans();
+		GeneralPlan plan = planner.generateFinalPlans(timeoutPlan);
 		double totalCost = plan.computeCost();
 
 		System.out.println(name + " total cost   = " + totalCost);

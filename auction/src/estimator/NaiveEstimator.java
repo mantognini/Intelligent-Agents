@@ -14,8 +14,8 @@ public class NaiveEstimator extends NoFuture {
 	}
 
 	@Override
-	public Result computeMC(PlannerTrait planner, Task task) {
-		Result result = super.computeMC(planner, task);
+	public Result computeMC(PlannerTrait planner, Task task, long timeout) {
+		Result result = super.computeMC(planner, task, timeout);
 		double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id);
 		double mc = ratio * result.mc;
 

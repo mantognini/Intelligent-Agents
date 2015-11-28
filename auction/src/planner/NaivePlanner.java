@@ -37,7 +37,8 @@ public final class NaivePlanner extends PlannerTrait {
 	}
 
 	@Override
-	public GeneralPlan generatePlans() {
+	public GeneralPlan generatePlans(long timeout) {
+		// This planner is so naive that it won't timeout!
 		if (plans == null)
 			buildPlans();
 
@@ -45,8 +46,8 @@ public final class NaivePlanner extends PlannerTrait {
 	}
 
 	@Override
-	public GeneralPlan generateFinalPlans() {
-		return generatePlans(); // Nothing fancy here
+	public GeneralPlan generateFinalPlans(long timeout) {
+		return generatePlans(timeout); // Nothing fancy here
 	}
 
 	private void buildPlans() {

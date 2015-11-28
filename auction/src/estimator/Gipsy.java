@@ -25,17 +25,23 @@ public class Gipsy extends NoFuture {
 	}
 
 	@Override
-	public Result computeMC(PlannerTrait planner, Task task) {
-		Result normalResult = super.computeMC(planner, task); // use NoFuture
+	public Result computeMC(PlannerTrait planner, Task task, long timeout) {
+		long startTime = System.currentTimeMillis();
+		Result normalResult = super.computeMC(planner, task, timeout); // use NoFuture
 
 		if (planner.tasks.size() >= minTasks || normalResult.mc == 0)
 			return normalResult;
+
+		long midTime = System.currentTimeMillis();
+		timeout -= (midTime - startTime);
+		long timeshare = (long) ((timeout * 0.95) / nbPredictions);
 
 		// Compute a few estimation
 		double worsePrediction = Double.NEGATIVE_INFINITY;
 		double bestPrediction = Double.POSITIVE_INFINITY;
 		double sum = 0;
 		for (int i = 0; i < nbPredictions; ++i) {
+			startTime = System.currentTimeMillis();
 			PlannerTrait vision = planner;
 
 			// Extend the current planner with random tasks
@@ -43,7 +49,8 @@ public class Gipsy extends NoFuture {
 				vision = vision.extendPlan(createTask());
 			}
 
-			double prediction = super.computeMC(vision, task).mc;
+			midTime = System.currentTimeMillis();
+			double prediction = super.computeMC(vision, task, timeshare - (midTime - startTime)).mc;
 			worsePrediction = Math.max(worsePrediction, prediction);
 			bestPrediction = Math.min(bestPrediction, prediction);
 

@@ -21,5 +21,6 @@ public abstract class CostEstimatorTrait {
 	/**
 	 * Return the marginal cost and the corresponding planner, if it exists
 	 */
-	public abstract Result computeMC(PlannerTrait planner, Task task);
+	public abstract Result computeMC(PlannerTrait planner, Task task, long timeout);
+
 }
