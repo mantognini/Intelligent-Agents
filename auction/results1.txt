@@ -1,12 +1,12 @@
 ### auction.xml ###
      Agents       | Win - Draw - Lose |       Gipsy       |    SafeGambler    |      Simple       |       Naive      
-      Gipsy       |     6 - 0 - 0     |         -         | WIN (3879 : 542)  |  WIN (4957 : 0)   | WIN (11506 : 301)
-   SafeGambler    |     4 - 0 - 2     | LOSE (51 : 7677)  |         -         |  WIN (4302 : 0)   | WIN (12908 : 301)
-     Simple       |     2 - 0 - 4     |  LOSE (0 : 9754)  |  LOSE (-115 : 0)  |         -         |  WIN (186 : 141) 
-      Naive       |     0 - 0 - 6     | LOSE (39 : 15770) | LOSE (233 : 5089) | LOSE (56 : 4266)  |         -        
+      Gipsy       |     6 - 0 - 0     |         -         | WIN (5694 : 572)  |  WIN (4841 : 0)   | WIN (13708 : 301)
+   SafeGambler    |     3 - 1 - 2     | LOSE (0 : 10287)  |         -         |  WIN (5057 : 0)   | WIN (13464 : 301)
+     Simple       |     1 - 1 - 4     |  LOSE (0 : 9115)  |   DRAW (0 : 0)    |         -         |  LOSE (1 : 141)  
+      Naive       |     1 - 0 - 5     | LOSE (39 : 16711) | LOSE (233 : 5413) |  LOSE (56 : 348)  |         -        
 
 First company results
-  # wins   : 6
-  # draws  : 0
+  # wins   : 5
+  # draws  : 1
   # losses : 6
 
