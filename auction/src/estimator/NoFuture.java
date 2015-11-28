@@ -15,7 +15,7 @@ public class NoFuture extends CostEstimatorTrait {
 		PlannerTrait extendedPlan = planner.extendPlan(task);
 		double costWithExtraTask = extendedPlan.generatePlans().computeCost();
 
-		double mc = Math.abs(costWithExtraTask - currentCost);
+		double mc = Math.max(0, costWithExtraTask - currentCost);
 
 		return new Result(mc, extendedPlan);
 	}
