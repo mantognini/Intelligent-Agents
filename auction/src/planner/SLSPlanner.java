@@ -40,8 +40,6 @@ public class SLSPlanner extends PlannerTrait {
 	private final Settings regularMode;
 	private final Settings optimalMode;
 
-	// TODO find best parameters
-
 	public SLSPlanner(List<Vehicle> vehicles, Settings regularMode, Settings optimalMode) {
 		super(vehicles);
 
