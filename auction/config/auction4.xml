@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- the main configuration for deliberative agents -->
+<configuration name="ex4-auction">
+
+	<!-- load settings -->
+	<settings import="config/settings_auction.xml" />
+	
+	<!-- load the topology from an external file -->
+	<topology import="config/topology/france.xml" />
+	
+	<!-- load agents from an external file -->
+	<agents import="config/agents.xml" />
+	
+	<!-- define task distribution -->
+	<tasks number="50" rngSeed="9876543210">
+		<!--
+			the probabilities, rewards and weight of tasks
+		-->
+		<reward distribution="constant" policy="short-distances" min="100" max="99999" />
+		<probability distribution="uniform" min="0.0" max="1.0" />
+		<weight distribution="uniform" min="10" max="30" />
+
+	</tasks>
+	
+	<!-- the companies and vehicles in the simulation -->
+	<companies>
+	
+		<company name="Company A">
+			<!-- the first vehicle (blue) -->
+			<vehicle name="Vehicle 1">
+				<set color="#0000ff" />
+				<set home="Brest" />
+				<set speed="60" />
+				<set capacity="80" />
+				<set cost-per-km="5" />
+			</vehicle>
+			
+			<!-- the second vehicle (red) -->
+			<vehicle name="Vehicle 2">
+				<set color="#ff0000" />
+				<set home="Le Havre" />
+				<set speed="90" />
+				<set capacity="80" />
+				<set cost-per-km="5" />
+			</vehicle>
+		</company>
+		
+		<company name="Company B">
+			<!-- the third vehicle (green) -->
+			<vehicle name="Vehicle 3">
+				<set color="#00ff00" />
+				<set home="Paris" />
+				<set speed="90" />
+				<set capacity="80" />
+				<set cost-per-km="5" />
+			</vehicle>
+			
+			<!-- the fourth vehicle (yellow) -->
+			<vehicle name="Vehicle 4">
+				<set color="#ffff00" />
+				<set home="Bordeaux" />
+				<set speed="90" />
+				<set capacity="80" />
+				<set cost-per-km="5" />
+			</vehicle>
+		</company>
+				
+		<company name="Company C">
+			<!-- the fifth vehicle (magenta) -->
+			<vehicle name="Vehicle 5">
+				<set color="#ff00ff" />
+				<set home="Marseille" />
+				<set speed="90" />
+				<set capacity="80" />
+				<set cost-per-km="5" />
+			</vehicle>
+			
+			<!-- the sixth vehicle (cyan) -->
+			<vehicle name="Vehicle 6">
+				<set color="#00ffff" />
+				<set home="Lyon" />
+				<set speed="90" />
+				<set capacity="80" />
+				<set cost-per-km="5" />
+			</vehicle>
+		</company>
+				
+		<company name="Company D">
+			<!-- the fifth vehicle (black) -->
+			<vehicle name="Vehicle 7">
+				<set color="#000000" />
+				<set home="Monaco" />
+				<set speed="90" />
+				<set capacity="30" />
+				<set cost-per-km="5" />
+			</vehicle>
+			
+			<!-- the sixth vehicle (grey) -->
+			<vehicle name="Vehicle 8">
+				<set color="#808080" />
+				<set home="Strasbourg" />
+				<set speed="90" />
+				<set capacity="30" />
+				<set cost-per-km="5" />
+			</vehicle>
+		</company>
+		
+	</companies>
+	
+</configuration>
+
