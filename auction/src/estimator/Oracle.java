@@ -6,14 +6,14 @@ import logist.task.Task;
 import logist.task.TaskDistribution;
 import planner.PlannerTrait;
 
-public class Gipsy extends NoFuture {
+public class Oracle extends NoFuture {
 
 	private final int minTasks;
 	private final int nbPredictions;
 	private final double riskTolerance;
 	private final DefaultTaskDistribution distribution;
 
-	public Gipsy(int minTasks, int nbPredictions, double riskTolerance, TaskDistribution distribution) {
+	public Oracle(int minTasks, int nbPredictions, double riskTolerance, TaskDistribution distribution) {
 		this.minTasks = minTasks;
 		this.nbPredictions = nbPredictions;
 		this.riskTolerance = riskTolerance;

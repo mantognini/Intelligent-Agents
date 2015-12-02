@@ -6,7 +6,7 @@ import planner.NaivePlanner;
 import planner.SLSPlanner;
 import bidder.NoGain;
 import bidder.NoPainMinOfBest;
-import estimator.Gipsy;
+import estimator.Oracle;
 import estimator.NaiveEstimator;
 import estimator.NoFuture;
 
@@ -39,7 +39,7 @@ public class StrategyFactory {
 
 		return new Strategy("Gipsy", new SLSPlanner(agent.vehicles(), SLSPlanner.FAST_SETTIGNS,
 
-		SLSPlanner.OPTIMAL_SETTINGS), new Gipsy(minTasks, nbPredictions, riskTolerance, distribution),
+		SLSPlanner.OPTIMAL_SETTINGS), new Oracle(minTasks, nbPredictions, riskTolerance, distribution),
 				new NoPainMinOfBest(agent.id(), marginRatio, depth));
 	}
 
