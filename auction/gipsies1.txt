@@ -1,0 +1,10 @@
+### auction.xml ###
+      Agents       | Win - Draw - Lose  |       Gipsy1       |       Gipsy2      
+      Gipsy1       |     1 - 0 - 1      |         -          | LOSE (-764 : 4433)
+      Gipsy2       |     1 - 0 - 1      | LOSE (-129 : 5843) |         -         
+
+First company results
+  # wins   : 0
+  # draws  : 0
+  # losses : 2
+
