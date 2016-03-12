@@ -1,4 +1,4 @@
-# Intelligent-Agents
+# Intelligent Agents
 
 CS-430 2015 at EPFL
 
